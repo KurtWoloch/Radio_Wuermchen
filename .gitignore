@@ -1,0 +1,29 @@
+# IDE/OS files
+.DS_Store
+Thumbs.db
+
+# OpenClaw files
+.openclaw/
+AGENTS.md
+SOUL.md
+TOOLS.md
+USER.md
+MEMORY.md
+HEARTBEAT.md
+IDENTITY.md
+
+# Python
+*.pyc
+__pycache__/
+
+# Project Artifacts
+radio-wuermchen/cache/
+radio-wuermchen/dj_log.jsonl
+radio-wuermchen/dj_request.json
+radio-wuermchen/dj_response.json
+radio-wuermchen/wishlist.txt
+radio-wuermchen/*.mp3
+radio-wuermchen/*.wav
+radio-wuermchen/*.m3u
+radio-wuermchen/temp_concat.txt
+radio-wuermchen/temp_announcement.txt

@@ -1,0 +1,86 @@
+<icecast>
+    <location>Earth</location>
+    <admin>icemaster@localhost</admin>
+    <hostname>localhost</hostname>
+
+    <limits>
+        <clients>100</clients>
+        <sources>3</sources> <!-- Increased sources to 3 (2 sources + 1 relay) -->
+        <queue-size>524288</queue-size>
+        <client-timeout>30</client-timeout>
+        <header-timeout>15</header-timeout>
+        <source-timeout>10</source-timeout>
+        <burst-size>65535</burst-size>
+    </limits>
+
+    <authentication>
+        <source-password>hackme</source-password>
+        <relay-password>hackme</relay-password>
+        <admin-user>admin</admin-user>
+        <admin-password>hackme</admin-password>
+    </authentication>
+
+    <listen-socket>
+        <port>8000</port>
+    </listen-socket>
+
+    <http-headers>
+        <header type="cors" name="Access-Control-Allow-Origin" />
+        <header type="cors" name="Access-Control-Allow-Headers" />
+        <header type="cors" name="Access-Control-Expose-Headers" />
+    </http-headers>
+
+    <!-- Public Mount: Listeners connect here. It relays from one of the two sources. -->
+    <mount type="normal">
+        <mount-name>/radio.mp3</mount-name>
+        <relay>
+            <!-- Start relaying from the first source initially -->
+            <upstream type="normal">
+                <uri>http://localhost:8000/source1.mp3</uri>
+            </upstream>
+        </relay>
+        <max-listeners>100</max-listeners>
+        <hidden>false</hidden> <!-- Visible to the public -->
+    </mount>
+
+    <!-- Source Mount 1: Python pushes segment to here. -->
+    <mount type="normal">
+        <mount-name>/source1.mp3</mount-name>
+        <max-listeners>1</max-listeners> <!-- No public listeners, max 1 internal relay -->
+        <hidden>true</hidden>          <!-- Hidden from status page -->
+    </mount>
+
+    <!-- Source Mount 2: Python pushes segment to here. -->
+    <mount type="normal">
+        <mount-name>/source2.mp3</mount-name>
+        <max-listeners>1</max-listeners>
+        <hidden>true</hidden>
+    </mount>
+    
+    <!-- Source Mount 3: Temporary mount for direct streaming (as used in previous session). -->
+    <mount type="normal">
+        <mount-name>/stream</mount-name>
+        <max-listeners>1</max-listeners>
+        <hidden>true</hidden>
+    </mount>
+    
+    <paths>
+        <logdir>./log</logdir>
+        <webroot>./web</webroot>
+        <adminroot>./admin</adminroot>
+        <reportxmldb>./report-db.xml</reportxmldb>
+        <alias source="/" destination="/status.xsl"/>
+    </paths>
+
+    <logging>
+        <accesslog>access.log</accesslog>
+        <errorlog>error.log</errorlog>
+        <loglevel>information</loglevel>
+        <logsize>10000</logsize>
+    </logging>
+    
+    <security>
+        <!-- Required to avoid a critical error -->
+        <prng-seed type="static">U4V5etZFv2Qp2b8A3Xw6zR1n8yH7cW5iK9tE4jD7bG1sM8zQ0oY3fP0lK7hG5mJ2oU9e</prng-seed>
+    </security>
+</icecast>
