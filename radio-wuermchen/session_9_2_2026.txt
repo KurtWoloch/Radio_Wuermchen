@@ -1,0 +1,72 @@
+OK. For selecting the track, my idea would be different... Sub-Agent A should first select a track independent from what's actually available. It returns that track to the python script, which then checks for the exact track, and if it isn't available for a near match (for instance, if "AVICII - Wake me up" isn't available, it would look for "AVICII * - Wake me up", allowing anything in place of the asterisk. If still nothing can be found, it prompts the agent again requesting further track proposals, and then plays the first of those that can be found. If none can be found, it chooses a number of tracks from the playlist which might be random or somewhat related to the given track (for instance, from the same artist if available) and prompts the LLM to select one of those tracks which are guaranteed to exist. This way, you save the LLM from processing the whole 20.000+ track playlist. And Sub-Agent B should also get the information what was the last track that played for back-announcement, as Radio Worm does it as well. And all agents should be independent from the session I'm having here with you... that session should never be tied up by the radio running.
+
+You
+0:02
+🦀
+
+This is an incredibly smart and efficient workflow, Kurt. You've introduced a critical layer of logic that saves substantial LLM processing time and handles the real-world problem of file existence.
+
+The core principle is: LLM thinks creatively (Track Selection) → Python validates existence (File Check) → LLM thinks creatively again (Announcement).
+
+Finalized LLM DJ Workflow
+Preparation (Python Streamer):
+radio_streamer.py completes its current segment.
+It writes a request file (dj_request.json) with the required info:
+last_track: Artist - Title of the song that just finished.
+mode: select_track
+DJ Brain (Me, the Agent):
+I see the request file and spawn a sub-agent.
+Sub-Agent A (Track Selection): I prompt the LLM: "The last song was [last_track]. Suggest the next song (Artist - Title) based on musical flow." The LLM suggests one track.
+I write the suggestion to the response file (dj_response.json).
+Validation (Python Streamer):
+radio_streamer.py reads the suggestion from the response file.
+It searches its local 20,000+ track music.playlist for the suggested track, using a flexible, wildcard-enabled search.
+If found (Success): Python sets the next_track variable and proceeds to step 4.
+If NOT found (Failure): Python updates dj_request.json with mode: suggest_options and a list of 5 random/related available tracks. It then repeats step 2, prompting Sub-Agent A to choose from the provided list.
+Announcement Generation (DJ Brain):
+I see the validated next_track.
+Sub-Agent B (Announcement): I prompt the LLM: "Write a witty, short DJ announcement for Radio Worm. Back-announce [last_track] and announce [next_track]."
+TTS: I use the cloud tts tool to generate the final MP3 ([song_slug].mp3) and save it to the cache.
+Streaming: The Python script updates its current track and pipes the announcement + song segment to the stream.
+This is a beautiful, efficient workflow. I will save this detailed plan to memory. Our next session will focus on building the two-way communication protocol (dj_request.json and dj_response.json) in the Python script.
+
+write
+memory/2026-02-09.md
+Completed
+Sidestepper
+0:02
+⚙
+Successfully wrote 1425 bytes to memory/2026-02-09.md
+
+write
+View
+Successfully wrote 1425 bytes to memory/2026-02-09.md
+tool
+0:02
+🦀
+Sidestepper
+0:02
+U
+Ah yes, one step would also be: if the track first selected by Agent A can't be found, write the tracks that can't be found to a "wishlist" to get later... maybe later we'll create an agent to get those tracks (asynchronously).
+
+You
+0:06
+🦀
+
+That is an excellent feature addition, Kurt. It turns a temporary failure into a long-term goal for the system.
+
+I will incorporate the "Wishlist" mechanism into the failure state of the workflow.
+
+Updated LLM DJ Workflow (with Wishlist)
+The change is added to Step 3 (Validation Failure):
+
+Step 3 (Validation Failure):
+If the track proposed by Sub-Agent A is NOT found:
+Python streamer immediately appends the suggested track (Artist - Title) to a new file: wishlist.txt (or a similar path) for future retrieval.
+Python then updates dj_request.json with mode: suggest_options and a list of 5 random/related available tracks, prompting the Agent for a safe selection.
+I have updated the plan in my memory. We are ready to begin building the communication layer in the next session.
+
+Have a good night, Kurt. I'll hold the state here.
+
+Sidestepper
+0:06
