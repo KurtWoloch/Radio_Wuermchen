@@ -12,6 +12,9 @@ MEMORY.md
 HEARTBEAT.md
 IDENTITY.md
 
+# Workspace files
+*.mp3
+
 # Python
 *.pyc
 __pycache__/
