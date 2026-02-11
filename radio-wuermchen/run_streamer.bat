@@ -8,7 +8,6 @@ timeout /t 5 /nobreak > nul
 REM --- CONTINUOUS STREAMING (PIPE CHAIN) ---
 set FFMPEG_BIN=C:\msys64\mingw64\bin\ffmpeg.exe
 set PYTHON_SCRIPT=C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\radio_streamer.py
-set ICECAST_URL=icecast://source:hackme@localhost:8000/radio.mp3
 
 echo Starting Pipe Chain Streamer...
 
