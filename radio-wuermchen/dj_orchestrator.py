@@ -292,19 +292,30 @@ def main():
                         # 1. Clean the DJ's suggestion to create a cleaner matching string
                         cleaned_suggestion = clean_suggestion_for_matching(suggested_track)
                         
+                        # 2. Create a simplified version for comparison against tracks that *also* lack versioning
+                        base_suggestion = cleaned_suggestion.lower().replace('(live)', '').replace('(remix)', '').strip()
+
                         for p_track in playlist:
                             p_filename = os.path.basename(p_track)
+                            p_filename_lower = p_filename.lower()
                             
-                            # Check if the cleaned suggestion is a case-insensitive substring of the library track file
-                            if cleaned_suggestion.lower() in p_filename.lower():
-                                # We store the track path, the original filename, and the length of the filename for sorting
-                                potential_matches.append((p_track, p_filename, len(p_filename)))
+                            # Score 1: Exact match (ignoring case and potential versioning in suggestion)
+                            # We check if the cleaned suggestion is found, and if so, store the match details
+                            if cleaned_suggestion.lower() in p_filename_lower:
+                                # Check for near-perfect match (score based on length difference)
+                                length_diff = len(p_filename_lower) - len(cleaned_suggestion.lower())
+                                
+                                # Score 0: If the DJ named a version (e.g., "(live)") and we find it, this is the best match (highest priority).
+                                # We check if the full, non-cleaned suggestion appears in the filename (case-insensitive).
+                                is_exact_version_match = suggested_track.lower() in p_filename_lower
+                                
+                                # Score 2: Prioritize exact version match, then shortest name (least extra text)
+                                potential_matches.append((p_track, p_filename, length_diff, is_exact_version_match))
                         
                         found_track = None
                         if potential_matches:
-                            # 2. Prioritize best match:
-                            # Sort by length ascending. The shortest match (least versioning) is usually the one the DJ meant.
-                            potential_matches.sort(key=lambda x: x[2]) 
+                            # Sort: Primary key is exact version match (True > False), Secondary key is length difference (smaller diff is better)
+                            potential_matches.sort(key=lambda x: (not x[3], x[2])) 
                             found_track = potential_matches[0][0]
                         
                         # --- MODIFIED MATCHING LOGIC END ---
