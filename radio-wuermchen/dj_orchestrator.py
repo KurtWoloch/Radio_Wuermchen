@@ -25,6 +25,7 @@ WISHLIST_FILE = BASE_DIR / "Wishlist.txt"
 
 PYTHON_BIN = "C:\\Program Files\\Python311\\python.exe"
 POLL_INTERVAL = 3  # seconds between checks
+MAX_ARTIST_SUGGESTIONS = 50 # Maximum tracks to offer the DJ if suggestion fails
 
 # --- HELPERS ---
 def log(msg):
@@ -104,20 +105,37 @@ def append_to_wishlist(track_suggestion):
         f.write(track_suggestion + '\n')
     log(f"Appended to wishlist: {track_suggestion}")
 
+# --- ARTIST MATCHING ---
+def parse_artist_from_suggestion(suggestion):
+    """Extracts the artist part from an 'Artist - Title' string."""
+    if " - " in suggestion:
+        return suggestion.split(" - ", 1)[0].strip()
+    return None
+
+def find_artist_alternatives(artist_name, playlist, max_results=MAX_ARTIST_SUGGESTIONS):
+    """Finds up to max_results tracks from the playlist matching the artist name."""
+    alternatives = []
+    for p_track in playlist:
+        filename = os.path.basename(p_track)
+        if artist_name.lower() in filename.lower():
+            alternatives.append(p_track)
+            if len(alternatives) >= max_results:
+                break
+    return alternatives
 
 # --- DJ COMMUNICATION ---
-def trigger_dj(last_track):
+def trigger_dj(last_track, instructions=None):
     """Writes request file, runs DJ brain, reads response."""
     
     # 1. Prepare Request
     request_data = {
         "last_track": last_track,
         "listener_input": None, # Future enhancement: check for new listener requests
-        "instructions": None
+        "instructions": instructions
     }
     with open(REQUEST_FILE, 'w', encoding='utf-8') as f:
         json.dump(request_data, f, indent=2)
-    log(f"Wrote DJ request based on last track: {last_track}")
+    log(f"Wrote DJ request based on last track: {last_track}. Instructions: {instructions}")
 
     # 2. Execute DJ Brain
     command = [PYTHON_BIN, str(DJ_BRAIN_SCRIPT)]
@@ -201,49 +219,93 @@ def main():
             else:
                 last_track_name = "Unknown track (Queue may have been empty)"
             
-            # 2. Trigger DJ Brain
-            dj_output = trigger_dj(last_track_name)
-
-            if dj_output:
-                suggested_track_path = dj_output.get("track") # This is Artist - Title, not a file path
-                announcement_text = dj_output.get("announcement")
+            # --- DJ Cycle Management Loop ---
+            max_retries = 3
+            retry_count = 0
+            success = False
+            
+            while retry_count < max_retries and not success:
                 
-                if suggested_track_path and announcement_text:
-                    # 3. Find the actual audio file for the suggested track
-                    playlist = []
-                    try:
-                         with open(PLAYLIST_FILE, 'r', encoding='utf-8') as f:
-                            playlist = [line.strip() for line in f if line.strip()]
-                    except FileNotFoundError:
-                        log(f"CRITICAL: Playlist file not found at {PLAYLIST_FILE}")
-                        delete_signal()
-                        time.sleep(POLL_INTERVAL)
-                        continue
+                # 2. Trigger DJ Brain
+                dj_output = trigger_dj(last_track_name)
+
+                if dj_output:
+                    suggested_track = dj_output.get("track") # Artist - Title
+                    announcement_text = dj_output.get("announcement")
                     
-                    found_track = None
-                    # Simple matching logic (case-insensitive partial match)
-                    for p_track in playlist:
-                        if suggested_track_path.lower() in os.path.basename(p_track).lower():
-                            found_track = p_track
-                            break
+                    if suggested_track and announcement_text:
+                        # 3. Find the actual audio file for the suggested track
+                        playlist = []
+                        try:
+                            with open(PLAYLIST_FILE, 'r', encoding='utf-8') as f:
+                                playlist = [line.strip() for line in f if line.strip()]
+                        except FileNotFoundError:
+                            log(f"CRITICAL: Playlist file not found at {PLAYLIST_FILE}")
+                            delete_signal()
+                            time.sleep(POLL_INTERVAL)
+                            continue
+                        
+                        found_track = None
+                        # Simple matching logic (case-insensitive partial match)
+                        for p_track in playlist:
+                            if suggested_track.lower() in os.path.basename(p_track).lower():
+                                found_track = p_track
+                                break
 
-                    if found_track:
-                        # 4. Generate Announcement Audio
-                        announcement_audio_path = generate_announcement_audio(announcement_text)
+                        if found_track:
+                            # SUCCESS PATH: Track found! Generate audio and queue.
+                            log(f"SUCCESS: Found track: {suggested_track}")
+                            announcement_audio_path = generate_announcement_audio(announcement_text)
 
-                        if announcement_audio_path:
-                            # 5. Append to Queue (Announcement FIRST, then Song)
-                            append_to_queue(str(announcement_audio_path))
-                            append_to_queue(found_track)
-                            last_track_played = found_track
+                            if announcement_audio_path:
+                                # 5. Append to Queue (Announcement FIRST, then Song)
+                                append_to_queue(str(announcement_audio_path))
+                                append_to_queue(found_track)
+                                last_track_played = found_track
+                                success = True # Exit inner loop
+                            else:
+                                log("Skipping DJ turn: Failed to generate announcement audio.")
                         else:
-                            log("Skipping DJ turn: Failed to generate announcement audio.")
+                            # FALLBACK PATH: Track not found, add to wishlist, reprompt DJ
+                            log(f"Track NOT FOUND: {suggested_track}")
+                            append_to_wishlist(suggested_track)
+                            
+                            # Prepare instruction for next DJ call
+                            artist = suggested_track.split(" - ", 1)[0].strip() if " - " in suggested_track else suggested_track
+                            
+                            alternatives = find_artist_alternatives(artist, playlist)
+                            
+                            if alternatives:
+                                # Offer up to 50 alternatives in the next prompt
+                                alternative_list = "\n".join(os.path.basename(t) for t in alternatives[:MAX_ARTIST_SUGGESTIONS])
+                                instructions = (f"The suggested track '{suggested_track}' was unavailable. "
+                                                f"Instead, please select one of the following tracks by the same artist: {artist}. "
+                                                f"Available tracks include: {alternative_list[:500]}...") # Truncate for prompt safety
+                                
+                                log(f"Alternatives found ({len(alternatives)} total). Reprompting DJ with instructions.")
+                                
+                                # Re-run the cycle by updating the request data (implicitly via next loop iteration if we delete signal)
+                                # For immediate re-prompt, we overwrite the request data for the *next* loop iteration's trigger.
+                                # Since the orchestrator deletes the signal *after* processing, we need to avoid deleting it here.
+                                
+                                # For simplicity, we'll pass the instruction directly to the next DJ call trigger if we were to re-run immediately.
+                                # Since we are using a polling loop, the simplest way to re-prompt is to re-run trigger_dj immediately.
+                                
+                                # To avoid breaking the structure, we'll use the instruction in the request file on the next loop iteration.
+                                # BUT, for immediate feedback, we'll call trigger_dj again with explicit instructions.
+                                
+                                # Save instructions back to request file before deleting signal to ensure next loop uses it
+                                request_data["instructions"] = instructions
+                                with open(REQUEST_FILE, 'w', encoding='utf-8') as f:
+                                    json.dump(request_data, f, indent=2)
+                                
+                            else:
+                                log(f"No alternatives found for artist: {artist}. Skipping turn.")
+                            
+                            # Always delete signal here so the loop continues immediately
+                            delete_signal() 
                     else:
-                        log(f"DJ suggested track not found in playlist: {suggested_track_path}")
-                        log(f"DJ suggestion JSON: {json.dumps(dj_output)}")
-                        # If track not found, add to wishlist and continue cycle
-                        append_to_wishlist(suggested_track_path)
-                        delete_signal() 
+                        log("DJ response incomplete. Skipping turn.")
                 else:
                     log("DJ response incomplete. Skipping turn.")
             else:
