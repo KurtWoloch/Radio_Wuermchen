@@ -102,29 +102,38 @@ def generate(text_file):
             return False
 
         data_b64 = part.inline_data.data
+        mime_type = part.inline_data.mime_type # NEW DEBUG
         print(f"DEBUG: Received base64 data payload of length: {len(data_b64)} characters.", file=sys.stderr)
+        print(f"DEBUG: Detected MIME Type: {mime_type}", file=sys.stderr) # NEW DEBUG
         
         pcm_data = base64.b64decode(data_b64)
         
         # DEBUG: Print size of decoded PCM data
         print(f"DEBUG: Decoded PCM data size: {len(pcm_data)} bytes.", file=sys.stderr)
-        
-        # 2. Save as WAV (FFmpeg needs WAV input for consistent conversion)
-        if not wave_file(wav_path, pcm_data):
-            return False
 
-        # 3. Convert WAV to MP3 using FFmpeg
-        ffmpeg_cmd = [
-            FFMPEG_BIN,
-            "-y",           # overwrite output without asking
-            "-i", wav_path, # Explicitly state input format is WAV
-            "-c:a", "libmp3lame",
-            "-b:a", "192k",
-            mp3_path
-        ]
+        # --- NEW LOGIC: Check MIME Type ---
+        if mime_type and 'audio/mp3' in mime_type.lower():
+            print("DEBUG: Detected MP3 audio stream. Writing directly to MP3.")
+            with open(mp3_path, 'wb') as f:
+                f.write(pcm_data)
+        else:
+            # Fallback: Assume WAV format, use existing WAV writing + FFmpeg
+            print(f"DEBUG: Assuming non-MP3 audio format. Saving to WAV first.")
+            if not wave_file(wav_path, pcm_data):
+                return False
 
-        subprocess.run(ffmpeg_cmd, check=True, capture_output=True)
+            # 3. Convert WAV to MP3 using FFmpeg
+            ffmpeg_cmd = [
+                FFMPEG_BIN,
+                "-y",           # overwrite output without asking
+                "-i", wav_path, # Explicitly state input format is WAV
+                "-c:a", "libmp3lame",
+                "-b:a", "192k",
+                mp3_path
+            ]
 
+            subprocess.run(ffmpeg_cmd, check=True, capture_output=True)
+            
     except Exception as e:
         print(f"TTS Generation/Conversion Error: {e}", file=sys.stderr)
         # WAV file will be left behind due to KEEP_WAV=True below
