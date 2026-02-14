@@ -7,6 +7,7 @@
 # base name but the .mp3 extension.
 #
 # Dependencies: google-genai, ffmpeg
+# Temporary WAV file will be kept for inspection if conversion fails.
 
 import json
 import sys
@@ -101,7 +102,7 @@ def generate(text_file):
         ffmpeg_cmd = [
             FFMPEG_BIN,
             "-y",           # overwrite output without asking
-            "-i", wav_path,
+            "-i", wav_path, # Explicitly state input format is WAV
             "-c:a", "libmp3lame",
             "-b:a", "192k",
             mp3_path
@@ -111,11 +112,16 @@ def generate(text_file):
 
     except Exception as e:
         print(f"TTS Generation/Conversion Error: {e}", file=sys.stderr)
+        # WAV file will be left behind due to KEEP_WAV=True below
         return False
     finally:
-        # Clean up temporary WAV file
-        if os.path.exists(wav_path):
+        # Cleanup temporary WAV file
+        KEEP_WAV = True # Set to True to keep the file for inspection
+        if not KEEP_WAV and os.path.exists(wav_path):
             os.remove(wav_path)
+        elif KEEP_WAV:
+            print(f"DEBUG: Kept WAV file for inspection: {wav_path}")
+
 
     print(f"OK: {mp3_path}")
     return True
