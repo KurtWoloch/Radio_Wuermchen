@@ -102,11 +102,12 @@ def generate(text_file):
             return False
 
         data_b64 = part.inline_data.data
-        mime_type = part.inline_data.mime_type # NEW DEBUG
+        mime_type = part.inline_data.mime_type
         print(f"DEBUG: Received base64 data payload of length: {len(data_b64)} characters.", file=sys.stderr)
-        print(f"DEBUG: Detected MIME Type: {mime_type}", file=sys.stderr) # NEW DEBUG
+        print(f"DEBUG: Detected MIME Type: {mime_type}", file=sys.stderr)
         
-        pcm_data = base64.b64decode(data_b64)
+        # MODIFICATION: Use validate=False to attempt decoding even with padding errors
+        pcm_data = base64.b64decode(data_b64, validate=False) 
         
         # DEBUG: Print size of decoded PCM data
         print(f"DEBUG: Decoded PCM data size: {len(pcm_data)} bytes.", file=sys.stderr)
