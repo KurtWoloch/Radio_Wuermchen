@@ -102,8 +102,9 @@ def generate(text_file):
             print(f"TTS API returned part without expected inline_data structure: {part}", file=sys.stderr)
             return False
 
-        # The data IS base64 encoded for audio parts in this SDK version.
         data_b64 = part.inline_data.data
+        print(f"DEBUG: Received base64 data payload of length: {len(data_b64)} characters.", file=sys.stderr)
+        
         pcm_data = base64.b64decode(data_b64)
         
         # 2. Save as WAV (FFmpeg needs WAV input for consistent conversion)
@@ -132,7 +133,7 @@ def generate(text_file):
         if not KEEP_WAV and os.path.exists(wav_path):
             os.remove(wav_path)
         elif KEEP_WAV:
-            print(f"DEBUG: Kept WAV file for inspection: {wav_path}")
+            print(f"DEBUG: Kept WAV file for inspection: {wav_path}", file=sys.stderr)
 
 
     print(f"OK: {mp3_path}")
