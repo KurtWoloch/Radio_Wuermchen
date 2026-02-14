@@ -106,35 +106,32 @@ def generate(text_file):
         print(f"DEBUG: Received data payload of length: {len(data_payload)} characters.", file=sys.stderr)
         print(f"DEBUG: Detected MIME Type: {mime_type}", file=sys.stderr)
         
-        pcm_data = None
+        audio_data = None
         
-        # LOGIC CHANGE: Check MIME type first to decide decoding strategy
+        # LOGIC CHANGE: Trust the MIME type. If PCM, treat payload as RAW bytes.
         if mime_type and 'audio/L16' in mime_type.lower():
             print("DEBUG: Detected raw PCM audio stream. Using data directly.", file=sys.stderr)
-            pcm_data = data_payload # Use raw data as PCM
-        elif mime_type and 'audio/mp3' in mime_type.lower():
-            print("DEBUG: Detected MP3 audio stream. Assuming Base64, decoding...", file=sys.stderr)
-            pcm_data = base64.b64decode(data_payload, validate=False)
+            audio_data = data_payload # Use raw data as PCM
         else:
-            # Default/Fallback: Assume Base64 for everything else (like the previous state)
+            # Assume Base64 encoded (MP3 or otherwise)
             print("DEBUG: Assuming Base64 encoded audio format. Decoding...", file=sys.stderr)
-            pcm_data = base64.b64decode(data_payload, validate=False)
+            audio_data = base64.b64decode(data_payload, validate=False)
         
         # DEBUG: Print size of processed data
-        print(f"DEBUG: Processed data size: {len(pcm_data)} bytes.", file=sys.stderr)
+        print(f"DEBUG: Processed data size: {len(audio_data)} bytes.", file=sys.stderr)
         
-        if len(pcm_data) < 500: # Heuristic check for tiny files
-             print(f"WARNING: Processed data size ({len(pcm_data)} bytes) is too small for audio.", file=sys.stderr)
+        if len(audio_data) < 500: # Heuristic check for tiny files
+             print(f"WARNING: Processed data size ({len(audio_data)} bytes) is too small for audio.", file=sys.stderr)
         
         # 2. Save WAV or MP3
         if mime_type and 'audio/mp3' in mime_type.lower():
             print("DEBUG: Detected MP3 audio stream. Writing directly to MP3.")
             with open(mp3_path, 'wb') as f:
-                f.write(pcm_data)
+                f.write(audio_data)
         else:
             # Default/Fallback: Save as WAV, then convert to MP3
             print(f"DEBUG: Saving via WAV intermediate step.")
-            if not wave_file(wav_path, pcm_data):
+            if not wave_file(wav_path, audio_data):
                 return False
 
             # 3. Convert WAV to MP3 using FFmpeg
