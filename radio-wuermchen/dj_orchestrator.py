@@ -292,24 +292,19 @@ def main():
                         # 1. Clean the DJ's suggestion to create a cleaner matching string
                         cleaned_suggestion = clean_suggestion_for_matching(suggested_track)
                         
-                        # 2. Create a simplified version for comparison against tracks that *also* lack versioning
-                        base_suggestion = cleaned_suggestion.lower().replace('(live)', '').replace('(remix)', '').strip()
-
                         for p_track in playlist:
                             p_filename = os.path.basename(p_track)
                             p_filename_lower = p_filename.lower()
                             
-                            # Score 1: Exact match (ignoring case and potential versioning in suggestion)
-                            # We check if the cleaned suggestion is found, and if so, store the match details
+                            # Check if the cleaned suggestion is a case-insensitive substring of the library track file
                             if cleaned_suggestion.lower() in p_filename_lower:
-                                # Check for near-perfect match (score based on length difference)
-                                length_diff = len(p_filename_lower) - len(cleaned_suggestion.lower())
-                                
-                                # Score 0: If the DJ named a version (e.g., "(live)") and we find it, this is the best match (highest priority).
-                                # We check if the full, non-cleaned suggestion appears in the filename (case-insensitive).
+                                # Score 1: Exact version match? (Check if the *DJ's exact text* is in the filename)
                                 is_exact_version_match = suggested_track.lower() in p_filename_lower
                                 
-                                # Score 2: Prioritize exact version match, then shortest name (least extra text)
+                                # Length difference between the library file and the cleaned suggestion
+                                length_diff = len(p_filename_lower) - len(cleaned_suggestion.lower())
+                                
+                                # Store: (track_path, filename, length_diff, is_exact_version_match)
                                 potential_matches.append((p_track, p_filename, length_diff, is_exact_version_match))
                         
                         found_track = None
@@ -361,11 +356,13 @@ def main():
                                         request_data["instructions"] = instructions
                                         # success remains False, loop continues to next attempt/retry
                                     else:
-                                        log(f"No alternatives found for artist: {artist}. Skipping turn.")
-                                        success = True # Treat as exhausted turn to avoid infinite loop
+                                        # --- CRITICAL FIX APPLIED HERE ---
+                                        log(f"No alternatives found for artist: {artist}. Autonomous turn failed. Forcing new artist selection.")
+                                        request_data["instructions"] = (f"The suggested artist {artist} has no available tracks. Please select a track by a completely different artist entirely.")
+                                        # success remains False, loop continues to next attempt/retry
                             else:
                                 log("Could not parse artist from suggestion. Skipping turn.")
-                                success = True # Treat as exhausted turn
+                                success = True # Treat as exhausted turn to avoid infinite loop (artist name is essential)
                     else:
                         log("DJ response incomplete (missing track/announcement). Skipping turn.")
                         success = True # Treat as failed turn
