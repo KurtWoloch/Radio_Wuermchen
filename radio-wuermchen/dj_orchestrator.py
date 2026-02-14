@@ -224,11 +224,14 @@ def main():
     last_track_played = None
     
     while True:
-        # --- NEW: Check for Listener Request ---
-        listener_input = read_and_clear_listener_request()
+        
+        listener_input = None # Initialize here
         
         if os.path.exists(SIGNAL_FILE):
             log("Signal detected. Starting DJ cycle.")
+
+            # NEW: Capture listener request ONLY when a DJ cycle is triggered
+            listener_input = read_and_clear_listener_request()
             
             # 1. Determine Context (Last track)
             last_track_path = read_last_line(QUEUE_FILE)
