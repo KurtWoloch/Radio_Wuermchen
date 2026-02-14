@@ -93,7 +93,6 @@ def build_system_prompt(config):
     station_name = config.get("station_name", "Radio Würmchen")
     language = config.get("language", "English")
     
-    # --- MODIFIED SECTION ---
     diversity_mandate = (
         "If there is no specific listener request, you MUST make an effort to "
         "suggest a track outside of the Alternative Rock/Grunge genre based on the "
@@ -120,7 +119,7 @@ def build_user_message(request_data, history):
     # Include recent history for variety
     if history:
         recent = [entry.get("track", "?") for entry in history[-5:]]
-        parts.append(f"Do not repeat these recent tracks: {', '.join(recent)}")
+        parts.append(f"HISTORY BLOCKLIST: You MUST NOT suggest any track found in this list unless fulfilling a specific listener request that names it: {', '.join(recent)}")
 
     # Listener input if any
     listener_input = request_data.get("listener_input")
