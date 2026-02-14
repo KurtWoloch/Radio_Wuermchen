@@ -21,6 +21,7 @@ PLAYLIST_FILE = BASE_DIR / "music.playlist"
 TTS_GENERATOR_SCRIPT = BASE_DIR / "tts_generate.py"
 DJ_BRAIN_SCRIPT = BASE_DIR / "dj_brain.py"
 LOG_FILE = BASE_DIR / "orchestrator.log"
+WISHLIST_FILE = BASE_DIR / "Wishlist.txt"
 
 PYTHON_BIN = "C:\\Program Files\\Python311\\python.exe"
 POLL_INTERVAL = 3  # seconds between checks
@@ -46,6 +47,10 @@ def load_json(path):
     except json.JSONDecodeError as e:
         log(f"Error reading JSON file {path}: {e}")
         return {}
+
+def save_json(path, data):
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
 def read_last_line(path):
     """Reads the last non-empty line from a file."""
@@ -92,6 +97,13 @@ def append_to_queue(track_path):
     with open(QUEUE_FILE, 'a', encoding='utf-8') as f:
         f.write(track_path + '\n')
     log(f"Appended to queue: {os.path.basename(track_path)}")
+
+def append_to_wishlist(track_suggestion):
+    """Append a track suggestion to the Wishlist file."""
+    with open(WISHLIST_FILE, 'a', encoding='utf-8') as f:
+        f.write(track_suggestion + '\n')
+    log(f"Appended to wishlist: {track_suggestion}")
+
 
 # --- DJ COMMUNICATION ---
 def trigger_dj(last_track):
@@ -229,8 +241,8 @@ def main():
                     else:
                         log(f"DJ suggested track not found in playlist: {suggested_track_path}")
                         log(f"DJ suggestion JSON: {json.dumps(dj_output)}")
-                        # If track not found, we must re-trigger the DJ immediately on next cycle
-                        # to ask for a new suggestion, but first, delete signal to stop current cycle.
+                        # If track not found, add to wishlist and continue cycle
+                        append_to_wishlist(suggested_track_path)
                         delete_signal() 
                 else:
                     log("DJ response incomplete. Skipping turn.")
