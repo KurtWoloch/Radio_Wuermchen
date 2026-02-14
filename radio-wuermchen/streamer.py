@@ -15,6 +15,7 @@ import subprocess
 import sys
 import os
 import time
+
 # --- CONFIGURATION ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 QUEUE_FILE = os.path.join(SCRIPT_DIR, "queue.txt")
@@ -143,8 +144,19 @@ def main():
     while True:
         file_path, is_last = pop_queue()
         
+        # --- NEW LOGIC START ---
+        while file_path == last_played and not is_last:
+            log(f"Skipping immediate repeat: {os.path.basename(file_path)}")
+            # Since we are skipping, we must pop the *next* item immediately to replace it.
+            file_path, is_last = pop_queue()
+            if file_path is None:
+                # Queue is now empty or only has one item left (which might be the repeat we skipped)
+                log("Queue became too small after skipping repeat. Stopping check and breaking inner loop.")
+                break
+        # --- NEW LOGIC END ---
+
         if file_path is None:
-            # Queue completely empty (shouldn't happen due to repeat logic, but safety net)
+            # Queue completely empty (handling case where queue only had repeats or went empty)
             if last_played:
                 log(f"Queue empty, repeating last played: {last_played}")
                 file_path = last_played
