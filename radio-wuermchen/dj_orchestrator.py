@@ -317,9 +317,16 @@ def main():
                                     request_data["instructions"] = instructions
                                     # Continue the inner loop (retry_count increments, success remains False)
                                 else:
-                                    # Path B: No alternatives found -> Skip turn
-                                    log(f"No alternatives found for artist: {artist}. Skipping turn.")
-                                    success = True # Treat as exhausted turn to avoid infinite loop
+                                    # --- CRITICAL FIX APPLIED HERE ---
+                                    if request_data["listener_input"]:
+                                        instructions = (f"The track '{suggested_track}' by {artist} was requested by a listener but is unavailable in the library. "
+                                                        "Please select a track by a COMPLETELY DIFFERENT artist, acknowledging the listener's general request if possible.")
+                                        log(f"Listener request failed for {artist}. Setting instruction to re-prompt DJ.")
+                                        request_data["instructions"] = instructions
+                                        # success remains False, loop continues to next attempt/retry
+                                    else:
+                                        log(f"No alternatives found for artist: {artist}. Skipping turn.")
+                                        success = True # Treat as exhausted turn to avoid infinite loop
                             else:
                                 log("Could not parse artist from suggestion. Skipping turn.")
                                 success = True # Treat as exhausted turn
