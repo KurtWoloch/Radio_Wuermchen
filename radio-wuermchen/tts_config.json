@@ -1,0 +1,5 @@
+{
+  "api_key": "YOUR_GEMINI_API_KEY",
+  "tts_model": "gemini-2.5-flash-preview-tts",
+  "voice_name": "Kore"
+}
