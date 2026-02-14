@@ -22,6 +22,7 @@ TTS_GENERATOR_SCRIPT = BASE_DIR / "tts_generate.py"
 DJ_BRAIN_SCRIPT = BASE_DIR / "dj_brain.py"
 LOG_FILE = BASE_DIR / "orchestrator.log"
 WISHLIST_FILE = BASE_DIR / "Wishlist.txt"
+LISTENER_REQUEST_FILE = BASE_DIR / "listener_request.txt" # NEW: Listener input file
 
 PYTHON_BIN = "C:\\Program Files\\Python311\\python.exe"
 POLL_INTERVAL = 3  # seconds between checks
@@ -93,6 +94,22 @@ def delete_signal():
     except FileNotFoundError:
         pass
 
+def read_and_clear_listener_request():
+    """Read listener request from file and delete the file."""
+    try:
+        with open(LISTENER_REQUEST_FILE, 'r', encoding='utf-8') as f:
+            request = f.read().strip()
+        
+        # Delete the file immediately after reading
+        os.remove(LISTENER_REQUEST_FILE)
+        log("Listener request read and file deleted.")
+        return request if request else None
+    except FileNotFoundError:
+        return None
+    except Exception as e:
+        log(f"Error reading/clearing listener request file: {e}")
+        return None
+
 # --- QUEUE MANAGEMENT ---
 def append_to_queue(track_path):
     """Append a track path to the queue file."""
@@ -125,18 +142,18 @@ def find_artist_alternatives(artist_name, playlist, max_results=MAX_ARTIST_SUGGE
     return alternatives
 
 # --- DJ COMMUNICATION ---
-def trigger_dj(last_track, instructions=None):
+def trigger_dj(last_track, listener_input=None, instructions=None):
     """Writes request file, runs DJ brain, reads response."""
     
     # 1. Prepare Request
     request_data = {
         "last_track": last_track,
-        "listener_input": None, # Future enhancement: check for new listener requests
+        "listener_input": listener_input,
         "instructions": instructions
     }
     with open(REQUEST_FILE, 'w', encoding='utf-8') as f:
         json.dump(request_data, f, indent=2)
-    log(f"Wrote DJ request based on last track: {last_track}. Instructions: {instructions}")
+    log(f"Wrote DJ request. Last Track: {last_track}. Listener Input: {listener_input}. Instructions: {instructions}")
 
     # 2. Execute DJ Brain
     command = [PYTHON_BIN, str(DJ_BRAIN_SCRIPT)]
@@ -207,6 +224,9 @@ def main():
     last_track_played = None
     
     while True:
+        # --- NEW: Check for Listener Request ---
+        listener_input = read_and_clear_listener_request()
+        
         if os.path.exists(SIGNAL_FILE):
             log("Signal detected. Starting DJ cycle.")
             
@@ -223,7 +243,7 @@ def main():
             # Initialize request_data here to be available for modification/re-prompting
             request_data = {
                 "last_track": last_track_name,
-                "listener_input": None,
+                "listener_input": listener_input, # <-- Pass listener input here
                 "instructions": None
             }
             
@@ -236,7 +256,7 @@ def main():
                 log(f"--- DJ Attempt {retry_count}/{MAX_DJ_ATTEMPTS} ---")
                 
                 # 2. Trigger DJ Brain
-                dj_output = trigger_dj(request_data["last_track"], request_data["instructions"])
+                dj_output = trigger_dj(request_data["last_track"], request_data["listener_input"], request_data["instructions"])
 
                 if dj_output:
                     suggested_track = dj_output.get("track") # Artist - Title
