@@ -10,6 +10,7 @@ import os
 import time
 import json
 from pathlib import Path
+import re
 
 # --- CONFIGURATION ---
 BASE_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
@@ -129,6 +130,14 @@ def parse_artist_from_suggestion(suggestion):
     if " - " in suggestion:
         return suggestion.split(" - ", 1)[0].strip()
     return None
+
+def clean_suggestion_for_matching(suggestion):
+    """Strips versioning/subtitles from the suggested track name for better matching."""
+    # Remove parenthetical notes like (live), (extended), (album version), etc.
+    cleaned = re.sub(r'\s*\(.*\)\s*', ' ', suggestion).strip()
+    # Remove features (feat. X) as they often cause mismatches if not in library tag
+    cleaned = re.sub(r'\s*ft\.\s*.*|\s*feat\.\s*.*', '', cleaned, flags=re.IGNORECASE).strip()
+    return cleaned
 
 def find_artist_alternatives(artist_name, playlist, max_results=MAX_ARTIST_SUGGESTIONS):
     """Finds up to max_results tracks from the playlist matching the artist name."""
@@ -279,24 +288,25 @@ def main():
                         
                         # --- MODIFIED MATCHING LOGIC START ---
                         potential_matches = []
-                        # Reconstruct expected base filename from DJ suggestion (Artist - Title)
-                        suggested_filename_base = suggested_track.strip() + ".mp3"
+                        
+                        # 1. Clean the DJ's suggestion to create a cleaner matching string
+                        cleaned_suggestion = clean_suggestion_for_matching(suggested_track)
                         
                         for p_track in playlist:
                             p_filename = os.path.basename(p_track)
                             
-                            # Check if the suggestion is a case-insensitive substring of the library track file
-                            if suggested_track.lower() in p_filename.lower():
-                                potential_matches.append((p_track, p_filename))
+                            # Check if the cleaned suggestion is a case-insensitive substring of the library track file
+                            if cleaned_suggestion.lower() in p_filename.lower():
+                                # We store the track path, the original filename, and the length of the filename for sorting
+                                potential_matches.append((p_track, p_filename, len(p_filename)))
                         
                         found_track = None
-                        if len(potential_matches) == 1:
-                            # Only one match found, use it.
+                        if potential_matches:
+                            # 2. Prioritize best match:
+                            # Sort by length ascending. The shortest match (least versioning) is usually the one the DJ meant.
+                            potential_matches.sort(key=lambda x: x[2]) 
                             found_track = potential_matches[0][0]
-                        elif len(potential_matches) > 1:
-                            # Multiple matches found: Prioritize the shortest filename (least versioning)
-                            potential_matches.sort(key=lambda x: len(x[1]))
-                            found_track = potential_matches[0][0]
+                        
                         # --- MODIFIED MATCHING LOGIC END ---
 
                         if found_track:
