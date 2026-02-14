@@ -26,6 +26,7 @@ WISHLIST_FILE = BASE_DIR / "Wishlist.txt"
 PYTHON_BIN = "C:\\Program Files\\Python311\\python.exe"
 POLL_INTERVAL = 3  # seconds between checks
 MAX_ARTIST_SUGGESTIONS = 50 # Maximum tracks to offer the DJ if suggestion fails
+MAX_DJ_ATTEMPTS = 5 # Maximum times to re-prompt the DJ per signal event
 
 # --- HELPERS ---
 def log(msg):
@@ -219,15 +220,23 @@ def main():
             else:
                 last_track_name = "Unknown track (Queue may have been empty)"
             
-            # --- DJ Cycle Management Loop ---
-            max_retries = 3
-            retry_count = 0
-            success = False
+            # Initialize request_data here to be available for modification/re-prompting
+            request_data = {
+                "last_track": last_track_name,
+                "listener_input": None,
+                "instructions": None
+            }
             
-            while retry_count < max_retries and not success:
+            dj_output = None
+            success = False
+            retry_count = 0
+            
+            while retry_count < MAX_DJ_ATTEMPTS and not success:
+                retry_count += 1
+                log(f"--- DJ Attempt {retry_count}/{MAX_DJ_ATTEMPTS} ---")
                 
                 # 2. Trigger DJ Brain
-                dj_output = trigger_dj(last_track_name)
+                dj_output = trigger_dj(request_data["last_track"], request_data["instructions"])
 
                 if dj_output:
                     suggested_track = dj_output.get("track") # Artist - Title
@@ -266,51 +275,37 @@ def main():
                             else:
                                 log("Skipping DJ turn: Failed to generate announcement audio.")
                         else:
-                            # FALLBACK PATH: Track not found, add to wishlist, reprompt DJ
+                            # FALLBACK PATH: Track not found, add to wishlist, reprompt DJ next cycle
                             log(f"Track NOT FOUND: {suggested_track}")
                             append_to_wishlist(suggested_track)
                             
-                            # Prepare instruction for next DJ call
-                            artist = suggested_track.split(" - ", 1)[0].strip() if " - " in suggested_track else suggested_track
+                            # Prepare instruction for next DJ call attempt
+                            artist = parse_artist_from_suggestion(suggested_track)
                             
-                            alternatives = find_artist_alternatives(artist, playlist)
-                            
-                            if alternatives:
-                                # Offer up to 50 alternatives in the next prompt
-                                alternative_list = "\n".join(os.path.basename(t) for t in alternatives[:MAX_ARTIST_SUGGESTIONS])
-                                instructions = (f"The suggested track '{suggested_track}' was unavailable. "
-                                                f"Instead, please select one of the following tracks by the same artist: {artist}. "
-                                                f"Available tracks include: {alternative_list[:500]}...") # Truncate for prompt safety
+                            if artist:
+                                alternatives = find_artist_alternatives(artist, playlist)
                                 
-                                log(f"Alternatives found ({len(alternatives)} total). Reprompting DJ with instructions.")
-                                
-                                # Re-run the cycle by updating the request data (implicitly via next loop iteration if we delete signal)
-                                # For immediate re-prompt, we overwrite the request data for the *next* loop iteration's trigger.
-                                # Since the orchestrator deletes the signal *after* processing, we need to avoid deleting it here.
-                                
-                                # For simplicity, we'll pass the instruction directly to the next DJ call trigger if we were to re-run immediately.
-                                # Since we are using a polling loop, the simplest way to re-prompt is to re-run trigger_dj immediately.
-                                
-                                # To avoid breaking the structure, we'll use the instruction in the request file on the next loop iteration.
-                                # BUT, for immediate feedback, we'll call trigger_dj again with explicit instructions.
-                                
-                                # Save instructions back to request file before deleting signal to ensure next loop uses it
-                                request_data["instructions"] = instructions
-                                with open(REQUEST_FILE, 'w', encoding='utf-8') as f:
-                                    json.dump(request_data, f, indent=2)
-                                
+                                if alternatives:
+                                    alternative_list = "\n".join(os.path.basename(t) for t in alternatives[:MAX_ARTIST_SUGGESTIONS])
+                                    instructions = (f"The track '{suggested_track}' was unavailable. Please select one of the following {len(alternatives)} available tracks by the same artist: {artist}. "
+                                                    f"Available tracks include: {alternative_list[:500]}...")
+                                    
+                                    log(f"Alternatives found. Setting instructions for next attempt.")
+                                    request_data["instructions"] = instructions
+                                    # DO NOT set success=True, loop will continue with modified request_data
+                                else:
+                                    log(f"No alternatives found for artist: {artist}. Skipping turn.")
+                                    success = True # Treat as exhausted turn to avoid infinite loop
                             else:
-                                log(f"No alternatives found for artist: {artist}. Skipping turn.")
-                            
-                            # Always delete signal here so the loop continues immediately
-                            delete_signal() 
+                                log("Could not parse artist from suggestion. Skipping turn.")
+                                success = True # Treat as exhausted turn
                     else:
-                        log("DJ response incomplete. Skipping turn.")
+                        log("DJ response incomplete (missing track/announcement). Skipping turn.")
+                        success = True # Treat as failed turn
                 else:
-                    log("DJ response incomplete. Skipping turn.")
-            else:
-                log("DJ cycle triggered, but no valid response or track found.")
-
+                    log("DJ cycle triggered, but no valid response.")
+                    success = True # Treat as failed turn
+            
             # 6. Cleanup signal file (Crucial: done regardless of success/failure)
             delete_signal()
 
