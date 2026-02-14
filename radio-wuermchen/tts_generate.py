@@ -101,25 +101,36 @@ def generate(text_file):
             print(f"TTS API returned part without expected inline_data structure: {part}", file=sys.stderr)
             return False
 
-        data_b64 = part.inline_data.data
+        # MODIFICATION: Do NOT Base64 decode if the MIME type is PCM
+        data_raw = part.inline_data.data
         mime_type = part.inline_data.mime_type
-        print(f"DEBUG: Received base64 data payload of length: {len(data_b64)} characters.", file=sys.stderr)
+        print(f"DEBUG: Received raw data payload of length: {len(data_raw)} characters.", file=sys.stderr)
         print(f"DEBUG: Detected MIME Type: {mime_type}", file=sys.stderr)
         
-        # MODIFICATION: Use validate=False to attempt decoding even with padding errors
-        pcm_data = base64.b64decode(data_b64, validate=False) 
+        pcm_data = None
         
-        # DEBUG: Print size of decoded PCM data
-        print(f"DEBUG: Decoded PCM data size: {len(pcm_data)} bytes.", file=sys.stderr)
-
-        # --- NEW LOGIC: Check MIME Type ---
+        if mime_type and 'audio/L16' in mime_type.lower():
+            print("DEBUG: Detected raw PCM L16 audio stream. Writing directly to WAV.", file=sys.stderr)
+            pcm_data = data_raw # Use raw data as PCM
+        else:
+            # Fallback: Assume Base64 encoded MP3/other audio (as previously attempted)
+            print("DEBUG: Assuming non-PCM audio format (likely Base64 encoded). Decoding to bytes.", file=sys.stderr)
+            pcm_data = base64.b64decode(data_raw, validate=False)
+        
+        # DEBUG: Print size of processed data
+        print(f"DEBUG: Processed data size: {len(pcm_data)} bytes.", file=sys.stderr)
+        
+        if len(pcm_data) < 500: # Heuristic check for tiny files
+             print(f"WARNING: Processed data size ({len(pcm_data)} bytes) is too small for audio.", file=sys.stderr)
+        
+        # 2. Save WAV or MP3
         if mime_type and 'audio/mp3' in mime_type.lower():
             print("DEBUG: Detected MP3 audio stream. Writing directly to MP3.")
             with open(mp3_path, 'wb') as f:
                 f.write(pcm_data)
         else:
-            # Fallback: Assume WAV format, use existing WAV writing + FFmpeg
-            print(f"DEBUG: Assuming non-MP3 audio format. Saving to WAV first.")
+            # Default/Fallback: Save as WAV, then convert to MP3
+            print(f"DEBUG: Saving via WAV intermediate step.")
             if not wave_file(wav_path, pcm_data):
                 return False
 
