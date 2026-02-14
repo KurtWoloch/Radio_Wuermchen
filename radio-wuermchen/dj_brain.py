@@ -63,7 +63,6 @@ def save_history(history, new_entry):
 def call_gemini(config, system_prompt, user_message):
     """Call the Gemini API using the modern google.genai SDK."""
     try:
-        # CORRECTED INITIALIZATION: API Key config is now done here, not globally before.
         genai_client.configure(api_key=config["api_key"])
         model = genai_client.GenerativeModel(model_name=config["model"])
         
