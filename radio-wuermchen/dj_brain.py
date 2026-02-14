@@ -16,8 +16,10 @@
 import json
 import sys
 import os
-import google.generativeai as genai
-from google import genai as genai_client # Alias for API key config
+import google.genai as genai
+from google import genai as genai_client
+import requests
+import time
 
 # --- CONFIGURATION ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -31,9 +33,14 @@ def load_json(path):
     try:
         with open(path, 'r', encoding='utf-8') as f:
             return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError) as e:
+    except FileNotFoundError:
+        # Return empty list for history, or empty dict for config/request/response
+        if path.endswith("history.json"):
+            return []
+        return {}
+    except json.JSONDecodeError as e:
         print(f"Error reading {path}: {e}", file=sys.stderr)
-        return None
+        return {}
 
 def save_json(path, data):
     with open(path, 'w', encoding='utf-8') as f:
@@ -54,9 +61,10 @@ def save_history(history, new_entry):
 
 # --- GEMINI API CALL ---
 def call_gemini(config, system_prompt, user_message):
-    """Call the Gemini API."""
+    """Call the Gemini API using the modern google.genai SDK."""
     try:
-        genai.configure(api_key=config["api_key"])
+        # CORRECTED INITIALIZATION: API Key config is now done here, not globally before.
+        genai_client.configure(api_key=config["api_key"])
         model = genai_client.GenerativeModel(model_name=config["model"])
         
         # Gemini uses the system instruction in the first message
@@ -155,7 +163,7 @@ def main():
         print("ERROR: Cannot load dj_request.json. Cannot proceed.", file=sys.stderr)
         sys.exit(1)
 
-    # Load history
+    # Load history (now handles missing file)
     history = load_history()
 
     # Build prompts
