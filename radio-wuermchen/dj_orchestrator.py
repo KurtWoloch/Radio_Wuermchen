@@ -275,25 +275,26 @@ def main():
                             else:
                                 log("Skipping DJ turn: Failed to generate announcement audio.")
                         else:
-                            # FALLBACK PATH: Track not found, add to wishlist, reprompt DJ next cycle
+                            # FALLBACK PATH 1: Track not found, add to wishlist, check for alternatives
                             log(f"Track NOT FOUND: {suggested_track}")
                             append_to_wishlist(suggested_track)
                             
-                            # Prepare instruction for next DJ call attempt
                             artist = parse_artist_from_suggestion(suggested_track)
                             
                             if artist:
                                 alternatives = find_artist_alternatives(artist, playlist)
                                 
                                 if alternatives:
+                                    # Path A: Alternatives exist -> Reprompt DJ with suggestions
                                     alternative_list = "\n".join(os.path.basename(t) for t in alternatives[:MAX_ARTIST_SUGGESTIONS])
                                     instructions = (f"The track '{suggested_track}' was unavailable. Please select one of the following {len(alternatives)} available tracks by the same artist: {artist}. "
                                                     f"Available tracks include: {alternative_list[:500]}...")
                                     
                                     log(f"Alternatives found. Setting instructions for next attempt.")
                                     request_data["instructions"] = instructions
-                                    # DO NOT set success=True, loop will continue with modified request_data
+                                    # Continue the inner loop (retry_count increments, success remains False)
                                 else:
+                                    # Path B: No alternatives found -> Skip turn
                                     log(f"No alternatives found for artist: {artist}. Skipping turn.")
                                     success = True # Treat as exhausted turn to avoid infinite loop
                             else:
