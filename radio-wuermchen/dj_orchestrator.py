@@ -277,12 +277,27 @@ def main():
                             time.sleep(POLL_INTERVAL)
                             continue
                         
-                        found_track = None
-                        # Simple matching logic (case-insensitive partial match)
+                        # --- MODIFIED MATCHING LOGIC START ---
+                        potential_matches = []
+                        # Reconstruct expected base filename from DJ suggestion (Artist - Title)
+                        suggested_filename_base = suggested_track.strip() + ".mp3"
+                        
                         for p_track in playlist:
-                            if suggested_track.lower() in os.path.basename(p_track).lower():
-                                found_track = p_track
-                                break
+                            p_filename = os.path.basename(p_track)
+                            
+                            # Check if the suggestion is a case-insensitive substring of the library track file
+                            if suggested_track.lower() in p_filename.lower():
+                                potential_matches.append((p_track, p_filename))
+                        
+                        found_track = None
+                        if len(potential_matches) == 1:
+                            # Only one match found, use it.
+                            found_track = potential_matches[0][0]
+                        elif len(potential_matches) > 1:
+                            # Multiple matches found: Prioritize the shortest filename (least versioning)
+                            potential_matches.sort(key=lambda x: len(x[1]))
+                            found_track = potential_matches[0][0]
+                        # --- MODIFIED MATCHING LOGIC END ---
 
                         if found_track:
                             # SUCCESS PATH: Track found! Generate audio and queue.
@@ -317,7 +332,7 @@ def main():
                                     request_data["instructions"] = instructions
                                     # Continue the inner loop (retry_count increments, success remains False)
                                 else:
-                                    # --- CRITICAL FIX APPLIED HERE ---
+                                    # Path B: No alternatives found -> Handle Listener Request persistence
                                     if request_data["listener_input"]:
                                         instructions = (f"The track '{suggested_track}' by {artist} was requested by a listener but is unavailable in the library. "
                                                         "Please select a track by a COMPLETELY DIFFERENT artist, acknowledging the listener's general request if possible.")
