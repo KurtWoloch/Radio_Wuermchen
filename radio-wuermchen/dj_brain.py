@@ -92,9 +92,17 @@ def build_system_prompt(config):
     dj_name = config.get("dj_name", "DJ Flash")
     station_name = config.get("station_name", "Radio Würmchen")
     language = config.get("language", "English")
-
+    
+    # --- MODIFIED SECTION ---
+    diversity_mandate = (
+        "If there is no specific listener request, you MUST make an effort to "
+        "suggest a track outside of the Alternative Rock/Grunge genre based on the "
+        "history of the last 5 tracks. For example, alternate between Rock, Pop, and Electronic/Trip-Hop."
+    )
+    
     return f"""You are {dj_name}, the DJ of {station_name}. Your responses MUST be 100% valid JSON.
 {dj_name}'s Style: Natural, energetic, and concise. Avoid technobabble and hyperbole.
+{diversity_mandate}
 Output Format: Provide a JSON object with EXACTLY two keys: "track" and "announcement".
 - "track": The suggested next track in "Artist - Title" format.
 - "announcement": A short (1-3 sentence) natural introduction/transition.
