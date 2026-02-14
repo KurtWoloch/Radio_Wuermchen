@@ -16,6 +16,8 @@ import base64
 from pathlib import Path
 import subprocess
 import wave
+from google import genai
+from google.genai import types
 
 # --- CONFIGURATION ---
 SCRIPT_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
@@ -33,8 +35,8 @@ def load_json(path):
         print(f"Error reading JSON file {path}: {e}", file=sys.stderr)
         return {}
 
-def save_wav_file(filename, pcm, channels=1, rate=24000, sample_width=2):
-    """Saves raw PCM data to a WAV file."""
+def wave_file(filename, pcm, channels=1, rate=24000, sample_width=2):
+    """Saves raw PCM data to a WAV file (matching example function name)."""
     try:
         with wave.open(filename, "wb") as wf:
             wf.setnchannels(channels)
@@ -90,12 +92,22 @@ def generate(text_file):
             )
         )
 
-        # Extract audio data (Base64 encoded audio data)
-        data_b64 = response.candidates[0].content.parts[0].inline_data.data
+        # DEBUG: Inspect response structure
+        if not response.candidates or not response.candidates[0].content.parts:
+            print(f"TTS API returned no candidates/parts: {response.prompt_feedback}", file=sys.stderr)
+            return False
+            
+        part = response.candidates[0].content.parts[0]
+        if not hasattr(part, 'inline_data') or not hasattr(part.inline_data, 'data'):
+            print(f"TTS API returned part without expected inline_data structure: {part}", file=sys.stderr)
+            return False
+
+        # The data IS base64 encoded for audio parts in this SDK version.
+        data_b64 = part.inline_data.data
         pcm_data = base64.b64decode(data_b64)
         
         # 2. Save as WAV (FFmpeg needs WAV input for consistent conversion)
-        if not save_wav_file(wav_path, pcm_data):
+        if not wave_file(wav_path, pcm_data):
             return False
 
         # 3. Convert WAV to MP3 using FFmpeg
@@ -130,10 +142,6 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         print(f"Usage: python {sys.argv[0]} <text_file>", file=sys.stderr)
         sys.exit(1)
-
-    # Need to import specific types for the API call structure
-    from google import genai
-    from google.genai import types
 
     success = generate(sys.argv[1])
     sys.exit(0 if success else 1)
