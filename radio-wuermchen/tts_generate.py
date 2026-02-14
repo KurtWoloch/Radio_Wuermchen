@@ -101,21 +101,24 @@ def generate(text_file):
             print(f"TTS API returned part without expected inline_data structure: {part}", file=sys.stderr)
             return False
 
-        # MODIFICATION: Do NOT Base64 decode if the MIME type is PCM
-        data_raw = part.inline_data.data
+        data_payload = part.inline_data.data
         mime_type = part.inline_data.mime_type
-        print(f"DEBUG: Received raw data payload of length: {len(data_raw)} characters.", file=sys.stderr)
+        print(f"DEBUG: Received data payload of length: {len(data_payload)} characters.", file=sys.stderr)
         print(f"DEBUG: Detected MIME Type: {mime_type}", file=sys.stderr)
         
         pcm_data = None
         
+        # LOGIC CHANGE: Check MIME type first to decide decoding strategy
         if mime_type and 'audio/L16' in mime_type.lower():
-            print("DEBUG: Detected raw PCM L16 audio stream. Writing directly to WAV.", file=sys.stderr)
-            pcm_data = data_raw # Use raw data as PCM
+            print("DEBUG: Detected raw PCM audio stream. Using data directly.", file=sys.stderr)
+            pcm_data = data_payload # Use raw data as PCM
+        elif mime_type and 'audio/mp3' in mime_type.lower():
+            print("DEBUG: Detected MP3 audio stream. Assuming Base64, decoding...", file=sys.stderr)
+            pcm_data = base64.b64decode(data_payload, validate=False)
         else:
-            # Fallback: Assume Base64 encoded MP3/other audio (as previously attempted)
-            print("DEBUG: Assuming non-PCM audio format (likely Base64 encoded). Decoding to bytes.", file=sys.stderr)
-            pcm_data = base64.b64decode(data_raw, validate=False)
+            # Default/Fallback: Assume Base64 for everything else (like the previous state)
+            print("DEBUG: Assuming Base64 encoded audio format. Decoding...", file=sys.stderr)
+            pcm_data = base64.b64decode(data_payload, validate=False)
         
         # DEBUG: Print size of processed data
         print(f"DEBUG: Processed data size: {len(pcm_data)} bytes.", file=sys.stderr)
