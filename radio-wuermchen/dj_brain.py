@@ -17,7 +17,7 @@ import json
 import sys
 import os
 import google.genai as genai
-from google import genai as genai_client
+# Removed redundant import: from google import genai as genai_client 
 import requests
 import time
 
@@ -63,8 +63,12 @@ def save_history(history, new_entry):
 def call_gemini(config, system_prompt, user_message):
     """Call the Gemini API using the modern google.genai SDK."""
     try:
-        genai_client.configure(api_key=config["api_key"])
-        model = genai_client.GenerativeModel(model_name=config["model"])
+        # FIX: Remove global configure(). Pass API key directly or rely on env.
+        # We pass it directly here to keep it self-contained as requested.
+        model = genai.GenerativeModel(
+            model_name=config["model"],
+            client_config={"api_key": config["api_key"]} # <-- New Explicit Key Passing Method
+        )
         
         # Gemini uses the system instruction in the first message
         response = model.generate_content([system_prompt, user_message], stream=False)
