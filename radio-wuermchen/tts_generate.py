@@ -98,7 +98,7 @@ def generate(text_file):
             
         part = response.candidates[0].content.parts[0]
         if not hasattr(part, 'inline_data') or not hasattr(part.inline_data, 'data'):
-            print(f"TTS API returned part without expected inline_data structure. Full Part: {part}", file=sys.stderr)
+            print(f"TTS API returned part without expected inline_data structure: {part}", file=sys.stderr)
             return False
 
         data_payload = part.inline_data.data
@@ -108,8 +108,8 @@ def generate(text_file):
         
         audio_data = None
         
-        # LOGIC CHANGE: Check MIME type strictly for PCM and assume raw data if found.
-        if mime_type and 'audio/L16' in mime_type.lower():
+        # LOGIC CHANGE: Check MIME type strictly for PCM (lowercase 'l16')
+        if mime_type and 'audio/l16' in mime_type.lower():
             print("DEBUG: Detected raw PCM audio stream. Using data directly.", file=sys.stderr)
             audio_data = data_payload # Use raw data as PCM
         else:
