@@ -5,7 +5,7 @@
 #
 # Interface (file-based):
 #   Input:  dj_request.json  - context about what just played, listener input, etc.
-#   Output: dj_response.json - track suggestion + announcement text
+#   Output: dj_response.json - track suggestion + track file path
 #   Config: dj_config.json   - API key, model, DJ personality settings
 #
 # Usage:
@@ -17,7 +17,7 @@ import json
 import sys
 import os
 import google.genai as genai
-# Removed redundant import: from google import genai as genai_client 
+from google import genai as genai_client
 import requests
 import time
 
@@ -61,24 +61,27 @@ def save_history(history, new_entry):
 
 # --- GEMINI API CALL ---
 def call_gemini(config, system_prompt, user_message):
-    """Call the Gemini API using the modern google.genai SDK."""
+    """Call the Gemini API using the structure found in Google's current examples."""
     try:
-        # FIX: Remove global configure(). Pass API key directly or rely on env.
-        # We pass it directly here to keep it self-contained as requested.
-        model = genai.GenerativeModel(
-            model_name=config["model"],
-            client_config={"api_key": config["api_key"]} # <-- New Explicit Key Passing Method
+        api_key = config["api_key"]
+        model_name = config["model"]
+
+        # FIX: Initialize Client explicitly and pass API key. Remove global configure().
+        client = genai_client.Client(api_key=api_key)
+        
+        # Use the client's generate_content method, matching REST/new SDK structure
+        response = client.models.generate_content(
+            model=model_name,
+            contents=[system_prompt, user_message]
         )
         
-        # Gemini uses the system instruction in the first message
-        response = model.generate_content([system_prompt, user_message], stream=False)
-        
+        # Extract text from response
         if response.candidates and response.candidates[0].content.parts:
-             # Gemini returns content parts, often as text
             return response.text
         else:
             print(f"API Response Empty/Failed: {response.prompt_feedback}", file=sys.stderr)
             return None
+            
     except Exception as e:
         print(f"Gemini API Error: {e}", file=sys.stderr)
         return None
