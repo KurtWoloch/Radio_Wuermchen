@@ -7,7 +7,6 @@
 # base name but the .mp3 extension.
 #
 # Dependencies: google-genai, ffmpeg
-# Temporary WAV file will be kept for inspection if conversion fails.
 
 import json
 import sys
@@ -106,6 +105,9 @@ def generate(text_file):
         print(f"DEBUG: Received base64 data payload of length: {len(data_b64)} characters.", file=sys.stderr)
         
         pcm_data = base64.b64decode(data_b64)
+        
+        # DEBUG: Print size of decoded PCM data
+        print(f"DEBUG: Decoded PCM data size: {len(pcm_data)} bytes.", file=sys.stderr)
         
         # 2. Save as WAV (FFmpeg needs WAV input for consistent conversion)
         if not wave_file(wav_path, pcm_data):
