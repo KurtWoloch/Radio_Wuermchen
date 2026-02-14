@@ -125,7 +125,10 @@ def build_user_message(request_data, history):
     listener_input = request_data.get("listener_input")
     if listener_input:
         parts.append(f"A listener has requested or commented: {listener_input}")
-
+    else:
+        # --- NEW INSTRUCTION FOR LONGER ANNOUNCEMENTS ---
+        parts.append("Since there is no specific listener request, your announcement should be more detailed and engaging (2-3 sentences) about the song or artist before introducing the track.")
+        
     # Any special instructions
     instructions = request_data.get("instructions")
     if instructions:
