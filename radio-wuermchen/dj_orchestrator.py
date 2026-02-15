@@ -29,6 +29,7 @@ LOG_FILE = BASE_DIR / "orchestrator.log"
 WISHLIST_FILE = BASE_DIR / "Wishlist.txt"
 LISTENER_REQUEST_FILE = BASE_DIR / "listener_request.txt"
 SUGGESTION_POOL_FILE = BASE_DIR / "suggestion_pool.txt"
+HISTORY_FILE = BASE_DIR / "dj_history.json" # NEW: Added History file constant
 
 PYTHON_BIN = "C:\\Program Files\\Python311\\python.exe"
 POLL_INTERVAL = 3  # seconds between checks
@@ -325,26 +326,38 @@ def main():
                             time.sleep(POLL_INTERVAL)
                             continue
                         
-                        # --- MUSIC MATCHING ---
-                        potential_matches = []
-                        cleaned_suggestion = clean_suggestion_for_matching(suggested_track)
+                        # --- HISTORY CHECK & VALIDATION START ---
                         
-                        for p_track in playlist:
-                            p_filename = os.path.basename(p_track)
-                            p_filename_lower = p_filename.lower()
+                        history = load_json(str(HISTORY_FILE))
+                        recent_tracks = [entry["track"].lower() for entry in history if "track" in entry]
+                        
+                        if suggested_track.lower() in recent_tracks:
+                            log(f"DJ Suggestion REJECTED: '{suggested_track}' is in recent history.")
+                            found_track = None 
+                        else:
+                            # --- MUSIC MATCHING LOGIC START ---
+                            potential_matches = []
                             
-                            if cleaned_suggestion.lower() in p_filename_lower:
-                                is_exact_version_match = suggested_track.lower() in p_filename_lower
-                                length_diff = len(p_filename_lower) - len(cleaned_suggestion.lower())
-                                potential_matches.append((p_track, p_filename, length_diff, is_exact_version_match))
-                        
-                        found_track = None
-                        if potential_matches:
-                            potential_matches.sort(key=lambda x: (not x[3], x[2])) 
-                            found_track = potential_matches[0][0]
+                            cleaned_suggestion = clean_suggestion_for_matching(suggested_track)
+                            
+                            for p_track in playlist:
+                                p_filename = os.path.basename(p_track)
+                                p_filename_lower = p_filename.lower()
+                                
+                                if cleaned_suggestion.lower() in p_filename_lower:
+                                    is_exact_version_match = suggested_track.lower() in p_filename_lower
+                                    length_diff = len(p_filename_lower) - len(cleaned_suggestion.lower())
+                                    potential_matches.append((p_track, p_filename, length_diff, is_exact_version_match))
+                            
+                            found_track = None
+                            if potential_matches:
+                                potential_matches.sort(key=lambda x: (not x[3], x[2])) 
+                                found_track = potential_matches[0][0]
+                            
+                            # --- MUSIC MATCHING LOGIC END ---
 
                         if found_track:
-                            # SUCCESS: Track found — generate audio and queue
+                            # SUCCESS PATH: Track found! Generate audio and queue.
                             log(f"SUCCESS: Found track: {suggested_track}")
                             announcement_audio_path = generate_announcement_audio(announcement_text)
 
@@ -366,8 +379,8 @@ def main():
                             
                             success = True
                         else:
-                            # FALLBACK PATH 1: Track not found, add to wishlist, check for alternatives
-                            log(f"Track NOT FOUND: {suggested_track}")
+                            # FALLBACK PATH 1: Track not found (or rejected by history)
+                            log(f"Track NOT FOUND or REJECTED: {suggested_track}")
                             append_to_wishlist(suggested_track)
                             
                             # --- SUGGESTION POOL FALLBACK (Priority 1) ---
