@@ -64,7 +64,11 @@ def save_history(history, new_entry):
 def call_gemini(config, system_prompt, user_message):
     """Call the Gemini API using the structure found in Google's current examples."""
     try:
-        api_key = config["api_key"]
+        api_key = os.environ.get("GEMINI_API_KEY")
+        if not api_key:
+            print("ERROR: GEMINI_API_KEY environment variable not set.", file=sys.stderr)
+            return None
+        
         model_name = config["model"]
 
         # FIX: Initialize Client explicitly and pass API key. Remove global configure().

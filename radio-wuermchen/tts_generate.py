@@ -74,7 +74,12 @@ def generate(text_file):
     
     try:
         # 1. Call Google TTS API
-        client = genai.Client(api_key=config["api_key"])
+        api_key = os.environ.get("GEMINI_API_KEY")
+        if not api_key:
+            print("ERROR: GEMINI_API_KEY environment variable not set.", file=sys.stderr)
+            return False
+
+        client = genai.Client(api_key=api_key)
         
         response = client.models.generate_content(
             model=config["tts_model"],

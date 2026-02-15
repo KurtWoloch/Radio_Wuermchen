@@ -8300,3 +8300,12 @@
 [2026-02-15 16:12:23] Streaming: Massive Attack - Teardrop.mp3
 [2026-02-15 16:12:23] FFmpeg error (code 4294967274) for: E:/Daten/Radio Würmchen/Musik/Massive Attack - Teardrop.mp3
 [2026-02-15 16:12:23] Failed to stream: E:/Daten/Radio Würmchen/Musik/Massive Attack - Teardrop.mp3, skipping.
+[2026-02-15 18:18:48] ============================================================
+[2026-02-15 18:18:48] Streamer starting up.
+[2026-02-15 18:18:48] Queue loaded with 1 items. First: E:/Daten/Radio Würmchen/Musik/Massive Attack - Teardrop.mp3
+[2026-02-15 18:18:48] Queue has 1 item left (repeat mode): E:/Daten/Radio Würmchen/Musik/Massive Attack - Teardrop.mp3
+[2026-02-15 18:18:48] Streaming: Massive Attack - Teardrop.mp3
+[2026-02-15 18:21:34] FFmpeg error (code 255) for: E:/Daten/Radio Würmchen/Musik/Massive Attack - Teardrop.mp3
+[2026-02-15 18:21:34] Failed to stream: E:/Daten/Radio Würmchen/Musik/Massive Attack - Teardrop.mp3, skipping.
+[2026-02-15 18:21:35] Queue has 1 item left (repeat mode): E:/Daten/Radio Würmchen/Musik/Massive Attack - Teardrop.mp3
+[2026-02-15 18:21:35] Streaming: Massive Attack - Teardrop.mp3
