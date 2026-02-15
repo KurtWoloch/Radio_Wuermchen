@@ -14,7 +14,7 @@ import re
 
 # --- IMPORTS FROM NEW MANAGERS ---
 from weather_manager import get_weather_forecast, WEATHER_RESULT
-from tts_manager import get_next_announcement_slot, generate_announcement_audio
+from tts_manager import generate_announcement_audio
 from news_scheduler import get_news_instruction, news_mark_presented
 
 # --- CONFIGURATION ---
@@ -24,15 +24,16 @@ SIGNAL_FILE = BASE_DIR / "queue_low.signal"
 REQUEST_FILE = BASE_DIR / "dj_request.json"
 RESPONSE_FILE = BASE_DIR / "dj_response.json"
 PLAYLIST_FILE = BASE_DIR / "music.playlist"
-TTS_GENERATOR_SCRIPT = BASE_DIR / "tts_generate.py"
 DJ_BRAIN_SCRIPT = BASE_DIR / "dj_brain.py"
 LOG_FILE = BASE_DIR / "orchestrator.log"
 WISHLIST_FILE = BASE_DIR / "Wishlist.txt"
-LISTENER_REQUEST_FILE = BASE_DIR / "listener_request.txt" # NEW: Listener input file
+LISTENER_REQUEST_FILE = BASE_DIR / "listener_request.txt"
+SUGGESTION_POOL_FILE = BASE_DIR / "suggestion_pool.txt"
 
 PYTHON_BIN = "C:\\Program Files\\Python311\\python.exe"
 POLL_INTERVAL = 3  # seconds between checks
 MAX_ARTIST_SUGGESTIONS = 50 # Maximum tracks to offer the DJ if suggestion fails
+MAX_POOL_SUGGESTIONS = 50   # Maximum tracks to offer from the suggestion pool
 MAX_DJ_ATTEMPTS = 5 # Maximum times to re-prompt the DJ per signal event
 
 # --- HELPERS ---
@@ -71,7 +72,6 @@ def read_last_line(path):
             if file_size == 0:
                 return None
             
-            # Read backwards in chunks
             chunk_size = 1024
             buffer = b''
             while f.tell() > 0:
@@ -80,11 +80,9 @@ def read_last_line(path):
                 chunk = f.read(read_size)
                 buffer = chunk + buffer
                 
-                # Check if we found a newline within the chunk
                 if b'\n' in chunk:
                     return buffer.split(b'\n')[-2].decode('utf-8').strip()
                 
-                # If we are at the start of the file and found no newline, the whole file is one line
                 if f.tell() == 0:
                     return buffer.decode('utf-8').strip()
 
@@ -106,8 +104,6 @@ def read_and_clear_listener_request():
     try:
         with open(str(LISTENER_REQUEST_FILE), 'r', encoding='utf-8') as f:
             request = f.read().strip()
-        
-        # Delete the file immediately after reading
         os.remove(str(LISTENER_REQUEST_FILE))
         log("Listener request read and file deleted.")
         return request if request else None
@@ -130,6 +126,42 @@ def append_to_wishlist(track_suggestion):
         f.write(track_suggestion + '\n')
     log(f"Appended to wishlist: {track_suggestion}")
 
+# --- SUGGESTION POOL ---
+def read_suggestion_pool():
+    """Read the suggestion pool file. Returns list of 'Artist - Track' strings."""
+    try:
+        with open(str(SUGGESTION_POOL_FILE), 'r', encoding='latin-1') as f:
+            lines = [line.strip() for line in f if line.strip() and not line.strip().startswith('#')]
+        return lines
+    except FileNotFoundError:
+        return []
+
+def remove_from_suggestion_pool(track_name):
+    """Remove a track from the suggestion pool (by matching Artist - Track name in filename)."""
+    pool = read_suggestion_pool()
+    if not pool:
+        return
+    
+    track_lower = track_name.lower()
+    new_pool = []
+    removed = False
+    for line in pool:
+        if not removed and line.lower() in track_lower:
+            log(f"Removed from suggestion pool: {line}")
+            removed = True
+        else:
+            new_pool.append(line)
+    
+    if removed:
+        with open(str(SUGGESTION_POOL_FILE), 'w', encoding='latin-1') as f:
+            for line in new_pool:
+                f.write(line + '\n')
+
+def get_pool_suggestions(max_count=MAX_POOL_SUGGESTIONS):
+    """Get the top N suggestions from the pool."""
+    pool = read_suggestion_pool()
+    return pool[:max_count]
+
 # --- ARTIST MATCHING ---
 def parse_artist_from_suggestion(suggestion):
     """Extracts the artist part from an 'Artist - Title' string."""
@@ -139,9 +171,7 @@ def parse_artist_from_suggestion(suggestion):
 
 def clean_suggestion_for_matching(suggestion):
     """Strips versioning/subtitles from the suggested track name for better matching."""
-    # Remove parenthetical notes like (live), (extended), (album version), etc.
     cleaned = re.sub(r'\s*\(.*\)\s*', ' ', suggestion).strip()
-    # Remove features (feat. X) as they often cause mismatches if not in library tag
     cleaned = re.sub(r'\s*ft\.\s*.*|\s*feat\.\s*.*', '', cleaned, flags=re.IGNORECASE).strip()
     return cleaned
 
@@ -160,7 +190,6 @@ def find_artist_alternatives(artist_name, playlist, max_results=MAX_ARTIST_SUGGE
 def trigger_dj(last_track, listener_input=None, instructions=None):
     """Writes request file, runs DJ brain, reads response."""
     
-    # 1. Prepare Request
     request_data = {
         "last_track": last_track,
         "listener_input": listener_input,
@@ -170,25 +199,18 @@ def trigger_dj(last_track, listener_input=None, instructions=None):
         json.dump(request_data, f, indent=2)
     log(f"Wrote DJ request. Last Track: {last_track}. Listener Input: {listener_input}. Instructions: {instructions}")
 
-    # 2. Execute DJ Brain
     command = [PYTHON_BIN, str(DJ_BRAIN_SCRIPT)]
     log(f"Executing DJ Brain: {' '.join(command)}")
     
     try:
-        # Run DJ brain synchronously, capture output/errors to log
         result = subprocess.run(
-            command,
-            check=True,
-            capture_output=True,
-            text=True,
-            cwd=str(BASE_DIR) # Ensure it runs from the correct directory
+            command, check=True, capture_output=True, text=True, cwd=str(BASE_DIR)
         )
         log(f"DJ Brain finished. STDOUT: {result.stdout.strip()}")
     except subprocess.CalledProcessError as e:
         log(f"DJ Brain FAILED (Code {e.returncode}). Stderr: {e.stderr.strip()}")
         return None
 
-    # 3. Read Response
     response = load_json(RESPONSE_FILE)
     if not response or "error" in response:
         log(f"Failed to get valid response from DJ: {response}")
@@ -206,16 +228,16 @@ def main():
     
     while True:
         
-        listener_input = None # Initialize here
+        listener_input = None
         
         if os.path.exists(SIGNAL_FILE):
             log("Signal detected. Starting DJ cycle.")
 
-            listener_input = read_and_clear_listener_request() # Read listener input first
+            listener_input = read_and_clear_listener_request()
             
-            # 1. Determine Context (Last track) and GATHER NEWS/WEATHER
+            # --- PHASE 1: CONTEXT GATHERING ---
             
-            # A. Weather Context 
+            # A. Weather Context
             weather_forecast = get_weather_forecast()
             weather_instruction = None
             weather_is_fresh = False
@@ -255,7 +277,7 @@ def main():
 
             # D. Prepare request data
             last_track_path = read_last_line(QUEUE_FILE)
-            if last_track_path and not last_track_path.endswith(".mp3"): # If it's not a valid file path, treat as unknown
+            if last_track_path and not last_track_path.endswith(".mp3"):
                  last_track_path = None
             
             if last_track_path:
@@ -269,7 +291,7 @@ def main():
                 "instructions": combined_instructions
             }
             
-            # If we are doing a news deep dive, the payload is just the story ID string
+            # Track news deep dive for post-processing
             mark_id = None
             if news_context_payload and isinstance(news_context_payload, str):
                  mark_id = news_context_payload
@@ -285,15 +307,14 @@ def main():
                 retry_count += 1
                 log(f"--- DJ Attempt {retry_count}/{MAX_DJ_ATTEMPTS} ---")
                 
-                # 2. Trigger DJ Brain
                 dj_output = trigger_dj(request_data["last_track"], request_data["listener_input"], request_data["instructions"])
 
                 if dj_output:
-                    suggested_track = dj_output.get("track") # Artist - Title
+                    suggested_track = dj_output.get("track")
                     announcement_text = dj_output.get("announcement")
                     
                     if suggested_track and announcement_text:
-                        # 3. Find the actual audio file for the suggested track
+                        # Load playlist
                         playlist = []
                         try:
                             with open(str(PLAYLIST_FILE), 'r', encoding='utf-8') as f:
@@ -304,9 +325,8 @@ def main():
                             time.sleep(POLL_INTERVAL)
                             continue
                         
-                        # --- MUSIC MATCHING LOGIC START ---
+                        # --- MUSIC MATCHING ---
                         potential_matches = []
-                        
                         cleaned_suggestion = clean_suggestion_for_matching(suggested_track)
                         
                         for p_track in playlist:
@@ -322,73 +342,86 @@ def main():
                         if potential_matches:
                             potential_matches.sort(key=lambda x: (not x[3], x[2])) 
                             found_track = potential_matches[0][0]
-                        
-                        # --- MUSIC MATCHING LOGIC END ---
 
                         if found_track:
-                            # SUCCESS PATH: Track found! Generate audio and queue.
+                            # SUCCESS: Track found — generate audio and queue
                             log(f"SUCCESS: Found track: {suggested_track}")
                             announcement_audio_path = generate_announcement_audio(announcement_text)
 
                             if announcement_audio_path:
-                                # 5. Append to Queue (Announcement FIRST, then Song)
                                 append_to_queue(str(announcement_audio_path))
-                                append_to_queue(found_track)
-                                last_track_played = found_track
-                                
-                                # Mark news story as presented if this was a deep dive
-                                if mark_id:
-                                    news_mark_presented(mark_id)
-                                    mark_id = None
-                                
-                                success = True # Exit inner loop
                             else:
-                                log("Skipping DJ turn: Failed to generate announcement audio.")
+                                log("TTS failed — queueing track without announcement.")
+                            
+                            append_to_queue(found_track)
+                            last_track_played = found_track
+                            
+                            # Remove from suggestion pool if it came from there
+                            remove_from_suggestion_pool(os.path.basename(found_track))
+                            
+                            # Mark news story as presented if this was a deep dive
+                            if mark_id:
+                                news_mark_presented(mark_id)
+                                mark_id = None
+                            
+                            success = True
                         else:
                             # FALLBACK PATH 1: Track not found, add to wishlist, check for alternatives
                             log(f"Track NOT FOUND: {suggested_track}")
                             append_to_wishlist(suggested_track)
                             
-                            artist = parse_artist_from_suggestion(suggested_track)
-                            
-                            if artist:
-                                alternatives = find_artist_alternatives(artist, playlist)
-                                
-                                if alternatives:
-                                    # Path A: Alternatives exist -> Reprompt DJ with suggestions
-                                    alternative_list = "\n".join(os.path.basename(t) for t in alternatives[:MAX_ARTIST_SUGGESTIONS])
-                                    retry_instructions = (f"The track '{suggested_track}' was unavailable. Please select one of the following {len(alternatives)} available tracks by the same artist: {artist}. "
-                                                    f"Available tracks include: {alternative_list[:500]}...")
-                                    instructions = f"{combined_instructions}\n{retry_instructions}" if combined_instructions else retry_instructions
-                                    
-                                    log(f"Alternatives found. Setting instructions for next attempt.")
-                                    request_data["instructions"] = instructions
-                                    # Continue the inner loop (retry_count increments, success remains False)
-                                else:
-                                    # Path B: No alternatives found -> Handle Listener Request persistence
-                                    if request_data["listener_input"]:
-                                        retry_instructions = (f"The track '{suggested_track}' by {artist} was requested by a listener but is unavailable in the library. "
-                                                        "Please select a track by a COMPLETELY DIFFERENT artist, acknowledging the listener's general request if possible.")
-                                        instructions = f"{combined_instructions}\n{retry_instructions}" if combined_instructions else retry_instructions
-                                        log(f"Listener request failed for {artist}. Setting instruction to re-prompt DJ.")
-                                        request_data["instructions"] = instructions
-                                        # success remains False, loop continues to next attempt/retry
-                                    else:
-                                        # --- CRITICAL FIX APPLIED HERE ---
-                                        log(f"No alternatives found for artist: {artist}. Autonomous turn failed. Forcing new artist selection.")
-                                        retry_instructions = f"The suggested artist {artist} has no available tracks. Please select a track by a completely different artist entirely."
-                                        instructions = f"{combined_instructions}\n{retry_instructions}" if combined_instructions else retry_instructions
-                                        request_data["instructions"] = instructions
-                                        # success remains False, loop continues to next attempt/retry
+                            # --- SUGGESTION POOL FALLBACK (Priority 1) ---
+                            pool_suggestions = get_pool_suggestions()
+                            if pool_suggestions:
+                                pool_list = "\n".join(pool_suggestions)
+                                retry_instructions = (
+                                    f"The track '{suggested_track}' was unavailable. "
+                                    f"Please select one of the following recommended tracks instead. "
+                                    f"These are listed from most recommended to least recommended:\n{pool_list}"
+                                )
+                                instructions = f"{combined_instructions}\n{retry_instructions}" if combined_instructions else retry_instructions
+                                log(f"Offering {len(pool_suggestions)} tracks from suggestion pool.")
+                                request_data["instructions"] = instructions
                             else:
-                                log("Could not parse artist from suggestion. Skipping turn.")
-                                success = True # Treat as exhausted turn to avoid infinite loop (artist name is essential)
+                                # --- ARTIST ALTERNATIVES FALLBACK (Priority 2) ---
+                                artist = parse_artist_from_suggestion(suggested_track)
+                                
+                                if artist:
+                                    alternatives = find_artist_alternatives(artist, playlist)
+                                    
+                                    if alternatives:
+                                        alternative_list = "\n".join(os.path.basename(t) for t in alternatives[:MAX_ARTIST_SUGGESTIONS])
+                                        retry_instructions = (
+                                            f"The track '{suggested_track}' was unavailable. "
+                                            f"Please select one of the following {len(alternatives)} available tracks by the same artist: {artist}. "
+                                            f"Available tracks include: {alternative_list[:500]}..."
+                                        )
+                                        instructions = f"{combined_instructions}\n{retry_instructions}" if combined_instructions else retry_instructions
+                                        log(f"Alternatives found. Setting instructions for next attempt.")
+                                        request_data["instructions"] = instructions
+                                    else:
+                                        if request_data["listener_input"]:
+                                            retry_instructions = (
+                                                f"The track '{suggested_track}' by {artist} was requested by a listener but is unavailable in the library. "
+                                                "Please select a track by a COMPLETELY DIFFERENT artist, acknowledging the listener's general request if possible."
+                                            )
+                                            instructions = f"{combined_instructions}\n{retry_instructions}" if combined_instructions else retry_instructions
+                                            log(f"Listener request failed for {artist}. Setting instruction to re-prompt DJ.")
+                                            request_data["instructions"] = instructions
+                                        else:
+                                            log(f"No alternatives found for artist: {artist}. Forcing new artist selection.")
+                                            retry_instructions = f"The suggested artist {artist} has no available tracks. Please select a track by a completely different artist entirely."
+                                            instructions = f"{combined_instructions}\n{retry_instructions}" if combined_instructions else retry_instructions
+                                            request_data["instructions"] = instructions
+                                else:
+                                    log("Could not parse artist from suggestion. Skipping turn.")
+                                    success = True
                     else:
                         log("DJ response incomplete (missing track/announcement). Skipping turn.")
-                        success = True # Treat as failed turn
+                        success = True
                 else:
                     log("DJ cycle triggered, but no valid response.")
-                    success = True # Treat as failed turn
+                    success = True
             
             # 6. Cleanup signal file (Crucial: done regardless of success/failure)
             delete_signal()
