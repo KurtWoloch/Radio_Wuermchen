@@ -8286,3 +8286,17 @@
 [2026-02-15 16:10:18] Finished: Liza Minnelli & Joel Grey - Money, Money.mp3
 [2026-02-15 16:10:18] Queue down to 2 items, signaling low.
 [2026-02-15 16:10:18] Streaming: The Killers - Mr. Brightside.mp3
+[2026-02-15 16:12:19] FFmpeg error (code 4294967274) for: E:/Daten/Radio Würmchen/Musik/The Killers - Mr. Brightside.mp3
+[2026-02-15 16:12:19] Failed to stream: E:/Daten/Radio Würmchen/Musik/The Killers - Mr. Brightside.mp3, skipping.
+[2026-02-15 16:12:20] Queue down to 2 items, signaling low.
+[2026-02-15 16:12:20] Streaming: Depeche Mode - Enjoy the silence.mp3
+[2026-02-15 16:12:20] FFmpeg error (code 4294967274) for: E:/Daten/Radio Würmchen/Musik/Depeche Mode - Enjoy the silence.mp3
+[2026-02-15 16:12:20] Failed to stream: E:/Daten/Radio Würmchen/Musik/Depeche Mode - Enjoy the silence.mp3, skipping.
+[2026-02-15 16:12:21] Queue has 1 item left (repeat mode): E:/Daten/Radio Würmchen/Musik/Massive Attack - Teardrop.mp3
+[2026-02-15 16:12:21] Streaming: Massive Attack - Teardrop.mp3
+[2026-02-15 16:12:22] FFmpeg error (code 4294967274) for: E:/Daten/Radio Würmchen/Musik/Massive Attack - Teardrop.mp3
+[2026-02-15 16:12:22] Failed to stream: E:/Daten/Radio Würmchen/Musik/Massive Attack - Teardrop.mp3, skipping.
+[2026-02-15 16:12:23] Queue has 1 item left (repeat mode): E:/Daten/Radio Würmchen/Musik/Massive Attack - Teardrop.mp3
+[2026-02-15 16:12:23] Streaming: Massive Attack - Teardrop.mp3
+[2026-02-15 16:12:23] FFmpeg error (code 4294967274) for: E:/Daten/Radio Würmchen/Musik/Massive Attack - Teardrop.mp3
+[2026-02-15 16:12:23] Failed to stream: E:/Daten/Radio Würmchen/Musik/Massive Attack - Teardrop.mp3, skipping.
