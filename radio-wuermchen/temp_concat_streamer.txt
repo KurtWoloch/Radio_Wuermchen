@@ -1,1 +1,1 @@
-file 'E:/Daten/Radio Würmchen/Musik/Moby - Lift me up.mp3'
+file 'C:/Users/kurt_/.openclaw/workspace/radio-wuermchen/temp_announcement6.mp3'

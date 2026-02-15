@@ -1,5 +1,5 @@
 {
-  "last_update": 1771155027.4828064,
+  "last_update": 1771158884.176454,
   "stories": [
     {
       "id": "f5371ba9fc",
@@ -7,7 +7,7 @@
       "url": "https://orf.at/stories/3420247/",
       "type": "top",
       "has_story": true,
-      "is_new": true
+      "is_new": false
     },
     {
       "id": "ae5b79ad12",
@@ -26,14 +26,6 @@
       "is_new": false
     },
     {
-      "id": "d3a7c9dc1e",
-      "headline": "Flocks Kreis schließt sich als Goldmedaille",
-      "url": "https://sport.orf.at/milanocortina2026/stories/3151987/",
-      "type": "top",
-      "has_story": true,
-      "is_new": true
-    },
-    {
       "id": "5a7315da16",
       "headline": "OÖ: Ehepaar rettet 81-Jährige in Schneesturm",
       "url": "https://ooe.orf.at/stories/3342013/",
@@ -47,6 +39,15 @@
       "url": "https://orf.at/stories/3420251/",
       "type": "regular",
       "story": "Die EU-Außenbeauftragte Kaja Kallas hält die Kritik von US-Politikern an der Europäischen Union für unangemessen und wenig glaubhaft. Es falle ihr \"sehr schwer\", diese Vorwürfe zu glauben, sagte sie heute auf der Münchner Sicherheitskonferenz.\nAls Beispiel nannte sie Kritik an der Pressefreiheit aus einem Land, das auf Platz 58 im Pressefreiheitsindex stehe, wogegen ihre Heimat Estland auf Platz zwei gelistet werde.Kallas betonte, dass die gestrige Rede von US-Außenminister Marco Rubio sowohl Botschaften für die Europäer und Europäerinnen als auch Botschaften für die Öffentlichkeit in den USA enthalten habe, insbesondere für die dortigen Wähler.\"Europa-Bashing in Mode\"\"Europa-Bashing\" sei derzeit \"gerade sehr in Mode\" – trotz all \"der guten Dinge, die Europa tatsächlich zu bieten hat\". Zugleich habe Rubios Rede klargemacht, \"dass Amerika und Europa miteinander verflochten sind, in der Vergangenheit waren und auch in Zukunft sein werden. Ich halte das für wichtig.\"\"Wenn ich um die Welt reise, sehe ich Länder, die zu uns aufschauen, weil wir Werte vertreten, die immer noch hoch im Kurs stehen\", sagte Kallas und nannte die Verteidigung der Menschenrechte und den Wohlstand.",
+      "has_story": true,
+      "is_new": false
+    },
+    {
+      "id": "942a453d2a",
+      "headline": "Weiter Kontroverse um UNO-Berichterstatterin Albanese",
+      "url": "https://orf.at/stories/3420258/",
+      "type": "regular",
+      "story": "Nach den Regierungen von Frankreich und Deutschland fordert nun auch Tschechien die Abberufung von Francesca Albanese, UNO-Sonderberichterstatterin für die besetzten palästinensischen Gebiete. Das berichteten italienische Medien.Zudem haben sich 40 britische Abgeordnete an Innenministerin Yvette Cooper gewandt und sie aufgefordert, ebenfalls Albaneses Rücktritt zu verlangen. In Italien bekräftigte Außenminister Antonio Tajani, dass \"die Erklärungen und das Verhalten\" der italienischen Juristin es \"unumgänglich machen, ihren Rücktritt zu verlangen\".Die Regierungspartei Fratelli d’Italia (Brüder Italiens) startete eine öffentliche Unterschriftensammlung zur Forderung der Mandatsenthebung. Nach Angaben der Initiatoren seien in den ersten zwölf Stunden \"zehntausend Unterschriften\" gesammelt worden.Rückhalt erhielt Albanese hingegen von Italiens Oppositionspartei Allianz Verdi e Sinistra (Avs) sowie von einzelnen Abgeordneten der Partito Democratico (PD – Demokratische Partei) und der Fünf-Sterne-Bewegung.Meinl-Reisinger-Post gelöschtSeit Tagen hagelt es Kritik an der UNO-Sonderberichterstatterin für die palästinensischen Gebiete. Auch Außenministerin Beate Meinl-Reisinger (NEOS) hatte sich dem Protest gegen die italienische Juristin angeschlossen. Ein entsprechender Post auf der Plattform X wurde am Freitag aber später gelöscht.Hintergrund des Wirbels sind israelkritische Aussagen von Albanese bei einer Konferenz in Doha, die Anfang Februar über die Bühne ging.",
       "has_story": true,
       "is_new": true
     },
@@ -64,9 +65,9 @@
       "headline": "Streit um Begnadigung: Trump attackiert Israels Präsidenten",
       "url": "https://orf.at/stories/3420257/",
       "type": "regular",
-      "story": "Eine verbale Attacke des US-Präsidenten Donald Trump gegen den israelischen Staatspräsidenten Yitzhak (Isaac) Herzog sorgt in Israel für Spannungen. Trump hatte vor Reportern im Weißen Haus gesagt, Herzog müsse sich \"schämen\", weil er den wegen Korruption angeklagten israelischen Ministerpräsidenten Benjamin Netanjahu bisher nicht begnadigt habe. Der Regierungschef habe immerhin in Kriegszeiten Außergewöhnliches geleistet, erklärte der US-Präsident.Das Büro des israelischen Präsidenten stellte daraufhin klar, Herzog habe anders als von Trump dargestellt noch keine Entscheidung in der Begnadigungsfrage getroffen. Der Antrag, den Netanjahu im November gestellt hatte, werde noch im Justizministerium gemäß den festgelegten Verfahren geprüft.Herzog schätze Trump zutiefst für seine Unterstützung des jüdischen Staates. Israel sei jedoch ein souveräner Staat, der nach dem Prinzip der Rechtsstaatlichkeit regiert werde, hieß es weiter.Spekulationen nach TreffenKurz vor der Attacke Trumps gegen Herzog hatte der US-Präsident Netanjahu im Weißen Haus getroffen. Nach Medienberichten hat Herzogs Büro deshalb Erklärungen darüber gefordert, ob Netanjahu Trump zu seinen Äußerungen gegen den israelischen Präsidenten ermutigt habe.Aus Kreisen um Netanjahu verlautete daraufhin, die Forderung Trumps nach einer Begnadigung sei ausschließlich auf Initiative des US-Präsidenten selbst erfolgt. Netanjahu hatte Herzog in einem Schreiben offiziell um Begnadigung gebeten.",
+      "story": "Eine verbale Attacke des US-Präsidenten Donald Trump gegen den israelischen Staatspräsidenten Yitzhak (Isaac) Herzog sorgt in Israel für Spannungen. Trump hatte vor Reportern im Weißen Haus gesagt, Herzog müsse sich \"schämen\", weil er den wegen Korruption angeklagten israelischen Ministerpräsidenten Benjamin Netanjahu bisher nicht begnadigt habe. Der Regierungschef habe immerhin in Kriegszeiten Außergewöhnliches geleistet, so der US-Präsident.Das Büro des israelischen Präsidenten stellte daraufhin klar, Herzog habe anders als von Trump dargestellt noch keine Entscheidung in der Begnadigungsfrage getroffen. Der Antrag, den Netanjahu im November gestellt hatte, werde noch im Justizministerium gemäß den festgelegten Verfahren geprüft.Herzog schätze Trump zutiefst für seine Unterstützung des jüdischen Staates. Israel sei jedoch ein souveräner Staat, der nach dem Prinzip der Rechtsstaatlichkeit regiert werde, hieß es weiter.Spekulationen nach TreffenKurz vor der Attacke Trumps gegen Herzog hatte der US-Präsident Netanjahu im Weißen Haus getroffen. Nach Medienberichten hat Herzogs Büro deshalb Erklärungen darüber gefordert, ob Netanjahu Trump zu seinen Äußerungen gegen den israelischen Präsidenten ermutigt habe.Aus Kreisen um Netanjahu verlautete daraufhin, die Forderung Trumps nach einer Begnadigung sei ausschließlich auf Initiative des US-Präsidenten selbst erfolgt. Netanjahu hatte Herzog in einem Schreiben offiziell um Begnadigung gebeten.",
       "has_story": true,
-      "is_new": true
+      "is_new": false
     },
     {
       "id": "7d91eb9e03",
@@ -76,6 +77,15 @@
       "story": "Das israelische Militär hat erneut mehrere Ziele im Libanon angegriffen. Im Süden des Nachbarlandes seien in mehreren Gebieten Waffenlager und Raketenwerfer der Hisbollah-Miliz attackiert worden, teilte das Militär in der Nacht auf heute mit.Die Präsenz der Waffen stelle einen Verstoß gegen die Waffenruhevereinbarung zwischen Israel und dem Libanon dar, hieß es. Die Hisbollah versuche weiterhin, ihre \"Terrorinfrastruktur im Südlibanon wieder aufzubauen\", erklärte Israels Armee.Nach offiziellen libanesischen Angaben wurden seit Inkrafttreten der Waffenruhe im November 2024 mehr als 300 Menschen im Libanon durch israelische Angriffe getötet. Den Vereinten Nationen zufolge waren mehr als 100 davon Zivilisten und Zivilistinnen.",
       "has_story": true,
       "is_new": false
+    },
+    {
+      "id": "4ff91445a5",
+      "headline": "Ukrainischer Ex-Energieminister festgenommen",
+      "url": "https://orf.at/stories/3420260/",
+      "type": "regular",
+      "story": "Der wegen Korruptionsverdacht entlassene frühere ukrainische Energieminister Herman Haluschtschenko ist bei einer versuchten Ausreise aus dem Land festgenommen worden. Das teilten die für Korruptionsbekämpfung zuständigen Kiewer Behörden SAP und Nabu auf ihren Telegram-Kanälen heute mit.\nDie Ermittlungen in dem weitverzweigten Fall von Bestechlichkeit dauerten an. Im vergangenen November hatten ukrainische Korruptionsfahnder Vorwürfe gegen eine Gruppe mutmaßlich bestechlicher Staatsdiener direkt im Umfeld von Präsident Wolodymyr Selenskyj erhoben.Sie sollen sich im staatlichen Konzern Ernerhoatom an Geld vergriffen haben, das eigentlich für Schutzbauten um Energieanlagen gegen feindliche Luftangriffe bestimmt war. Haluschtschenko, einer der Beschuldigten, musste als Energieminister gehen.Dem Selenskyj-Vertrauten Tymur Minditsch gelang die Flucht. Der Präsident baute daraufhin die Regierung um und ersetzte auch seinen einflussreichen Stabschef Andrij Jermak.",
+      "has_story": true,
+      "is_new": true
     },
     {
       "id": "8ff5b7416a",
@@ -94,15 +104,6 @@
       "story": "Im Jahr 2025 wurden 208 Personen zur Strafvollstreckung aus Österreich in ihren Herkunftsstaat gebracht. Das ist ein Höchstwert seit Beginn der Aufzeichnungen 2013. Ein Jahr zuvor waren es 167 Personen, zehn Jahre zuvor 144. Das geht aus Zahlen des Justizministeriums hervor.Dazu kamen 2025 insgesamt 394 Personen mit Einreise- oder Aufenthaltsverboten, die aus dem Strafvollzug in ihre Heimatländer gebracht wurden. Die Justiz will die \"Haft in der Heimat\" weiter ausbauen.Die vermehrte Überstellung von Strafgefangenen in den Herkunftsstaat sei \"ein wichtiges Anliegen, um die heimischen Gefängnisse zu entlasten und eine bessere Resozialisierung von Strafgefangenen in der Heimat zu ermöglichen\", hieß es aus dem SPÖ-geführten Justizressort.Meisten Überstellungen innerhalb EuropasEin Großteil der Ersuchen und Überstellungen betreffe das EU- bzw. europäische Ausland. Rechtsgrundlage sind ein Rahmenbeschluss der Europäischen Union aus dem Jahr 2008 sowie das Übereinkommen über die Überstellung verurteilter Personen des Europarats.\"Die Überstellung in den heimatlichen Strafvollzug hängt nicht direkt mit dem Delikt zusammen, sondern vielmehr mit der Dauer der in Österreich verhängten Freiheitsstrafe\", teilte das Justizministerium mit. Ein Ansuchen sei nur sinnvoll, wenn noch \"ausreichend Strafzeit\" vorhanden sei und keine bedingte Entlassung anstehe.Die Kosten für Überstellungen sind laut Ministerium \"je nach individuellem Fall sehr unterschiedlich\". Insgesamt \"überwiegen die ersparten Haftkosten jedoch den Aufwand der Außerlandesbringungen\".",
       "has_story": true,
       "is_new": false
-    },
-    {
-      "id": "749f5740bf",
-      "headline": "Babler: Investitionsbeitrag für Streamer auf Zielgerade",
-      "url": "https://orf.at/stories/3420255/",
-      "type": "regular",
-      "story": "Kulturminister Andreas Babler (SPÖ) und der für Auslandskultur zuständige Staatssekretär Sepp Schellhorn (NEOS) haben sich heute bei einem Empfang in der österreichischen Botschaft in Berlin zur laufenden Debatte um Finanzierungsmodelle der Filmbranche geäußert.Zumindest die Frage des Investitionsbeitrags – also einer Abgabe der Streamingunternehmen – sei vonseiten des Kulturministeriums auf der Zielgeraden: \"Wir sind jetzt im Februar so weit, dass wir in die politische Koordinierung gehen können\", sagte Babler. \"Ich bekenne mich zur Streamingabgabe – sie muss kommen.\"\"Aber das frische Geld für den Anschub aufzustellen, ist das Schwierige\", so Babler. Auch Schellhorn unterstrich die Bedeutung des österreichischen Films als Exportgut und bekannte sich allgemein zur finanziellen Ausstattung.Fachverband erfreutWKO-Fachverbandsobmann Alexander Dumreicher-Ivanceanu reagierte erfreut: \"Wir wissen, dass es in die richtige Richtung geht.\" Schließlich flössen die Einnahmen aus den rund 600 Millionen Euro an Umsätzen, die von den Streamern in Österreich generiert würden, derzeit zu 99,9 Prozent aus dem Land ab: \"Das geht einfach nicht.\"Allerdings dürfe neben der Investitionsabgabe auch nicht auf die Investitionsverpflichtungen wie in Deutschland vergessen werden. \"Unser Appell geht hier an die gesamte Regierung\", verwies Dumreicher-Ivanceanu auf die nötige Beteiligung des Wirtschaftsministeriums in dieser Frage.",
-      "has_story": true,
-      "is_new": true
     },
     {
       "id": "953c326ef9",
@@ -138,7 +139,7 @@
       "type": "quicklink",
       "story": null,
       "has_story": false,
-      "is_new": true
+      "is_new": false
     },
     {
       "id": "578fcfa499",
@@ -168,18 +169,18 @@
       "is_new": false
     },
     {
-      "id": "5a17c63d10",
-      "headline": "Kuba sagt berühmtes Zigarrenfestival ab",
-      "url": "https://orf.at/stories/3420218/",
-      "type": "regular",
-      "story": "Kuba hat sein berühmtes Zigarrenfestival aufgrund der durch die USA ausgelösten Energiekrise vorerst abgesagt. Die Organisatoren verkündeten gestern, das für 24. bis 27. Februar geplante Festival solle verschoben werden.Die Entscheidung sei getroffen worden, um weiterhin \"höchste Qualitätsstandards, Exzellenz und Erfahrung\" bieten zu können, welche die internationale Veranstaltung ausmachten, erklärte der Tabakhersteller Habanos SA, der die Veranstaltung ausrichtet.Ein neues Datum wurde nicht genannt. Das Festival del Habano zieht jedes Jahr Zigarrenliebhaber, Händler und Fachjournalisten aus aller Welt an. Zu der Veranstaltung gehört auch eine Versteigerung von Zigarren und Humidoren.Diese Auktion bringt jährlich mehrere Millionen Dollar ein – im vergangenen Jahr waren es etwa 19,5 Millionen Dollar (rund 16,5 Mio. Euro). Das Geld fließt traditionell in das Gesundheitssystem des Landes. Zigarren sind das wichtigste Exportgut Kubas.",
-      "has_story": true,
-      "is_new": false
-    },
-    {
       "id": "fe360028f7",
       "headline": "Stmk.: Eingeschränkter Seilbahnbetrieb wegen Windes",
       "url": "https://steiermark.orf.at/stories/3342038/",
+      "type": "quicklink",
+      "story": null,
+      "has_story": false,
+      "is_new": false
+    },
+    {
+      "id": "abd44ded49",
+      "headline": "25-Jähriger wegen Messerattacke in Wien festgenommen",
+      "url": "https://wien.orf.at/stories/3342048/",
       "type": "quicklink",
       "story": null,
       "has_story": false,
@@ -219,7 +220,7 @@
       "type": "regular",
       "story": "In der Küstenprovinz Guayas in Ecuador sind acht abgetrennte menschliche Köpfe entdeckt worden. Nahe der Köpfe seien Zettel mit der Aufschrift \"Stehlen verboten\" gefunden worden, sagte Polizeikommandeur Marcelo Castillo gestern.\nHintergrund der Tat seien vermutlich Auseinandersetzungen zwischen \"kriminellen Banden\". Erst im vergangenen Jänner waren an einem Strand in Ecuador fünf Köpfe entdeckt worden.Erbitterte Kämpfe zwischen Drogenbanden haben Ecuador in das gewalttätigste Land Südamerikas verwandelt. Im vergangenen Jahr lag die Mordrate nach Angaben des Innenministeriums bei 54 pro 100.000 Einwohnern. Das entspricht einem Mord pro Stunde.Ecuador liegt zwischen den beiden weltgrößten Kokainproduzenten Kolumbien und Peru und hat sich zu einem wichtigen Transitland für den Drogenhandel entwickelt. Rund 70 Prozent des Kokains wird an Ecuadors Häfen am Pazifik umgeschlagen, Ziel sind zumeist die USA oder Europa.",
       "has_story": true,
-      "is_new": true
+      "is_new": false
     },
     {
       "id": "65ad654792",
@@ -228,15 +229,6 @@
       "type": "quicklink",
       "story": null,
       "has_story": false,
-      "is_new": false
-    },
-    {
-      "id": "f45dc1236f",
-      "headline": "Vier Astronauten mit \"Crew Dragon\" an ISS angekommen",
-      "url": "https://orf.at/stories/3420223/",
-      "type": "regular",
-      "story": "Erstmals in der ISS-Geschichte hat die US-Raumfahrtbehörde NASA eine Besatzung wegen medizinischer Probleme  im Jänner vorzeitig zurückgeholt – nun ist die Nachfolgecrew an der Raumstation angekommen.Die vier Astronauten der \"Crew 12\" dockten gestern mit ihrem \"Crew Dragon\" des Raumfahrtunternehmens SpaceX von Tech-Milliardär Elon Musk an der Internationalen Raumstation (ISS) an, wie Livebilder der NASA zeigten. Am Freitag waren sie vom Weltraumbahnhof Cape Canaveral im US-Bundesstaat Florida gestartet.\nDie \"Crew 12\" besteht aus der NASA-Astronautin Jessica Meir, ihrem Kollegen Jack Hathaway, dem Kosmonauten Andrej Fedjajew und der Französin Sophie Adenot, Astronautin der Europäischen Raumfahrtagentur (ESA).Für Hathaway und Adenot ist es der erste Flug zur ISS, für Meir und Fedjajew jeweils der zweite. Rund acht Monate lang sollen sie an Bord der ISS leben und forschen.",
-      "has_story": true,
       "is_new": false
     },
     {
@@ -249,12 +241,12 @@
       "is_new": false
     },
     {
-      "id": "3776725159",
-      "headline": "Breites Hilfsangebot für krebskranke Kinder",
-      "url": "https://wien.orf.at/stories/3341935/",
-      "type": "quicklink",
-      "story": null,
-      "has_story": false,
+      "id": "749f5740bf",
+      "headline": "Babler: Abgabe für Streamingdienste kommt demnächst",
+      "url": "https://orf.at/stories/3420255/",
+      "type": "regular",
+      "story": "Kulturminister Andreas Babler (SPÖ) und der für Auslandskultur zuständige Staatssekretär Sepp Schellhorn (NEOS) haben sich heute bei einem Empfang in der österreichischen Botschaft in Berlin zur laufenden Debatte um Finanzierungsmodelle der Filmbranche geäußert.Zumindest die Frage des Investitionsbeitrags – also einer Abgabe der Streamingunternehmen – sei vonseiten des Kulturministeriums auf der Zielgeraden: \"Wir sind jetzt im Februar so weit, dass wir in die politische Koordinierung gehen können\", sagte Babler. \"Ich bekenne mich zur Streamingabgabe – sie muss kommen.\"\"Aber das frische Geld für den Anschub aufzustellen, ist das Schwierige\", so Babler. Auch Schellhorn unterstrich die Bedeutung des österreichischen Films als Exportgut und bekannte sich allgemein zur finanziellen Ausstattung.Fachverband erfreutWKO-Fachverbandsobmann Alexander Dumreicher-Ivanceanu reagierte erfreut: \"Wir wissen, dass es in die richtige Richtung geht.\" Schließlich flössen die Einnahmen aus den rund 600 Millionen Euro an Umsätzen, die von den Streamingdiensten in Österreich generiert würden, derzeit zu 99,9 Prozent aus dem Land ab: \"Das geht einfach nicht.\"Allerdings dürfe neben der Investitionsabgabe auch nicht auf die Investitionsverpflichtungen wie in Deutschland vergessen werden. \"Unser Appell geht hier an die gesamte Regierung\", verwies Dumreicher-Ivanceanu auf die nötige Beteiligung des Wirtschaftsministeriums in dieser Frage.",
+      "has_story": true,
       "is_new": false
     },
     {
@@ -264,22 +256,24 @@
       "type": "quicklink",
       "story": null,
       "has_story": false,
-      "is_new": true
-    },
-    {
-      "id": "4ef3ca84b8",
-      "headline": "Erstmals Standards für Kunstdenkmalpflege",
-      "url": "https://wien.orf.at/stories/3341959/",
-      "type": "quicklink",
-      "story": null,
-      "has_story": false,
       "is_new": false
     }
   ],
   "presented": [
-    "f5371ba9fc",
-    "d3a7c9dc1e",
     "ae5b79ad12",
+    "8ce8ea2688",
+    "749f5740bf",
+    "d3a7c9dc1e",
+    "7d91eb9e03",
+    "942a453d2a",
+    "5a7315da16",
+    "f5371ba9fc",
+    "3052cff5dd",
+    "5930f5e545",
+    "7e7c893e29",
+    "976c04539b",
+    "d892e5b19d",
+    "4ff91445a5",
     "307341ce83"
   ],
   "last_headlines_at": 0

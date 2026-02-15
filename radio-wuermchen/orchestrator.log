@@ -6290,3 +6290,1257 @@ DJ suggests: Garbage - Only happy when it rains
 [2026-02-15 13:05:17] Appended to queue: temp_announcement3.mp3
 [2026-02-15 13:05:17] Appended to queue: Garbage - Only happy when it rains.mp3
 [2026-02-15 13:05:17] Signal file deleted.
+[2026-02-15 13:07:59] Signal detected. Starting DJ cycle.
+[2026-02-15 13:07:59] Using cached weather (209s old)
+[2026-02-15 13:07:59] Weather segment: subtle mode (cached)
+[2026-02-15 13:07:59] News update: Cache is fresh (2252s old, max 3600s). Skipping update.
+Stories in cache: 31
+[2026-02-15 13:07:59] News: DEEP DIVE on 'OÖ: Ehepaar rettet 81-Jährige in Schneesturm...' (id: 5a7315da16)
+[2026-02-15 13:07:59] Deep dive story queued for marking after success: 5a7315da16
+[2026-02-15 13:07:59] --- DJ Attempt 1/5 ---
+[2026-02-15 13:07:59] Wrote DJ request. Last Track: Garbage - Only happy when it rains.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: OÖ: Ehepaar rettet 81-Jährige in Schneesturm
+Story: In Maria Schmolln im Bezirk Braunau ist bei Minusgraden und während eines Schneesturms eine demenzkranke Frau allein durch die Nacht geirrt. Polizei, Feuerwehr und Suchhunde suchten nach ihr. Gefunden wurde sie schließlich von einem Ehepaar auf dem Heimweg von einer Faschingsfeier.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+__NEWS_ID_TO_MARK__: 5a7315da16
+[2026-02-15 13:07:59] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:08:07] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Bill Withers - Lean On Me
+[2026-02-15 13:08:08] SUCCESS: Found track: Bill Withers - Lean On Me
+[2026-02-15 13:08:08] Generating announcement audio (slot 4): 'We just heard that intense ene...'
+[2026-02-15 13:08:43] TTS Generation successful (slot 4).
+[2026-02-15 13:08:43] Appended to queue: temp_announcement4.mp3
+[2026-02-15 13:08:43] Appended to queue: Bill Withers - Lean on me.mp3
+[2026-02-15 13:08:43] Marked story 5a7315da16 as presented.
+[2026-02-15 13:08:43] Signal file deleted.
+[2026-02-15 13:12:35] Signal detected. Starting DJ cycle.
+[2026-02-15 13:12:35] Using cached weather (484s old)
+[2026-02-15 13:12:35] Weather segment: subtle mode (cached)
+[2026-02-15 13:12:35] News update: Cache is fresh (2527s old, max 3600s). Skipping update.
+Stories in cache: 31
+[2026-02-15 13:12:35] News: DEEP DIVE on 'Kallas wehrt sich gegen Schlechtreden von Europa...' (id: d892e5b19d)
+[2026-02-15 13:12:35] Deep dive story queued for marking after success: d892e5b19d
+[2026-02-15 13:12:35] --- DJ Attempt 1/5 ---
+[2026-02-15 13:12:35] Wrote DJ request. Last Track: Bill Withers - Lean on me.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Kallas wehrt sich gegen Schlechtreden von Europa
+Story: Die EU-Außenbeauftragte Kaja Kallas hält die Kritik von US-Politikern an der Europäischen Union für unangemessen und wenig glaubhaft. Es falle ihr "sehr schwer", diese Vorwürfe zu glauben, sagte sie heute auf der Münchner Sicherheitskonferenz.
+Als Beispiel nannte sie Kritik an der Pressefreiheit aus einem Land, das auf Platz 58 im Pressefreiheitsindex stehe, wogegen ihre Heimat Estland auf Platz zwei gelistet werde.Kallas betonte, dass die gestrige Rede von US-Außenminister Marco Rubio sowohl Botschaften für die Europäer und Europäerinnen als auch Botschaften für die Öffentlichkeit in den USA enthalten habe, insbesondere für die dortigen Wähler."Europa-Bashing in Mode""Europa-Bashing" sei derzeit "gerade sehr in Mode" – trotz all "der guten Dinge, die Europa tatsächlich zu bieten hat". Zugleich habe Rubios Rede klargemacht, "dass Amerika und Europa miteinander verflochten sind, in der Vergangenheit waren und auch in Zukunft sein werden. Ich halte das für wichtig.""Wenn ich um die Welt reise, sehe ich Länder, die zu uns aufschauen, weil wir Werte vertreten, die immer noch hoch im Kurs stehen", sagte Kallas und nannte die Verteidigung der Menschenrechte und den Wohlstand.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+__NEWS_ID_TO_MARK__: d892e5b19d
+[2026-02-15 13:12:35] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:12:42] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Massive Attack - Teardrop
+[2026-02-15 13:12:42] SUCCESS: Found track: Massive Attack - Teardrop
+[2026-02-15 13:12:42] Generating announcement audio (slot 7): 'That was the powerful Bill Wit...'
+[2026-02-15 13:13:06] TTS Generation successful (slot 7).
+[2026-02-15 13:13:06] Appended to queue: temp_announcement7.mp3
+[2026-02-15 13:13:06] Appended to queue: Massive Attack - Teardrop.mp3
+[2026-02-15 13:13:06] Marked story d892e5b19d as presented.
+[2026-02-15 13:13:06] Signal file deleted.
+[2026-02-15 13:17:15] Signal detected. Starting DJ cycle.
+[2026-02-15 13:17:15] Using cached weather (765s old)
+[2026-02-15 13:17:15] Weather segment: subtle mode (cached)
+[2026-02-15 13:17:15] News update: Cache is fresh (2808s old, max 3600s). Skipping update.
+Stories in cache: 31
+[2026-02-15 13:17:15] News: DEEP DIVE on 'Obama über Trump-Video mit Affen: "Anstand verlore...' (id: 7e7c893e29)
+[2026-02-15 13:17:15] Deep dive story queued for marking after success: 7e7c893e29
+[2026-02-15 13:17:15] --- DJ Attempt 1/5 ---
+[2026-02-15 13:17:15] Wrote DJ request. Last Track: Massive Attack - Teardrop.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Obama über Trump-Video mit Affen: "Anstand verloren"
+Story: Der frühere US-Präsident Barack Obama hat sich erstmals über ein von Amtsinhaber Donald Trump veröffentlichtes Video geäußert, das ihn und seine Ehefrau Michelle als Affen verunglimpfte.Obama beklagte dabei gestern in einem Interview mit dem linksgerichteten Politikpodcaster Brian Tyler Cohen fehlende "Scham" und fehlenden "Anstand" in der Politik. Die meisten US-Bürger würden ein solches Verhalten als "zutiefst verstörend" empfinden."Antwort wird vom Volk kommen""Es gibt so eine Art Clown-Show in den sozialen Netzwerken und im Fernsehen", sagte Obama, ohne Trump beim Namen zu nennen. "Es scheint keinerlei Scham mehr darüber bei Menschen zu geben, die einst dachten, dass es Anstand, einen Sinn für Anständigkeit und Respekt für das Amt geben sollte, richtig? Das ist verloren gegangen."Der Demokrat sagte voraus, dass ein solches Verhalten Trumps Republikanern bei den Zwischenwahlen im November schaden werde. "Letztlich wird die Antwort vom amerikanischen Volk kommen", sagte der US-Präsident der Jahre 2009 bis 2017.Das Video war am 5. Februar auf Trumps Nutzerkonto auf seiner Onlineplattform Truth Social veröffentlicht worden. In dem Video ging es um vermeintliche Beweise für Manipulation bei der Präsidentschaftswahl 2020, die Trump gegen den Demokraten Joe Biden verloren hatte.Obamas Köpfe auf AffenkörpernAm Ende des Videos sind kurz die lachenden Köpfe von Michelle und Barack Obama auf Affenkörpern zu sehen. Der erste afroamerikanische Präsident der US-Geschichte und seine Ehefrau tanzten darin vor einer Dschungelkulisse.Das Video sorgte für einen Aufschrei der Empörung, Trump wurde Rassismus vorgeworfen. Auch Parteifreunde des rechtspopulistischen Präsidenten kritisierten das Video scharf.Trumps Sprecherin Karoline Leavitt sprach zunächst von "gespielter Empörung", bevor das Weiße Haus das Video entfernte und erklärte, ein Mitarbeiter habe den Beitrag "irrtümlich veröffentlicht". Trump beteuerte später, er habe "nur den ersten Teil angesehen und nicht das ganze Video".
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+__NEWS_ID_TO_MARK__: 7e7c893e29
+[2026-02-15 13:17:15] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:17:23] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Marvin Gaye - What's Going On
+[2026-02-15 13:17:23] Track NOT FOUND: Marvin Gaye - What's Going On
+[2026-02-15 13:17:23] Appended to wishlist: Marvin Gaye - What's Going On
+[2026-02-15 13:17:23] Alternatives found. Setting instructions for next attempt.
+[2026-02-15 13:17:23] --- DJ Attempt 2/5 ---
+[2026-02-15 13:17:23] Wrote DJ request. Last Track: Massive Attack - Teardrop.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Obama über Trump-Video mit Affen: "Anstand verloren"
+Story: Der frühere US-Präsident Barack Obama hat sich erstmals über ein von Amtsinhaber Donald Trump veröffentlichtes Video geäußert, das ihn und seine Ehefrau Michelle als Affen verunglimpfte.Obama beklagte dabei gestern in einem Interview mit dem linksgerichteten Politikpodcaster Brian Tyler Cohen fehlende "Scham" und fehlenden "Anstand" in der Politik. Die meisten US-Bürger würden ein solches Verhalten als "zutiefst verstörend" empfinden."Antwort wird vom Volk kommen""Es gibt so eine Art Clown-Show in den sozialen Netzwerken und im Fernsehen", sagte Obama, ohne Trump beim Namen zu nennen. "Es scheint keinerlei Scham mehr darüber bei Menschen zu geben, die einst dachten, dass es Anstand, einen Sinn für Anständigkeit und Respekt für das Amt geben sollte, richtig? Das ist verloren gegangen."Der Demokrat sagte voraus, dass ein solches Verhalten Trumps Republikanern bei den Zwischenwahlen im November schaden werde. "Letztlich wird die Antwort vom amerikanischen Volk kommen", sagte der US-Präsident der Jahre 2009 bis 2017.Das Video war am 5. Februar auf Trumps Nutzerkonto auf seiner Onlineplattform Truth Social veröffentlicht worden. In dem Video ging es um vermeintliche Beweise für Manipulation bei der Präsidentschaftswahl 2020, die Trump gegen den Demokraten Joe Biden verloren hatte.Obamas Köpfe auf AffenkörpernAm Ende des Videos sind kurz die lachenden Köpfe von Michelle und Barack Obama auf Affenkörpern zu sehen. Der erste afroamerikanische Präsident der US-Geschichte und seine Ehefrau tanzten darin vor einer Dschungelkulisse.Das Video sorgte für einen Aufschrei der Empörung, Trump wurde Rassismus vorgeworfen. Auch Parteifreunde des rechtspopulistischen Präsidenten kritisierten das Video scharf.Trumps Sprecherin Karoline Leavitt sprach zunächst von "gespielter Empörung", bevor das Weiße Haus das Video entfernte und erklärte, ein Mitarbeiter habe den Beitrag "irrtümlich veröffentlicht". Trump beteuerte später, er habe "nur den ersten Teil angesehen und nicht das ganze Video".
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+The track 'Marvin Gaye - What's Going On' was unavailable. Please select one of the following 2 available tracks by the same artist: Marvin Gaye. Available tracks include: Charlie Puth feat. Meghan Trainor - Marvin Gaye.mp3
+Marvin Gaye - I heard it through the grapevine.mp3...
+[2026-02-15 13:17:23] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:17:32] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Marvin Gaye - I heard it through the grapevine
+[2026-02-15 13:17:32] SUCCESS: Found track: Marvin Gaye - I heard it through the grapevine
+[2026-02-15 13:17:32] Generating announcement audio (slot 5): 'That was Massive Attack, keepi...'
+[2026-02-15 13:17:48] ============================================================
+[2026-02-15 13:17:48] DJ Orchestrator starting up.
+[2026-02-15 13:17:48] Signal detected. Starting DJ cycle.
+[2026-02-15 13:17:48] Using cached weather (798s old)
+[2026-02-15 13:17:48] Weather segment: subtle mode (cached)
+[2026-02-15 13:17:49] News update: Cache is fresh (2841s old, max 3600s). Skipping update.
+Stories in cache: 31
+[2026-02-15 13:17:49] News: DEEP DIVE on 'Obama über Trump-Video mit Affen: "Anstand verlore...' (id: 7e7c893e29)
+[2026-02-15 13:17:49] Deep dive story queued for marking after success: 7e7c893e29
+[2026-02-15 13:17:49] --- DJ Attempt 1/5 ---
+[2026-02-15 13:17:49] Wrote DJ request. Last Track: Massive Attack - Teardrop.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Obama über Trump-Video mit Affen: "Anstand verloren"
+Story: Der frühere US-Präsident Barack Obama hat sich erstmals über ein von Amtsinhaber Donald Trump veröffentlichtes Video geäußert, das ihn und seine Ehefrau Michelle als Affen verunglimpfte.Obama beklagte dabei gestern in einem Interview mit dem linksgerichteten Politikpodcaster Brian Tyler Cohen fehlende "Scham" und fehlenden "Anstand" in der Politik. Die meisten US-Bürger würden ein solches Verhalten als "zutiefst verstörend" empfinden."Antwort wird vom Volk kommen""Es gibt so eine Art Clown-Show in den sozialen Netzwerken und im Fernsehen", sagte Obama, ohne Trump beim Namen zu nennen. "Es scheint keinerlei Scham mehr darüber bei Menschen zu geben, die einst dachten, dass es Anstand, einen Sinn für Anständigkeit und Respekt für das Amt geben sollte, richtig? Das ist verloren gegangen."Der Demokrat sagte voraus, dass ein solches Verhalten Trumps Republikanern bei den Zwischenwahlen im November schaden werde. "Letztlich wird die Antwort vom amerikanischen Volk kommen", sagte der US-Präsident der Jahre 2009 bis 2017.Das Video war am 5. Februar auf Trumps Nutzerkonto auf seiner Onlineplattform Truth Social veröffentlicht worden. In dem Video ging es um vermeintliche Beweise für Manipulation bei der Präsidentschaftswahl 2020, die Trump gegen den Demokraten Joe Biden verloren hatte.Obamas Köpfe auf AffenkörpernAm Ende des Videos sind kurz die lachenden Köpfe von Michelle und Barack Obama auf Affenkörpern zu sehen. Der erste afroamerikanische Präsident der US-Geschichte und seine Ehefrau tanzten darin vor einer Dschungelkulisse.Das Video sorgte für einen Aufschrei der Empörung, Trump wurde Rassismus vorgeworfen. Auch Parteifreunde des rechtspopulistischen Präsidenten kritisierten das Video scharf.Trumps Sprecherin Karoline Leavitt sprach zunächst von "gespielter Empörung", bevor das Weiße Haus das Video entfernte und erklärte, ein Mitarbeiter habe den Beitrag "irrtümlich veröffentlicht". Trump beteuerte später, er habe "nur den ersten Teil angesehen und nicht das ganze Video".
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+__NEWS_ID_TO_MARK__: 7e7c893e29
+[2026-02-15 13:17:49] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:17:56] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Rage Against the Machine - Know Your Enemy
+[2026-02-15 13:17:56] Track NOT FOUND: Rage Against the Machine - Know Your Enemy
+[2026-02-15 13:17:56] Appended to wishlist: Rage Against the Machine - Know Your Enemy
+[2026-02-15 13:17:57] Alternatives found. Setting instructions for next attempt.
+[2026-02-15 13:17:57] --- DJ Attempt 2/5 ---
+[2026-02-15 13:17:57] Wrote DJ request. Last Track: Massive Attack - Teardrop.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Obama über Trump-Video mit Affen: "Anstand verloren"
+Story: Der frühere US-Präsident Barack Obama hat sich erstmals über ein von Amtsinhaber Donald Trump veröffentlichtes Video geäußert, das ihn und seine Ehefrau Michelle als Affen verunglimpfte.Obama beklagte dabei gestern in einem Interview mit dem linksgerichteten Politikpodcaster Brian Tyler Cohen fehlende "Scham" und fehlenden "Anstand" in der Politik. Die meisten US-Bürger würden ein solches Verhalten als "zutiefst verstörend" empfinden."Antwort wird vom Volk kommen""Es gibt so eine Art Clown-Show in den sozialen Netzwerken und im Fernsehen", sagte Obama, ohne Trump beim Namen zu nennen. "Es scheint keinerlei Scham mehr darüber bei Menschen zu geben, die einst dachten, dass es Anstand, einen Sinn für Anständigkeit und Respekt für das Amt geben sollte, richtig? Das ist verloren gegangen."Der Demokrat sagte voraus, dass ein solches Verhalten Trumps Republikanern bei den Zwischenwahlen im November schaden werde. "Letztlich wird die Antwort vom amerikanischen Volk kommen", sagte der US-Präsident der Jahre 2009 bis 2017.Das Video war am 5. Februar auf Trumps Nutzerkonto auf seiner Onlineplattform Truth Social veröffentlicht worden. In dem Video ging es um vermeintliche Beweise für Manipulation bei der Präsidentschaftswahl 2020, die Trump gegen den Demokraten Joe Biden verloren hatte.Obamas Köpfe auf AffenkörpernAm Ende des Videos sind kurz die lachenden Köpfe von Michelle und Barack Obama auf Affenkörpern zu sehen. Der erste afroamerikanische Präsident der US-Geschichte und seine Ehefrau tanzten darin vor einer Dschungelkulisse.Das Video sorgte für einen Aufschrei der Empörung, Trump wurde Rassismus vorgeworfen. Auch Parteifreunde des rechtspopulistischen Präsidenten kritisierten das Video scharf.Trumps Sprecherin Karoline Leavitt sprach zunächst von "gespielter Empörung", bevor das Weiße Haus das Video entfernte und erklärte, ein Mitarbeiter habe den Beitrag "irrtümlich veröffentlicht". Trump beteuerte später, er habe "nur den ersten Teil angesehen und nicht das ganze Video".
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+The track 'Rage Against the Machine - Know Your Enemy' was unavailable. Please select one of the following 1 available tracks by the same artist: Rage Against the Machine. Available tracks include: Rage against the machine - Killing in the name.mp3...
+[2026-02-15 13:17:57] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:18:04] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Rage against the machine - Killing in the name
+[2026-02-15 13:18:04] SUCCESS: Found track: Rage against the machine - Killing in the name
+[2026-02-15 13:18:04] Generating announcement audio (slot 5): 'The political debate in the US...'
+[2026-02-15 13:18:19] TTS Generation successful (slot 5).
+[2026-02-15 13:18:19] Appended to queue: temp_announcement5.mp3
+[2026-02-15 13:18:19] Appended to queue: Rage against the machine - Killing in the name.mp3
+[2026-02-15 13:18:19] Marked story 7e7c893e29 as presented.
+[2026-02-15 13:18:19] Signal file deleted.
+[2026-02-15 13:23:10] Signal detected. Starting DJ cycle.
+[2026-02-15 13:23:10] Using cached weather (1120s old)
+[2026-02-15 13:23:10] Weather segment: subtle mode (cached)
+[2026-02-15 13:23:10] News update: Cache is fresh (3163s old, max 3600s). Skipping update.
+Stories in cache: 31
+[2026-02-15 13:23:10] News: HEADLINES segment (31 headlines)
+[2026-02-15 13:23:10] --- DJ Attempt 1/5 ---
+[2026-02-15 13:23:10] Wrote DJ request. Last Track: Rage against the machine - Killing in the name.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS SEGMENT: It's time for the hourly news update! Here are the current headlines:
+
+Top stories: Atomkompromiss: Iran unter Bedingungen bereit; "Unmögliches geschafft": Antipopulist bringt Bolivien zurück auf Kurs; Neues Machtgefüge: Kurden in Syrien mit ungewisser Zukunft; Flocks Kreis schließt sich als Goldmedaille; OÖ: Ehepaar rettet 81-Jährige in Schneesturm
+Also in the news: Kallas wehrt sich gegen Schlechtreden von Europa; Obama über Trump-Video mit Affen: "Anstand verloren"; Streit um Begnadigung: Trump attackiert Israels Präsidenten; Israel greift erneut Ziele im Libanon an; 208 Häftlinge im Vorjahr in Herkunftsstaat überstellt
+In brief: Ungarn im Wahlkampf: Magyar fordert Orban heraus; Villach: Gedenkmesse ein Jahr nach Terroranschlag; SPÖ und NEOS in Wien widmen sich Ringstraße; Austria muss im Wiener Derby "höllisch aufpassen"; ÖSV-Herren nach Riesentorlauf-Abfuhr ratlos
+
+Please present these headlines to the listeners as a news bulletin in your own words. Cover the top stories first, then briefly mention a few of the other headlines. After the news, suggest and introduce a song that fits the overall mood of today's news.
+[2026-02-15 13:23:10] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:23:19] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Massive Attack - Angel
+[2026-02-15 13:23:19] Track NOT FOUND: Massive Attack - Angel
+[2026-02-15 13:23:19] Appended to wishlist: Massive Attack - Angel
+[2026-02-15 13:23:20] Alternatives found. Setting instructions for next attempt.
+[2026-02-15 13:23:20] --- DJ Attempt 2/5 ---
+[2026-02-15 13:23:20] Wrote DJ request. Last Track: Rage against the machine - Killing in the name.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS SEGMENT: It's time for the hourly news update! Here are the current headlines:
+
+Top stories: Atomkompromiss: Iran unter Bedingungen bereit; "Unmögliches geschafft": Antipopulist bringt Bolivien zurück auf Kurs; Neues Machtgefüge: Kurden in Syrien mit ungewisser Zukunft; Flocks Kreis schließt sich als Goldmedaille; OÖ: Ehepaar rettet 81-Jährige in Schneesturm
+Also in the news: Kallas wehrt sich gegen Schlechtreden von Europa; Obama über Trump-Video mit Affen: "Anstand verloren"; Streit um Begnadigung: Trump attackiert Israels Präsidenten; Israel greift erneut Ziele im Libanon an; 208 Häftlinge im Vorjahr in Herkunftsstaat überstellt
+In brief: Ungarn im Wahlkampf: Magyar fordert Orban heraus; Villach: Gedenkmesse ein Jahr nach Terroranschlag; SPÖ und NEOS in Wien widmen sich Ringstraße; Austria muss im Wiener Derby "höllisch aufpassen"; ÖSV-Herren nach Riesentorlauf-Abfuhr ratlos
+
+Please present these headlines to the listeners as a news bulletin in your own words. Cover the top stories first, then briefly mention a few of the other headlines. After the news, suggest and introduce a song that fits the overall mood of today's news.
+The track 'Massive Attack - Angel' was unavailable. Please select one of the following 4 available tracks by the same artist: Massive Attack. Available tracks include: Massive Attack - Exchange.mp3
+Massive Attack - Safe from harm.mp3
+Massive Attack - Teardrop.mp3
+Massive Attack - Unfinished sympathy.mp3...
+[2026-02-15 13:23:20] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:23:29] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Massive Attack - Safe from harm
+[2026-02-15 13:23:29] SUCCESS: Found track: Massive Attack - Safe from harm
+[2026-02-15 13:23:29] Generating announcement audio (slot 1): 'Phew, that was intense! Time n...'
+[2026-02-15 13:23:49] TTS Generation successful (slot 1).
+[2026-02-15 13:23:49] Appended to queue: temp_announcement1.mp3
+[2026-02-15 13:23:49] Appended to queue: Massive Attack - Safe from harm.mp3
+[2026-02-15 13:23:49] Signal file deleted.
+[2026-02-15 13:24:26] ============================================================
+[2026-02-15 13:24:26] DJ Orchestrator starting up.
+[2026-02-15 13:28:44] Signal detected. Starting DJ cycle.
+[2026-02-15 13:28:44] Weather segment: subtle mode (cached)
+[2026-02-15 13:28:44] Deep dive story queued for marking after success: 3052cff5dd
+[2026-02-15 13:28:44] --- DJ Attempt 1/5 ---
+[2026-02-15 13:28:44] Wrote DJ request. Last Track: Massive Attack - Safe from harm.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Streit um Begnadigung: Trump attackiert Israels Präsidenten
+Story: Eine verbale Attacke des US-Präsidenten Donald Trump gegen den israelischen Staatspräsidenten Yitzhak (Isaac) Herzog sorgt in Israel für Spannungen. Trump hatte vor Reportern im Weißen Haus gesagt, Herzog müsse sich "schämen", weil er den wegen Korruption angeklagten israelischen Ministerpräsidenten Benjamin Netanjahu bisher nicht begnadigt habe. Der Regierungschef habe immerhin in Kriegszeiten Außergewöhnliches geleistet, erklärte der US-Präsident.Das Büro des israelischen Präsidenten stellte daraufhin klar, Herzog habe anders als von Trump dargestellt noch keine Entscheidung in der Begnadigungsfrage getroffen. Der Antrag, den Netanjahu im November gestellt hatte, werde noch im Justizministerium gemäß den festgelegten Verfahren geprüft.Herzog schätze Trump zutiefst für seine Unterstützung des jüdischen Staates. Israel sei jedoch ein souveräner Staat, der nach dem Prinzip der Rechtsstaatlichkeit regiert werde, hieß es weiter.Spekulationen nach TreffenKurz vor der Attacke Trumps gegen Herzog hatte der US-Präsident Netanjahu im Weißen Haus getroffen. Nach Medienberichten hat Herzogs Büro deshalb Erklärungen darüber gefordert, ob Netanjahu Trump zu seinen Äußerungen gegen den israelischen Präsidenten ermutigt habe.Aus Kreisen um Netanjahu verlautete daraufhin, die Forderung Trumps nach einer Begnadigung sei ausschließlich auf Initiative des US-Präsidenten selbst erfolgt. Netanjahu hatte Herzog in einem Schreiben offiziell um Begnadigung gebeten.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+__NEWS_ID_TO_MARK__: 3052cff5dd
+[2026-02-15 13:28:44] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:28:52] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Depeche Mode - Policy of Truth
+[2026-02-15 13:28:53] Track NOT FOUND: Depeche Mode - Policy of Truth
+[2026-02-15 13:28:53] Appended to wishlist: Depeche Mode - Policy of Truth
+[2026-02-15 13:28:53] Alternatives found. Setting instructions for next attempt.
+[2026-02-15 13:28:53] --- DJ Attempt 2/5 ---
+[2026-02-15 13:28:53] Wrote DJ request. Last Track: Massive Attack - Safe from harm.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Streit um Begnadigung: Trump attackiert Israels Präsidenten
+Story: Eine verbale Attacke des US-Präsidenten Donald Trump gegen den israelischen Staatspräsidenten Yitzhak (Isaac) Herzog sorgt in Israel für Spannungen. Trump hatte vor Reportern im Weißen Haus gesagt, Herzog müsse sich "schämen", weil er den wegen Korruption angeklagten israelischen Ministerpräsidenten Benjamin Netanjahu bisher nicht begnadigt habe. Der Regierungschef habe immerhin in Kriegszeiten Außergewöhnliches geleistet, erklärte der US-Präsident.Das Büro des israelischen Präsidenten stellte daraufhin klar, Herzog habe anders als von Trump dargestellt noch keine Entscheidung in der Begnadigungsfrage getroffen. Der Antrag, den Netanjahu im November gestellt hatte, werde noch im Justizministerium gemäß den festgelegten Verfahren geprüft.Herzog schätze Trump zutiefst für seine Unterstützung des jüdischen Staates. Israel sei jedoch ein souveräner Staat, der nach dem Prinzip der Rechtsstaatlichkeit regiert werde, hieß es weiter.Spekulationen nach TreffenKurz vor der Attacke Trumps gegen Herzog hatte der US-Präsident Netanjahu im Weißen Haus getroffen. Nach Medienberichten hat Herzogs Büro deshalb Erklärungen darüber gefordert, ob Netanjahu Trump zu seinen Äußerungen gegen den israelischen Präsidenten ermutigt habe.Aus Kreisen um Netanjahu verlautete daraufhin, die Forderung Trumps nach einer Begnadigung sei ausschließlich auf Initiative des US-Präsidenten selbst erfolgt. Netanjahu hatte Herzog in einem Schreiben offiziell um Begnadigung gebeten.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+The track 'Depeche Mode - Policy of Truth' was unavailable. Please select one of the following 16 available tracks by the same artist: Depeche Mode. Available tracks include: Depeche Mode - A pain that I'm used to.mp3
+Depeche Mode - Enjoy the silence 04.mp3
+Depeche Mode - Enjoy the silence.mp3
+Depeche Mode - Heaven.mp3
+Depeche Mode - Interlude #2 - Crucified.mp3
+Depeche Mode - Little 15.mp3
+Depeche Mode - Martyr.mp3
+Depeche Mode - Master and servant.mp3
+Depeche Mode - Never let me down again.mp3
+Depeche Mode - People are people.mp3
+Depeche Mode - Personal Jesus.mp3
+Depeche Mode - Precious.mp3
+Depeche Mode - Strangelove (live).mp3
+Depeche Mode - Walking in my shoes.mp...
+[2026-02-15 13:28:53] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:29:01] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Depeche Mode - Personal Jesus
+[2026-02-15 13:29:01] SUCCESS: Found track: Depeche Mode - Personal Jesus
+[2026-02-15 13:29:22] Appended to queue: temp_announcement2.mp3
+[2026-02-15 13:29:22] Appended to queue: Depeche Mode - Personal Jesus.mp3
+[2026-02-15 13:29:22] Signal file deleted.
+[2026-02-15 13:34:43] Signal detected. Starting DJ cycle.
+[2026-02-15 13:34:43] Weather segment: FULL forecast mode (fresh scrape)
+[2026-02-15 13:34:44] Deep dive story queued for marking after success: 942a453d2a
+[2026-02-15 13:34:44] --- DJ Attempt 1/5 ---
+[2026-02-15 13:34:44] Wrote DJ request. Last Track: Depeche Mode - Personal Jesus.mp3. Listener Input: None. Instructions: Current weather forecast for Vienna:
+Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+
+It's time for a weather update! Please present the full weather forecast to the listeners in your own words, then suggest and introduce a song that fits the current weather mood.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Weiter Kontroverse um UNO-Berichterstatterin Albanese
+Story: Nach den Regierungen von Frankreich und Deutschland fordert nun auch Tschechien die Abberufung von Francesca Albanese, UNO-Sonderberichterstatterin für die besetzten palästinensischen Gebiete. Das berichteten italienische Medien.Zudem haben sich 40 britische Abgeordnete an Innenministerin Yvette Cooper gewandt und sie aufgefordert, ebenfalls Albaneses Rücktritt zu verlangen. In Italien bekräftigte Außenminister Antonio Tajani, dass "die Erklärungen und das Verhalten" der italienischen Juristin es "unumgänglich machen, ihren Rücktritt zu verlangen".Die Regierungspartei Fratelli d’Italia (Brüder Italiens) startete eine öffentliche Unterschriftensammlung zur Forderung der Mandatsenthebung. Nach Angaben der Initiatoren seien in den ersten zwölf Stunden "zehntausend Unterschriften" gesammelt worden.Rückhalt erhielt Albanese hingegen von Italiens Oppositionspartei Allianz Verdi e Sinistra (Avs) sowie von einzelnen Abgeordneten der Partito Democratico (PD – Demokratische Partei) und der Fünf-Sterne-Bewegung.Meinl-Reisinger-Post gelöschtSeit Tagen hagelt es Kritik an der UNO-Sonderberichterstatterin für die palästinensischen Gebiete. Auch Außenministerin Beate Meinl-Reisinger (NEOS) hatte sich dem Protest gegen die italienische Juristin angeschlossen. Ein entsprechender Post auf der Plattform X wurde am Freitag aber später gelöscht.Hintergrund des Wirbels sind israelkritische Aussagen von Albanese bei einer Konferenz in Doha, die Anfang Februar über die Bühne ging.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+__NEWS_ID_TO_MARK__: 942a453d2a
+[2026-02-15 13:34:44] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:34:53] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Tracy Chapman - Talkin' 'Bout a Revolution
+[2026-02-15 13:34:54] Track NOT FOUND: Tracy Chapman - Talkin' 'Bout a Revolution
+[2026-02-15 13:34:54] Appended to wishlist: Tracy Chapman - Talkin' 'Bout a Revolution
+[2026-02-15 13:34:54] Alternatives found. Setting instructions for next attempt.
+[2026-02-15 13:34:54] --- DJ Attempt 2/5 ---
+[2026-02-15 13:34:54] Wrote DJ request. Last Track: Depeche Mode - Personal Jesus.mp3. Listener Input: None. Instructions: Current weather forecast for Vienna:
+Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+
+It's time for a weather update! Please present the full weather forecast to the listeners in your own words, then suggest and introduce a song that fits the current weather mood.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Weiter Kontroverse um UNO-Berichterstatterin Albanese
+Story: Nach den Regierungen von Frankreich und Deutschland fordert nun auch Tschechien die Abberufung von Francesca Albanese, UNO-Sonderberichterstatterin für die besetzten palästinensischen Gebiete. Das berichteten italienische Medien.Zudem haben sich 40 britische Abgeordnete an Innenministerin Yvette Cooper gewandt und sie aufgefordert, ebenfalls Albaneses Rücktritt zu verlangen. In Italien bekräftigte Außenminister Antonio Tajani, dass "die Erklärungen und das Verhalten" der italienischen Juristin es "unumgänglich machen, ihren Rücktritt zu verlangen".Die Regierungspartei Fratelli d’Italia (Brüder Italiens) startete eine öffentliche Unterschriftensammlung zur Forderung der Mandatsenthebung. Nach Angaben der Initiatoren seien in den ersten zwölf Stunden "zehntausend Unterschriften" gesammelt worden.Rückhalt erhielt Albanese hingegen von Italiens Oppositionspartei Allianz Verdi e Sinistra (Avs) sowie von einzelnen Abgeordneten der Partito Democratico (PD – Demokratische Partei) und der Fünf-Sterne-Bewegung.Meinl-Reisinger-Post gelöschtSeit Tagen hagelt es Kritik an der UNO-Sonderberichterstatterin für die palästinensischen Gebiete. Auch Außenministerin Beate Meinl-Reisinger (NEOS) hatte sich dem Protest gegen die italienische Juristin angeschlossen. Ein entsprechender Post auf der Plattform X wurde am Freitag aber später gelöscht.Hintergrund des Wirbels sind israelkritische Aussagen von Albanese bei einer Konferenz in Doha, die Anfang Februar über die Bühne ging.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+The track 'Tracy Chapman - Talkin' 'Bout a Revolution' was unavailable. Please select one of the following 2 available tracks by the same artist: Tracy Chapman. Available tracks include: Tracy Chapman - Baby Can I Hold You.mp3
+Tracy Chapman - Telling stories (live).mp3...
+[2026-02-15 13:34:54] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:35:02] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Tracy Chapman - Telling stories (live)
+[2026-02-15 13:35:03] SUCCESS: Found track: Tracy Chapman - Telling stories (live)
+[2026-02-15 13:35:15] Appended to queue: temp_announcement6.mp3
+[2026-02-15 13:35:15] Appended to queue: Tracy Chapman - Telling stories (live).mp3
+[2026-02-15 13:35:15] Signal file deleted.
+[2026-02-15 13:38:51] Signal detected. Starting DJ cycle.
+[2026-02-15 13:38:51] Weather segment: subtle mode (cached)
+[2026-02-15 13:38:52] Deep dive story queued for marking after success: 7d91eb9e03
+[2026-02-15 13:38:52] --- DJ Attempt 1/5 ---
+[2026-02-15 13:38:52] Wrote DJ request. Last Track: Tracy Chapman - Telling stories (live).mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Israel greift erneut Ziele im Libanon an
+Story: Das israelische Militär hat erneut mehrere Ziele im Libanon angegriffen. Im Süden des Nachbarlandes seien in mehreren Gebieten Waffenlager und Raketenwerfer der Hisbollah-Miliz attackiert worden, teilte das Militär in der Nacht auf heute mit.Die Präsenz der Waffen stelle einen Verstoß gegen die Waffenruhevereinbarung zwischen Israel und dem Libanon dar, hieß es. Die Hisbollah versuche weiterhin, ihre "Terrorinfrastruktur im Südlibanon wieder aufzubauen", erklärte Israels Armee.Nach offiziellen libanesischen Angaben wurden seit Inkrafttreten der Waffenruhe im November 2024 mehr als 300 Menschen im Libanon durch israelische Angriffe getötet. Den Vereinten Nationen zufolge waren mehr als 100 davon Zivilisten und Zivilistinnen.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+__NEWS_ID_TO_MARK__: 7d91eb9e03
+[2026-02-15 13:38:52] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:38:59] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Marvin Gaye - What's Going On
+[2026-02-15 13:38:59] Track NOT FOUND: Marvin Gaye - What's Going On
+[2026-02-15 13:38:59] Appended to wishlist: Marvin Gaye - What's Going On
+[2026-02-15 13:38:59] Alternatives found. Setting instructions for next attempt.
+[2026-02-15 13:38:59] --- DJ Attempt 2/5 ---
+[2026-02-15 13:38:59] Wrote DJ request. Last Track: Tracy Chapman - Telling stories (live).mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Israel greift erneut Ziele im Libanon an
+Story: Das israelische Militär hat erneut mehrere Ziele im Libanon angegriffen. Im Süden des Nachbarlandes seien in mehreren Gebieten Waffenlager und Raketenwerfer der Hisbollah-Miliz attackiert worden, teilte das Militär in der Nacht auf heute mit.Die Präsenz der Waffen stelle einen Verstoß gegen die Waffenruhevereinbarung zwischen Israel und dem Libanon dar, hieß es. Die Hisbollah versuche weiterhin, ihre "Terrorinfrastruktur im Südlibanon wieder aufzubauen", erklärte Israels Armee.Nach offiziellen libanesischen Angaben wurden seit Inkrafttreten der Waffenruhe im November 2024 mehr als 300 Menschen im Libanon durch israelische Angriffe getötet. Den Vereinten Nationen zufolge waren mehr als 100 davon Zivilisten und Zivilistinnen.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+The track 'Marvin Gaye - What's Going On' was unavailable. Please select one of the following 2 available tracks by the same artist: Marvin Gaye. Available tracks include: Charlie Puth feat. Meghan Trainor - Marvin Gaye.mp3
+Marvin Gaye - I heard it through the grapevine.mp3...
+[2026-02-15 13:38:59] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:39:08] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Marvin Gaye - I heard it through the grapevine
+[2026-02-15 13:39:08] SUCCESS: Found track: Marvin Gaye - I heard it through the grapevine
+[2026-02-15 13:39:27] Appended to queue: temp_announcement3.mp3
+[2026-02-15 13:39:27] Appended to queue: Marvin Gaye - I heard it through the grapevine.mp3
+[2026-02-15 13:39:27] Signal file deleted.
+[2026-02-15 13:43:09] Signal detected. Starting DJ cycle.
+[2026-02-15 13:43:09] Weather segment: subtle mode (cached)
+[2026-02-15 13:43:09] Deep dive story queued for marking after success: 4ff91445a5
+[2026-02-15 13:43:09] --- DJ Attempt 1/5 ---
+[2026-02-15 13:43:09] Wrote DJ request. Last Track: Marvin Gaye - I heard it through the grapevine.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Ukrainischer Ex-Energieminister festgenommen
+Story: Der wegen Korruptionsverdacht entlassene frühere ukrainische Energieminister Herman Haluschtschenko ist bei einer versuchten Ausreise aus dem Land festgenommen worden. Das teilten die für Korruptionsbekämpfung zuständigen Kiewer Behörden SAP und Nabu auf ihren Telegram-Kanälen heute mit.
+Die Ermittlungen in dem weitverzweigten Fall von Bestechlichkeit dauerten an. Im vergangenen November hatten ukrainische Korruptionsfahnder Vorwürfe gegen eine Gruppe mutmaßlich bestechlicher Staatsdiener direkt im Umfeld von Präsident Wolodymyr Selenskyj erhoben.Sie sollen sich im staatlichen Konzern Ernerhoatom an Geld vergriffen haben, das eigentlich für Schutzbauten um Energieanlagen gegen feindliche Luftangriffe bestimmt war. Haluschtschenko, einer der Beschuldigten, musste als Energieminister gehen.Dem Selenskyj-Vertrauten Tymur Minditsch gelang die Flucht. Der Präsident baute daraufhin die Regierung um und ersetzte auch seinen einflussreichen Stabschef Andrij Jermak.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+__NEWS_ID_TO_MARK__: 4ff91445a5
+[2026-02-15 13:43:09] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:43:18] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Massive Attack - Teardrop
+[2026-02-15 13:43:18] SUCCESS: Found track: Massive Attack - Teardrop
+[2026-02-15 13:43:38] Appended to queue: temp_announcement4.mp3
+[2026-02-15 13:43:38] Appended to queue: Massive Attack - Teardrop.mp3
+[2026-02-15 13:43:38] Signal file deleted.
+[2026-02-15 13:46:47] Signal detected. Starting DJ cycle.
+[2026-02-15 13:46:47] Weather segment: subtle mode (cached)
+[2026-02-15 13:46:47] Deep dive story queued for marking after success: 8ce8ea2688
+[2026-02-15 13:46:47] --- DJ Attempt 1/5 ---
+[2026-02-15 13:46:47] Wrote DJ request. Last Track: Massive Attack - Teardrop.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: 208 Häftlinge im Vorjahr in Herkunftsstaat überstellt
+Story: Im Jahr 2025 wurden 208 Personen zur Strafvollstreckung aus Österreich in ihren Herkunftsstaat gebracht. Das ist ein Höchstwert seit Beginn der Aufzeichnungen 2013. Ein Jahr zuvor waren es 167 Personen, zehn Jahre zuvor 144. Das geht aus Zahlen des Justizministeriums hervor.Dazu kamen 2025 insgesamt 394 Personen mit Einreise- oder Aufenthaltsverboten, die aus dem Strafvollzug in ihre Heimatländer gebracht wurden. Die Justiz will die "Haft in der Heimat" weiter ausbauen.Die vermehrte Überstellung von Strafgefangenen in den Herkunftsstaat sei "ein wichtiges Anliegen, um die heimischen Gefängnisse zu entlasten und eine bessere Resozialisierung von Strafgefangenen in der Heimat zu ermöglichen", hieß es aus dem SPÖ-geführten Justizressort.Meisten Überstellungen innerhalb EuropasEin Großteil der Ersuchen und Überstellungen betreffe das EU- bzw. europäische Ausland. Rechtsgrundlage sind ein Rahmenbeschluss der Europäischen Union aus dem Jahr 2008 sowie das Übereinkommen über die Überstellung verurteilter Personen des Europarats."Die Überstellung in den heimatlichen Strafvollzug hängt nicht direkt mit dem Delikt zusammen, sondern vielmehr mit der Dauer der in Österreich verhängten Freiheitsstrafe", teilte das Justizministerium mit. Ein Ansuchen sei nur sinnvoll, wenn noch "ausreichend Strafzeit" vorhanden sei und keine bedingte Entlassung anstehe.Die Kosten für Überstellungen sind laut Ministerium "je nach individuellem Fall sehr unterschiedlich". Insgesamt "überwiegen die ersparten Haftkosten jedoch den Aufwand der Außerlandesbringungen".
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+__NEWS_ID_TO_MARK__: 8ce8ea2688
+[2026-02-15 13:46:47] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:46:55] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Talking Heads - Road to Nowhere
+[2026-02-15 13:46:55] SUCCESS: Found track: Talking Heads - Road to Nowhere
+[2026-02-15 13:47:31] Appended to queue: temp_announcement7.mp3
+[2026-02-15 13:47:31] Appended to queue: Talking heads - Road to nowhere.mp3
+[2026-02-15 13:47:31] Signal file deleted.
+[2026-02-15 13:52:37] Signal detected. Starting DJ cycle.
+[2026-02-15 13:52:37] Weather segment: subtle mode (cached)
+[2026-02-15 13:52:37] Deep dive story queued for marking after success: 976c04539b
+[2026-02-15 13:52:37] --- DJ Attempt 1/5 ---
+[2026-02-15 13:52:37] Wrote DJ request. Last Track: Talking heads - Road to nowhere.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Ukrainischer Angriff trifft Ölhafen an Schwarzmeer-Küste
+Story: Die Ukraine hat nach russischen Angaben die Schwarzmeer-Küste Russlands mit Drohnen angegriffen und einen Öltank in Brand geschossen. Der Gouverneur der betroffenen Region Krasnodar, Wenjamin Kondratjew, schrieb heute auf der Plattform Telegram von einem "massiven Angriff", der die ganze Nacht gedauert habe.Getroffen wurde demnach ein Tank mit Ölprodukten bei einem Ölverladehafen auf der Halbinsel Taman. Der Terminal war schon mehrmals Ziel ukrainischer Attacken. Kondratjew sprach auch von kleineren Schäden bei Anapa und Sotschi. Es habe zwei Verletzte gegeben.Das Verteidigungsministerium in Moskau teilte mit, 68 ukrainische Drohnen seien über verschiedenen Regionen Südrusslands abgeschossen worden.Umgekehrt griff die russische Armee die Ukraine erneut mit Drohnen an. In der Großstadt Saporischschja seien drei Menschen verletzt worden, teilten die örtlichen Behörden mit.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+__NEWS_ID_TO_MARK__: 976c04539b
+[2026-02-15 13:52:37] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:52:45] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Portishead - Glory Box
+[2026-02-15 13:52:45] Track NOT FOUND: Portishead - Glory Box
+[2026-02-15 13:52:45] Appended to wishlist: Portishead - Glory Box
+[2026-02-15 13:52:45] No alternatives found for artist: Portishead. Autonomous turn failed. Forcing new artist selection.
+[2026-02-15 13:52:45] --- DJ Attempt 2/5 ---
+[2026-02-15 13:52:45] Wrote DJ request. Last Track: Talking heads - Road to nowhere.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Ukrainischer Angriff trifft Ölhafen an Schwarzmeer-Küste
+Story: Die Ukraine hat nach russischen Angaben die Schwarzmeer-Küste Russlands mit Drohnen angegriffen und einen Öltank in Brand geschossen. Der Gouverneur der betroffenen Region Krasnodar, Wenjamin Kondratjew, schrieb heute auf der Plattform Telegram von einem "massiven Angriff", der die ganze Nacht gedauert habe.Getroffen wurde demnach ein Tank mit Ölprodukten bei einem Ölverladehafen auf der Halbinsel Taman. Der Terminal war schon mehrmals Ziel ukrainischer Attacken. Kondratjew sprach auch von kleineren Schäden bei Anapa und Sotschi. Es habe zwei Verletzte gegeben.Das Verteidigungsministerium in Moskau teilte mit, 68 ukrainische Drohnen seien über verschiedenen Regionen Südrusslands abgeschossen worden.Umgekehrt griff die russische Armee die Ukraine erneut mit Drohnen an. In der Großstadt Saporischschja seien drei Menschen verletzt worden, teilten die örtlichen Behörden mit.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+The suggested artist Portishead has no available tracks. Please select a track by a completely different artist entirely.
+[2026-02-15 13:52:45] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:52:53] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: DJ Shadow - Six Days
+[2026-02-15 13:52:53] Track NOT FOUND: DJ Shadow - Six Days
+[2026-02-15 13:52:53] Appended to wishlist: DJ Shadow - Six Days
+[2026-02-15 13:52:53] No alternatives found for artist: DJ Shadow. Autonomous turn failed. Forcing new artist selection.
+[2026-02-15 13:52:53] --- DJ Attempt 3/5 ---
+[2026-02-15 13:52:53] Wrote DJ request. Last Track: Talking heads - Road to nowhere.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Ukrainischer Angriff trifft Ölhafen an Schwarzmeer-Küste
+Story: Die Ukraine hat nach russischen Angaben die Schwarzmeer-Küste Russlands mit Drohnen angegriffen und einen Öltank in Brand geschossen. Der Gouverneur der betroffenen Region Krasnodar, Wenjamin Kondratjew, schrieb heute auf der Plattform Telegram von einem "massiven Angriff", der die ganze Nacht gedauert habe.Getroffen wurde demnach ein Tank mit Ölprodukten bei einem Ölverladehafen auf der Halbinsel Taman. Der Terminal war schon mehrmals Ziel ukrainischer Attacken. Kondratjew sprach auch von kleineren Schäden bei Anapa und Sotschi. Es habe zwei Verletzte gegeben.Das Verteidigungsministerium in Moskau teilte mit, 68 ukrainische Drohnen seien über verschiedenen Regionen Südrusslands abgeschossen worden.Umgekehrt griff die russische Armee die Ukraine erneut mit Drohnen an. In der Großstadt Saporischschja seien drei Menschen verletzt worden, teilten die örtlichen Behörden mit.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+The suggested artist DJ Shadow has no available tracks. Please select a track by a completely different artist entirely.
+[2026-02-15 13:52:53] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:53:01] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Tricky - Hell Is Round The Corner
+[2026-02-15 13:53:01] Track NOT FOUND: Tricky - Hell Is Round The Corner
+[2026-02-15 13:53:01] Appended to wishlist: Tricky - Hell Is Round The Corner
+[2026-02-15 13:53:01] Alternatives found. Setting instructions for next attempt.
+[2026-02-15 13:53:01] --- DJ Attempt 4/5 ---
+[2026-02-15 13:53:01] Wrote DJ request. Last Track: Talking heads - Road to nowhere.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Ukrainischer Angriff trifft Ölhafen an Schwarzmeer-Küste
+Story: Die Ukraine hat nach russischen Angaben die Schwarzmeer-Küste Russlands mit Drohnen angegriffen und einen Öltank in Brand geschossen. Der Gouverneur der betroffenen Region Krasnodar, Wenjamin Kondratjew, schrieb heute auf der Plattform Telegram von einem "massiven Angriff", der die ganze Nacht gedauert habe.Getroffen wurde demnach ein Tank mit Ölprodukten bei einem Ölverladehafen auf der Halbinsel Taman. Der Terminal war schon mehrmals Ziel ukrainischer Attacken. Kondratjew sprach auch von kleineren Schäden bei Anapa und Sotschi. Es habe zwei Verletzte gegeben.Das Verteidigungsministerium in Moskau teilte mit, 68 ukrainische Drohnen seien über verschiedenen Regionen Südrusslands abgeschossen worden.Umgekehrt griff die russische Armee die Ukraine erneut mit Drohnen an. In der Großstadt Saporischschja seien drei Menschen verletzt worden, teilten die örtlichen Behörden mit.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+The track 'Tricky - Hell Is Round The Corner' was unavailable. Please select one of the following 1 available tracks by the same artist: Tricky. Available tracks include: Busted - Tricky Tricky.mp3...
+[2026-02-15 13:53:01] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:53:10] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Massive Attack - Angel
+[2026-02-15 13:53:10] Track NOT FOUND: Massive Attack - Angel
+[2026-02-15 13:53:10] Appended to wishlist: Massive Attack - Angel
+[2026-02-15 13:53:10] Alternatives found. Setting instructions for next attempt.
+[2026-02-15 13:53:10] --- DJ Attempt 5/5 ---
+[2026-02-15 13:53:10] Wrote DJ request. Last Track: Talking heads - Road to nowhere.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Ukrainischer Angriff trifft Ölhafen an Schwarzmeer-Küste
+Story: Die Ukraine hat nach russischen Angaben die Schwarzmeer-Küste Russlands mit Drohnen angegriffen und einen Öltank in Brand geschossen. Der Gouverneur der betroffenen Region Krasnodar, Wenjamin Kondratjew, schrieb heute auf der Plattform Telegram von einem "massiven Angriff", der die ganze Nacht gedauert habe.Getroffen wurde demnach ein Tank mit Ölprodukten bei einem Ölverladehafen auf der Halbinsel Taman. Der Terminal war schon mehrmals Ziel ukrainischer Attacken. Kondratjew sprach auch von kleineren Schäden bei Anapa und Sotschi. Es habe zwei Verletzte gegeben.Das Verteidigungsministerium in Moskau teilte mit, 68 ukrainische Drohnen seien über verschiedenen Regionen Südrusslands abgeschossen worden.Umgekehrt griff die russische Armee die Ukraine erneut mit Drohnen an. In der Großstadt Saporischschja seien drei Menschen verletzt worden, teilten die örtlichen Behörden mit.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+The track 'Massive Attack - Angel' was unavailable. Please select one of the following 4 available tracks by the same artist: Massive Attack. Available tracks include: Massive Attack - Exchange.mp3
+Massive Attack - Safe from harm.mp3
+Massive Attack - Teardrop.mp3
+Massive Attack - Unfinished sympathy.mp3...
+[2026-02-15 13:53:10] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:53:17] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Massive Attack - Safe from harm
+[2026-02-15 13:53:17] SUCCESS: Found track: Massive Attack - Safe from harm
+[2026-02-15 13:53:36] Appended to queue: temp_announcement5.mp3
+[2026-02-15 13:53:36] Appended to queue: Massive Attack - Safe from harm.mp3
+[2026-02-15 13:53:36] Signal file deleted.
+[2026-02-15 13:57:24] Signal detected. Starting DJ cycle.
+[2026-02-15 13:57:24] Weather segment: subtle mode (cached)
+[2026-02-15 13:57:24] Deep dive story queued for marking after success: 5930f5e545
+[2026-02-15 13:57:24] --- DJ Attempt 1/5 ---
+[2026-02-15 13:57:24] Wrote DJ request. Last Track: Massive Attack - Safe from harm.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Acht abgetrennte Köpfe in Ecuador entdeckt
+Story: In der Küstenprovinz Guayas in Ecuador sind acht abgetrennte menschliche Köpfe entdeckt worden. Nahe der Köpfe seien Zettel mit der Aufschrift "Stehlen verboten" gefunden worden, sagte Polizeikommandeur Marcelo Castillo gestern.
+Hintergrund der Tat seien vermutlich Auseinandersetzungen zwischen "kriminellen Banden". Erst im vergangenen Jänner waren an einem Strand in Ecuador fünf Köpfe entdeckt worden.Erbitterte Kämpfe zwischen Drogenbanden haben Ecuador in das gewalttätigste Land Südamerikas verwandelt. Im vergangenen Jahr lag die Mordrate nach Angaben des Innenministeriums bei 54 pro 100.000 Einwohnern. Das entspricht einem Mord pro Stunde.Ecuador liegt zwischen den beiden weltgrößten Kokainproduzenten Kolumbien und Peru und hat sich zu einem wichtigen Transitland für den Drogenhandel entwickelt. Rund 70 Prozent des Kokains wird an Ecuadors Häfen am Pazifik umgeschlagen, Ziel sind zumeist die USA oder Europa.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+__NEWS_ID_TO_MARK__: 5930f5e545
+[2026-02-15 13:57:24] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:57:32] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Rage Against The Machine - Bulls On Parade
+[2026-02-15 13:57:32] Track NOT FOUND: Rage Against The Machine - Bulls On Parade
+[2026-02-15 13:57:32] Appended to wishlist: Rage Against The Machine - Bulls On Parade
+[2026-02-15 13:57:33] Alternatives found. Setting instructions for next attempt.
+[2026-02-15 13:57:33] --- DJ Attempt 2/5 ---
+[2026-02-15 13:57:33] Wrote DJ request. Last Track: Massive Attack - Safe from harm.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Acht abgetrennte Köpfe in Ecuador entdeckt
+Story: In der Küstenprovinz Guayas in Ecuador sind acht abgetrennte menschliche Köpfe entdeckt worden. Nahe der Köpfe seien Zettel mit der Aufschrift "Stehlen verboten" gefunden worden, sagte Polizeikommandeur Marcelo Castillo gestern.
+Hintergrund der Tat seien vermutlich Auseinandersetzungen zwischen "kriminellen Banden". Erst im vergangenen Jänner waren an einem Strand in Ecuador fünf Köpfe entdeckt worden.Erbitterte Kämpfe zwischen Drogenbanden haben Ecuador in das gewalttätigste Land Südamerikas verwandelt. Im vergangenen Jahr lag die Mordrate nach Angaben des Innenministeriums bei 54 pro 100.000 Einwohnern. Das entspricht einem Mord pro Stunde.Ecuador liegt zwischen den beiden weltgrößten Kokainproduzenten Kolumbien und Peru und hat sich zu einem wichtigen Transitland für den Drogenhandel entwickelt. Rund 70 Prozent des Kokains wird an Ecuadors Häfen am Pazifik umgeschlagen, Ziel sind zumeist die USA oder Europa.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+The track 'Rage Against The Machine - Bulls On Parade' was unavailable. Please select one of the following 1 available tracks by the same artist: Rage Against The Machine. Available tracks include: Rage against the machine - Killing in the name.mp3...
+[2026-02-15 13:57:33] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 13:57:39] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Rage Against The Machine - Killing in the name
+[2026-02-15 13:57:39] SUCCESS: Found track: Rage Against The Machine - Killing in the name
+[2026-02-15 13:58:20] Appended to queue: temp_announcement1.mp3
+[2026-02-15 13:58:20] Appended to queue: Rage against the machine - Killing in the name.mp3
+[2026-02-15 13:58:20] Signal file deleted.
+[2026-02-15 14:03:05] Signal detected. Starting DJ cycle.
+[2026-02-15 14:03:05] Weather segment: subtle mode (cached)
+[2026-02-15 14:03:06] Deep dive story queued for marking after success: 749f5740bf
+[2026-02-15 14:03:06] --- DJ Attempt 1/5 ---
+[2026-02-15 14:03:06] Wrote DJ request. Last Track: Rage against the machine - Killing in the name.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+
+---
+
+NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.
+
+Headline: Babler: Abgabe für Streamingdienste kommt demnächst
+Story: Kulturminister Andreas Babler (SPÖ) und der für Auslandskultur zuständige Staatssekretär Sepp Schellhorn (NEOS) haben sich heute bei einem Empfang in der österreichischen Botschaft in Berlin zur laufenden Debatte um Finanzierungsmodelle der Filmbranche geäußert.Zumindest die Frage des Investitionsbeitrags – also einer Abgabe der Streamingunternehmen – sei vonseiten des Kulturministeriums auf der Zielgeraden: "Wir sind jetzt im Februar so weit, dass wir in die politische Koordinierung gehen können", sagte Babler. "Ich bekenne mich zur Streamingabgabe – sie muss kommen.""Aber das frische Geld für den Anschub aufzustellen, ist das Schwierige", so Babler. Auch Schellhorn unterstrich die Bedeutung des österreichischen Films als Exportgut und bekannte sich allgemein zur finanziellen Ausstattung.Fachverband erfreutWKO-Fachverbandsobmann Alexander Dumreicher-Ivanceanu reagierte erfreut: "Wir wissen, dass es in die richtige Richtung geht." Schließlich flössen die Einnahmen aus den rund 600 Millionen Euro an Umsätzen, die von den Streamingdiensten in Österreich generiert würden, derzeit zu 99,9 Prozent aus dem Land ab: "Das geht einfach nicht."Allerdings dürfe neben der Investitionsabgabe auch nicht auf die Investitionsverpflichtungen wie in Deutschland vergessen werden. "Unser Appell geht hier an die gesamte Regierung", verwies Dumreicher-Ivanceanu auf die nötige Beteiligung des Wirtschaftsministeriums in dieser Frage.
+
+Summarize this story engagingly for the radio audience, then suggest and introduce a song that fits the topic or mood of this story.
+__NEWS_ID_TO_MARK__: 749f5740bf
+[2026-02-15 14:03:06] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 14:03:14] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Pet Shop Boys - Opportunities (Let's Make Lots of Money)
+[2026-02-15 14:03:14] SUCCESS: Found track: Pet Shop Boys - Opportunities (Let's Make Lots of Money)
+[2026-02-15 14:03:33] Appended to queue: temp_announcement2.mp3
+[2026-02-15 14:03:33] Appended to queue: Pet Shop Boys - Opportunities (Let 's make lots of money).mp3
+[2026-02-15 14:03:33] Signal file deleted.
+[2026-02-15 14:08:39] Signal detected. Starting DJ cycle.
+[2026-02-15 14:08:39] Weather segment: FULL forecast mode (fresh scrape)
+[2026-02-15 14:08:39] --- DJ Attempt 1/5 ---
+[2026-02-15 14:08:39] Wrote DJ request. Last Track: Pet Shop Boys - Opportunities (Let 's make lots of money).mp3. Listener Input: None. Instructions: Current weather forecast for Vienna:
+Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+
+It's time for a weather update! Please present the full weather forecast to the listeners in your own words, then suggest and introduce a song that fits the current weather mood.
+[2026-02-15 14:08:39] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 14:08:47] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Portishead - Glory Box
+[2026-02-15 14:08:47] Track NOT FOUND: Portishead - Glory Box
+[2026-02-15 14:08:47] Appended to wishlist: Portishead - Glory Box
+[2026-02-15 14:08:47] No alternatives found for artist: Portishead. Autonomous turn failed. Forcing new artist selection.
+[2026-02-15 14:08:47] --- DJ Attempt 2/5 ---
+[2026-02-15 14:08:47] Wrote DJ request. Last Track: Pet Shop Boys - Opportunities (Let 's make lots of money).mp3. Listener Input: None. Instructions: Current weather forecast for Vienna:
+Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+
+It's time for a weather update! Please present the full weather forecast to the listeners in your own words, then suggest and introduce a song that fits the current weather mood.
+The suggested artist Portishead has no available tracks. Please select a track by a completely different artist entirely.
+[2026-02-15 14:08:47] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 14:08:58] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Garbage - Only Happy When It Rains
+[2026-02-15 14:08:58] SUCCESS: Found track: Garbage - Only Happy When It Rains
+[2026-02-15 14:09:14] Appended to queue: temp_announcement6.mp3
+[2026-02-15 14:09:14] Appended to queue: Garbage - Only happy when it rains.mp3
+[2026-02-15 14:09:14] Signal file deleted.
+[2026-02-15 14:12:35] Signal detected. Starting DJ cycle.
+[2026-02-15 14:12:35] Weather segment: subtle mode (cached)
+[2026-02-15 14:12:35] --- DJ Attempt 1/5 ---
+[2026-02-15 14:12:35] Wrote DJ request. Last Track: Garbage - Only happy when it rains.mp3. Listener Input: None. Instructions: Current weather for Vienna: Heute Nachmittag
+
+Es bleibt nun trocken, und die Wolken werden immer weniger. Der eisige Nordwestwind, der mit Spitzenböen um 50 km/h durch die Stadt weht, wird erst am Abend spürbar schwächer. Mit dem kräftigen Wind fühlt sich die Lufttemperatur um +1 Grad deutlich kälter an.
+
+Heute Abend, heute Nacht
+
+Am Abend klart es bei lebhaftem Nordwestwind auf. In der Nacht wird der schwächer und dreht auf Ost. Nach Mitternacht treffen immer mehr Wolken ein. Die Temperatur sinkt auf minus 3 bis minus 7 Grad.
+
+Morgen, Montag
+
+Meist stark bewölkt, zwischendurch Schneeflocken. Anfangs überwiegen die Wolken, von Westen her ziehen unergiebige Schneeschauer durch. Im Laufe des Tages kann sich zeitweise noch die Sonne zeigen. Der Wind weht mäßig aus Süd bis Südost, und die Temperatur steigt auf etwa 3 Grad.
+
+In der Nacht auf Dienstag treffen Regen- und Schneeschauer ein: Glatteis durch gefrierenden Regen ist nicht ausgeschlossen.
+
+Übermorgen, Dienstag
+
+Wechselhaft, mit Westwind im Laufe des Tages milder als zuletzt. Immer wieder ziehen dichte Wolken, zwischendurch auch Schnee- und Regenschauer über die Stadt hinweg, anfangs kann es noch gefrierend regnen! Dazu weht mäßiger bis lebhafter, in den Wienerwald-Bezirken mitunter kräftiger W-Wind, der die Wolken zwischendurch ein bisschen auflockert und die Temperatur auf 5 oder 6 Grad treibt.
+
+Der weitere Trend
+
+Am Mittwoch anfangs noch stark bewölkt und eventuell ein kurzer Schneeschauer mit böigem Westwind, rasch aber trocken und zeitweise sonnig. Im Laufe des Tages nur langsam nachlassender Wind und neuerlich bis zu 6 Grad.
+
+Am Donnerstag mit auffrischendem Nordwind wieder kälter, dazu überwiegend stark bewölkt, aber weitgehend trocken. Kaum mehr als 2 Grad am Nachmittag.
+
+Am Freitag aus heutiger Sicht trocken und meist sonnig, dazu zeitweise lebhafter Nordwestwind und eine höchste Temperatur um 3 Grad.
+You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast.
+[2026-02-15 14:12:35] Executing DJ Brain: C:\Program Files\Python311\python.exe C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\dj_brain.py
+[2026-02-15 14:12:42] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
+DJ suggests: Massive Attack - Teardrop
+[2026-02-15 14:12:42] SUCCESS: Found track: Massive Attack - Teardrop
