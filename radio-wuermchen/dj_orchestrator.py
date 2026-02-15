@@ -66,13 +66,13 @@ def load_json(path):
         return {}
 
 def save_json(path, data):
-    with open(path, 'w', encoding='utf-8') as f:
+    with open(str(path), 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 def read_last_line(path):
     """Reads the last non-empty line from a file."""
     try:
-        with open(path, 'rb') as f:
+        with open(str(path), 'rb') as f:
             f.seek(0, os.SEEK_END)
             file_size = f.tell()
             if file_size == 0:
@@ -103,7 +103,7 @@ def read_last_line(path):
 def delete_signal():
     """Delete the signal file."""
     try:
-        os.remove(SIGNAL_FILE)
+        os.remove(str(SIGNAL_FILE))
         log("Signal file deleted.")
     except FileNotFoundError:
         pass
@@ -111,11 +111,11 @@ def delete_signal():
 def read_and_clear_listener_request():
     """Read listener request from file and delete the file."""
     try:
-        with open(LISTENER_REQUEST_FILE, 'r', encoding='utf-8') as f:
+        with open(str(LISTENER_REQUEST_FILE), 'r', encoding='utf-8') as f:
             request = f.read().strip()
         
         # Delete the file immediately after reading
-        os.remove(LISTENER_REQUEST_FILE)
+        os.remove(str(LISTENER_REQUEST_FILE))
         log("Listener request read and file deleted.")
         return request if request else None
     except FileNotFoundError:
@@ -127,13 +127,13 @@ def read_and_clear_listener_request():
 # --- QUEUE MANAGEMENT ---
 def append_to_queue(track_path):
     """Append a track path to the queue file."""
-    with open(QUEUE_FILE, 'a', encoding='utf-8') as f:
+    with open(str(QUEUE_FILE), 'a', encoding='utf-8') as f:
         f.write(track_path + '\n')
     log(f"Appended to queue: {os.path.basename(track_path)}")
 
 def append_to_wishlist(track_suggestion):
     """Append a track suggestion to the Wishlist file."""
-    with open(WISHLIST_FILE, 'a', encoding='utf-8') as f:
+    with open(str(WISHLIST_FILE), 'a', encoding='utf-8') as f:
         f.write(track_suggestion + '\n')
     log(f"Appended to wishlist: {track_suggestion}")
 
@@ -263,6 +263,7 @@ def get_news_instruction():
     """
     Determine the news instruction for this DJ cycle.
     Returns (instruction_text, story_id_to_mark_after_success) or (None, None).
+    Story ID is returned as a string if it's a deep-dive requiring marking.
     """
     # Always try to update (respects its own 60-min cache internally)
     news_update()
@@ -271,7 +272,7 @@ def get_news_instruction():
     now = time.time()
     time_since_headlines = now - news_state.get('last_headlines_at', 0)
 
-    # Top of the hour: full headlines segment
+    # 1. Check for Headline Segment (Every NEWS_HEADLINES_INTERVAL)
     if time_since_headlines >= NEWS_HEADLINES_INTERVAL:
         headlines_data = news_get_headlines()
         if headlines_data and headlines_data.get('headlines'):
@@ -304,28 +305,57 @@ def get_news_instruction():
                 "After the news, suggest and introduce a song that fits the overall mood of today's news."
             )
 
-            # Update state — mark headlines as delivered
+            # Update state — mark headlines as delivered and reset deep dive tracking
             news_state['last_headlines_at'] = now
+            news_state['last_deep_dive_id'] = None
             save_news_state(news_state)
 
             log(f"News: HEADLINES segment ({len(headline_list)} headlines)")
             return instruction, None
 
-    # Between headlines: try a deep-dive story
-    story = news_get_next_story()
-    if story:
-        instruction = (
-            f"NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.\n\n"
-            f"Headline: {story['headline']}\n"
-            f"Story: {story['story']}\n\n"
-            "Summarize this story engagingly for the radio audience, then suggest and introduce "
-            "a song that fits the topic or mood of this story."
-        )
-        log(f"News: DEEP DIVE on '{story['headline'][:50]}...' (id: {story['id']})")
-        return instruction, story['id']
+    # 2. Check for Deep Dive Story
+    deep_dive_id = news_state.get('last_deep_dive_id')
+    
+    # If last deep dive was successful (i.e., ID exists and is not PENDING), look for a new one
+    if deep_dive_id and deep_dive_id != "PENDING":
+        log(f"Deep dive ID {deep_dive_id} was presented. Resetting for next cycle to find new story.")
+        news_state['last_deep_dive_id'] = None
+        save_news_state(news_state)
+        deep_dive_id = None # Reset to search below
+
+    if not deep_dive_id or deep_dive_id == "PENDING":
+        # Look for the next unpresented story with content
+        story = news_get_next_story()
+        
+        if story:
+            story_id = story.get('id')
+            if not story_id:
+                log("Warning: Found story with no ID, skipping deep dive logic.")
+                return None, None
+
+            # Mark as pending immediately to prevent another loop finding it before this one succeeds
+            news_state['last_deep_dive_id'] = "PENDING"
+            save_news_state(news_state)
+            
+            instruction = (
+                f"NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.\n\n"
+                f"Headline: {story['headline']}\n"
+                f"Story: {story['story']}\n\n"
+                "Summarize this story engagingly for the radio audience, then suggest and introduce "
+                "a song that fits the topic or mood of this story."
+            )
+            log(f"News: DEEP DIVE on '{story['headline'][:50]}...' (id: {story_id})")
+            return instruction, story_id # Return ID string here for marking later
+        else:
+            log("No more new stories with content to present.")
+            # Ensure state is clean if we stop finding new stories
+            if news_state.get('last_deep_dive_id') == 'PENDING':
+                news_state['last_deep_dive_id'] = None
+                save_news_state(news_state)
+            return None, None
 
     # No news to present
-    log("News: nothing new to present this cycle.")
+    log("News: subtle mode (cached/no new content).")
     return None, None
 
 # --- DJ COMMUNICATION ---
@@ -338,7 +368,7 @@ def trigger_dj(last_track, listener_input=None, instructions=None):
         "listener_input": listener_input,
         "instructions": instructions
     }
-    with open(REQUEST_FILE, 'w', encoding='utf-8') as f:
+    with open(str(REQUEST_FILE), 'w', encoding='utf-8') as f:
         json.dump(request_data, f, indent=2)
     log(f"Wrote DJ request. Last Track: {last_track}. Listener Input: {listener_input}. Instructions: {instructions}")
 
@@ -401,7 +431,7 @@ def generate_announcement_audio(text_content):
     txt_file = BASE_DIR / f"temp_announcement{slot}.txt"
     mp3_file = BASE_DIR / f"temp_announcement{slot}.mp3"
     
-    with open(txt_file, 'w', encoding='utf-8') as f:
+    with open(str(txt_file), 'w', encoding='utf-8') as f:
         f.write(text_content)
         
     log(f"Generating announcement audio (slot {slot}): '{text_content[:30]}...'")
@@ -426,7 +456,7 @@ def generate_announcement_audio(text_content):
     finally:
         # Clean up temporary text file
         if os.path.exists(txt_file):
-            os.remove(txt_file)
+            os.remove(str(txt_file))
 
 
 # --- MAIN LOOP ---
@@ -443,8 +473,7 @@ def main():
         if os.path.exists(SIGNAL_FILE):
             log("Signal detected. Starting DJ cycle.")
 
-            # NEW: Capture listener request ONLY when a DJ cycle is triggered
-            listener_input = read_and_clear_listener_request()
+            listener_input = read_and_clear_listener_request() # Read listener input first
             
             # 1. Determine Context (Last track) and GATHER NEWS/WEATHER
             
@@ -473,9 +502,9 @@ def main():
                     )
                     log("Weather segment: subtle mode (cached)")
 
-            # B. News Segment Check (New Logic)
+            # B. News Segment Check
             news_instruction, news_context_payload = get_news_instruction()
-            
+
             # C. Combine instructions
             combined_instructions = None
             instruction_parts = []
@@ -502,12 +531,13 @@ def main():
                 "instructions": combined_instructions
             }
             
-            # If we are doing a news deep dive, pass the ID in instructions for post-processing
+            # If we are doing a news deep dive, the payload is just the story ID string
             mark_id = None
-            if news_context_payload and isinstance(news_context_payload, dict) and news_context_payload.get('type') == 'news_deep_dive':
-                 mark_id = news_context_payload['story_id']
+            if news_context_payload and isinstance(news_context_payload, str):
+                 mark_id = news_context_payload
+                 log(f"Deep dive story queued for marking after success: {mark_id}")
                  request_data["instructions"] += f"\n__NEWS_ID_TO_MARK__: {mark_id}"
-
+            
             # --- PHASE 2: DJ EXECUTION & SONG SELECTION ---
             dj_output = None
             success = False
@@ -528,7 +558,7 @@ def main():
                         # 3. Find the actual audio file for the suggested track
                         playlist = []
                         try:
-                            with open(PLAYLIST_FILE, 'r', encoding='utf-8') as f:
+                            with open(str(PLAYLIST_FILE), 'r', encoding='utf-8') as f:
                                 playlist = [line.strip() for line in f if line.strip()]
                         except FileNotFoundError:
                             log(f"CRITICAL: Playlist file not found at {PLAYLIST_FILE}")

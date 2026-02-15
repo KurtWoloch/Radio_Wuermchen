@@ -1,46 +1,46 @@
 [
   {
-    "track": "The Killers - Mr. Brightside",
-    "last_track": "Daft Punk feat. Pharrell Williams - Get lucky.mp3"
+    "track": "Depeche Mode - Personal Jesus",
+    "last_track": "David Bowie - Changes.mp3"
+  },
+  {
+    "track": "Tears for Fears - Everybody Wants To Rule The World",
+    "last_track": "Depeche Mode - Personal Jesus.mp3"
+  },
+  {
+    "track": "Tears For Fears - Shout",
+    "last_track": "Depeche Mode - Personal Jesus.mp3"
+  },
+  {
+    "track": "Depeche Mode - Enjoy The Silence",
+    "last_track": "Tears For Fears - Shout.mp3"
   },
   {
     "track": "Massive Attack - Teardrop",
-    "last_track": "The Killers - Mr. Brightside.mp3"
+    "last_track": "Depeche Mode - Enjoy the silence.mp3"
   },
   {
-    "track": "Queen - Don't Stop Me Now",
+    "track": "Radiohead - Street Spirit (Fade Out)",
     "last_track": "Massive Attack - Teardrop.mp3"
   },
   {
-    "track": "Portishead - Glory Box",
-    "last_track": "Queen - Don't stop me now.mp3"
-  },
-  {
-    "track": "Zero 7 - Destiny",
-    "last_track": "Queen - Don't stop me now.mp3"
-  },
-  {
-    "track": "London Grammar - Strong",
-    "last_track": "Queen - Don't stop me now.mp3"
-  },
-  {
-    "track": "Arcade Fire - Wake Up",
-    "last_track": "London Grammar - Strong.mp3"
-  },
-  {
-    "track": "Arcade Fire - Rebellion (lies)",
-    "last_track": "London Grammar - Strong.mp3"
-  },
-  {
-    "track": "Massive Attack - Teardrop",
-    "last_track": "The Arcade Fire - Rebellion (lies).mp3"
-  },
-  {
-    "track": "The Cure - Pictures of You",
+    "track": "Radiohead - No surprises",
     "last_track": "Massive Attack - Teardrop.mp3"
   },
   {
-    "track": "The Cure - Boys don't cry",
-    "last_track": "Massive Attack - Teardrop.mp3"
+    "track": "Moby - Extreme Ways",
+    "last_track": "Radiohead - No surprises.mp3"
+  },
+  {
+    "track": "Moby - Lift me up",
+    "last_track": "Radiohead - No surprises.mp3"
+  },
+  {
+    "track": "Garbage - Stupid Girl",
+    "last_track": "Moby - Lift me up.mp3"
+  },
+  {
+    "track": "Garbage - Only happy when it rains",
+    "last_track": "Moby - Lift me up.mp3"
   }
 ]
