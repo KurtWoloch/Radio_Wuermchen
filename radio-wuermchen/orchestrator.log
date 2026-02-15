@@ -7544,3 +7544,6 @@ You may weave weather info naturally into your announcement if it fits, but don'
 [2026-02-15 14:12:42] DJ Brain finished. STDOUT: Calling gemini-2.5-flash-preview-09-2025...
 DJ suggests: Massive Attack - Teardrop
 [2026-02-15 14:12:42] SUCCESS: Found track: Massive Attack - Teardrop
+[2026-02-15 14:12:55] Appended to queue: temp_announcement3.mp3
+[2026-02-15 14:12:55] Appended to queue: Massive Attack - Teardrop.mp3
+[2026-02-15 14:12:55] Signal file deleted.
