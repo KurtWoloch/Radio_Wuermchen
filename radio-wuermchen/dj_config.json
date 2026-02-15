@@ -1,7 +1,7 @@
 {
     "provider": "google",
     "model": "gemini-2.5-flash-preview-09-2025",
-    "api_key": "YOUR_GOOGLE_API_KEY_HERE",
+    "api_key": "AIzaSyBs_zWOBIomWdwApHRNrXF0phRhHZzmkKI",
     "dj_name": "DJ Würmchen",
     "station_name": "Radio Würmchen",
     "language": "English"

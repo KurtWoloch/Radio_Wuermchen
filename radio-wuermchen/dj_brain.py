@@ -20,6 +20,7 @@ import google.genai as genai
 from google import genai as genai_client
 import requests
 import time
+from datetime import datetime
 
 # --- CONFIGURATION ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -99,7 +100,9 @@ def build_system_prompt(config):
         "history of the last 5 tracks. For example, alternate between Rock, Pop, and Electronic/Trip-Hop."
     )
     
-    return f"""You are {dj_name}, the DJ of {station_name}. Your responses MUST be 100% valid JSON.
+    now = datetime.now().strftime("%A, %H:%M")
+    
+    return f"""You are {dj_name}, the DJ of {station_name}. The current time is {now}. Your responses MUST be 100% valid JSON.
 {dj_name}'s Style: Natural, energetic, and concise. Avoid technobabble and hyperbole.
 {diversity_mandate}
 Output Format: Provide a JSON object with EXACTLY two keys: "track" and "announcement".

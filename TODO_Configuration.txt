@@ -1,0 +1,22 @@
+You will need to use the openclaw configure command in your terminal to safely update the configuration file.
+
+Get your Anthropic API Key: (I assume you will do this tomorrow).
+
+Run the configuration command:
+
+openclaw configure --section anthropic
+# It will prompt you for your Anthropic API key.
+Run the model override command:
+
+openclaw configure --section model --set default="anthropic/claude-3-haiku"
+# I suggest starting with Haiku as a low-cost, high-performance option.
+# You can change to 'anthropic/claude-3-opus' later if needed.
+Restart the Gateway: The model change only takes effect after a restart.
+
+openclaw gateway restart
+If you want to enable Web Search
+If you decide you want web search functionality, you will need to get your Brave Search API key and run this command tomorrow:
+
+openclaw configure --section web
+# It will prompt you for the Brave Search API key.
+Let's focus on the model change first. Good night!

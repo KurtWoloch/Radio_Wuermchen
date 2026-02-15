@@ -1,0 +1,116 @@
+OK. The first segment transition failed... it played until the end of the first song and then quit. The player page now shows "Error
+Response
+Message
+The file you requested could not be found
+
+Error code: 18c32b43-0d8e-469d-b434-10133cdd06ad", and the mountpoint has gone. The song that actually played was "Götterfunken" by Tanzwut. After that, the following events got logged: {"time": "2026-02-10 12:03:30.526", "type": "script_start", "status": "initialized"}
+{"time": "2026-02-10 12:03:30.543", "type": "request_start", "mode": "select_track", "last_track": "None"}
+{"time": "2026-02-10 12:03:39.106", "type": "response_received", "mode": "select_track", "duration": 8.56303882598877}
+{"time": "2026-02-10 12:03:39.403", "type": "track_match", "status": "not_found", "suggestion": "A_Synthesized_Dream.mp3"}
+{"time": "2026-02-10 12:03:39.403", "type": "wishlist", "suggestion": "A_Synthesized_Dream.mp3", "status": "added"}
+{"time": "2026-02-10 12:03:39.403", "type": "request_start", "mode": "suggest_options", "options": [["Billie Eilish", "NDA"], ["Leonard Cohen", "Take this waltz"], ["Queen", "Heaven for everyone"], ["Alphaville", "A victory of love"], ["The Pussycat Dolls", "I don't need a man"]]}
+{"time": "2026-02-10 12:03:49.448", "type": "timeout", "mode": "suggest_options"}
+{"time": "2026-02-10 12:03:49.448", "type": "request_start", "mode": "generate_announcement", "next_track": "Tanzwut - G\u00f6tterfunken"}
+{"time": "2026-02-10 12:04:08.473", "type": "response_received", "mode": "generate_announcement", "duration": 19.024388551712036}
+{"time": "2026-02-10 12:04:08.473", "type": "announcement_status", "status": "found", "file": "C:\\Users\\kurt_\\.openclaw\\workspace\\radio-wuermchen\\cache\\announcement_1770721429.mp3"}
+{"time": "2026-02-10 12:04:08.473", "type": "stream_start", "files": ["announcement_1770721429.mp3", "Tanzwut - G\u00f6tterfunken.mp3"]}
+{"time": "2026-02-10 12:10:02.621", "type": "stream_end", "status": "success", "track_played": "E:/Daten/Radio W\u00fcrmchen/Musik/Tanzwut - G\u00f6tterfunken.mp3"}
+{"time": "2026-02-10 12:10:02.621", "type": "request_start", "mode": "select_track", "last_track": "Tanzwut - G\u00f6tterfunken"}
+{"time": "2026-02-10 12:10:08.141", "type": "response_received", "mode": "select_track", "duration": 5.520174503326416}
+{"time": "2026-02-10 12:10:08.420", "type": "track_match", "status": "not_found", "suggestion": "ASP - Der Takt der Zeit"}
+{"time": "2026-02-10 12:10:08.420", "type": "wishlist", "suggestion": "ASP - Der Takt der Zeit", "status": "added"}
+{"time": "2026-02-10 12:10:08.420", "type": "request_start", "mode": "suggest_options", "options": [["Familie Woloch", "Anfang der Vincent-Reportage (Roboter dz)"], ["Shania Twain", "Forever And For Always"], ["The Three Tenors", "O sole mio (in concert)"], ["Frankie Goes To Hollywood", "Two tribes (Cowboys and Indians)"], ["Bob marley and the wailers", "Sunday morning"]]}
+{"time": "2026-02-10 12:10:18.435", "type": "timeout", "mode": "suggest_options"}
+{"time": "2026-02-10 12:10:18.435", "type": "request_start", "mode": "generate_announcement", "next_track": "Stefanie Werger - Blumen im Sand"}
+{"time": "2026-02-10 12:10:40.951", "type": "response_received", "mode": "generate_announcement", "duration": 22.5159170627594}
+{"time": "2026-02-10 12:10:40.951", "type": "announcement_status", "status": "found", "file": "C:\\Users\\kurt_\\.openclaw\\workspace\\radio-wuermchen\\cache\\1770721818.mp3"}
+{"time": "2026-02-10 12:10:40.951", "type": "stream_start", "files": ["1770721818.mp3", "Stefanie Werger - Blumen im Sand.mp3"]}
+{"time": "2026-02-10 12:14:20.075", "type": "stream_end", "status": "success", "track_played": "E:/Daten/Radio W\u00fcrmchen/Musik/Stefanie Werger - Blumen im Sand.mp3"}
+{"time": "2026-02-10 12:14:20.075", "type": "request_start", "mode": "select_track", "last_track": "Stefanie Werger - Blumen im Sand"}
+{"time": "2026-02-10 12:14:27.590", "type": "response_received", "mode": "select_track", "duration": 7.5147385597229}
+{"time": "2026-02-10 12:14:27.670", "type": "track_match", "status": "found_exact", "suggestion": "Falco - Jeanny", "track_path": "E:/Daten/Radio W\u00fcrmchen/Musik/Falco - Jeanny.mp3"}
+{"time": "2026-02-10 12:14:27.670", "type": "track_selection", "status": "direct_success", "track_path": "E:/Daten/Radio W\u00fcrmchen/Musik/Falco - Jeanny.mp3"}
+{"time": "2026-02-10 12:14:27.670", "type": "request_start", "mode": "generate_announcement", "next_track": "Falco - Jeanny"}
+{"time": "2026-02-10 12:16:27.860", "type": "announcement_status", "status": "failed", "error": "missing_file"}
+{"time": "2026-02-10 12:16:27.860", "type": "stream_start", "files": ["Falco - Jeanny.mp3"]}
+{"time": "2026-02-10 12:22:25.048", "type": "stream_end", "status": "success", "track_played": "E:/Daten/Radio W\u00fcrmchen/Musik/Falco - Jeanny.mp3"}
+{"time": "2026-02-10 12:22:25.048", "type": "request_start", "mode": "select_track", "last_track": "Falco - Jeanny"}
+{"time": "2026-02-10 12:22:35.058", "type": "timeout", "mode": "select_track"}
+{"time": "2026-02-10 12:22:35.058", "type": "request_start", "mode": "generate_announcement", "next_track": "Styx - Show me the way"}
+{"time": "2026-02-10 12:22:45.065", "type": "response_received", "mode": "generate_announcement", "duration": 10.006285667419434}
+{"time": "2026-02-10 12:22:45.065", "type": "announcement_status", "status": "found", "file": "C:\\Users\\kurt_\\AppData\\Local\\Temp\\tts-fw2IfQ\\voice-1770722560175.mp3"}
+{"time": "2026-02-10 12:22:45.065", "type": "stream_start", "files": ["voice-1770722560175.mp3", "Styx - Show me the way.mp3"]}
+{"time": "2026-02-10 12:27:32.321", "type": "stream_end", "status": "success", "track_played": "E:/Daten/Radio W\u00fcrmchen/Musik/Styx - Show me the way.mp3"}
+{"time": "2026-02-10 12:27:32.321", "type": "request_start", "mode": "select_track", "last_track": "Styx - Show me the way"}
+{"time": "2026-02-10 12:27:42.341", "type": "timeout", "mode": "select_track"}
+{"time": "2026-02-10 12:27:42.341", "type": "request_start", "mode": "generate_announcement", "next_track": "Phil Campbell - Take this longing"}
+{"time": "2026-02-10 12:29:42.550", "type": "announcement_status", "status": "failed", "error": "missing_file"}
+{"time": "2026-02-10 12:29:42.550", "type": "stream_start", "files": ["Phil Campbell - Take this longing.mp3"]}
+{"time": "2026-02-10 12:32:34.819", "type": "stream_end", "status": "success", "track_played": "E:/Daten/Radio W\u00fcrmchen/Musik/Phil Campbell - Take this longing.mp3"}
+{"time": "2026-02-10 12:32:34.835", "type": "request_start", "mode": "select_track", "last_track": "Phil Campbell - Take this longing"}
+{"time": "2026-02-10 12:32:44.893", "type": "error", "error": "missing_suggested_track", "mode": "select_track"}
+{"time": "2026-02-10 12:32:44.893", "type": "request_start", "mode": "generate_announcement", "next_track": "Mark Forster - Flash mich"}. Seems like streaming works now, but the mountpoint still gets lost. I also get some LLM error messages in the openclaw-gateway window: 11:33:56 [diagnostic] lane task error: lane=cron durationMs=16180 error="FailoverError: LLM error: {
+  "error": {
+    "code": 429,
+    "message": "Resource has been exhausted (e.g. check quota).",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+"
+11:33:56 [diagnostic] lane task error: lane=session:agent:main:cron:33583ebf-f7e2-41f2-8ca6-c23fef3cbb72 durationMs=16187 error="FailoverError: LLM error: {
+  "error": {
+    "code": 429,
+    "message": "Resource has been exhausted (e.g. check quota).",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+"
+11:33:56 [diagnostic] lane task error: lane=cron durationMs=4 error="FailoverError: No available auth profile for google (all in cooldown or unavailable)."
+11:33:56 [diagnostic] lane task error: lane=session:agent:main:cron:33583ebf-f7e2-41f2-8ca6-c23fef3cbb72 durationMs=12 error="FailoverError: No available auth profile for google (all in cooldown or unavailable)."
+11:35:17 [diagnostic] lane task error: lane=cron durationMs=16699 error="FailoverError: LLM error: {
+  "error": {
+    "code": 429,
+    "message": "Resource has been exhausted (e.g. check quota).",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+"
+11:35:17 [diagnostic] lane task error: lane=session:agent:main:cron:33583ebf-f7e2-41f2-8ca6-c23fef3cbb72 durationMs=16707 error="FailoverError: LLM error: {
+  "error": {
+    "code": 429,
+    "message": "Resource has been exhausted (e.g. check quota).",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+"
+11:35:17 [diagnostic] lane task error: lane=cron durationMs=2 error="FailoverError: No available auth profile for google (all in cooldown or unavailable)."
+11:35:17 [diagnostic] lane task error: lane=session:agent:main:cron:33583ebf-f7e2-41f2-8ca6-c23fef3cbb72 durationMs=7 error="FailoverError: No available auth profile for google (all in cooldown or unavailable)."
+11:40:37 [diagnostic] lane task error: lane=cron durationMs=16820 error="FailoverError: LLM error: {
+  "error": {
+    "code": 429,
+    "message": "Resource has been exhausted (e.g. check quota).",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+"
+11:40:37 [diagnostic] lane task error: lane=session:agent:main:cron:33583ebf-f7e2-41f2-8ca6-c23fef3cbb72 durationMs=16827 error="FailoverError: LLM error: {
+  "error": {
+    "code": 429,
+    "message": "Resource has been exhausted (e.g. check quota).",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+"
+11:40:37 [diagnostic] lane task error: lane=cron durationMs=3 error="FailoverError: No available auth profile for google (all in cooldown or unavailable)."
+11:40:37 [diagnostic] lane task error: lane=session:agent:main:cron:33583ebf-f7e2-41f2-8ca6-c23fef3cbb72 durationMs=11 error="FailoverError: No available auth profile for google (all in cooldown or unavailable)."
+As I can see on the Google page, I have a rate limit of 1 million TPM (tokens per minute) which has been overrun with an actual use of 1.25 million TPM.
+Before that, the following happened:
+11:22:46 [tools] exec failed: Remove-Item : Der Parameter kann nicht verarbeitet werden, da der Parametername "f" nicht eindeutig ist. M�gliche
+�bereinstimmungen:  -Filter -Force.
+In Zeile:1 Zeichen:4
++ rm -f radio-wuermchen/dj_request.json
++    ~~
+    + CategoryInfo          : InvalidArgument: (:) [Remove-Item], ParameterBindingException
+    + FullyQualifiedErrorId : AmbiguousParameter,Microsoft.PowerShell.Commands.RemoveItemCommand
+
+Command exited with code 1

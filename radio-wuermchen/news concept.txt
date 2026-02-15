@@ -1,0 +1,42 @@
+OK. Now here comes something a bit more complex... the news.
+For the news, I'd like to scrape the following site: https://www.orf.at.
+I think this can be cached for 60 minutes since the news don't change that fast.
+But this site is more complex, so I'd suggest to hand this, or parts of it, off to an own Python script, the news manager.
+First there is an element "<div id="ticker-breaking-special">", which sometimes contains breaking news, which should be prioritized if they are there, but they are only there on special occasions.
+That element ends on "</div>".
+Then there are several elements which are the top news that should be prioritized. However, on the ORF site, those are presented as click-through the pictures.
+So the structure of each one is the following:
+There is a tag starting on "<div class="oon-grid-texts-headline", then another one also starting on "<div class="oon-grid-texts-headline".
+This second tag is followed by "<h1>", then the actual headline is presented, ending on "</h1>".
+The next tag "<a href="" is followed by a URL of the actual storry, ending on "">". This is the click-through URL of the picture.
+Now the headlines themselves are sometimes puzzling and unclear, such as "„Unmögliches geschafft“: Antipopulist bringt Bolivien zurück auf Kurs".
+But there are several elements like this, and their number may vary since the pictures are sometimes of various size.
+If, instead of another tag like this, the text "close overflow wrapper" is found, that section is over.
+Next is the section of minor stories. Each of those start with the tag "<article class="ticker-story"".
+Under that, immediately before the headline of that story, is a "<a href" tag leading to the story page, but we don't need the URL here.
+After that tag closes with a ">", there is the headline, followed by an </a> tag.
+The actual story then follows preceded by a tag "<div class="story-story">" and ends on "</div>".
+However, the story may be interrupted by a "<section class="stripe  ">" tag ending on a "</section>" tag.
+So everything appearing in that "section" tag should be ignored, including "</div>" elements which in this case don't end the actual story, but something inside the "section" element.
+The story is only over on the first "</div>" tag outside the "section" element. The story also may be interrupted by a "<figure" tag for which the same applies as for "section" tags...
+ignore everything until the "</figure>" tag appears.
+
+Between the tag "<article class="ticker-story">", other stories may appear bearing a "<article class="ticker-story ticker-story-quicklink"" tag.
+These are different in that they have a "ticker-story-headline" tag, but no "story-story" tag, so they only have headlines. They do have a link to a story page,
+but since those are minor stories, their full story can be ignored.
+
+That's the way the main page should be scraped. I'd propose to keep all the stories in a JSON file and keep them cashed.
+Every 60 minutes, the main page should be read again, and the freshly scraped stories should be compared to the old ones, so that we see which stories have been newly added.
+The stories don't have to appear in the same order than in the last cached file, and that's OK... there may be errors.
+
+Now, as for the links of the top stories, they should be followed to read the story behind it. However they should also be cached, so that if the same links appear on newly scraping the main page, those sub-stories don't have to be read again.
+Those sub-story pages have links such as: https://religion.orf.at/stories/3233794, and they are structured a bit differently.
+They actually contain a JSON starting from "<script type="application/ld+json">", with the element "headline" giving the headline and the element "description" giving the actual story.
+Below that, starting at "<div class="story-story">", there is the main story, but on those pages it's way too long to be presented on the radio, at least on my station,
+so the shorter version found under "description" should do, and everything after it on that page can be ignored.
+
+The workflow, as far as the radio broadcast is concerned, should be so that at the top of the hour, all the headlines of new stories are presented, then in subsequent DJ breaks, one of the new stories should be presented in more depth, but only those which actually have a story behind them and not only the headline. For this the DJ is given the text of the story, and then the story is being "checked off" in some way so that it doesn't get presented again, but it may reappear as a headline as long as it's one of the top stories.
+
+I know that's pretty complicated, and that's why I think it makes sense to offload much of this to another Python script, the "News manager". I hope you can make something out of this.
+
+

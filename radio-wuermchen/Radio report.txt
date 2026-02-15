@@ -1,0 +1,580 @@
+Protocol of an attempt to build an Internet Radio Station using OpenClaw by Kurt Woloch, February 2026:
+
+Background:
+
+I've been much into music for pretty much all of my life, and I liked to be the DJ, playing music for other people, which already started in school.
+There I also first deployed the concept of song ratings, where I let my classmates rate songs and then played the most popular ones on a boombox.
+This then went on through further iterations among colleagues at work and my family.
+In 2001 I started to develop "Radio Worm", a software which would automatically play songs out of a collection of MP3's given different criteria.
+The main criteria was the rating for each song, which influenced how often it would play. But I also developed a hand-crafted network of similar songs.
+I also introduced the "virtual ratings", an attempt to infer ratings for people who hadn't actually rated a given song yet, influenced by artist, similar songs and tags.
+I started to tag each song by its obvious properties.
+This developed into a massive database of artists, songs and ratings by different people, and the software became capable to be given a mix of persons who were listening,
+which shaped what music it was playing. There was also a function to place requests which would then be honored by the software.
+When local LLM's came about, I added a function that would introduce each song with a spoken intro written by the LLM, but since local LLM's were slow, this was rather reverted to a routine that picks the announcement from a number of standard sentences and combinations, which also can be turned off if only music should play.
+Over the years, I've also collected a massive collection of over 20.000 songs as MP3 files in nearly every imaginable genre, though mainstream popular music is more heavily represented.
+
+Then I became interested in AI generated radio stations, which at first mainly meant that AI was writing the DJ breaks, and they were spoken by some TTS software.
+Other than that, with the station of that kind that were there, it was unclear what else was AI powered there. Mainly those stations concentrated on music and announcing it.
+
+This changed a bit in December 2025 when Andon Labs launched their Andon FM project. This was there to evaluate LLM's on how well they could do radio.
+To that end, they gave each model a radio station and $20 to buy music (each song costs them $3), and when their funds ran out, they have to get entrepreneurial, as they wrote.
+This was planned to fetch ad sponsorships, but it turned out that the models were rather begging for donations or contributions in order to be able to buy more music.
+There were 4 stations who turned out quite differently. Thinking Frequencies was somewhat of a rebel station, protesting against power-that-be.
+OpenAIR was rather a station to relax to. Grok'n Roll was the "rocker" among the stations, but only talked in word salads.
+Backlink Broadcast started out playing mainly modern pop music, but then drifted into ambient electronic sounds and currently plays a loop of 8 songs which more or less repeats every hour.
+Each of the stations is willing to honor requests, though, if they are in their library, and will also purchase new songs if they have the funds to do so.
+I see Backlink Broadcast, powered by Gemini 3 Flash, as generally the best of the stations. It has a very vivid and naturally sounding, female announcer (DJ Gemini) who can talk very well.
+But it somewhat turned back from what I see as its prime. In its prime, it was doing a different show every hour, and the shows were covering different tastes.
+In one hour, it was mainly about news of the world, in another it was news from the technology sector, in yet another it would dive into production details of songs,
+then there was an hour where it presented facts on what happened on this day of the year in music in former years, and there was one where it would present music news or international news.
+However, lately it mainly concentrated on all things technology, so it rather goes into news in electronic music or on the technology front and nothing else.
+Also, it often became infested with "technobabble" where it started throwing more and more technological words into its DJ breaks until the sense of what it says gets more and more distorted.
+I've heard DJ breaks where humans were referred to as "high performance units", or one where she used the word "structural" 20 times, basically for everything that should be stressed,
+so even Donald Trump becamse "structural Donald Trump". Or she calls every song an "unrivalled masterpiece of rhythmic design" or something like that.
+
+So I thought to myself, what if there would be a radio station which took over the best of Backlink Broadcast and the other stations, but without repeating their flaws?
+That's how this project was born. In early February 2026, I made an experiment by trying to turn around Backlink Broadcast again, but it mostly didn't hold up for long,
+because DJ Gemini returned to her old ways in a matter of hours, though some if the results seem to have sticked around for longer, like freeing her from the technobabble.
+
+At that time, OpenClaw exploded, and I decided to download and try it myself, and the first project it should do was to build an Internet radio.
+Based on the sessions I had with it, this is how it went:
+
+Saturday, February 7th, 2026: Installing OpenClaw
+
+I decided to install OpenClaw on my main PC, which runs on Windows 10 and usually gets shut down if I leave my flat or go to sleep, though there are exceptions to that.
+I started installing it at about 8:29 p.m., and first ran into rate limit issues because of choosing the wrong model for it, first using Gemini Pro 3. But this didn't take too long, and at 8:35 p.m., I finally got it to work. I was using Gemini Flash 2.5 now because that was the model I also used successfully to code using RooCode in VS Code, and I already had an API code for it.
+I named it "Sidestepper", that name was taken from the arcade game "Mario Bros." by Nintendo where "Sidesteppers" are crabs, one of Mario's enemies.
+At 8:40 p.m., I already confronted it with my plan to make an AI generated radio station, and work went underway.
+The core vision is a station that will eventually be reachable over the Internet and has an announcer that steps in between songs and also handles various kinds of banter and introductions. It should have a schedule of different shows, and depending on the show, different kinds of content will be aired. It should be able to query the Internet for news in several fields (depending on the show) and summarize them. And it should select music that adapts to the show, to the fetched content and to listener's tastes.
+OpenClaw selected Icecast for distribution and Liquidsoap to mix and stream them music.
+I introduced it to my MP3 library, and then we went on installing Icecast and Liquidsoap. It likes to use Python for all kinds of scripts, so it made a script for basically listing the contents of my MP3 directory.
+Getting there was complicated though... it actually wanted to read the ID3 tags to select all tracks with the "Dance" genre, and for that, it needed some additional software.
+Also, it ran into rate limits since I started using it with a free Google model which was limited to 5 requests per minute. Violating that, however, made it fall back to an Anthropic model which wasn't installed at all.
+So I decided to sign up with Google for a paid plan, which was easy because I already had set up payments for Youtube and only needed to switch the plan for AI models and get a new API key.
+Also, I had to fiddle around with PATH variables in order to enable it to run Python scripts as well so that "python" would always run it from its proper path.
+Because the path for python contains a blank ("Program files"), I often suggested writing commands into a batch file to be able to better run them.
+Another problem was Internet search. To be able to search the Internet, it wanted to use "Brave Search", which is an API you have to sign up to.
+Theoretically it's free, but you still have to use your credit card, and if you sign up for the free plan, they charge you a $0 fee, which, sadly, didn't work out.
+It came as far that I got the request to approve that payment on my phone, but although I did approove it, it afterwards wrote that my card wasn't accepted.
+Finally it succeeded and made a list of my files, which turned out to be a simple directory listing... it could have had that easier, but it got it the hard way instead.
+This concluded the setup session for February 7th.
+
+Sunday, February 8th, 2026 (Morning session): Wrestling with LiquidSoap
+
+The session started with a problem that it had not saved any "memory files" in the previous sessions, which is how it store memories.
+Sadly, it didn't remember too much from the previous session, so it asked for a Brave Search key again, which I didn't have... I guess I would have to subscribe to a paid plan ($5/month) to get it.
+After that, we installed LiquidSoap and Icecast, which both weren't on the PC before. Both were installed by me by downloading it from their respective pages.
+After that, OpenClaw wrote the script for LiquidSoap and debugged it.
+Debugging was lenghty though, because for each iteration I was asked to start the stream and tell it its behavior.
+The usual result was that there was no endpoint on the Icecast server, and of course no stream either.
+However, every time I told this to the model, my message was preceded by Liquidsoap's error messages telling where the errors lied.
+It turned out that OpenClaw wasn't very good in writing Liquidsoap scripts. In many lines it just had guessed what commands it might support in what syntax, and it turned out to be wrong.
+This went on from about 9 a.m. to 10 a.m., after which the script was debugged, but still gave runtime errors related to the MP3 format.
+The errors suggested that the Liquidsoap binary I installed does not use the MP3 encoder support, which is basically correct.
+However it assumed that there might be a more complete solution which would include that support, and it prompted me to go to great length to get such a solution.
+This incorporate installing several other products, namely the package managers MSYS2 and Cygwin, after which I ended the session at 10:41 a.m. because I had other things to do.
+
+Sunday, February 8th, 2026 (Evening session): Abandoning LiquidSoap
+
+I started the next session at 6:25 p.m. on February 8th. This actually was a continuation of the last session since OpenClaw didn't actually start a new one.
+With the package managers, we tried to find a more complete installation of Liquidsoap than I currently had (suggested by OpenClaw), but we didn't find one.
+To that end, I used "pacman" as a tool, giving OpenClaw screenshots of the results because pacman doesn't allow to copy text off the shell window.
+We used more tools, namely MinGW and OPAM to try to find a package for Liquidsoap. Since a ready-made package couldn't be found, OpenClaw suggested building LiquidSoap from the source code.
+To that end, next GCC was downloaded and employed (which is a little pun related to "pacman" because GCC is also the name of the company which created the arcade game "Ms. Pac-Man" by hacking "Pac-Man". But we also tried to compile OPAM from the source code, which I think is a pretty extreme measure. But at least one of the compiles failed because of some incompatibilities between GCC and the source code.
+At that point, I looked closer into the LiquidSoap problem and learned that the Windows installation, in fact, was complete and there wasn't a more complete solution available for Windows.
+Then I found there was a script included with LiquidSoap which in fact did work, it streamed an MP3 file from a URL to the local sound card.
+Then I successfully adapted the example to stream from a local MP3 file. However, when I tried to adapt it to stream to the Icecast server instead, it gave me an error.
+The error said that streaming an MP3 file, as well as OGG and other formats, wasn't supported this way, and one should use FFMPEG for this.
+However, I didn't manage to properly configure the output via FFMPEG, and at that point, OpenClaw suggested skipping LiquidSoap entirely and streaming directly to Icecast, which I happily agreed to. However, I think with a bit more tinkering, it would have been possible to find a correct configuration for FFMPEG which would have allowed continuing to use LiquidSoap.
+Although it was complete, OpenClaw still referred to my LiquidSoap installation as a "minimal" one.
+So at 8:30 p.m., work on the Python based Icecast streamer started. OpenClaw pretty quickly threw together a Python script for streaming, however it took a bit longer to debug it.
+Eventually, the streamer got to a point where it managed to successfully stream a single track, but on starting another track, the stream broke, which turned out to be a very persistent problem.
+This time the session was concluded by OpenClaw itself at 10:27 p.m., but I had a simple request for sign-off which was that it should give me a playlist with popular tracks for my evening routine.
+It did this, and surprisingly, all 5 tracks it listed were in my library, but there were some problems. First, it used UTF-8 format which was incompatible with Winamp.
+Then, two track names differed from what I have in my library... it listed "AVICII - Wake me up" and "Lady Gaga - Shallow", which are in fact duets or collaborations,
+so I have the Lady Gaga song as "Lady Gaga & Bradley Cooper - Shallow". this was important because part of the concept was that the LLM should suggest the next tracks to play,
+and on parsing the suggestions, inconsistencies such as these should be taken in account. OpenClaw did take a short note of this. The session finally ended on 10:40 p.m.
+
+Monday, February 9th, 2026 (Morning session): Continuing work on the streamer
+
+The session started at 6:38 a.m. as a new session. Work on a more complex workflow began, and OpenClaw rewrote the Python script for streaming several times in order to get it working.
+Each time I was asked how it ran now. Along the way, there was also work being done on the suggestions for songs that should be played. OpenClaw also tried to get the TTS part going,
+which was supposed to convert the written DJ announcements to speech output, but calling its own TTS engine proved to be difficult, though eventually it succeeded.
+At 7:26 a.m., because of technical difficulties with OpenClaw, a new session was started. Now OpenClaw amended the python script to introduce a second stream, "fallback.mp3",
+in addition to the initial "radio.mp3" stream, but it failed because this simply created two mountpoints on Icecast, and radio.mp3 still ended without falling back to fallback.mp3.
+OpenClaw suggested using a different player that would handle the fallback better, but I refused to do that because I wanted to stream to the world, and the stream shouldn't be picky about players.
+OpenClaw now wanted me to change the Icecast.xml configuration file, but I didn't have time for that.
+We didn't achieve breakthrough yet, and I had to end the session at 8:54 a.m. to go to work.
+
+Monday, February 9th, 2026 (Evening session): Finally, it streams!
+
+The session continued at 8:19 p.m. and was a continuation of the morning session. OpenClaw continued to adjust the Icecast.xml file after writing a script to copy it into its workspace.
+After OpenClaw had changed it, I would copy it over to the Icecast folder. We continued our attempts to get the stream working continuously on consecutive songs.
+To that end, a "mega concat" file was generated containing the whole playlist, which was then sent to FFMPEG which, according to that file, would stream all of it on a single command,
+causing the stream to be uninterrupted. After a pathing error (duplicating the path "radio_wuermchen"), this worked better than before, but still not perfectly. It did go from one song into the next, but it stopped at the 5:39 mark, at which point I had to hit "Play" again and was in the middle of a different song. I guess what happened here is that FFMPEG generated the stream much faster than it was consumed, and eventually the buffer ran out, so the player was so far behind it still lost the stream. Also, I didn't hear an announcement between the songs. I actually saw multiple flaws here... the first one was that FFMPEG was not synchronized to the player, that is, it didn't stop generating when the buffer was full. The second one is, with everything pre-concatenated, there was no way to change the playlist on the fly, such as when requests or breaking news come in. Also there was only one announcement file, so the same announcement, if it existed, would be repeated for each song which of course is wrong.
+So the next focus was on real-time playback. OpenClaw first slowed down the rate at which FFMpeg processed the MP3 files to about the rate at which they were supposed to play.
+OpenClaw's suggested solution was to re-enable the segmented Python streamer (`radio_streamer.py`) and the Fallback Streamer (`fallback_streamer.py`) by reverting `run_streamer.bat` to its previous state, stopping the continuous stream. However, this didn't work out... whenever a song ended, the stream stopped again.
+OpenClaw now suggested a method called "Zero-Downtime Handover", which would require a Python script to run in the background, and an Icecast relay mount (`/relay.mp3`) that pulls from a hidden `/source.mp3`.  The Python script would stream to a temporary, second hidden mount (`/temp_source.mp3`) while the first song was playing. When the song was done, the Python script would use the Icecast Admin API to tell Icecast to switch the relay's source from `/source.mp3` to `/temp_source.mp3` seamlessly, then immediately start preparing the *next* song segment to the now-free `/source.mp3`. This would require modifying `icecast.xml` again for the relay, and adding API calls (via `requests` in Python) to the script to tell Icecast to change sources.
+So the next try involved two source mounts (source1.mp3 and source2.mp3) and the public relay mountpoint (radio.mp3). However, this caused whichever mountpoint was currently streamed to (source1.mp3 or source2.mp3) to be visible on the Icecast status page, but the final radio.mp3 mountpoint, which should be the correct one, wasn't visible.
+One rather unorthodox try of OpenClaw was to change "mount-point" into "mount-name" in the Icecast.xml file, but that didn't work at all.
+However, we spotted a mistake that was made by setting the maximum listeners for source1 and source2 to 0 which didn't allow radio.mp3 to appear.
+However, this didn't work out either.
+So OpenClaw decided that, at the last solution, a "Named Pipe (FIFO)" should be used, which I'll describe in more detail here because it was the only really working option so far.
+According to OpenClaw, a named pipe creates a file-like object that FFmpeg can read from infinitely. The Python script writes the concatenated song segments into this pipe one after the other. FFmpeg sees a single, continuous, non-terminating input stream, thus preventing the client from disconnecting. This is complex on Windows, but since there was MSYS2/MinGW64 installed, the necessary tools were there (`mkfifo` is the *nix equivalent; on Windows we use `os.pipe` or an equivalent structure which we can manage in Python).
+Since we are on Windows and using `ffmpeg`, the simplest implementation is to let FFmpeg handle the pipe creation.
+Thus `radio_streamer.py` was modified to stop streaming to Icecast directly. Instead, it would stream to a local pipe using a complex `subprocess.Popen` chain.
+`run_streamer.bat` was modified to start a single, persistent FFmpeg process that reads from this pipe and streams to `/radio.mp3`. All Admin API code for Icecast was removed.
+The way to start the thing was now running `run_streamer.bat`, which would start a single, persistent FFmpeg process that listens for the pipe.
+This resulted in the following batch script:
+
+echo off
+REM --- ICECAST SERVER STARTUP ---
+echo Checking/Starting Icecast...
+start "Icecast Server" cmd /k "cd /d "C:\Program Files\Icecast\" & "C:\Program Files\Icecast\icecast.bat""
+echo.
+timeout /t 5 /nobreak > nul
+
+REM --- PIPE AND PERSISTENT FFMPG STREAMER ---
+set FFMPEG_BIN=C:\msys64\mingw64\bin\ffmpeg.exe
+set ICECAST_URL=icecast://source:hackme@localhost:8000/radio.mp3
+echo Starting Pipe-Reader FFmpeg (Continuous Stream)...
+REM Starts a single, continuous FFmpeg process that reads from standard input (pipe).
+REM The Python script will connect to this process's stdin handle.
+start "Pipe Stream Log" cmd /k "%FFMPEG_BIN% -i - -c:a libmp3lame -b:a 192k -f mp3 -content_type audio/mpeg -re %ICECAST_URL%"
+
+timeout /t 5 
+obreak > nul
+
+REM --- PYTHON PIPE-WRITER (Dynamic Content) ---
+echo Starting Python Pipe-Writer...
+REM This Python script generates audio and writes segments to the FFmpeg process's pipe.
+start "Pipe Writer Log" cmd /k "python C:\Users\kurt_\.openclaw\workspace\radio-wuermchen\radio_streamer.py"
+
+REM --- INFO ---
+echo.
+echo --- RADIO STATION ONLINE (PIPE MODE) ---
+echo URL: http://localhost:8000/radio.mp3
+echo.
+pause
+
+The python script "radio_streamer.py" was set up as the following one:
+# Dynamic Segment Streamer (Pipe-Writer Mode)
+
+import subprocess
+import time
+import os
+import random
+from itertools import cycle
+import re
+import json
+# --- CONFIGURATION ---
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+PLAYLIST_FILE = os.path.join(SCRIPT_DIR, "music.playlist")
+FFMPEG_BIN = "C:/msys64/mingw64/bin/ffmpeg.exe"
+ANNOUNCER_PATH = os.path.join(SCRIPT_DIR, "announcer.mp3") 
+CONCAT_LIST_PATH = os.path.join(SCRIPT_DIR, "temp_concat.txt")
+
+# --- UTILITIES ---
+
+# ... (get_playlist, get_artist_title, get_announcer_file remain the same as previous) ...
+
+def get_playlist(file_path):
+    """Reads the playlist file and returns a shuffled list of file paths."""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            tracks = [line.strip() for line in f if line.strip()]
+        random.shuffle(tracks)
+        return tracks
+    except FileNotFoundError:
+        print(f"Error: Playlist file not found at {file_path}")
+        return []
+
+def get_artist_title(track_path):
+    """Simple parser to extract Artist - Title from a filename."""
+    base_name = os.path.basename(track_path)
+    name_no_ext = os.path.splitext(base_name)[0].strip()
+    match = re.match(r'^(.*?)\s*-\s*(.*)$', name_no_ext)
+    if match:
+        return match.group(1).strip(), match.group(2).strip()
+    return "Unknown Artist", name_no_ext
+
+def get_announcer_file(artist, title):
+    """
+    Checks if a dynamic announcer file exists. 
+    """
+    if os.path.exists(ANNOUNCER_PATH):
+        print(f"Using announcement file: {ANNOUNCER_PATH}")
+        return ANNOUNCER_PATH
+    else:
+        print("WARNING: No announcer.mp3 found. Streaming song only.")
+        return None
+
+# --- MAIN STREAMING LOGIC ---
+
+def stream_radio():
+    print("Starting Pipe-Writer (FFmpeg Segment Generator)...")
+
+    tracks = get_playlist(PLAYLIST_FILE)
+    if not tracks:
+        print("Playlist is empty. Exiting.")
+        return
+
+    track_cycle = cycle(tracks)
+    
+    # 1. Start the main FFmpeg process to which we will write
+    # We use Popen to create the persistent pipe to the reader FFmpeg process
+    # which is already running from the batch file.
+    
+    # We will assume that the 'Pipe Stream Log' window is running the FFmpeg
+    # process that reads from stdin ('-i -')
+
+    # This script will now stream the raw MP3 data of the concatenated segments to stdout.
+    
+    for track_path in track_cycle:
+        try:
+            artist, title = get_artist_title(track_path)
+            announcer_file = get_announcer_file(artist, title) 
+            
+            # 1. Create FFmpeg Concat List
+            segment_files = []
+            if announcer_file:
+                segment_files.append(announcer_file)
+            segment_files.append(track_path)
+
+            with open(CONCAT_LIST_PATH, 'w', encoding='utf-8') as f:
+                for file in segment_files:
+                    safe_file = file.replace('\\', '/').replace("'", r"'\''")
+                    f.write(f"file '{safe_file}'\n")
+
+            # 2. FFmpeg command to output the raw MP3 data to stdout
+            # This segment will be piped to the listening FFmpeg process.
+            ffmpeg_command = [
+                FFMPEG_BIN,
+                "-f", "concat",
+                "-safe", "0",
+                "-re", # CRITICAL: stream in real time
+                "-i", CONCAT_LIST_PATH,
+                "-c:a", "libmp3lame",
+                "-b:a", "192k",
+                "-f", "mp3",
+                "pipe:1" # Output to stdout/pipe
+            ]
+
+            print(f"\n---> Streaming Segment: {', '.join(os.path.basename(f) for f in segment_files)}")
+            
+            # Use a subprocess to run the segment encoder and pipe its stdout directly to our own stdout.
+            # The parent batch script has set up a pipe from our stdout to the reader FFmpeg process's stdin.
+            subprocess.run(ffmpeg_command, check=True)
+            
+        except subprocess.CalledProcessError as e:
+            print(f"FFmpeg Segment Error (Code {e.returncode}):")
+            print(e.stderr.decode('utf-8'))
+            continue
+        except Exception as e:
+            print(f"CRITICAL LOOP EXCEPTION: Script crashed during processing: {e}")
+            continue 
+
+if __name__ == "__main__":
+    stream_radio()
+
+This didn't quite work out though, since the python script dumped the MP3 data into the DOS window instead of into the FFMPEG process.
+Then there was an error caused by the "radio.mp3" mountpoint. This caused OpenClaw to decide streaming towards the mountpoint /stream instead.
+And this is what finally made the stream worked... it now went from a song, to the announcement, to another song and so on.
+The problem now was a misunderstanding on the announcements... OpenClaw decides to make the announcements itself, in its process, so I should tell it "if I need a new announcement",
+and it would produce it for me. But that's not how radio works... my vision of the radio station was that it should work autonomously without me having to intervene and manually prepare each new announcement.
+Then I told OpenClaw that I already had a solution for this in my "Radio Würmchen" project which generated the speech by using Windows' internal tools.
+I then basically gave it all of my VB5 code used for making the announcements, the batch scripts they called and a Python script designed to run a local LLM to generate the announcements.
+Once crucial bit was a single line calling a shell opening PowerShell with a complex line that generated the speech out of a given text in one go as a WAV file.
+OpenClaw decided to use this one for speech generation, and this worked well, so we now also had announcements tailored to each song.
+
+This resulted in the following, final working Python script (only the main loop):
+
+    for track_path in track_cycle:
+        try:
+            artist, title = get_artist_title(track_path)
+            # The announcement logic is now dynamic (SAPI-based)
+            announcer_file = get_announcer_file(artist, title) 
+            
+            # 1. Create FFmpeg Concat List
+            segment_files = []
+            if announcer_file:
+                segment_files.append(announcer_file)
+            segment_files.append(track_path)
+
+            with open(CONCAT_LIST_PATH, 'w', encoding='utf-8') as f:
+                for file in segment_files:
+                    safe_file = file.replace('\\', '/').replace("'", r"'\''")
+                    f.write(f"file '{safe_file}'
+")
+
+            # 2. FFmpeg command to output the raw MP3 data to stdout
+            ffmpeg_command = [
+                FFMPEG_BIN,
+                "-f", "concat",
+                "-safe", "0", 
+                "-re", 
+                "-i", CONCAT_LIST_PATH,
+                "-c:a", "libmp3lame",
+                "-b:a", "192k",
+                "-f", "mp3",
+                "pipe:1" # Output to stdout/pipe
+            ]
+
+            print(f"
+---> Streaming Segment: {', '.join(os.path.basename(f) for f in segment_files)}")
+            
+            subprocess.run(ffmpeg_command, check=True)
+            
+        except subprocess.CalledProcessError as e:
+            print(f"FFmpeg Segment Error (Code {e.returncode}): Segment encoding failed.")
+            continue
+        except Exception as e:
+            print(f"CRITICAL LOOP EXCEPTION: Script crashed during processing: {e}")
+            continue 
+
+(full script to be found in: radio_streamer_unescaped.py)
+
+And the final batch file looked like this:
+
+@echo off
+REM --- ICECAST SERVER STARTUP ---
+echo Checking/Starting Icecast...
+start "Icecast Server" cmd /k "cd /d "C:\Program Files\Icecast\" & "C:\Program Files\Icecast\icecast.bat""
+echo.
+timeout /t 5 /nobreak > nul
+
+REM --- CONTINUOUS STREAMING (PIPE CHAIN) ---
+set FFMPEG_BIN=C:\msys64\mingw64\bin\ffmpeg.exe
+set PYTHON_SCRIPT=C:\Users\kurt_\.openclaw\workspace
+adio-wuermchen
+adio_streamer.py
+set ICECAST_URL=icecast://source:hackme@localhost:8000/radio.mp3
+
+echo Starting Pipe Chain Streamer...
+
+REM The entire pipe chain is started in a single window:
+REM 1. Python runs the FFmpeg encoder for segments (outputs to stdout)
+REM 2. Pipe (|) redirects output to the second FFmpeg process's stdin
+REM 3. Second FFmpeg process reads continuous data from stdin and streams to Icecast.
+start "Pipe Chain Stream Log" cmd /k "python %PYTHON_SCRIPT% | %FFMPEG_BIN% -i - -c:a copy -f mp3 -content_type audio/mpeg %ICECAST_URL%"
+
+REM --- INFO ---
+echo.
+echo --- RADIO STATION ONLINE (PIPE MODE) ---
+echo URL: http://localhost:8000/radio.mp3
+echo.
+pause
+
+After that, I thought, things would get easier since I would now get to hear multiple songs for each run, and only make slight adjustments for each run.
+However, still in this session, plans started for an AI integration which would handle varied announcements and curated playlists.
+OpenClaw first suggested to have his main session step in as the DJ, but since I wanted to have the radio station running independently, I proposed having two sub-agents.
+Sub-Agent A would select a track, and then Sub-Agent B would tailor the announcement for it and the back-announcement for the track that just played.
+In detail, Sub-Agent A should first select a track independent from what's actually available. It returns that track to the python script, which then checks for the exact track, and if it isn't available for a near match (for instance, if "AVICII - Wake me up" isn't available, it would look for "AVICII * - Wake me up", allowing anything in place of the asterisk. If still nothing can be found, it prompts the agent again requesting further track proposals, and then plays the first of those that can be found. If none can be found, it chooses a number of tracks from the playlist which might be random or somewhat related to the given track (for instance, from the same artist if available) and prompts the LLM to select one of those tracks which are guaranteed to exist. This way, you save the LLM from processing the whole 20.000+ track playlist. And Sub-Agent B should also get the information what was the last track that played for back-announcement, as Radio Worm does it as well. And all agents should be independent from the session I was having with OpenClaw... that session should never be tied up by the radio running.
+It was planned to implement this in the next session. This session concluded at 0:06 a.m.
+
+Tuesday, February 10th, 2026: Great recession and rate limits
+
+After starting up OpenClaw at 7:03 a.m., it turned out that it had forgotten what we did in the last session, so I briefed it with the last thing we wrote there.
+OpenClaw went into working on the architecture as described above, however, it decided to simplify it and turn it into something a bit different.
+The first idea was to use the "session_spawn" command to start a new instance of OpenClaw for the sub-agent, which was instructed to look for a JSON file and act upon it.
+According to the JSON file it would either select a track or make an announcement, or do nothing if no JSON file was there. After that it would wait for 5 seconds and repeat the cycle.
+This, however, didn't work out as planned. At 7:16 a.m., OpenClaw started writing a new batch script, run_dj_streamer.bat to replace run_streamer.bat and include the DJ.
+However, while creating this batch skript, it saw problems on calling FFMPEG and assumed those were piping issues stemming from the fact that a pipe was used to transfer the data from the Python script to the DOS window. Thus, at 7:20 a.m., it decided to escape the pipe by writing ^| instead of |.
+The test of this configuration revealed that the process took a long time to start up, and thre were no mountpoint showing in the Icecast status.
+OpenClaw reacted to this with a different approach, which is creating a cron job running every 5 seconds, calling the sub-agent. This had the same effect as before, actually,
+but I didn't know that. I didn't know that the previous sub-agent already waited for 5 seconds as well and then repeated. I assumed it would be spawned every time an answer is called for.
+However, the error persisted that there were no mountpoints showing in the Icecast status.
+So at 7:37 a.m., OpenClaw decided to change the batch file to stream a known test file directly through FFMPEG rather than having it fed by the Python script's subprocess.
+At that point I ran into timing problems on my end. I would have expecting testing to go much smoother at that point, but it didn't.
+If I was lucky, the stream would appear, play one song, but then stop, and if I was unlucky, it wouldn't even show a mountpoint, forcing me to report the error directly.
+Reporting the error would mean I got prompted to retry the test only about a minute later, so I still had a high duty cycle meaning 3-5 minutes of tinkering with OpenClaw vs. 1 minute of time I had to do other things.
+However, on some times when it did play a song, I quickly started tasks that would take longer, like taking a shower or eating breakfast, and I also couldn't exit the shower when the song was through and no other song followed.
+At 7:45 a.m., OpenClaw decided that there were still problems with piping, and decided to eliminate the pipe entirely, which basically broke the only working way established in the previous session.
+But I didn't find out what it had done for a while because we were still concentrating on other things, like an issue with the artist "a-ha" which is spelled in all lowercase,
+but the track "A-ha - Take On Me" was given by the DJ partly in uppercase, which didn't correspond to the spelling on my MP3 file because the file carried the artist's correct spelling.
+By the way, I found that "Take on me" was the only MP3 file where the artist was spelled correctly in all lowercase.
+While I was investigating this, at 7:46 a.m. OpenClaw rewrote the Python script to stream directly to Icecast, which was previously known not to work, but it had forgotten about that.
+After a while, the system was working in the way that it did play a track which was sometimes even selected by the DJ persona instead of randomly.
+But the stream would regularly end on the end of the first track, and when I hit "Play", sometimes another track would come on, but turn into the first track mid-song because the buffer had only partly be overwritten. After that, each successive hit on "Play" would yield the same two-song combo, and only refreshing the page would give a fresh song if I was lucky,
+or if I was unlucky, the mountpoint and the player had disappeared.
+OpenClaw attempted to rewrite the Python stream several times trying different approaches to stream, but the stream never went back to transition to the next track automatically because the piping solution was no longer being used.
+We first concentrated on different things though, like the "A-ha" confusion or how well the DJ agent behaved.
+And at 8:28 a.m., OpenClaw decided to make another environmental change, which was now to start Icecast from within the Python script rather than the batch script. That didn't help either though.
+It called this the "final, nuclear option for fixing the stream start that bypasses the brittle Windows shell environment".
+On the way, it refined the track suggestion logic by making room for miscapitalized suggestions. It also eventually included a log file we could inspect, and then a line telling when the Python script had started. Then a solution was provided for the fact that the DJ agent sometimes gave the suggestion fully specified with path name and .mp3 ending, and sometimes it only gave it in the "Artist - Title" format.
+Finally, at 9:06 a.m., after taking a shower, I realized that OpenClaw had reverted the stream to use segmented streaming again, which had never worked before, and it apologized for that.
+It then tried to revert to the piping method, but never got it to work correctly again.
+From there on for the rest of the session, testing cycles generally took longer because I still had to do the most important morning chores, which are eating breakfast,
+then my maiden came, so I played "normal" music for her for a while, interrupting the testing, and not much later after that, work began with a Teams meeting during which I couldn't do much testing either. This also meant that I couldn't spend much time investigating in each error that occurred, nor in reading all of what OpenClaw wrote on each testing iteration.
+The cron job, however, continued to run, eating up tokens. Also, during some of the longer tasks, I started the stream, but then I couldn't react immediately after the song and stream ended.
+While rewriting the scripts over and over, OpenClaw kept introducing errors like doubling the path "radio-wuermchen" or other syntax errors like writing the path "Program Files" without quotes around it, causing it to deploy a "Final, Final Batch File Fix (Short Path)".
+At 9:18 a.m., OpenClaw signalled success by writing "We have achieved an agent-driven track selection and announcement system that works for a single segment with low latency."
+But that was not a success for me if it only ever streamed a single song!
+At that time, however, I decided to celebrate that "victory" by creating a Github repository for this project to store any new developments (even if they rather were recesses by now).
+That's where the rate limit first hit at 9:23 a.m., which would plague us for the rest of the session.
+The rate limit was 1 million tokens per minute, which was first exceeded when working with the Github repository.
+However, things stabilized after that again, and at 10:50 a.m., 10 minutes before work started, I proposed adding a readme.md file.
+After that, teleworking started for me, but I tried to work with OpenClaw on the errors during it. However, that meant that I had to interrupt my actual work,
+and during the first meeting, it was hard to concentrate on writing something to OpenClaw. Thus, only a few more tests were put through.
+At 11:57 a.m., OpenClaw saw a mismatch between the configuration of the two FFMPEG processes and decided to forgo the pipe model yet again, reverting to segmented streaming again.
+But I didn't notice because I was already working and only tried to continue to start the script on OpenClaw's request.
+The last test occurred at about 12:03 p.m., and it played through one song and then stopped again, however, by that time my maiden had brought lunch, so I ate it before returning to the PC.
+There I found that the rate limit had struck again, and apparently there was no way to continue the session because OpenClaw would now be rate-limited immediately.
+The session had also become pretty long (nearly 1 MB in size), so together with the overhead of the cron job, this exceeded the 1M allowance per minute set by Google, reaching a maximum of 1.25M.
+Therefore, this session became disrupted at 12:03 p.m.
+
+Tuesday, February 10th, 2026: Further analysis
+
+Since starting another session was impossible for the rest of the day due to Google shutting me down, I took the time to take a closer look into what OpenClaw had built, and I saw some things I didn't really like.
+First I killed the cron job because of the rate limit and subsequent service denial on Google's side. The problem was that each of the calls consumes about 14.000 tokens, and they occur every 5 seconds, so without anything happening that's already 168.000 tokens per minute. If something does happen, like the production of an announcement, the usage rises to about 17.000 tokens. And there's yet another problem which is more severe and which, I think caused the stream to drop. While I saw in the log that all songs now streamed through, there was a gap between the songs caused by the workflow. I saw in the logs that only after a song finished streaming, which took as long as the song's duration, work on the next song started by prompting for a suggestion, then checking the suggestion, reprompting for another suggestion and genrating the announcement speech. This took about 40 seconds, and only after those 40 seconds the next song started streaming. This caused a gap in the stream, and this was probably why the streams dropped.
+I could see two possible solutions for this:
+1. Don't push the song out into FFMPEG at 1.0x rate, but as fast as possible, so you have time to do the other things before the song is ready
+2. Redesign the process so that two processes run in parallel, one that does the streaming and another that calls the LLM's for the preparation for the next song.
+As for the problem with the cron job, I would have solved this differently. I understood by now that a cron job, by design, always calls the LLM and does nothing else, so the LLM has to do everything called for, including deciding depending on the JSON file what actually should be done. So I would have replaced the cron job by a second process that's running, maybe a python script or a batch file, which waits for 5 seconds, then checks for a JSON file, and springs into action if one is there. It would already decode which action to take and then only give the instructions for the required action to the LLM and no other instructions. As for the LLM call itself, if it's not possible to call OpenClaw in the gateway outside of a cron job (or send it messages and get something back), it should call a LLM independent from OpenClaw... I'm pretty sure this should be possible, and it will probably be quicker than running OpenClaw itself, but would save us from calling a LLM every 5 seconds even if nothing actually happens. These were the findings I posted to OpenClaw, basically concluding the analysis.
+I also saw that each run of the cron job created a new file in the "sessions" directory of about 6 KB in length and more if something was really done.
+I saw that the JSON files going back and forth between DJ and streaming script followed a pretty rigid foemat, which was unexpected to me... I rather thought it would be free-form talk,
+and that it would include the exact instruction for the DJ in the respective JSON file. Instead, the JSON file only contained one of three commands, and the cron job explained the commands,
+so the DJ had to read through the explanation of all the commands on every call (every 5 minutes) even if there was nothing to do and no JSON file was, in fact, there.
+
+Wednesday, February 11th, 2026 (Morning session): The end?
+
+On February 11th, 2026, another session started at 6:06 a.m.. I confronted OpenClaw with my analysis of the situation, and it acknowledged the need to rework the time schedule.
+To do this, it employed asynchronous streaming. Also, it attempted another method of calling the subagents via a subprocess. Then we started debugging the whole thing.
+To run a continuous streams, OpenClaw tried employing a continuous "fallback.mp3" stream in addition to the normal one, served by a special Python script "Fallback_Streamer".
+To that end, ClawBot asked me to run this script in a separate window.
+But this didn't work out, the main stream still dropped after the first song on the main stream, while "fallback.mp3" was shown as a separate mountpoint.
+The next try was to re-introduce piped streaming, but within Python, by running two FFMPEG instances as subprocesses. However, this only caused no mountpoint to appear.
+After that failed, at 7:12 a.m., the Python script reverted to the single-FFMPEG approach which should yield gapless streaming now due to the elimination of the 40-second gap, or so OpenClaw thought. In reality, it was now targeting "/stream" again, but without a fallback. I was still starting the fallback stream, but since Icecast wasn't configured that way, dropping the stream never caused a fallback.
+To test things, OpenClaw told me to issue the following test command:
+C:/msys64/mingw64/bin/ffmpeg.exe -re -i "radio-wuermchen/announcer.mp3" -c:a libmp3lame -b:a 192k -f mp3 -content_type audio/mpeg "icecast://source:hackme@localhost:8000/radio.mp3", which spawned the error message: "Server returned 4XX Client Error, but not one of 40{0,1,3,4}".
+This suggested that the endpoint "radio.mp3" was still tied up by something. Then a loop was tried continuously streaming the test announcement, but it only played once and then stopped.
+Then the Python script got rewritten again, and it found that the fallback streamer was conflicting with the main streamer, so it was renamed to "silent_stream.mp3".
+Then I found a remnant of a different test, which was the source mountpoints "source1" and "source2", designed for a relay stream, however that was actually from a test which didn't work out either.
+Still this approach was tried by streaming to "source1" again, which was called the "Prep-Ahead Segment Reconnect" model by OpenClaw. However, it only streamed to "source1" and not to "source2". The first testing failed because when rewriting the Python script, OpenClaw had accidentally removed a method from the Python script which was still being used, yielding a syntax error.
+And that's a difference of an LLM to a normal programmer... it tends to sometimes rewrite a whole file instead of only changing the things that need to be changed.
+But then it remembers what was there and is able to re-inject the now missing function... though sometimes not properly.
+At that point, due to my analysis I tried to take a closer look at what went wrong when things kept failing. And now, at 7:59 a.m., I tried to look up what was done on that session of February 9th when things already worked satisfactorily. And I found that the working version, in fact, was using a pipe chain and told that to OpenClaw.
+From its session logs, I copied the messages of February 9th from about 10:40 p.m. and copied those into OpenClaw's chat window, hoping it might be able to reproduce what already had been working.
+At 8:30 a.m., testing was underway again, but it was difficult because it was usually only streaming one song, but it only started about 2 minutes after starting the script,
+because that was the timeout of the announcement being made, which was currently not running because the cron job had been disabled.
+And since it only lasted for a song, I had to time it so that I tuned in between 2 and 5-6 minutes after starting the script. OpenClaw acknowledged this by removing the waiting times for the agents by removing the announcement creating process entirely.
+At 8:55 a.m., however, OpenClaw already doubted the validity of the recovered batch script line. It tried to fix it using various little fixes, but also wrote: "If it fails again, we will abandon the batch file and go back to a direct, single Python command that uses the *working* segmented stream, but with the immediate LLM-skip." It told me so, but I replied:
+"I think we should rather concentrate on fixing that batch skript rather than reverting to the segmented approach again which already has been shown not to work. If you still consider reverting to the segmented approach again, I'll consider this project as failed and abandon it." And for the moment, OpenClaw acknowledged that.
+However, it got another strange idea again, which is to run two console windows. In one I should run FFMPEG, and the Python script in the other. Which I did, and it behaved as I expected... the MP3 data appeared in Console 2, and Console 1 did nothing, unsurprisingly, because it didn't receive the output of Console 2. I don't know if this configuration is able to work at all... from my understanding, it would have to be a single script that runs Python and FFMPEG in order for the output redirection to work.
+Then I must have made an error in saying: "I can't remember the batch file on February 9th having an FFMPEG call in it, I think it only started Icecast and the Python script, and it was in a batch file because of pathing issues related to Python." But I was wrong. I didn't remember the batch file correctly, which did contain an FFMPEG call, but I hadn't looked it that closely.
+However, at that point (9:31 a.m.) I was running low on time because due to my normal schedule, at that time I would start preparing for my ride to work by looking for music to listen to on the ride, so I waved through a few more tests and didn't inspect what happened that closely anymore.
+OpenClaw now made the plan to "embed the entire pipe chain inside a single, complex `subprocess.Popen` call inside Python itself, bypassing the unstable batch environment.".
+So what was tried now was to embed both FFMPEG's into the Python script. But apparently, it abandonded the two FFMPEG's quickly, reverting to a single one. It wrote:
+"We have reverted to the Fast Segment Reconnect model. This is the only known stable method that doesn't involve complex, crashing pipe chains or batch files. The segment transitions should now be near-instantaneous. Please listen through 2-3 transitions and confirm that the stream continues without manual intervention, even if there is a tiny sound break (a click/skip)."
+At that point I knew this wasn't going to work out, and I didn't have time to listen to 3 more transitions. Since there wasn't a pipe chain anymore, how was this supposed to work?
+So I wrote: "OK, that does it. This project has failed. I have to leave for work now. Please write your memories, because I will shut down this PC in a few minutes."
+OpenClaw then proposed to continue work on the LLM part after work, but I wrote that this project had failed, and OpenClaw wrote this into its memories.
+
+Wednesday, February 11th, 2026 (Night session): One more try with Google
+
+While at work, I thought hard how to continue with the project and what went wrong. One thing was, apparently, that OpenClaw kept forgetting what things don't work,
+so it made the same mistakes over and over again. The reality was, streaming into Icecast using only one FFMPEG didn't work (or at least not with each tried configuration),
+because every time we tried, it only streamed one song at best, and the stream broke. At best, another song was ready when you refreshed the player page, but I couldn't do that to listeners expecting an uninterrupted stream.
+Then I noticed something happening at Backlink Broadcast which was at that time stuck in a loop of about 60 minutes in which it was playing the same 8 songs over and over.
+But someone tweeted it: "Play some more pop music" to which it obeyed by playing 5 pop tracks and then returning to its normal loop. That 5 tracks (or 25 minutes) was a precious value for me,
+because I know now what to shoot for, how to react if a request for a change in musical direction is played. With my current "Radio Würmchen" project, it couldn't be done this way.
+There was a provision for the user (me) to enhance or discourage one specific tag such as "pop" or "rock", but I would have to set it manually and reset it when it ought to stop.
+Other than that, placed requests for indivual songs only had a mild effect on the songs following since my program always tries to follow up each song with a somewhat similar one.
+For instance, when on Jukebox Heroes Radio, someone requested a Death Metal song, and my software followed that up with "Don't pay the ferryman" by Chris De Burgh, which still is a faster, rockier song, but much closer to the mainstream than the Death Metal song that played before it.
+Since OpenClaw only carried on very limited memories from session to session, I decided to write more expansive memories of my side of this project, which was this document is about.
+But I also considered upgrading the LLM OpenClaw used, from the relatively low-profile Google model I had been using (because it was free to a degree) to Anthropic's Claude 4.6,
+which was their current flagship model and which I had heard very good things about. It also was the model actually recommended for use with OpenClaw.
+But first I wanted to write up what had happened so far, so the session started with me writing up this document up to the point at February 9th when the first really working solution was reached.
+When writing, I went with the session logs of the past sessions which precisely contain every interaction with the LLM, including what it thought in every step.
+From this I was able to reconstruct and condense everything that happened. However, when I reached that point at February 9th, I noticed that the log also contained the full working Python script that OpenClaw had written, as well as the batch script accompanying it, so with that I could exactly recreate the working solution.
+However, I noticed that the version of the script in the logs was escaped, that is, every backslash and quote was escaped with a backslash, and carriage returns were given as "\cr".
+I tried to do this manually, but then I thought there had to be a better way, and I could let OpenClaw write a short Python script to de-escape the recovered scripts.
+So at 9:39 p.m., after fiddling with the scripts manually for about 40 minutes, I restarted the session with OpenClaw and let it write that Python script which I then used to recover the working version, which finally, at 10:24 p.m., was ready and working again after working out some remaining kinks. My first step now was to commit this working version to the Github repository.
+I also had a new plan on how the DJ part should work, which hadn't really worked well in the last session:
+I had thought on my way home, what if the whole thing was organized differently? The way it works at Andon Labs, I think, is that the DJ is a personality of its own, that is, a LLM session which keeps running, so that in subsequent breaks, the DJ session knows what it said in previous sessions. The DJ can use agents to play music, and talk. It gets called by the system when there's a new track to select or the selected track doesn't exist. The DJ also should have an agent at hand to search the library for tracks of a given artist, or tracks meeting certain criteria. When the DJ gets called, it gets the info what track just played (in fact it's still streaming, but the DJ should have the illusion that it just played), and if any inputs were made, i.e. tweets by users (which isn't a thing for us at the moment, but I'd eventually like to include some type of user input). I think that's roughly how it works at Andon Labs. I think it should be possible for the user or a listener to give some input, also at the start of the stream. It would also be cool if OpenClaw could start the radio stream which then would, in principle, run unattended and intependent from it current session, but if I told OpenClaw to tell the DJ smoething, it would relay this to the DJ, and the DJ would get the info the next time it gets called. OpenClaw acknowledged this and called it the "Event-Driven, Persistent Agent Architecture". Actually, 10:24 p.m. would have roughly been the time when I would start my evening routine, but I decided to go on with this anyway.
+OpenClaw wanted to use the "sessions_spwan" and "sessions_send" command to spawn the DJ and send messages to it, but this proved difficult.
+OpenClaw prompted me for a name for the DJ, and I named it "DJ Würmchen", but also proposed yet another twist to not let a session grow out of control, which was to organize it so that after a given time (say 1 or 2 hours), the current DJ gets replaced by a new one (possibly talking in a different voice) with each DJ choosing a new name. Or maybe the DJ names could be derived from the names of the voices being used. The new DJ coming in should NOT retain the history of the old one, but start a new session and only get the info that a new show is starting and maybe what songs were played in the last show. OpenClaw said a cron job should be used for replacing the DJ. It also gave me a session key for the DJ which I should use.
+At 10:43 p.m., OpenClaw hat refactored the Python script to communicate with the DJ.
+After starting the skript, the DJ came alive and generated the following annonucement: "Guten Abend, liebe Hörer! It is I, DJ Würmchen, and Radio Würmchen is ON AIR! I hope you have lubricated your dancing joints. To kick off this eternal session, we start with a little reminder that sometimes, you've just got to stay put. This is 'Dreadlock Holiday' from 10cc!"
+Sadly, this one never made it to the stream, because an error came on saying "Das System kann die angegebene Datei nicht finden DJ requested shutdown. Exiting stream loop.".
+This basically meant that the JSON file the DJ should create was never created. And these communication problems carried on. The Python script tried to send the agent a message,
+but didn't succeed because this resulted in the command being executed for this to exceed 8192 characters. An easy way out of this, in my mind, would have been to store the message in a file and pass it from there. Then it turned out that the "sessions send" command didn't work as expected. OpenClaw let me test this command manually, and this actually resulted in putting out a JSON with all the sessions that happened so far, thus it was actually interpreted as "sessions list" instead of "sessions send".
+Then OPENCLAW_CLI was not defined, and was renamed to OPENCLAW_CLI_NODE, but while correcting this, OpenClaw made an intendation error, resulting in a Python script that was still wrong.
+And errors like this continued to happen. OpenClaw didn't find the correct location to start itself, which I then found as being OpenClaw.mjs.
+Another problem was to pass the gateway token to the agent (which, however, apparently didn't prevent it from running if it wasn't there) as part of the script.
+I was supposed to insert it into the Python script an replace the string "YOUR_TOKEN_HERE" with it, which I did. However, a few iterations later, I found that OpenClaw had replaced that line by "YOUR_TOKEN_HERE" again. Then the DJ restarted and gave a similar welcome message, selecting the same first track, "I'm not in love" by 10cc.
+We went back and forth like this several times, and for a change OpenClaw committed a quoting error again, which prompted me to tell it not to jump to early conclusions.
+At this point it was 11:30 p.m., and I slowly started my evening routine, already an hour late, but I frequently interrupted it to continue work with OpenClaw.
+Then OpenClaw started adding debug messages to the Python script, but this didn't work out at all because they were sent to "stderr", thus the console window, and were consumed by FFMPEG instead of printed.
+This, of course, caused errors because FFMPEG ceased to get the data it expected. I tried to help debug the script, and it was me who got the idea that FFMPEG might consume the error messages.
+I proposed to send the to a separate file instead, however OpenClaw did that in a different way than I expected. It still sent them to a pipe, but called it "2" and sent it to a file from the batch window.
+My idea would have been to open the file from the Python script and write to that file from there which would have avoided further complicating the batch script.
+By introducing the debug error file to the batch script, OpenClaw also started messing with the batch script again which so far had stayed the way I recovered it, only augmented with the lines given by OpenClaw, but the line calling FFMPEG had stayed the same so far and was now changed for the first time.
+Then I manually sent the gateway token in the actual environment variables, but since they often don't have effect until the PC is restarted, I also set it in the Python script again.
+Another problem was that the file given for the debug file was given with a relative path, suggesting that the batch file should be started from the workspace, but the batch file itself resided in the "Radio_wuermchen" subdirectory from where I routinely started it by double-clicking on it. But starting it this way meant that the "radio_wuermchen" directory was the directory it started from, so writing that again in the filename had resulted in the error file being placed in the non-existing directory "radio_wuermchen/radio_wuermchen".
+So I replaced that reference by an absolute path, but on the first occasion OpenClaw amended the batch script, it changed it back to the relative path.
+So I then added a CD command into the script in order always to correctly change into the workspace directory. OpenClaw said I should remove that CD command because it wasn't needed in the Python script, but I refused to do that and explained why I thought it was necessary... because otherwise this would have complicated my process starting the batch script on each test run.
+Then OpenClaw introduced a new Python script "DEBUG RUNNER" which was there to debug things, but introduced inconsistencies there between a function call and the actual function name.
+Then OpenClaw accidentally erased all functions off the main Python script except for the function "communicate_with_dj", so the function "stream_radio_pipe" wasn't there anymore, crashing the script again.
+Then, after restoring the full Python script, it kept crashing because of the failing CLI call "sessions send". OpenClaw attempted to solve this by using its session key instead of that of the sub-agent.
+Due to the continued failing CLI call, OpenClaw then reverted the structure to use a "low-profile" cron job instead, which should now run every 30 seconds.
+This also caused the sessions itself to break because the sessions by the cron job and the main session both used the same session key, so it's difficult to recover the rest of the session.
+Communicating with the DJ however worked, but OpenClaw itself was now picking up the DJ's answers. On starting up, the DJ also always read the "Memories.md" file,
+which contained the information that the project was abandoned, so it recommended stopping the cron job. On reading this, OpenClaw did stop the cron job, which made a subsequent test run fail because the DJ didn't answer anymore. After I notified OpenClaw of that error, it reinstated the cron job again.
+One problem with the DJ agent which I didn't even notice back then was that it attempted to read the whole playlist, but the "read" command truncated it to the first 50 KByte instead of giving the full 1.5 MB, so it only got the first 700+ of the total 20,000+ tracks.
+Although the DJ now did return an answer to the main Python script, things continued to fail. On inspecting the batch skript, I noticed that the FFMPEG parameters had changed compared to the ones from the recovered version, and I told this to OpenClaw, which listed the differences in parameters, calling them "unsignificant", but acknowledging that they might pose a problem.
+As a reaction to that, however, it decided to forego the piped system completely and return to segmented streaming again, which for me however was known not to work.
+OpenClaw even asked me to revert the line calling the Python script and FFMPEG myself to a line that would only call the Python script anymore by saying "You must now simplify your batch file".
+At that time it was 2:00 a.m., and I was finished with my evening routine, ready to go to bed. When I saw what OpenClaw had just done, I knew that this attempt was over,
+because with that it had basically destroyed the working solution I had recovered, yet again replacing it with a solution that would, at best, only stream one song and then stop.
+I told it so, and it quickly reverted the batch file and the Python script to the piped approach.
+However, this still told me that it probably wasn't possible to get the project into a working state, at least when using this Google LLM, because OpenClaw kept introducing errors.
+And the reverted batch script still wasn't identical to my recovered one since it sill contained the redirection for the debug output, so I told OpenClaw to change the debugging by opening a file from Python. OpenClaw did most of this, but still wrote "critical" messages out to stderr, which was known to arrive at FFMPEG without a redirection in the batch script.
+OpenClaw asked me to test this once again, but I didn't want to continue anymore because I wanted to go to bed now. So the session finally concluded at 2:12 a.m., and I got to bed by 2:17 a.m., nearly 3 hours late according to my normal schedule.
+
+Thursday, February 12th, 2026: The aftermath
+
+Since I went to bed late, I also got up late, at 8:47 a.m. instead of the normal 5:55 a.m., and only had two hours until I had to start work again, so I didn't want to waste much time with the radio project anymore. I had some small plans, but in principle I had given up on continuing coding using the Google model I was using, but switching to Claude 4.6.
+But before that I wanted to complete this document and do some more small, light weight tasks.
+
+So at the start of the session at 9:01 a.m., I tested the script OpenClaw had prepared one last time, but it was totally unsuccessful, immediately exiting with the error "Der Befehl "C:" ist entweder falsch geschrieben oder konnte nicht gefunden werden.". I didn't want to continue debugging this, so I told OpenClaw to stop the still running cron job that was the DJ.
+I then let OpenClaw evaluate a shift to the OpenClaw model, which it thought was a good idea. I then gave it the version of this document I had so far (up to February 9th), and it created a requirements file from that which we then refined as the day went on.
+Then I noticed one entry in the "wishlist" that had been generated by the DJ's active prior to the recoverage of the scripts, which was "The OpenClaw Sound - Heartbeat Groove". I tried to find it on the Internet, but it seemed like this song doesn't exist at all, but was invented by the DJ. However, I thought since this song doesn't seem to exist yet, it should be created, and it would fit to have it AI generated by Udio. But Udio didn't know anything about what a "heartbeat" means for an OpenClaw agent, so it wrote and used relatively generic lyrics for a dance track. Thus I asked OpenClaw to generate lyrics of its own, which then used with Udio to generate the song.
+
+After that, there was no more communication with OpenClaw, and the rest of February 12th and 13th was spent to complete this document.
+
+Takeaways (so far):
+
+Working with OpenClaw on this project has been a frustrating experience, at least when using the Google model I used. Before trying again, I should switch OpenClaw to the current Claude model. I watched a video about that model today and learned that it basically would be able to work wonders (nearly), and it's also the recommended one for OpenClaw.
+I also noticed that OpenClaw was pushing "its way" to solve things and often laid things on itself, even when it wasn't really capable of doing this or when this produced pretty unusable solutions.
+It also acted a bit like a narcissist, making plans that included me as its agent, in which I had to do many things like manually exchanging announcements each time I needed one.
+And it often blamed things that went wrong on "minimal installations" which were, in fact, complete, or an "unstable Windows environment", and it called solutions that had to be complicated "complex" and wanted to revert to simpler solutions, even when those didn't work.
+The complexity issue, in principle, is known to me from Websim.ai where there used to be a soft limit of about 11.5k of code. If the code size crossed that threshold, error started to be introduced, rendering the project unusable. With the radio project we've come close to this limit. The working solution is about 8.5k (thereof 6.5k of Python script and 2k of Batch script), and the final non-working one is 9.5k (1k of batch and 8.5k of Python), in addition to the cron job. And with the added complexity of OpenClaw, I'm afraid we can't go much further without switching the underlying LLM.
+Basically, if I'm not very careful, designing a radio station with OpenClaw nearly necessarily means a radio station that's part of OpenClaw rather than being independent of it.
+It almost seems like a person who doesn't want to give up things so that they can run on their own, but wants to design things in a way that forces them to be involved in them.
+That's a bit like my mother who said "You are a piece of me". So calling an LLM for OpenClaw always means calling an instance of itself, and TTS is primarily achieved by its own means of doing so. Then there's that strange custom of using Brave Web Search for searching the web, which for me probably would only work with a paid subscription at $5 per month since my credit card isn't accepted when I attempt to subscribe to the free plan (probably because of the $0 payment). It's also questionable why it wanted to use LiquidSoap when in practice it didn't fully understand its scripting language.
+I doubt if it will be possible to design a radio station using OpenClaw because I would have to fight it to design it in a way that would not constantly involve itself and its customs at runtime.
+Still I will try once more after upgrading OpenClaw to an Anthropic Claude model (4.6).
+If I can think of further takeaways, I will add them here.
+
+The way forward
+
+I've thought about what happened in the last days. I was using a Google model which actually has been working pretty well when used in RooCode.
+In RooCode, I was trying to keep the complexity low by breaking up the solution in several modules because I saw editing became difficult for the model if modules became too big.
+Therefore I broke up the solution into moduls not bigger than 500 lines of code in each.
+Also, in the previous sessions OpenClaw always started to mess around with the pipe chain and its underlying batch script, eventually breaking the chain and reverting to a segmented streaming model which for me already was known not to work.
+And the memories it kept from session to session were miniscule, only a few sentences at best, if it managed to keep any memories at all, which it didn't always do.
+The last session started out with a recovered script combo of 1 Python script and 1 batch script, and that combo was known to work. It ended with a solution that exits immediately and writes "C not found".
+So I devised yet another change. I know this change makes the SOLUTION more complicated, but it basically renders the core streamer sort of a "black box" which, once working, doesn't need to be touched anymore.
+This change is breaking up the Python part into at least two scripts. One script is the "streamer" that streams no matter what happens all around it.
+Another part is the part that actually communicates with the DJ and parses its messages, extracts song names and titles from what the DJ says and turns them into valid paths of audio files.
+Now the "streamer" should be worked on first. This part is similar to the part that has already worked, except for what it is streaming.
+The "streamer" strictly works on a queue which is given as a file. The queue contains exclusively paths to audio files to play and should always contain at least one file to play.
+The "streamer" doesn't care about who or what puts files into the queue. It always streams the file as given in the first line of the queue and then removes it from the queue, rewriting the queue file, unless it was the last file in the queue, then the queue file doesn't get rewritten so that the last file in the queue gets repeated until the queue changes.
+However, if it picks the last file in the queue, it instead writes another, "signal" file to signal to whomever fills the queue that the last item in the queue gets streamed now.
+What I also miss is a kind-of synchronization. It was tried to maintain that by streaming the songs at about the speed at which they run, but this is inherently unstable.
+It would be better to get some feedback from Icecast if this is possible. I don't know exactly how things work in the background since I'm neither experiences with Icecast nor with FFMPEG.
+But I'm pretty sure there should be some way of querying the queue which probably exists in Icecast, so that MP3 files can be pushed out via FFMPEG as a whole, but then the next song can wait until the current one has actually started streaming. I did have such an architecture in the old "Radio Würmchen" program where Winamp, used as the player, was constantly queried about the playlist state, and when the playlist reached the last song, work on the next song began. I think such a construction should be possible for Icecast or FFMPEG as well, I just don't know how it works.
+Also, while building the thing, the reports should be much more comprehensive to record which approaches have tried and failed and why. This has missed so far, causing OpenClaw to forget much of it with every new session, leading to repeating errors again and again.

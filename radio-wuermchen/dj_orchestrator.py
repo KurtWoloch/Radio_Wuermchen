@@ -25,6 +25,18 @@ LOG_FILE = BASE_DIR / "orchestrator.log"
 WISHLIST_FILE = BASE_DIR / "Wishlist.txt"
 LISTENER_REQUEST_FILE = BASE_DIR / "listener_request.txt" # NEW: Listener input file
 
+SCRAPER_SCRIPT = BASE_DIR / "scraper.py"
+WEATHER_TEMPLATE = BASE_DIR / "templates" / "weather_vienna.txt"
+WEATHER_RESULT = BASE_DIR / "templates" / "weather_result.json"
+WEATHER_CACHE_MAX_AGE = 1800  # seconds (30 min) - don't re-scrape more often than this
+
+NEWS_MANAGER_SCRIPT = BASE_DIR / "news_manager.py"
+NEWS_HEADLINES_INTERVAL = 3600  # seconds (60 min) - how often to do a full headlines segment
+NEWS_STATE_FILE = BASE_DIR / "news_state.json"  # tracks last headlines time
+
+ANNOUNCEMENT_SLOTS = 10  # number of rotating announcement files
+ANNOUNCEMENT_MIN_AGE = 1800  # seconds (30 min) before a slot can be reused
+
 PYTHON_BIN = "C:\\Program Files\\Python311\\python.exe"
 POLL_INTERVAL = 3  # seconds between checks
 MAX_ARTIST_SUGGESTIONS = 50 # Maximum tracks to offer the DJ if suggestion fails
@@ -41,15 +53,16 @@ def log(msg):
 
 def load_json(path):
     """Load JSON data, handling missing files gracefully."""
+    path_str = str(path)
     try:
-        with open(path, 'r', encoding='utf-8') as f:
+        with open(path_str, 'r', encoding='utf-8') as f:
             return json.load(f)
     except FileNotFoundError:
-        if path.endswith("history.json"):
+        if path_str.endswith("history.json"):
             return []
         return {}
     except json.JSONDecodeError as e:
-        log(f"Error reading JSON file {path}: {e}")
+        log(f"Error reading JSON file {path_str}: {e}")
         return {}
 
 def save_json(path, data):
@@ -150,6 +163,171 @@ def find_artist_alternatives(artist_name, playlist, max_results=MAX_ARTIST_SUGGE
                 break
     return alternatives
 
+# --- WEATHER ---
+def get_weather_forecast():
+    """Run the scraper for weather and return the forecast text, or None."""
+    try:
+        # Check cache age - don't scrape too often
+        if os.path.exists(WEATHER_RESULT):
+            age = time.time() - os.path.getmtime(WEATHER_RESULT)
+            if age < WEATHER_CACHE_MAX_AGE:
+                cached = load_json(WEATHER_RESULT)
+                forecast = cached.get("forecast")
+                if forecast:
+                    log(f"Using cached weather ({int(age)}s old)")
+                    return forecast
+
+        log("Fetching fresh weather forecast...")
+        result = subprocess.run(
+            [PYTHON_BIN, str(SCRAPER_SCRIPT), str(WEATHER_TEMPLATE)],
+            capture_output=True, text=True, cwd=str(BASE_DIR), timeout=20
+        )
+        if result.returncode != 0:
+            log(f"Weather scrape failed: {result.stderr.strip()}")
+            return None
+
+        data = load_json(WEATHER_RESULT)
+        forecast = data.get("forecast")
+        if forecast:
+            log(f"Weather fetched: {forecast[:80]}...")
+        return forecast
+    except Exception as e:
+        log(f"Weather fetch error: {e}")
+        return None
+
+# --- NEWS ---
+
+def load_news_state():
+    """Load persistent news state (last headlines time, etc.)."""
+    return load_json(NEWS_STATE_FILE) or {'last_headlines_at': 0}
+
+def save_news_state(state):
+    save_json(NEWS_STATE_FILE, state)
+
+def news_update():
+    """Run news_manager.py update. Returns True on success."""
+    try:
+        result = subprocess.run(
+            [PYTHON_BIN, str(NEWS_MANAGER_SCRIPT), "update"],
+            capture_output=True, text=True, cwd=str(BASE_DIR), timeout=60
+        )
+        log(f"News update: {result.stdout.strip()}")
+        if result.returncode != 0:
+            log(f"News update error: {result.stderr.strip()}")
+            return False
+        return True
+    except Exception as e:
+        log(f"News update exception: {e}")
+        return False
+
+def news_get_headlines():
+    """Run news_manager.py headlines. Returns parsed JSON or None."""
+    try:
+        result = subprocess.run(
+            [PYTHON_BIN, str(NEWS_MANAGER_SCRIPT), "headlines"],
+            capture_output=True, text=True, cwd=str(BASE_DIR), timeout=15
+        )
+        if result.returncode == 0:
+            return json.loads(result.stdout)
+    except Exception as e:
+        log(f"News headlines error: {e}")
+    return None
+
+def news_get_next_story():
+    """Run news_manager.py next_story. Returns parsed JSON or None."""
+    try:
+        result = subprocess.run(
+            [PYTHON_BIN, str(NEWS_MANAGER_SCRIPT), "next_story"],
+            capture_output=True, text=True, cwd=str(BASE_DIR), timeout=15
+        )
+        if result.returncode == 0:
+            data = json.loads(result.stdout)
+            if data.get('id') and data.get('story'):
+                return data
+    except Exception as e:
+        log(f"News next_story error: {e}")
+    return None
+
+def news_mark_presented(story_id):
+    """Run news_manager.py mark <id>."""
+    try:
+        subprocess.run(
+            [PYTHON_BIN, str(NEWS_MANAGER_SCRIPT), "mark", story_id],
+            capture_output=True, text=True, cwd=str(BASE_DIR), timeout=10
+        )
+        log(f"Marked story {story_id} as presented.")
+    except Exception as e:
+        log(f"News mark error: {e}")
+
+def get_news_instruction():
+    """
+    Determine the news instruction for this DJ cycle.
+    Returns (instruction_text, story_id_to_mark_after_success) or (None, None).
+    """
+    # Always try to update (respects its own 60-min cache internally)
+    news_update()
+
+    news_state = load_news_state()
+    now = time.time()
+    time_since_headlines = now - news_state.get('last_headlines_at', 0)
+
+    # Top of the hour: full headlines segment
+    if time_since_headlines >= NEWS_HEADLINES_INTERVAL:
+        headlines_data = news_get_headlines()
+        if headlines_data and headlines_data.get('headlines'):
+            headline_list = headlines_data['headlines']
+
+            # Build headline text for the DJ
+            parts = []
+            if headlines_data.get('breaking'):
+                parts.append(f"BREAKING NEWS: {headlines_data['breaking']}")
+
+            # Group by type for clarity
+            top = [h['headline'] for h in headline_list if h['type'] == 'top']
+            regular = [h['headline'] for h in headline_list if h['type'] == 'regular']
+            quick = [h['headline'] for h in headline_list if h['type'] == 'quicklink']
+
+            if top:
+                parts.append("Top stories: " + "; ".join(top))
+            if regular:
+                parts.append("Also in the news: " + "; ".join(regular[:5]))
+            if quick:
+                parts.append("In brief: " + "; ".join(quick[:5]))
+
+            headline_text = "\n".join(parts)
+
+            instruction = (
+                f"NEWS SEGMENT: It's time for the hourly news update! Here are the current headlines:\n\n"
+                f"{headline_text}\n\n"
+                "Please present these headlines to the listeners as a news bulletin in your own words. "
+                "Cover the top stories first, then briefly mention a few of the other headlines. "
+                "After the news, suggest and introduce a song that fits the overall mood of today's news."
+            )
+
+            # Update state — mark headlines as delivered
+            news_state['last_headlines_at'] = now
+            save_news_state(news_state)
+
+            log(f"News: HEADLINES segment ({len(headline_list)} headlines)")
+            return instruction, None
+
+    # Between headlines: try a deep-dive story
+    story = news_get_next_story()
+    if story:
+        instruction = (
+            f"NEWS DEEP DIVE: Please present the following news story to the listeners in your own words.\n\n"
+            f"Headline: {story['headline']}\n"
+            f"Story: {story['story']}\n\n"
+            "Summarize this story engagingly for the radio audience, then suggest and introduce "
+            "a song that fits the topic or mood of this story."
+        )
+        log(f"News: DEEP DIVE on '{story['headline'][:50]}...' (id: {story['id']})")
+        return instruction, story['id']
+
+    # No news to present
+    log("News: nothing new to present this cycle.")
+    return None, None
+
 # --- DJ COMMUNICATION ---
 def trigger_dj(last_track, listener_input=None, instructions=None):
     """Writes request file, runs DJ brain, reads response."""
@@ -190,18 +368,45 @@ def trigger_dj(last_track, listener_input=None, instructions=None):
         
     return response
 
-def generate_announcement_audio(text_content):
-    """Generates announcement audio using tts_generate.py."""
+def get_next_announcement_slot():
+    """Find the next available announcement slot that's old enough to reuse."""
+    now = time.time()
     
-    # Create a temporary text file for the TTS script to read
-    temp_text_file = BASE_DIR / "temp_announcement.txt"
-    with open(temp_text_file, 'w', encoding='utf-8') as f:
+    # First pass: find a slot that either doesn't exist or is old enough
+    for i in range(1, ANNOUNCEMENT_SLOTS + 1):
+        mp3_path = BASE_DIR / f"temp_announcement{i}.mp3"
+        if not os.path.exists(mp3_path):
+            return i
+        age = now - os.path.getmtime(mp3_path)
+        if age >= ANNOUNCEMENT_MIN_AGE:
+            return i
+    
+    # All slots are too young — pick the oldest one
+    oldest_slot = 1
+    oldest_age = 0
+    for i in range(1, ANNOUNCEMENT_SLOTS + 1):
+        mp3_path = BASE_DIR / f"temp_announcement{i}.mp3"
+        age = now - os.path.getmtime(mp3_path)
+        if age > oldest_age:
+            oldest_age = age
+            oldest_slot = i
+    
+    log(f"WARNING: All announcement slots are younger than {ANNOUNCEMENT_MIN_AGE}s. Reusing oldest (slot {oldest_slot}, {int(oldest_age)}s old).")
+    return oldest_slot
+
+def generate_announcement_audio(text_content):
+    """Generates announcement audio using tts_generate.py with rotating file slots."""
+    
+    slot = get_next_announcement_slot()
+    txt_file = BASE_DIR / f"temp_announcement{slot}.txt"
+    mp3_file = BASE_DIR / f"temp_announcement{slot}.mp3"
+    
+    with open(txt_file, 'w', encoding='utf-8') as f:
         f.write(text_content)
         
-    log(f"Generating announcement audio for text: '{text_content[:30]}...'")
+    log(f"Generating announcement audio (slot {slot}): '{text_content[:30]}...'")
 
-    # Run TTS generator. Output path is hardcoded in tts_generate.py to be temp_announcement.mp3
-    command = [PYTHON_BIN, str(TTS_GENERATOR_SCRIPT), str(temp_text_file)]
+    command = [PYTHON_BIN, str(TTS_GENERATOR_SCRIPT), str(txt_file)]
     
     try:
         result = subprocess.run(
@@ -212,17 +417,16 @@ def generate_announcement_audio(text_content):
             cwd=str(BASE_DIR)
         )
         
-        log("TTS Generation successful.")
-        # Return path to the hardcoded output file
-        return BASE_DIR / "temp_announcement.mp3"
+        log(f"TTS Generation successful (slot {slot}).")
+        return mp3_file
         
     except subprocess.CalledProcessError as e:
         log(f"TTS Generation FAILED (Code {e.returncode}). Stderr: {e.stderr.strip()}")
         return None
     finally:
         # Clean up temporary text file
-        if os.path.exists(temp_text_file):
-            os.remove(temp_text_file)
+        if os.path.exists(txt_file):
+            os.remove(txt_file)
 
 
 # --- MAIN LOOP ---
@@ -242,7 +446,47 @@ def main():
             # NEW: Capture listener request ONLY when a DJ cycle is triggered
             listener_input = read_and_clear_listener_request()
             
-            # 1. Determine Context (Last track)
+            # 1. Determine Context (Last track) and GATHER NEWS/WEATHER
+            
+            # A. Weather Context 
+            weather_forecast = get_weather_forecast()
+            weather_instruction = None
+            weather_is_fresh = False
+            if weather_forecast:
+                try:
+                    age = time.time() - os.path.getmtime(WEATHER_RESULT)
+                    weather_is_fresh = (age < 10)
+                except Exception:
+                    pass
+
+                if weather_is_fresh:
+                    weather_instruction = (
+                        f"Current weather forecast for Vienna:\n{weather_forecast}\n\n"
+                        "It's time for a weather update! Please present the full weather forecast to the listeners in your own words, "
+                        "then suggest and introduce a song that fits the current weather mood."
+                    )
+                    log("Weather segment: FULL forecast mode (fresh scrape)")
+                else:
+                    weather_instruction = (
+                        f"Current weather for Vienna: {weather_forecast}\n"
+                        "You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast."
+                    )
+                    log("Weather segment: subtle mode (cached)")
+
+            # B. News Segment Check (New Logic)
+            news_instruction, news_context_payload = get_news_instruction()
+            
+            # C. Combine instructions
+            combined_instructions = None
+            instruction_parts = []
+            if weather_instruction:
+                instruction_parts.append(weather_instruction)
+            if news_instruction:
+                instruction_parts.append(news_instruction)
+            if instruction_parts:
+                combined_instructions = "\n\n---\n\n".join(instruction_parts)
+
+            # D. Prepare request data
             last_track_path = read_last_line(QUEUE_FILE)
             if last_track_path and not last_track_path.endswith(".mp3"): # If it's not a valid file path, treat as unknown
                  last_track_path = None
@@ -251,14 +495,20 @@ def main():
                 last_track_name = os.path.basename(last_track_path)
             else:
                 last_track_name = "Unknown track (Queue may have been empty)"
-            
-            # Initialize request_data here to be available for modification/re-prompting
+
             request_data = {
                 "last_track": last_track_name,
-                "listener_input": listener_input, # <-- Pass listener input here
-                "instructions": None
+                "listener_input": listener_input,
+                "instructions": combined_instructions
             }
             
+            # If we are doing a news deep dive, pass the ID in instructions for post-processing
+            mark_id = None
+            if news_context_payload and isinstance(news_context_payload, dict) and news_context_payload.get('type') == 'news_deep_dive':
+                 mark_id = news_context_payload['story_id']
+                 request_data["instructions"] += f"\n__NEWS_ID_TO_MARK__: {mark_id}"
+
+            # --- PHASE 2: DJ EXECUTION & SONG SELECTION ---
             dj_output = None
             success = False
             retry_count = 0
@@ -286,34 +536,26 @@ def main():
                             time.sleep(POLL_INTERVAL)
                             continue
                         
-                        # --- MODIFIED MATCHING LOGIC START ---
+                        # --- MUSIC MATCHING LOGIC START ---
                         potential_matches = []
                         
-                        # 1. Clean the DJ's suggestion to create a cleaner matching string
                         cleaned_suggestion = clean_suggestion_for_matching(suggested_track)
                         
                         for p_track in playlist:
                             p_filename = os.path.basename(p_track)
                             p_filename_lower = p_filename.lower()
                             
-                            # Check if the cleaned suggestion is a case-insensitive substring of the library track file
                             if cleaned_suggestion.lower() in p_filename_lower:
-                                # Score 1: Exact version match? (Check if the *DJ's exact text* is in the filename)
                                 is_exact_version_match = suggested_track.lower() in p_filename_lower
-                                
-                                # Length difference between the library file and the cleaned suggestion
                                 length_diff = len(p_filename_lower) - len(cleaned_suggestion.lower())
-                                
-                                # Store: (track_path, filename, length_diff, is_exact_version_match)
                                 potential_matches.append((p_track, p_filename, length_diff, is_exact_version_match))
                         
                         found_track = None
                         if potential_matches:
-                            # Sort: Primary key is exact version match (True > False), Secondary key is length difference (smaller diff is better)
                             potential_matches.sort(key=lambda x: (not x[3], x[2])) 
                             found_track = potential_matches[0][0]
                         
-                        # --- MODIFIED MATCHING LOGIC END ---
+                        # --- MUSIC MATCHING LOGIC END ---
 
                         if found_track:
                             # SUCCESS PATH: Track found! Generate audio and queue.
@@ -325,6 +567,12 @@ def main():
                                 append_to_queue(str(announcement_audio_path))
                                 append_to_queue(found_track)
                                 last_track_played = found_track
+                                
+                                # Mark news story as presented if this was a deep dive
+                                if mark_id:
+                                    news_mark_presented(mark_id)
+                                    mark_id = None
+                                
                                 success = True # Exit inner loop
                             else:
                                 log("Skipping DJ turn: Failed to generate announcement audio.")
@@ -341,8 +589,9 @@ def main():
                                 if alternatives:
                                     # Path A: Alternatives exist -> Reprompt DJ with suggestions
                                     alternative_list = "\n".join(os.path.basename(t) for t in alternatives[:MAX_ARTIST_SUGGESTIONS])
-                                    instructions = (f"The track '{suggested_track}' was unavailable. Please select one of the following {len(alternatives)} available tracks by the same artist: {artist}. "
+                                    retry_instructions = (f"The track '{suggested_track}' was unavailable. Please select one of the following {len(alternatives)} available tracks by the same artist: {artist}. "
                                                     f"Available tracks include: {alternative_list[:500]}...")
+                                    instructions = f"{combined_instructions}\n{retry_instructions}" if combined_instructions else retry_instructions
                                     
                                     log(f"Alternatives found. Setting instructions for next attempt.")
                                     request_data["instructions"] = instructions
@@ -350,15 +599,18 @@ def main():
                                 else:
                                     # Path B: No alternatives found -> Handle Listener Request persistence
                                     if request_data["listener_input"]:
-                                        instructions = (f"The track '{suggested_track}' by {artist} was requested by a listener but is unavailable in the library. "
+                                        retry_instructions = (f"The track '{suggested_track}' by {artist} was requested by a listener but is unavailable in the library. "
                                                         "Please select a track by a COMPLETELY DIFFERENT artist, acknowledging the listener's general request if possible.")
+                                        instructions = f"{combined_instructions}\n{retry_instructions}" if combined_instructions else retry_instructions
                                         log(f"Listener request failed for {artist}. Setting instruction to re-prompt DJ.")
                                         request_data["instructions"] = instructions
                                         # success remains False, loop continues to next attempt/retry
                                     else:
                                         # --- CRITICAL FIX APPLIED HERE ---
                                         log(f"No alternatives found for artist: {artist}. Autonomous turn failed. Forcing new artist selection.")
-                                        request_data["instructions"] = (f"The suggested artist {artist} has no available tracks. Please select a track by a completely different artist entirely.")
+                                        retry_instructions = f"The suggested artist {artist} has no available tracks. Please select a track by a completely different artist entirely."
+                                        instructions = f"{combined_instructions}\n{retry_instructions}" if combined_instructions else retry_instructions
+                                        request_data["instructions"] = instructions
                                         # success remains False, loop continues to next attempt/retry
                             else:
                                 log("Could not parse artist from suggestion. Skipping turn.")

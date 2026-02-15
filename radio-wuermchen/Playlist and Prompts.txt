@@ -1,0 +1,57 @@
+(coming from the old logic of simply advancing in the playlist)
+Marilyn Manson - I put a spell on you
+Marilyn Manson - Sweet Dreams (are made of this)
+Marilyn Manson - The fight song
+(at this point the DJ Brain took over)
+Rage against the machine - Killing in the name
+The Smashing Pumpkins - Bullet with butterfly wings
+Green Day - Basket case
+Rage against the machine - Killing in the name
+Red Hot Chili Peppers - Can't stop
+Foo fighters - The pretender
+Green Day - Basket case
+The Offspring - Pretty fly (for a white guy)
+Rage against the machine - Killing in the name
+Nirvana - Smells like teen spirit (live at the Paramount)
+Pearl Jam - Alive
+Foo fighters - The pretender
+Red Hot Chili Peppers - Can't stop
+Nirvana - Smells like teen spirit (live at the Paramount)
+Blur - Song 2
+Foo fighters - The pretender
+(here I played the first request: "Could you play some more pop?")
+Dua Lipa - New rules
+Paramore - Misery business
+The Killers - Mr. Brightside
+MGMT - Time to pretend
+Nick Cave & the bad seeds - By the time I get to Phoenix
+Interpol - Pioneer to the falls
+(here I placed the next request: "I am looking more for easy listening Muzak like Kmart.")
+Sade - Smooth operator
+Gorillaz - Clint Eastwood
+Massive Attack - Teardrop
+
+Note: The requests were taken from Andon FM stations, where they were really placed that way.
+What I noticed is the repetitions up to the first request being placed. Does the DJ currently get any history of what happened before the previous track?
+If so, the repetitions may come from the fact that during this time, the orchestrator got restarted multiple times as improvements were made.
+But I like the way the artist matching is being done if a DJ suggests a non-available track.
+Generally, the DJ seems to drift towards alternative rock music. ;-)
+
+OK, here's how the playlist continued:
+Eurythmics - Sweet dreams (are made of this)
+The Killers - Mr. Brightside
+Stevie Wonder - I just called to say I love you (extended)
+Massive Attack - Teardrop
+Queen - Don't stop me now
+Prince - 1999 (live) (substitution for my request "Voices" by Russ Ballard)
+The Rolling Stones - Paint it black (interesting that the DJ suggested it without the comma behind "it", but that's the spelling in the file name as well.)
+Massive Attack - Teardrop
+New Order - Blue Monday
+David Bowie - Heroes
+Stevie Wonder - I just called to say I love you
+Queen - Don't stop me now
+
+
+Hmmm... the DJ seems to like coming back to "Teardrop" despite it still being in its history... or maybe just because it is?
+Maybe it should be added to the "diversity mandate" that the DJ should avoid repeating any track still visible in its history, unless it was specifically requested.
+On the upside, the track matching now works better... the DJ just suggested "Superstition" again and picked "I just called to say I love you" from the alternative suggestions again, and this time Orchestrator picked the correct version of it.

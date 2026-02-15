@@ -1,0 +1,5 @@
+# Weather forecast for Vienna from ORF
+URL: https://wetter.orf.at/wien/prognose
+OUTPUT: weather_result.json
+CLEAN: html
+FIELD: forecast | START: <div class="fulltextWrapper" role="article"> | END: <div class="story-horizontal-ad story-banner">
