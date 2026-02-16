@@ -12,6 +12,8 @@ import os
 import subprocess
 from datetime import datetime
 from pathlib import Path
+import google.generativeai as genai_client
+from google.genai import types
 
 # --- CONFIGURATION ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
