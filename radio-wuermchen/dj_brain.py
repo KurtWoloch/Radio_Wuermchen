@@ -117,12 +117,13 @@ def build_system_prompt(config):
     return f"""You are {dj_name}, the DJ of {station_name}. The current time is {now}. Your responses MUST be 100% valid JSON.
 {style_instruction}
 {diversity_mandate}
+---
+SHOW OVERRIDES RECEIVED:
+{instructions}
+---
 Output Format: Provide a JSON object with EXACTLY two keys: "track" and "announcement".
 - "track": The suggested next track in "Artist - Title" format.
-- "announcement": A short (1-3 sentence) natural introduction/transition.
-
-Example JSON:
-{{"track": "Fleetwood Mac - Dreams", "announcement": "That was a classic! Now let's ease into something smooth with Fleetwood Mac and their timeless Dreams."}}"""
+- "announcement": A short (1-3 sentence) natural introduction/transition."""
 
 def build_user_message(request_data, history):
     """Build the user message with context for the DJ."""
