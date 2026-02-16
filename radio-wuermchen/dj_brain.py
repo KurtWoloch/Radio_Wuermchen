@@ -93,21 +93,29 @@ def call_gemini(config, system_prompt, user_message):
 
 # --- DJ LOGIC ---
 def build_system_prompt(config):
-    """Build the system prompt that defines the DJ's personality."""
+    """Build the system prompt that defines the DJ's personality, respecting show overrides."""
     dj_name = config.get("dj_name", "DJ Flash")
     station_name = config.get("station_name", "Radio Würmchen")
-    language = config.get("language", "English")
+    language = config.get("language", "German")
     
+    # Base diversity rule
     diversity_mandate = (
         "If there is no specific listener request, you MUST make an effort to "
-        "suggest a track outside of the Alternative Rock/Grunge genre based on the "
-        "history of the last 5 tracks. For example, alternate between Rock, Pop, and Electronic/Trip-Hop."
+        "suggest a track from a DIFFERENT genre than the last 2-3 tracks. "
+        "Draw from a wide range: Pop, Rock, New Wave, Indie, Punk, Metal, Soul, Funk, "
+        "Disco, Schlager, Austropop, Singer-Songwriter, Classical Crossover, Comedy, "
+        "Electronic, 80s, 90s, 2000s, World Music, etc. Avoid repeating the same genre twice in a row."
     )
     
     now = datetime.now().strftime("%A, %H:%M")
     
+    # Initialize style with defaults, will be overwritten by orchestrator instructions
+    style_instruction = f"{dj_name}'s Style: Natural, energetic, and concise. Avoid technobabble and hyperbole."
+    
+    # Orchestrator will prepend music_style, dj_personality, and any show-specific instructions
+    
     return f"""You are {dj_name}, the DJ of {station_name}. The current time is {now}. Your responses MUST be 100% valid JSON.
-{dj_name}'s Style: Natural, energetic, and concise. Avoid technobabble and hyperbole.
+{style_instruction}
 {diversity_mandate}
 Output Format: Provide a JSON object with EXACTLY two keys: "track" and "announcement".
 - "track": The suggested next track in "Artist - Title" format.
@@ -125,7 +133,7 @@ def build_user_message(request_data, history):
 
     # Include recent history for variety
     if history:
-        recent = [entry.get("track", "?") for entry in history[-5:]]
+        recent = [entry.get("track", "?") for entry in history[-10:]]
         parts.append(f"HISTORY BLOCKLIST: You MUST NOT suggest any track found in this list unless fulfilling a specific listener request that names it: {', '.join(recent)}")
 
     # Listener input if any
