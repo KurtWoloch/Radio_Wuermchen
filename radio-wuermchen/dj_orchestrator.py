@@ -10,6 +10,7 @@ import os
 import time
 import json
 from pathlib import Path
+from datetime import datetime
 import re
 
 # --- IMPORTS FROM NEW MANAGERS ---
@@ -30,6 +31,7 @@ WISHLIST_FILE = BASE_DIR / "Wishlist.txt"
 LISTENER_REQUEST_FILE = BASE_DIR / "listener_request.txt"
 SUGGESTION_POOL_FILE = BASE_DIR / "suggestion_pool.txt"
 HISTORY_FILE = BASE_DIR / "dj_history.json" # NEW: Added History file constant
+SHOWS_SCHEDULE_FILE = BASE_DIR / "shows_schedule.json"
 
 PYTHON_BIN = "C:\\Program Files\\Python311\\python.exe"
 POLL_INTERVAL = 3  # seconds between checks
@@ -93,12 +95,13 @@ def read_last_line(path):
         return None
 
 def delete_signal():
-    """Delete the signal file."""
-    try:
-        os.remove(str(SIGNAL_FILE))
-        log("Signal file deleted.")
-    except FileNotFoundError:
-        pass
+    """Delete the signal file and its lock."""
+    for f in [str(SIGNAL_FILE), str(SIGNAL_FILE) + ".lock"]:
+        try:
+            os.remove(f)
+        except FileNotFoundError:
+            pass
+    log("Signal file deleted.")
 
 def read_and_clear_listener_request():
     """Read listener request from file and delete the file."""
@@ -128,10 +131,11 @@ def append_to_wishlist(track_suggestion):
     log(f"Appended to wishlist: {track_suggestion}")
 
 # --- SUGGESTION POOL ---
-def read_suggestion_pool():
+def read_suggestion_pool(pool_file=None):
     """Read the suggestion pool file. Returns list of 'Artist - Track' strings."""
+    target = pool_file or str(SUGGESTION_POOL_FILE)
     try:
-        with open(str(SUGGESTION_POOL_FILE), 'r', encoding='latin-1') as f:
+        with open(target, 'r', encoding='latin-1') as f:
             lines = [line.strip() for line in f if line.strip() and not line.strip().startswith('#')]
         return lines
     except FileNotFoundError:
@@ -158,9 +162,9 @@ def remove_from_suggestion_pool(track_name):
             for line in new_pool:
                 f.write(line + '\n')
 
-def get_pool_suggestions(max_count=MAX_POOL_SUGGESTIONS):
+def get_pool_suggestions(max_count=MAX_POOL_SUGGESTIONS, pool_file=None):
     """Get the top N suggestions from the pool."""
-    pool = read_suggestion_pool()
+    pool = read_suggestion_pool(pool_file=pool_file)
     return pool[:max_count]
 
 # --- ARTIST MATCHING ---
@@ -213,12 +217,69 @@ def trigger_dj(last_track, listener_input=None, instructions=None):
         return None
 
     response = load_json(RESPONSE_FILE)
+    
+    # Delete response file immediately to prevent stale re-use
+    try:
+        os.remove(str(RESPONSE_FILE))
+    except OSError:
+        pass
+    
     if not response or "error" in response:
         log(f"Failed to get valid response from DJ: {response}")
         return None
         
     return response
 
+
+# --- SHOW SCHEDULE ---
+
+def get_active_show():
+    """Check if a scheduled show is currently active. Returns show dict or None."""
+    schedule = load_json(str(SHOWS_SCHEDULE_FILE))
+    if not schedule or "shows" not in schedule:
+        return None
+    
+    now = datetime.now()
+    current_minutes = now.hour * 60 + now.minute
+    
+    for show in schedule["shows"]:
+        sched = show.get("schedule", {})
+        start_str = sched.get("start", "")
+        end_str = sched.get("end", "")
+        if not start_str or not end_str:
+            continue
+        
+        try:
+            sh, sm = map(int, start_str.split(":"))
+            eh, em = map(int, end_str.split(":"))
+        except ValueError:
+            continue
+        
+        start_min = sh * 60 + sm
+        end_min = eh * 60 + em
+        
+        if end_min <= start_min:
+            # Crosses midnight (e.g. 23:00 - 00:00)
+            if current_minutes >= start_min or current_minutes < end_min:
+                return show
+        else:
+            if start_min <= current_minutes < end_min:
+                return show
+    
+    return None
+
+def get_show_overrides(show):
+    """Extract overrides from a show config, with defaults."""
+    schedule = load_json(str(SHOWS_SCHEDULE_FILE))
+    defaults = schedule.get("defaults", {}) if schedule else {}
+    overrides = show.get("overrides", {}) if show else {}
+    
+    return {
+        "music_style": overrides.get("music_style", defaults.get("music_style")),
+        "dj_personality": overrides.get("dj_personality", defaults.get("dj_personality")),
+        "suggestion_pool": overrides.get("suggestion_pool", defaults.get("suggestion_pool", "suggestion_pool.txt")),
+        "news_enabled": overrides.get("news_enabled", defaults.get("news_enabled", True)),
+    }
 
 # --- MAIN LOOP ---
 def main():
@@ -232,9 +293,27 @@ def main():
         listener_input = None
         
         if os.path.exists(SIGNAL_FILE):
+            # Atomically claim the signal file to prevent duplicate processing
+            lock_file = str(SIGNAL_FILE) + ".lock"
+            try:
+                os.rename(str(SIGNAL_FILE), lock_file)
+            except (OSError, FileNotFoundError):
+                # Another instance already claimed it
+                log("Signal file disappeared (claimed by another instance). Skipping.")
+                time.sleep(POLL_INTERVAL)
+                continue
             log("Signal detected. Starting DJ cycle.")
+            
+            # Delete signal immediately to prevent duplicate cycles
+            delete_signal()
 
             listener_input = read_and_clear_listener_request()
+            
+            # --- PHASE 0: SHOW DETECTION ---
+            active_show = get_active_show()
+            show_overrides = get_show_overrides(active_show)
+            if active_show:
+                log(f"Active show: {active_show['name']}")
             
             # --- PHASE 1: CONTEXT GATHERING ---
             
@@ -264,11 +343,23 @@ def main():
                     log("Weather segment: subtle mode (cached)")
 
             # B. News Segment Check
-            news_instruction, news_context_payload = get_news_instruction()
+            if show_overrides["news_enabled"]:
+                news_instruction, news_context_payload = get_news_instruction()
+            else:
+                news_instruction, news_context_payload = None, None
+                log("News disabled for current show.")
 
             # C. Combine instructions
             combined_instructions = None
             instruction_parts = []
+
+            # Show-specific music style instruction
+            if show_overrides["music_style"]:
+                instruction_parts.append(f"SHOW MUSIC DIRECTIVE: {show_overrides['music_style']}")
+            
+            # Show-specific DJ personality override
+            if show_overrides["dj_personality"]:
+                instruction_parts.append(f"DJ STYLE FOR THIS SHOW: {show_overrides['dj_personality']}")
             if weather_instruction:
                 instruction_parts.append(weather_instruction)
             if news_instruction:
@@ -385,7 +476,8 @@ def main():
                             append_to_wishlist(suggested_track)
                             
                             # --- SUGGESTION POOL FALLBACK (Priority 1) ---
-                            pool_suggestions = get_pool_suggestions()
+                            show_pool_file = str(BASE_DIR / show_overrides["suggestion_pool"]) if show_overrides.get("suggestion_pool") else None
+                            pool_suggestions = get_pool_suggestions(pool_file=show_pool_file)
                             if pool_suggestions:
                                 pool_list = "\n".join(pool_suggestions)
                                 retry_instructions = (
@@ -437,9 +529,6 @@ def main():
                     log("DJ cycle triggered, but no valid response.")
                     success = True
             
-            # 6. Cleanup signal file (Crucial: done regardless of success/failure)
-            delete_signal()
-
         time.sleep(POLL_INTERVAL)
 
 if __name__ == "__main__":

@@ -1,0 +1,24 @@
+{
+  "shows": [
+    {
+      "id": "music_for_dreaming",
+      "name": "Music for Dreaming",
+      "schedule": {
+        "start": "23:00",
+        "end": "00:00"
+      },
+      "overrides": {
+        "music_style": "Play slower, softer, and more relaxing songs. Lean towards easy listening, ballads, smooth jazz, soft rock, and gentle classics. Avoid anything loud, fast, or energetic.",
+        "dj_personality": "Speak in a calm, warm, and soothing tone. Keep announcements gentle and brief — like a late-night companion winding down the day with the listener.",
+        "suggestion_pool": "suggestion_pool_dreaming.txt",
+        "news_enabled": false
+      }
+    }
+  ],
+  "defaults": {
+    "music_style": null,
+    "dj_personality": null,
+    "suggestion_pool": "suggestion_pool.txt",
+    "news_enabled": true
+  }
+}
