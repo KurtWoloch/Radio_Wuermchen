@@ -1,26 +1,17 @@
 # DJ Brain (Black Box) - Google Gemini Edition
 #
-# Standalone LLM-powered DJ that calls the Google Gemini API directly.
-# No OpenClaw dependency.
+# Usage: python dj_brain.py
 #
-# Interface (file-based):
-#   Input:  dj_request.json  - context about what just played, listener input, etc.
-#   Output: dj_response.json - track suggestion + track file path
-#   Config: dj_config.json   - API key, model, DJ personality settings
+# Listens for a request file, calls Gemini, and writes the response.
 #
-# Usage:
-#   python dj_brain.py
-#
-# To swap LLM providers, only this file and dj_config.json need to change.
+# Dependencies: google-genai
 
 import json
 import sys
 import os
-import google.genai as genai
-from google import genai as genai_client
-import requests
-import time
+import subprocess
 from datetime import datetime
+from pathlib import Path
 
 # --- CONFIGURATION ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -28,6 +19,9 @@ CONFIG_FILE = os.path.join(SCRIPT_DIR, "dj_config.json")
 REQUEST_FILE = os.path.join(SCRIPT_DIR, "dj_request.json")
 RESPONSE_FILE = os.path.join(SCRIPT_DIR, "dj_response.json")
 HISTORY_FILE = os.path.join(SCRIPT_DIR, "dj_history.json")
+WISHLIST_FILE = os.path.join(SCRIPT_DIR, "Wishlist.txt")
+TTS_GENERATOR_SCRIPT = os.path.join(SCRIPT_DIR, "tts_generate.py")
+PYTHON_BIN = "C:\\Program Files\\Python311\\python.exe"
 
 # --- HELPERS ---
 def load_json(path):
@@ -35,32 +29,46 @@ def load_json(path):
         with open(path, 'r', encoding='utf-8') as f:
             return json.load(f)
     except FileNotFoundError:
-        # Return empty list for history, or empty dict for config/request/response
-        if path.endswith("history.json"):
-            return []
         return {}
     except json.JSONDecodeError as e:
-        print(f"Error reading {path}: {e}", file=sys.stderr)
+        print(f"Error reading JSON file {path}: {e}", file=sys.stderr)
         return {}
 
-def save_json(path, data):
-    with open(path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-
 def load_history():
-    """Load recent DJ history (last N tracks played + announcements)."""
-    data = load_json(HISTORY_FILE)
-    if data and isinstance(data, list):
-        return data[-10:]  # keep last 10 entries
-    return []
+    """Load DJ history, returns empty list if file missing."""
+    return load_json(HISTORY_FILE)
 
-def save_history(history, new_entry):
-    """Append a new entry to history and save (keep last 20)."""
-    history.append(new_entry)
-    history = history[-20:]
-    save_json(HISTORY_FILE, history)
+def save_history(history):
+    """Save DJ history."""
+    try:
+        with open(HISTORY_FILE, 'w', encoding='utf-8') as f:
+            json.dump(history, f, indent=2)
+        return True
+    except Exception as e:
+        print(f"Error saving history: {e}", file=sys.stderr)
+        return False
 
-# --- GEMINI API CALL ---
+def append_to_history(track, announcement):
+    """Adds new entry to history."""
+    history = load_history()
+    if not isinstance(history, list):
+        history = []
+        
+    history.append({
+        "timestamp": datetime.now().isoformat(),
+        "track": track,
+        "announcement": announcement
+    })
+    save_history(history)
+
+def append_to_wishlist(track):
+    """Adds failed suggestion to wishlist."""
+    try:
+        with open(WISHLIST_FILE, 'a', encoding='utf-8') as f:
+            f.write(f"{datetime.now().isoformat()} | {track}\n")
+    except Exception as e:
+        print(f"Error writing to wishlist: {e}", file=sys.stderr)
+
 def call_gemini(config, system_prompt, user_message):
     """Call the Gemini API using the structure found in Google's current examples."""
     try:
@@ -68,37 +76,34 @@ def call_gemini(config, system_prompt, user_message):
         if not api_key:
             print("ERROR: GEMINI_API_KEY environment variable not set.", file=sys.stderr)
             return None
-        
-        model_name = config["model"]
 
-        # FIX: Initialize Client explicitly and pass API key. Remove global configure().
         client = genai_client.Client(api_key=api_key)
         
-        # Use the client's generate_content method, matching REST/new SDK structure
         response = client.models.generate_content(
-            model=model_name,
-            contents=[system_prompt, user_message]
+            model=config["model"],
+            contents=[system_prompt, user_message],
+            config=types.GenerateContentConfig(
+                response_modalities=["TEXT"],
+                temperature=config.get("temperature", 0.7)
+            )
         )
-        
-        # Extract text from response
-        if response.candidates and response.candidates[0].content.parts:
-            return response.text
-        else:
+
+        if not response.candidates or not response.candidates[0].content.parts:
             print(f"API Response Empty/Failed: {response.prompt_feedback}", file=sys.stderr)
             return None
             
+        return response.candidates[0].content.parts[0].text
+
     except Exception as e:
-        print(f"Gemini API Error: {e}", file=sys.stderr)
+        print(f"Gemini API Call Failed: {e}", file=sys.stderr)
         return None
 
-# --- DJ LOGIC ---
 def build_system_prompt(config):
-    """Build the system prompt that defines the DJ's personality, respecting show overrides."""
+    """Build the system prompt that defines the DJ's personality."""
     dj_name = config.get("dj_name", "DJ Flash")
     station_name = config.get("station_name", "Radio Würmchen")
     language = config.get("language", "German")
     
-    # Base diversity rule
     diversity_mandate = (
         "If there is no specific listener request, you MUST make an effort to "
         "suggest a track from a DIFFERENT genre than the last 2-3 tracks. "
@@ -109,21 +114,15 @@ def build_system_prompt(config):
     
     now = datetime.now().strftime("%A, %H:%M")
     
-    # Initialize style with defaults, will be overwritten by orchestrator instructions
-    style_instruction = f"{dj_name}'s Style: Natural, energetic, and concise. Avoid technobabble and hyperbole."
-    
-    # Orchestrator will prepend music_style, dj_personality, and any show-specific instructions
-    
     return f"""You are {dj_name}, the DJ of {station_name}. The current time is {now}. Your responses MUST be 100% valid JSON.
-{style_instruction}
+{dj_name}'s Style: Natural, energetic, and concise. Avoid technobabble and hyperbole.
 {diversity_mandate}
----
-SHOW OVERRIDES RECEIVED:
-{instructions}
----
 Output Format: Provide a JSON object with EXACTLY two keys: "track" and "announcement".
 - "track": The suggested next track in "Artist - Title" format.
-- "announcement": A short (1-3 sentence) natural introduction/transition."""
+- "announcement": A short (1-3 sentence) natural introduction/transition.
+
+Example JSON:
+{{"track": "Fleetwood Mac - Dreams", "announcement": "That was a classic! Now let's ease into something smooth with Fleetwood Mac and their timeless Dreams."}}"""
 
 def build_user_message(request_data, history):
     """Build the user message with context for the DJ."""
@@ -154,9 +153,7 @@ def build_user_message(request_data, history):
     return "\n".join(parts)
 
 def parse_dj_response(raw_text):
-    """Parse the DJ's JSON response. Returns dict with 'track' and 'announcement', or None."""
-    if not raw_text:
-        return None
+    """Parses the raw JSON string response from the DJ Brain into a Python dict."""
 
     # Gemini often returns clean text, but we clean up potential markdown fences just in case
     text = raw_text.strip()
@@ -207,28 +204,21 @@ def main():
     raw_response = call_gemini(config, system_prompt, user_message)
 
     if not raw_response:
-        print("ERROR: No response from LLM.", file=sys.stderr)
-        save_json(RESPONSE_FILE, {"error": "No response from LLM"})
         sys.exit(1)
 
-    # Parse response
-    parsed = parse_dj_response(raw_response)
-    if not parsed:
-        print("ERROR: Could not parse DJ response.", file=sys.stderr)
-        save_json(RESPONSE_FILE, {"error": "Invalid DJ response", "raw": raw_response})
+    # Parse and save result
+    response = parse_dj_response(raw_response)
+
+    if response:
+        print(f"DJ Suggestion: {response['track']}")
+        append_to_history(response["track"], response["announcement"])
+        
+        with open(RESPONSE_FILE, 'w', encoding='utf-8') as f:
+            json.dump(response, f, indent=2)
+        
+        sys.exit(0)
+    else:
         sys.exit(1)
-
-    # Save response
-    save_json(RESPONSE_FILE, parsed)
-    print(f"DJ suggests: {parsed['track']}")
-
-    # Update history
-    save_history(history, {
-        "track": parsed["track"],
-        "last_track": request_data.get("last_track", "Unknown")
-    })
-
-    sys.exit(0)
 
 if __name__ == "__main__":
     main()
