@@ -329,7 +329,8 @@ def main():
                         # --- HISTORY CHECK & VALIDATION START ---
                         
                         history = load_json(str(HISTORY_FILE))
-                        recent_tracks = [entry["track"].lower() for entry in history if "track" in entry]
+                        # Skip the most recent entry — it's the one the DJ just suggested
+                        recent_tracks = [entry["track"].lower() for entry in history[:-1] if "track" in entry]
                         
                         if suggested_track.lower() in recent_tracks:
                             log(f"DJ Suggestion REJECTED: '{suggested_track}' is in recent history.")
