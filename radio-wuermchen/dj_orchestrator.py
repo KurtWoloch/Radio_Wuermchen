@@ -372,6 +372,34 @@ def main():
                 news_instruction, news_context_payload = None, None
                 log("News disabled for current show.")
 
+            # C. Combine instructions
+            combined_instructions = None
+            instruction_parts = []
+
+            # Show-specific music style instruction
+            if show_overrides["music_style"]:
+                instruction_parts.append(f"SHOW MUSIC DIRECTIVE: {show_overrides['music_style']}")
+            
+            # Show-specific DJ personality override
+            if show_overrides["dj_personality"]:
+                instruction_parts.append(f"DJ STYLE FOR THIS SHOW: {show_overrides['dj_personality']}")
+            if weather_instruction:
+                instruction_parts.append(weather_instruction)
+            if news_instruction:
+                instruction_parts.append(news_instruction)
+            if instruction_parts:
+                combined_instructions = "\n\n---\n\n".join(instruction_parts)
+
+            # D. Prepare request data
+            last_track_path = read_last_line(QUEUE_FILE)
+            if last_track_path and not last_track_path.endswith(".mp3"):
+                 last_track_path = None
+            
+            if last_track_path:
+                last_track_name = os.path.basename(last_track_path)
+            else:
+                last_track_name = "Unknown track (Queue may have been empty)"
+
             # B2. Charts Context — check if the last played track is on the charts
             charts_instruction = None
             try:
@@ -390,36 +418,9 @@ def main():
                             break
             except Exception as e:
                 log(f"Charts lookup error (non-fatal): {e}")
-
-            # C. Combine instructions
-            combined_instructions = None
-            instruction_parts = []
-
-            # Show-specific music style instruction
-            if show_overrides["music_style"]:
-                instruction_parts.append(f"SHOW MUSIC DIRECTIVE: {show_overrides['music_style']}")
-            
-            # Show-specific DJ personality override
-            if show_overrides["dj_personality"]:
-                instruction_parts.append(f"DJ STYLE FOR THIS SHOW: {show_overrides['dj_personality']}")
             if charts_instruction:
                 instruction_parts.append(charts_instruction)
-            if weather_instruction:
-                instruction_parts.append(weather_instruction)
-            if news_instruction:
-                instruction_parts.append(news_instruction)
-            if instruction_parts:
                 combined_instructions = "\n\n---\n\n".join(instruction_parts)
-
-            # D. Prepare request data
-            last_track_path = read_last_line(QUEUE_FILE)
-            if last_track_path and not last_track_path.endswith(".mp3"):
-                 last_track_path = None
-            
-            if last_track_path:
-                last_track_name = os.path.basename(last_track_path)
-            else:
-                last_track_name = "Unknown track (Queue may have been empty)"
 
             request_data = {
                 "last_track": last_track_name,
