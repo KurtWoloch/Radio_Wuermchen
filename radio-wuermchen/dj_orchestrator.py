@@ -196,6 +196,28 @@ def remove_from_pool_file(pool_file_path, track_name):
             for line in new_lines:
                 f.write(line + '\n')
 
+def remove_exact_from_pool_file(pool_file_path, exact_entry):
+    """Remove a specific entry from a pool file by exact text match."""
+    try:
+        with open(pool_file_path, 'r', encoding='latin-1') as f:
+            lines = [line.rstrip('\n').rstrip('\r') for line in f]
+    except FileNotFoundError:
+        return
+
+    new_lines = []
+    removed = False
+    for line in lines:
+        if not removed and line.strip() == exact_entry.strip():
+            log(f"Removed from pool {os.path.basename(pool_file_path)}: {line.strip()}")
+            removed = True
+            continue
+        new_lines.append(line)
+
+    if removed:
+        with open(pool_file_path, 'w', encoding='latin-1') as f:
+            for line in new_lines:
+                f.write(line + '\n')
+
 def fallback_queue_from_pool(show_overrides, playlist):
     """When the DJ is unavailable, pick the next song from the suggestion pool,
     match it against the library, queue it, and remove it from the pool.
@@ -214,7 +236,8 @@ def fallback_queue_from_pool(show_overrides, playlist):
             if cleaned.lower() in p_filename.lower():
                 log(f"FALLBACK (no DJ): Queueing from pool: {p_filename}")
                 append_to_queue(p_track)
-                remove_from_pool_file(actual_pool_file, p_filename)
+                # Remove the exact pool entry we matched, not a fuzzy re-match
+                remove_exact_from_pool_file(actual_pool_file, suggestion)
                 return p_track
     
     log("FALLBACK: No matching tracks found in suggestion pool.")
