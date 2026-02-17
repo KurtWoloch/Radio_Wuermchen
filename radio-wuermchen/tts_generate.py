@@ -71,9 +71,31 @@ def set_rate_limited(error_message=""):
     RATE_LIMIT_WARN_FILE.write_text(content, encoding="utf-8")
     print(f"WARNING: Created rate limit warn file. Will use local TTS for {RATE_LIMIT_COOLDOWN}s.", file=sys.stderr)
 
+def detect_language(text):
+    """Detect if text is likely German based on umlaut frequency.
+    Returns 'de' if multiple umlauts found, 'en' otherwise."""
+    umlauts = sum(1 for c in text if c in 'äöüÄÖÜß')
+    if umlauts >= 2:
+        return 'de'
+    return 'en'
+
 def generate_local_tts(text_file, wav_path):
-    """Fall back to Windows SAPI local TTS generation."""
-    print("INFO: Falling back to local SAPI TTS (Microsoft Zira)...", file=sys.stderr)
+    """Fall back to Windows SAPI local TTS generation.
+    Automatically detects German text and switches voice accordingly."""
+    # Read text to detect language
+    with open(str(text_file), 'r', encoding='utf-8') as f:
+        text_content = f.read()
+
+    lang = detect_language(text_content)
+    if lang == 'de':
+        voice_name = 'Microsoft Hedda Desktop - German'
+        voice_lang = '407'
+        print("INFO: Falling back to local SAPI TTS (Microsoft Hedda - German)...", file=sys.stderr)
+    else:
+        voice_name = 'Microsoft Zira Desktop - English (United States)'
+        voice_lang = '409'
+        print("INFO: Falling back to local SAPI TTS (Microsoft Zira - English)...", file=sys.stderr)
+
     text_file_escaped = str(text_file).replace("'", "''")
     wav_path_escaped = str(wav_path).replace("'", "''")
     powershell_cmd = (
@@ -81,8 +103,8 @@ def generate_local_tts(text_file, wav_path):
         f"$stream = New-Object -ComObject 'SAPI.SpFileStream'; "
         f"$stream.Open('{wav_path_escaped}', 3, $false); "
         f"$speak.AudioOutputStream = $stream; "
-        f"$voice = $speak.GetVoices() | Where-Object {{ $_.GetAttribute('Language') -eq '409' "
-        f"-and $_.GetDescription() -eq 'Microsoft Zira Desktop - English (United States)' }}; "
+        f"$voice = $speak.GetVoices() | Where-Object {{ $_.GetAttribute('Language') -eq '{voice_lang}' "
+        f"-and $_.GetDescription() -eq '{voice_name}' }}; "
         f"$speak.Voice = $voice; "
         f"$speak.Speak([System.IO.File]::ReadAllText('{text_file_escaped}')); "
         f"$stream.Close(); $speak = $null;"
