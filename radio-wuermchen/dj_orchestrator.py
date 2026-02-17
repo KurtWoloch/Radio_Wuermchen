@@ -467,9 +467,11 @@ def main():
                         # Skip the most recent entry — it's the one the DJ just suggested
                         recent_tracks = [entry["track"].lower() for entry in history[:-1] if "track" in entry]
                         
+                        rejected_by_history = False
                         if suggested_track.lower() in recent_tracks:
                             log(f"DJ Suggestion REJECTED: '{suggested_track}' is in recent history.")
-                            found_track = None 
+                            found_track = None
+                            rejected_by_history = True
                         else:
                             # --- MUSIC MATCHING LOGIC START ---
                             potential_matches = []
@@ -515,9 +517,10 @@ def main():
                             
                             success = True
                         else:
-                            # FALLBACK PATH 1: Track not found (or rejected by history)
+                            # FALLBACK PATH 1: Track not found or rejected by history
                             log(f"Track NOT FOUND or REJECTED: {suggested_track}")
-                            append_to_wishlist(suggested_track)
+                            if not rejected_by_history:
+                                append_to_wishlist(suggested_track)
                             
                             # --- SUGGESTION POOL FALLBACK (Priority 1) ---
                             show_pool_file = str(BASE_DIR / show_overrides["suggestion_pool"]) if show_overrides.get("suggestion_pool") else None

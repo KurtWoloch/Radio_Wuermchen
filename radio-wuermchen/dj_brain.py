@@ -50,8 +50,10 @@ def save_history(history):
         print(f"Error saving history: {e}", file=sys.stderr)
         return False
 
+MAX_HISTORY_ENTRIES = 50  # Keep last 50 tracks in history
+
 def append_to_history(track, announcement):
-    """Adds new entry to history."""
+    """Adds new entry to history and trims to MAX_HISTORY_ENTRIES."""
     history = load_history()
     if not isinstance(history, list):
         history = []
@@ -61,6 +63,11 @@ def append_to_history(track, announcement):
         "track": track,
         "announcement": announcement
     })
+    
+    # Trim oldest entries if history exceeds max size
+    if len(history) > MAX_HISTORY_ENTRIES:
+        history = history[-MAX_HISTORY_ENTRIES:]
+    
     save_history(history)
 
 def append_to_wishlist(track):
