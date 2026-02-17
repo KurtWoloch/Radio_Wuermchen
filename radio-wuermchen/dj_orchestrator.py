@@ -17,6 +17,7 @@ import re
 from weather_manager import get_weather_forecast, WEATHER_RESULT
 from tts_manager import generate_announcement_audio
 from news_scheduler import get_news_instruction, news_mark_presented
+import charts_scraper
 
 # --- CONFIGURATION ---
 BASE_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
@@ -32,6 +33,7 @@ LISTENER_REQUEST_FILE = BASE_DIR / "listener_request.txt"
 SUGGESTION_POOL_FILE = BASE_DIR / "suggestion_pool.txt"
 HISTORY_FILE = BASE_DIR / "dj_history.json" # NEW: Added History file constant
 SHOWS_SCHEDULE_FILE = BASE_DIR / "shows_schedule.json"
+CHARTS_LIBRARY_FILE = BASE_DIR / "charts_in_library.json"
 
 PYTHON_BIN = "C:\\Program Files\\Python311\\python.exe"
 POLL_INTERVAL = 3  # seconds between checks
@@ -287,10 +289,31 @@ def main():
     log("DJ Orchestrator starting up.")
     
     last_track_played = None
+    last_charts_check = 0
+    CHARTS_CHECK_INTERVAL = 86400  # 24 hours in seconds
     
     while True:
         
         listener_input = None
+        
+        # --- CHARTS CHECK (once per day) ---
+        now_ts = time.time()
+        if now_ts - last_charts_check > CHARTS_CHECK_INTERVAL:
+            try:
+                cache_file = str(BASE_DIR / "charts_cache.json")
+                cache_age = None
+                if os.path.exists(cache_file):
+                    cache_age = now_ts - os.path.getmtime(cache_file)
+                
+                if cache_age is None or cache_age > CHARTS_CHECK_INTERVAL:
+                    log("Charts cache is stale or missing. Running charts scraper...")
+                    charts_scraper.main()
+                    log("Charts scraper finished.")
+                else:
+                    log(f"Charts cache is fresh ({cache_age:.0f}s old). Skipping scrape.")
+            except Exception as e:
+                log(f"Charts scraper error (non-fatal): {e}")
+            last_charts_check = now_ts
         
         if os.path.exists(SIGNAL_FILE):
             # Atomically claim the signal file to prevent duplicate processing
@@ -349,6 +372,25 @@ def main():
                 news_instruction, news_context_payload = None, None
                 log("News disabled for current show.")
 
+            # B2. Charts Context — check if the last played track is on the charts
+            charts_instruction = None
+            try:
+                charts_lib = load_json(str(CHARTS_LIBRARY_FILE))
+                if charts_lib and last_track_name:
+                    # Match by basename without extension
+                    last_base = os.path.splitext(last_track_name)[0]
+                    for chart_song, position in charts_lib.items():
+                        if chart_song.lower() == last_base.lower():
+                            charts_instruction = (
+                                f"The song that just played, \"{last_base}\", is currently at "
+                                f"#{position} in the Austrian Singles Charts! "
+                                f"You may mention this to the listeners."
+                            )
+                            log(f"Charts context: last track is at #{position} in the charts.")
+                            break
+            except Exception as e:
+                log(f"Charts lookup error (non-fatal): {e}")
+
             # C. Combine instructions
             combined_instructions = None
             instruction_parts = []
@@ -360,6 +402,8 @@ def main():
             # Show-specific DJ personality override
             if show_overrides["dj_personality"]:
                 instruction_parts.append(f"DJ STYLE FOR THIS SHOW: {show_overrides['dj_personality']}")
+            if charts_instruction:
+                instruction_parts.append(charts_instruction)
             if weather_instruction:
                 instruction_parts.append(weather_instruction)
             if news_instruction:
