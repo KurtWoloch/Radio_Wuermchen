@@ -1,6 +1,6 @@
 {
     "provider": "google",
-    "model": "gemini-2.5-flash-preview-09-2025",
+    "model": "gemini-2.5-flash",
     "dj_name": "DJ Würmchen",
     "station_name": "Radio Würmchen",
     "language": "English"
