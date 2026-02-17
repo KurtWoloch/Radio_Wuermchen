@@ -12,7 +12,7 @@ import os
 import subprocess
 from datetime import datetime
 from pathlib import Path
-import google.generativeai as genai_client
+from google import genai as genai_client
 from google.genai import types
 
 # --- CONFIGURATION ---

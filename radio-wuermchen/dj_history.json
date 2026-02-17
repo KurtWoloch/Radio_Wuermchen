@@ -1,46 +1,336 @@
 [
   {
-    "track": "Amy Winehouse - Back to Black",
-    "last_track": "Arctic Monkeys - I bet you look good on the dancefloor.mp3"
+    "track": "Rainhard Fendrich - Rattenf\u00e4nger (live)",
+    "last_track": "Garbage - I Think I'm Paranoid.mp3"
   },
   {
-    "track": "Robyn - Dancing On My Own",
-    "last_track": "Arctic Monkeys - I bet you look good on the dancefloor.mp3"
+    "track": "The Doors - Riders on the Storm",
+    "last_track": "Rainhard Fendrich - Rattenf\u00e4nger (live).mp3"
   },
   {
-    "track": "Pet Shop Boys - West End Girls",
-    "last_track": "Arctic Monkeys - I bet you look good on the dancefloor.mp3"
+    "track": "Marvin Gaye - I Heard It Through The Grapevine",
+    "last_track": "The Doors - Riders on the storm.mp3"
   },
   {
-    "track": "The Chemical Brothers - Galvanize",
-    "last_track": "Arctic Monkeys - I bet you look good on the dancefloor.mp3"
+    "track": "Johnny Cash - Hurt",
+    "last_track": "Marvin Gaye - I heard it through the grapevine.mp3"
   },
   {
-    "track": "Massive Attack - Teardrop",
-    "last_track": "Arctic Monkeys - I bet you look good on the dancefloor.mp3"
+    "track": "Matt Bianco - More than I can bear (Single-Version)",
+    "last_track": "Marvin Gaye - I heard it through the grapevine.mp3"
   },
   {
-    "track": "Portishead - Glory Box",
-    "last_track": "Arctic Monkeys - I bet you look good on the dancefloor.mp3"
+    "track": "Muse - Uprising",
+    "last_track": "Matt Bianco - More than I can bear (Single-Version).mp3"
   },
   {
-    "track": "Tears for Fears - Everybody Wants To Rule The World",
-    "last_track": "Arctic Monkeys - I bet you look good on the dancefloor.mp3"
+    "track": "Tracy Chapman - Talkin' Bout A Revolution",
+    "last_track": "Muse - Uprising.mp3"
   },
   {
-    "track": "Liza Minnelli & Joel Grey - Money, Money",
-    "last_track": "Arctic Monkeys - I bet you look good on the dancefloor.mp3"
+    "track": "Kurt Woloch - Love can build a bridge (Karaoke)",
+    "last_track": "Muse - Uprising.mp3"
   },
   {
-    "track": "The Killers - Mr. Brightside",
-    "last_track": "Liza Minnelli & Joel Grey - Money, Money.mp3"
+    "track": "Nena - 99 Luftballons",
+    "last_track": "Kurt Woloch - Love can build a bridge (Karaoke).mp3"
   },
   {
-    "track": "Depeche Mode - Enjoy the Silence",
-    "last_track": "The Killers - Mr. Brightside.mp3"
+    "track": "Queen - Who Wants To Live Forever",
+    "last_track": "Nena - 99 Luftballons.mp3"
   },
   {
-    "track": "Massive Attack - Teardrop",
-    "last_track": "Depeche Mode - Enjoy the silence.mp3"
+    "track": "Willie Nelson - Always On My Mind",
+    "last_track": "Queen - Who wants to live forever.mp3"
+  },
+  {
+    "timestamp": "2026-02-16T21:25:55.329951",
+    "track": "Imagine Dragons - Believer",
+    "announcement": "Whew, the heat is rising in the political arena! Interior Minister Karner and the FP\u00d6 are trading serious blows over the Pilnacek inquiry witness list, with accusations of 'witch hunts' flying around. Let's channel that intense conviction into some powerful 2017 rock with Imagine Dragons."
+  },
+  {
+    "timestamp": "2026-02-16T21:29:29.979136",
+    "track": "Billie Eilish - Therefore I Am",
+    "announcement": "Wien, aufgepasst: Tonight we have freezing rain possible after midnight, and tomorrow brings wind and slippery conditions before clearing up! Now, let's turn to the headlines: The Equal Treatment Ombudsman is strongly denying claims of cooperating with antisemitic groups following heavy political criticism over a recent press conference. It\u2019s a serious debate about accountability, and when you face that kind of public scrutiny, you just have to declare yourself\u2014this is Billie Eilish with 'Therefore I Am'."
+  },
+  {
+    "timestamp": "2026-02-16T21:30:42.009388",
+    "track": "Kendrick Lamar - Money Trees",
+    "announcement": "Okay, time for a quick check on the numbers. The Austrian health funds are still facing massive deficits\u2014we're talking over 500 million euros projected for 2025, even if that's slightly better than expected. Dealing with numbers that high can definitely make you think about the cost of everything; let's hit the reset button with some serious West Coast flow."
+  },
+  {
+    "timestamp": "2026-02-16T21:30:50.509094",
+    "track": "Arctic Monkeys - Do I Wanna Know?",
+    "announcement": "Speaking of serious business, the Krankenkassen are still projecting a massive deficit of over 500 million Euros for 2025, even if their consolidation measures are showing small improvements. It's a complex financial picture, but now we leave the budget woes behind. Let's get into the heavy sound of modern Indie Rock with the Arctic Monkeys."
+  },
+  {
+    "timestamp": "2026-02-16T21:30:59.278843",
+    "track": "Lorde - Royals",
+    "announcement": "So, the latest news shows Austria's health funds are still staring at a huge deficit of over 500 million euros next year, despite some slight improvements in the forecast. When we hear those massive budget numbers, it makes you think about money and the true cost of everything. Here's Lorde with a track from 2013 that really nailed that feeling."
+  },
+  {
+    "timestamp": "2026-02-16T21:36:33.098007",
+    "track": "Childish Gambino - This Is America",
+    "announcement": "We have some heavy news out of the US tonight: Authorities in Minnesota are accusing the FBI of an unprecedented lack of cooperation, stonewalling the investigation into the fatal shooting of a US citizen by ICE agents. This situation highlights serious systemic issues and the tension surrounding federal operations and transparency. For a powerful moment of reflection and commentary that speaks volumes, here is Childish Gambino."
+  },
+  {
+    "timestamp": "2026-02-16T21:36:43.507803",
+    "track": "Andrea & Kurt Woloch - California dreamin'",
+    "announcement": "That news coming out of the US is heavy tonight: State authorities in Minnesota are calling out the FBI for refusing to share crucial evidence regarding fatal shootings by ICE agents, citing an 'unprecedented' lack of cooperation in these serious cases. It\u2019s a deeply concerning story about accountability and institutional transparency. We definitely need a break from the headlines now, so let's mentally escape the cold Vienna weather and head toward the sunshine with this classic cover."
+  },
+  {
+    "timestamp": "2026-02-16T21:37:18.142737",
+    "track": "Billie Eilish - Bad Guy",
+    "announcement": "Serious news tonight from Paris: French authorities raided institutions connected to former Culture Minister Jack Lang, who is under investigation for alleged financial ties to the Epstein case. When secrets start coming out and the pressure is on, sometimes you just need a track with that perfect, dark confidence. Here is Billie Eilish, keeping the energy high."
+  },
+  {
+    "timestamp": "2026-02-16T21:37:27.307656",
+    "track": "The Neighbourhood - Sweater Weather",
+    "announcement": "We shift gears after that heavy news: French authorities are investigating former Culture Minister Jack Lang and his daughter over serious allegations of money laundering and tax fraud linked directly to the Epstein documents, leading to raids in Paris. When powerful figures are tied to such scandals, things can get cold fast. Let's dive into something moody and current with The Neighbourhood."
+  },
+  {
+    "timestamp": "2026-02-16T21:37:36.427666",
+    "track": "Hozier - Take Me To Church",
+    "announcement": "Oof, heavy news coming out of Paris tonight. Former French Culture Minister Jack Lang is facing investigation for suspected financial crimes tied to the Epstein documents, leading to raids today; he resigned, blaming \"naivety.\" That kind of intense, dramatic situation needs a powerful soundtrack, so here is Hozier with a track that digs deep into complicated truths."
+  },
+  {
+    "timestamp": "2026-02-16T21:43:35.516625",
+    "track": "Florence + The Machine - Shake It Out",
+    "announcement": "We have some heavy news tonight: Ukrainian President Selenskyj is warning of a major Russian air strike on critical energy facilities, urging allies to speed up air defense shipments. It's a sobering reminder of the resilience needed right now, especially as winter continues, and we're sending out this track as a moment of powerful defiance and hope. Here is Florence + The Machine."
+  },
+  {
+    "timestamp": "2026-02-16T21:43:45.956614",
+    "track": "Woodkid - Iron",
+    "announcement": "Wir haben gerade eine ernste Warnung von Pr\u00e4sident Selenskyj geh\u00f6rt, der vor schweren Angriffen auf die ukrainische Energieversorgung mitten im Winter warnt. Er appelliert dringend an den Westen, die versprochene Luftabwehr schnell zu liefern, um die Menschen zu sch\u00fctzen. Dieser Song f\u00e4ngt die Dramatik und die monumentale St\u00e4rke des Widerstands perfekt ein."
+  },
+  {
+    "timestamp": "2026-02-16T21:43:54.691826",
+    "track": "Imagine Dragons - Radioactive",
+    "announcement": "Die Lage in der Ukraine spitzt sich zu: Pr\u00e4sident Selenskyj warnte heute vor massiven russischen Luftangriffen auf die Energieversorgung, gerade jetzt in der bitteren K\u00e4lte. Er fordert die westlichen Verb\u00fcndeten eindringlich auf, die zugesagten Flugabwehrsysteme schnellstens zu liefern, damit die Menschen dort gesch\u00fctzt werden k\u00f6nnen. Es ist eine ernste und herausfordernde Zeit, und wir brauchen Kraft\u2014hier ist Imagine Dragons mit \"Radioactive\"."
+  },
+  {
+    "timestamp": "2026-02-16T21:44:22.206638",
+    "track": "Stromae - Papaoutai",
+    "announcement": "Big political news tonight: the EU is sending a representative to the meeting of Trump's new \"Peace Council,\" even though the price tag for a permanent seat is reportedly one billion dollars. That's some serious international drama; let's switch gears with the brilliant Stromae and a track about searching for answers in a complex world."
+  },
+  {
+    "timestamp": "2026-02-16T21:51:36.365164",
+    "track": "The Black Keys - Tighten Up",
+    "announcement": "We just got some heavy news: VW is reportedly planning a massive 60-billion-Euro savings program by 2028, meaning cost-cutting and potential job losses are looming large. When faced with that kind of corporate pressure, the only advice is to stay focused and get back to basics. Here\u2019s The Black Keys with their 2010 hit, Tighten Up."
+  },
+  {
+    "timestamp": "2026-02-16T21:51:44.460150",
+    "track": "Adele - Rolling in the deep",
+    "announcement": "Big news from the auto world: VW is reportedly planning a massive \u20ac60 billion savings program over the next few years, driven by sluggish global sales. That kind of economic pressure means major cost cuts are coming, and this next track embodies having to face the consequences and start fresh. This is Adele with the powerful 'Rolling in the Deep'."
+  },
+  {
+    "timestamp": "2026-02-16T21:52:16.425123",
+    "track": "Kendrick Lamar - Money Trees",
+    "announcement": "Uff, tough news coming out of the finance world tonight. The Austrian Crowdinvesting platform Rendity has reportedly shut down, meaning around 37,000 people who invested over 150 million Euros in real estate are now facing serious losses. When the high-stakes game of money goes wrong, it makes you think about what really matters\u2014so let\u2019s drop the volume on the drama and turn up the introspection with Kendrick Lamar."
+  },
+  {
+    "timestamp": "2026-02-16T21:52:24.300181",
+    "track": "Twenty One Pilots - Stressed out",
+    "announcement": "Woah, some tough news coming out of the finance world tonight: the Austrian Crowdinvesting platform Rendity is shutting down, leaving around 37,000 investors in the lurch after massive amounts of money were sunk into failed real estate projects. Losing that kind of money is definitely a high-stress situation, and that feeling perfectly leads us into this next track from Twenty One Pilots."
+  },
+  {
+    "timestamp": "2026-02-16T22:00:00.106191",
+    "track": "Dua Lipa - Don't Start Now",
+    "announcement": "It's 21:59 here on Radio W\u00fcrmchen, and before we dive into the next track, let's catch up on the world. The headlines tonight are serious: we're tracking medication shortages affecting 1,300 drugs, the passing of acting legend Robert Duvall, and international politics regarding US support for Orban and charges related to the alleged Swift attack plans. Looking outside, Vienna is bracing for a chilly night\u2014watch out for some snow and possible freezing rain after midnight, and tomorrow stays windy with temperatures around 4 to 6 degrees. After all that complexity and the cold forecast, we need a burst of pure energy to shake things up; this track is a massive dancefloor hit from the late 2010s that still sounds absolutely fresh."
+  },
+  {
+    "timestamp": "2026-02-16T22:00:54.875078",
+    "track": "Bill Withers - Lean On Me",
+    "announcement": "Before the next tune, just a quick heads-up on the supply chain: over 1,300 medications are currently experiencing delivery issues, including important diabetes treatments and the shingles vaccine. That news is a bit heavy, so let's turn to Bill Withers for a reminder that we all need somebody to lean on sometimes."
+  },
+  {
+    "timestamp": "2026-02-16T22:07:35.902145",
+    "track": "Fela Kuti - Zombie",
+    "announcement": "That was a great moment of Soul, but now for some important news. About a hundred US soldiers have arrived in Nigeria to advise local forces fighting militant groups like Boko Haram, underlining the complex security situation there. We'll carry that energy and urgency straight into some powerful Afrobeat from the legendary Fela Kuti."
+  },
+  {
+    "timestamp": "2026-02-16T22:07:43.784137",
+    "track": "Kurt Woloch - Brothers in arms (Karaoke-Party)",
+    "announcement": "We interrupt the flow briefly for a serious update: The US has just deployed roughly a hundred soldiers to Nigeria to assist local forces fighting intense battles against Islamist groups. These soldiers are there to train and advise, but the situation remains tense and volatile. Here is a powerful track reflecting the reality faced by those in conflict."
+  },
+  {
+    "timestamp": "2026-02-16T22:08:10.515897",
+    "track": "Kraftwerk - The Robots",
+    "announcement": "Huge news for Austrian tech: Peter Steinberger, the brain behind the AI agent OpenClaw, is heading to Silicon Valley after being recruited by ChatGPT-creators OpenAI. That's innovation moving fast! Let's celebrate the march of technology with the pioneers of electronic sound, Kraftwerk."
+  },
+  {
+    "timestamp": "2026-02-16T22:08:18.219033",
+    "track": "Oliver Baier & Claus H\u00f6rr - Der Telefon-Virus im Wiener Fu_",
+    "announcement": "Gro\u00dfe News aus der Tech-Welt: Der Ober\u00f6sterreicher Peter Steinberger, Entwickler des KI-Agenten OpenClaw, wird vom Silicon Valley-Riesen OpenAI verpflichtet! Das ist ein riesiger Schritt f\u00fcr die KI-Entwicklung. Passend zum Thema digitale Gefahren und Kommunikation h\u00f6ren wir jetzt, wie Oliver Baier und Claus H\u00f6rr den 'Telefon-Virus' bek\u00e4mpfen."
+  },
+  {
+    "timestamp": "2026-02-16T22:17:16.048124",
+    "track": "Depeche Mode - Policy of Truth",
+    "announcement": "The Austrian Journalists Club just cleaned house, removing two controversial board members amid heavy criticism and allegations of foreign influence. It seems integrity was finally prioritized over policy loopholes, addressing some serious image problems. Let's switch gears completely now and hear Depeche Mode remind us about the importance of the 'Policy of Truth'."
+  },
+  {
+    "timestamp": "2026-02-16T22:17:24.659728",
+    "track": "Heli Deinboek - Ollas wa' so afoch ohne mi",
+    "announcement": "Das war der Telefon-Virus. Der \u00d6sterreichische Journalisten Club hat gestern aufger\u00e4umt und zwei Vorstandsmitglieder wegen massiver Imageprobleme und mutma\u00dflicher Einflussnahme ausgeschlossen. Es scheint, als w\u00fcrde man sich denken: 'Ollas wa' so afoch ohne mi'. Hier ist Heli Deinboek."
+  },
+  {
+    "timestamp": "2026-02-16T22:17:47.576978",
+    "track": "The Police - Every Breath You Take",
+    "announcement": "Okay, that was Heli Deinboek. Time for a quick check-in on security: ETH Z\u00fcrich just reported finding huge vulnerabilities in several popular password managers, meaning those digital locks we trust might not be so secure after all. It\u2019s a good reminder to be vigilant, especially as we head into a potentially icy night here in Vienna."
+  },
+  {
+    "timestamp": "2026-02-16T22:31:39.112192",
+    "track": "Leonard Cohen - Hallelujah",
+    "announcement": "Bevor wir zur Musik kommen, eine traurige Nachricht: Dana Eden, die Produzentin der Emmy-pr\u00e4mierten Spionageserie 'Teheran', ist gestern Abend in Athen verstorben. Die Polizei geht von Suizid aus. In Gedenken an sie und die ernste Stimmung dieser Nachricht, spielen wir jetzt Leonard Cohen."
+  },
+  {
+    "timestamp": "2026-02-16T22:34:01.610888",
+    "track": "Queen - I Want It All",
+    "announcement": "Wow, talk about valuable nostalgia! An extremely rare Pok\u00e9mon card just sold for a staggering $16.5 million, setting a new world record for a collectible card. That kind of high-stakes bidding for the ultimate prize requires an anthem\u2014here is Queen."
+  },
+  {
+    "timestamp": "2026-02-16T22:34:27.277825",
+    "track": "Marvin Gaye - What's Going On",
+    "announcement": "It's getting late, and with the chance of freezing rain outside, we need some serious soul to keep warm here at Radio W\u00fcrmchen. Marvin Gaye always delivers that heat, blending incredible grooves with powerful messages about the world around us. Let's start the week right with this timeless masterpiece, \"What's Going On.\""
+  },
+  {
+    "timestamp": "2026-02-16T22:34:34.260833",
+    "track": "The Shirelles - Everybody loves a lover",
+    "announcement": "It's getting cold out there tonight, Vienna, with some snow and possibly even freezing rain coming later. Let's warm things up with a perfect classic from the early 60s. This is The Shirelles, reminding us that everybody loves a lover."
+  },
+  {
+    "timestamp": "2026-02-16T22:43:57.698683",
+    "track": "Eurythmics - Sweet Dreams (Are Made of This)",
+    "announcement": "That sweet sound from The Shirelles was perfect, but now it's time to shake off that Monday fatigue. We've got some freezing rain and snow coming down in Vienna tonight, so let's turn up the heat with a synth-pop masterpiece."
+  },
+  {
+    "timestamp": "2026-02-16T22:44:18.054541",
+    "track": "Stevie Wonder - Superstition",
+    "announcement": "That New Wave groove was fantastic, but it's getting late, and Vienna is starting to feel that freezing rain\u2014so please be safe if you're still out! Time to ditch the cold and heat things up with some undeniable rhythm and brass. Here is the legend, Stevie Wonder, to keep the energy high."
+  },
+  {
+    "timestamp": "2026-02-16T22:44:24.777604",
+    "track": "Helge Schneider - Telefonmann",
+    "announcement": "That was Eurythmics, pulling us through the Monday night. It's getting cold and messy outside, so let's dial up something truly unique to keep the mood warm and slightly strange with the incomparable Helge Schneider."
+  },
+  {
+    "timestamp": "2026-02-16T22:50:39.589277",
+    "track": "James Brown - I Got You (I Feel Good)",
+    "announcement": "We need some serious heat to fight off that freezing rain Vienna is expecting after midnight. This next track is pure energy, a perfect antidote to the cold. Get ready for the Godfather of Soul, James Brown!"
+  },
+  {
+    "timestamp": "2026-02-16T22:51:00.810965",
+    "track": "The Cure - Just Like Heaven",
+    "announcement": "That was the Godfather of Soul keeping the energy high! As we head toward midnight here in Vienna, the forecast warns of freezing rain and slick conditions later tonight. Be careful out there, and let's slow things down a bit with some dreamy New Wave from The Cure."
+  },
+  {
+    "timestamp": "2026-02-16T22:56:27.262726",
+    "track": "Wolfgang Ambros - Schifoan",
+    "announcement": "We're shaking off that New Wave mood and diving into something distinctly Austrian. With freezing rain and maybe a little snow expected tonight, this classic reminds us that winter is still here, even if it's messy. Time for Wolfgang Ambros and Schifoan!"
+  },
+  {
+    "timestamp": "2026-02-16T22:56:48.167604",
+    "track": "Soft Cell - Tainted Love",
+    "announcement": "The slopes are closed, but Radio W\u00fcrmchen is still wide open! It's getting icy out there tonight with the possibility of freezing rain, so let's dial up the temperature and the energy. This classic piece of synth-pop from Soft Cell should do the trick."
+  },
+  {
+    "timestamp": "2026-02-16T23:04:33.563553",
+    "track": "Carole King - It's Too Late",
+    "announcement": "Good evening. The weather is turning chilly tonight; while it starts clear, be aware of possible snow and freezing rain after midnight, and tomorrow morning will be quite windy. Please stay warm and drive carefully. Now, as the city settles down into the quiet, let's enjoy a moment of gentle reflection with the beautiful sound of Carole King."
+  },
+  {
+    "timestamp": "2026-02-16T23:04:43.281152",
+    "track": "Dream Collection - Time to say goodbye",
+    "announcement": "Guten Abend, Wien. It\u2019s 11:04 PM, and the weather is turning cold and tricky. We might see some stars now, but after midnight, look out for snow and even freezing rain in parts of the city, with temperatures dipping just below zero. Tomorrow brings changeability and wind, but highs around six degrees. Given the chill and the late hour, let's find some peace now and drift away softly with this beautiful, relaxing piece."
+  },
+  {
+    "timestamp": "2026-02-16T23:05:13.503289",
+    "track": "James Taylor - Fire and Rain",
+    "announcement": "It is getting quite cold outside tonight, so let's keep things warm and gentle here on the airwaves. We turn now to a timeless piece of comfort from James Taylor, here is 'Fire and Rain'."
+  },
+  {
+    "timestamp": "2026-02-16T23:12:05.625817",
+    "track": "Sade - No Ordinary Love",
+    "announcement": "It's getting late, and the temperatures are dropping outside tonight, Vienna. Let's keep things gentle and warm inside as we wind down the evening. Here is Sade with a truly beautiful, relaxing track."
+  },
+  {
+    "timestamp": "2026-02-16T23:12:13.526543",
+    "track": "Frank Sinatra - Night and day",
+    "announcement": "We are winding down the evening here at Radio W\u00fcrmchen, and with the temperatures dropping outside, we need something truly warm and classic inside. Let's shift gears completely and enjoy a timeless standard from The Voice himself. This is Frank Sinatra with the beautiful 'Night and Day.'"
+  },
+  {
+    "timestamp": "2026-02-16T23:12:34.269962",
+    "track": "Eva Cassidy - Fields of Gold",
+    "announcement": "As we settle into the late hour, let's keep the evening gentle and warm. Here is the incomparable Eva Cassidy with her stunning rendition of \"Fields of Gold.\""
+  },
+  {
+    "timestamp": "2026-02-16T23:12:42.658059",
+    "track": "Katie Melua - Nine million bicycles",
+    "announcement": "That wonderful classic helped us settle in for the night. As the wind is starting to pick up outside in Vienna, let's keep things gentle and warm right here. We turn now to the beautiful, soothing sounds of Katie Melua."
+  },
+  {
+    "timestamp": "2026-02-16T23:18:24.369424",
+    "track": "George Benson - Breezin'",
+    "announcement": "As we settle into the quiet of the late evening, let's keep the atmosphere calm and warm. This instrumental classic from George Benson is the perfect soundtrack for winding down and letting the day go. Just sit back and enjoy \"Breezin'.\""
+  },
+  {
+    "timestamp": "2026-02-16T23:18:34.229521",
+    "track": "Air Supply - Making love out of nothing at all",
+    "announcement": "It is getting quite late now, and with the freezing conditions moving in tonight, please stay safe and warm. Let the sound of Air Supply provide a gentle, soothing blanket as we continue to wind down the evening. This is their classic ballad, \u201cMaking love out of nothing at all.\u201d"
+  },
+  {
+    "timestamp": "2026-02-16T23:18:56.546530",
+    "track": "Leonard Cohen - Hallelujah",
+    "announcement": "As we wind down this late hour, let's turn to a true master of reflection. Leonard Cohen always provides the perfect soundtrack for quiet contemplation."
+  },
+  {
+    "timestamp": "2026-02-16T23:19:04.359479",
+    "track": "Bing Crosby - Stars fell on Alabama",
+    "announcement": "It's a chilly night out there, with some freezing rain possible in the city, so let's settle in with something truly warm and classic. Bing Crosby has the perfect soothing voice to guide us into the quiet hours of the morning. Here he is with the timeless standard, \"Stars fell on Alabama.\""
+  },
+  {
+    "timestamp": "2026-02-16T23:27:50.453199",
+    "track": "Cat Stevens - Morning Has Broken",
+    "announcement": "That gentle classic from Bing Crosby sets the mood perfectly for a late evening. As the clock ticks toward midnight, we need something truly peaceful to wind things down. This next track is a timeless, meditative piece from Cat Stevens."
+  },
+  {
+    "timestamp": "2026-02-16T23:31:16.928720",
+    "track": "Carole King - So Far Away",
+    "announcement": "That was a gentle acoustic moment. As the night deepens and the temperature drops toward freezing, let's find some warmth in a classic sound. This beautiful, reflective track from Carole King is perfect for winding down the evening."
+  },
+  {
+    "timestamp": "2026-02-16T23:31:24.956509",
+    "track": "Lionel Richie & Diana Ross - Endless love",
+    "announcement": "It's a quiet, cold night developing here in Vienna, so let's keep things warm and gentle as we wind down the hour. This next track is one of the most iconic and soothing ballads of the early 80s, a perfect late-night companion. Here are Lionel Richie and Diana Ross with their timeless duet, \"Endless Love.\""
+  },
+  {
+    "timestamp": "2026-02-16T23:31:47.716577",
+    "track": "Kenny G - Silhouette",
+    "announcement": "The freezing temperatures are settling in across Vienna tonight, so let's keep things warm and gentle inside. This next piece is pure smooth relaxation, perfect for winding down this Monday evening."
+  },
+  {
+    "timestamp": "2026-02-16T23:31:55.597435",
+    "track": "Billie Holiday - Night and day",
+    "announcement": "It's getting late here in Vienna, and the perfect way to wind down the night is with a true classic. Let the gentle magic of Billie Holiday take over as we listen to 'Night and Day.'"
+  },
+  {
+    "timestamp": "2026-02-17T06:29:43.415304",
+    "track": "The Cure - Just Like Heaven",
+    "announcement": "Guten Morgen! Es ist 6:29 Uhr und das Wetter in Wien ist heute ein echtes Wechselspiel: Plusgrade, lebhafter Wind, und alles von Sonne bis Graupelschauern ist m\u00f6glich. In den Nachrichten dominieren heute die Debatte um die Wehrpflicht, scharfe Kritik an Israel und die traurige Meldung vom Tod des Schauspielers Robert Duvall, neben Meldungen \u00fcber Medikamenten-Engp\u00e4sse und einem Drohnenangriff im Sudan. Nach diesen ernsten Themen und dem wechselhaften Start in den Tag, brauchen wir jetzt etwas, das uns mit Schwung und Melodie begleitet: Hier sind The Cure."
+  },
+  {
+    "timestamp": "2026-02-17T06:29:51.779778",
+    "track": "Madonna - Dear Jessie",
+    "announcement": "Guten Morgen! Es ist 6:29 Uhr. In Wien wird es heute windig mit Regen- und Schneeschauern bei 5 bis 7 Grad; die Schlagzeilen dominieren die hitzige Wehrpflicht-Debatte und die traurige Nachricht vom Tod Robert Duvalls. Nach diesen ernsten T\u00f6nen brauchen wir jetzt eine vertr\u00e4umte Auszeit, hier ist Madonna."
+  },
+  {
+    "timestamp": "2026-02-17T06:30:17.915716",
+    "track": "Creedence Clearwater Revival - Fortunate Son",
+    "announcement": "Guten Morgen! While the wind is lively outside, things are heating up inside Parliament today as the government debates the controversial conscription reform. Experts are already questioning the proposed public referendum, setting the stage for a tense morning. Let's match that mood with a powerful classic about duty and division from CCR."
+  },
+  {
+    "timestamp": "2026-02-17T06:30:26.115023",
+    "track": "Die Prinzen - Mein Fahrrad",
+    "announcement": "Guten Morgen, Vienna! It's a brisk and windy Tuesday out there, so bundle up if you're heading out. Speaking of heated situations, the government is meeting today for what promises to be a fiery debate over the reform of the draft. Let's lighten the mood and spin something energetic from Die Prinzen\u2014a track about a far less serious, but equally important, matter: \"Mein Fahrrad.\""
   }
 ]
