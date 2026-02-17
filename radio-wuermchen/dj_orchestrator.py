@@ -169,6 +169,57 @@ def get_pool_suggestions(max_count=MAX_POOL_SUGGESTIONS, pool_file=None):
     pool = read_suggestion_pool(pool_file=pool_file)
     return pool[:max_count]
 
+def remove_from_pool_file(pool_file_path, track_name):
+    """Remove a track from a specific pool file by matching against the track filename."""
+    try:
+        with open(pool_file_path, 'r', encoding='latin-1') as f:
+            lines = [line.rstrip('\n').rstrip('\r') for line in f]
+    except FileNotFoundError:
+        return
+
+    track_lower = track_name.lower()
+    new_lines = []
+    removed = False
+    for line in lines:
+        stripped = line.strip()
+        if not removed and stripped and not stripped.startswith('#'):
+            # Strip chart annotations for comparison
+            clean_line = re.sub(r'\s*\(.*?\)\s*$', '', stripped).strip()
+            if clean_line.lower() in track_lower:
+                log(f"Removed from pool {os.path.basename(pool_file_path)}: {stripped}")
+                removed = True
+                continue
+        new_lines.append(line)
+
+    if removed:
+        with open(pool_file_path, 'w', encoding='latin-1') as f:
+            for line in new_lines:
+                f.write(line + '\n')
+
+def fallback_queue_from_pool(show_overrides, playlist):
+    """When the DJ is unavailable, pick the next song from the suggestion pool,
+    match it against the library, queue it, and remove it from the pool.
+    Returns the queued track path or None."""
+    show_pool_file = str(BASE_DIR / show_overrides["suggestion_pool"]) if show_overrides.get("suggestion_pool") else None
+    actual_pool_file = show_pool_file or str(SUGGESTION_POOL_FILE)
+    pool = read_suggestion_pool(pool_file=show_pool_file)
+    
+    for suggestion in pool:
+        # Strip chart annotations like "(currently at #xx in the Austrian charts)"
+        clean_name = re.sub(r'\s*\(.*?\)\s*$', '', suggestion).strip()
+        cleaned = clean_suggestion_for_matching(clean_name)
+        
+        for p_track in playlist:
+            p_filename = os.path.basename(p_track)
+            if cleaned.lower() in p_filename.lower():
+                log(f"FALLBACK (no DJ): Queueing from pool: {p_filename}")
+                append_to_queue(p_track)
+                remove_from_pool_file(actual_pool_file, p_filename)
+                return p_track
+    
+    log("FALLBACK: No matching tracks found in suggestion pool.")
+    return None
+
 # --- ARTIST MATCHING ---
 def parse_artist_from_suggestion(suggestion):
     """Extracts the artist part from an 'Artist - Title' string."""
@@ -436,6 +487,16 @@ def main():
                  request_data["instructions"] += f"\n__NEWS_ID_TO_MARK__: {mark_id}"
             
             # --- PHASE 2: DJ EXECUTION & SONG SELECTION ---
+            # Load playlist once for the entire cycle
+            playlist = []
+            try:
+                with open(str(PLAYLIST_FILE), 'r', encoding='utf-8') as f:
+                    playlist = [line.strip() for line in f if line.strip()]
+            except FileNotFoundError:
+                log(f"CRITICAL: Playlist file not found at {PLAYLIST_FILE}")
+                time.sleep(POLL_INTERVAL)
+                continue
+
             dj_output = None
             success = False
             retry_count = 0
@@ -451,17 +512,6 @@ def main():
                     announcement_text = dj_output.get("announcement")
                     
                     if suggested_track and announcement_text:
-                        # Load playlist
-                        playlist = []
-                        try:
-                            with open(str(PLAYLIST_FILE), 'r', encoding='utf-8') as f:
-                                playlist = [line.strip() for line in f if line.strip()]
-                        except FileNotFoundError:
-                            log(f"CRITICAL: Playlist file not found at {PLAYLIST_FILE}")
-                            delete_signal()
-                            time.sleep(POLL_INTERVAL)
-                            continue
-                        
                         # --- HISTORY CHECK & VALIDATION START ---
                         
                         history = load_json(str(HISTORY_FILE))
@@ -509,7 +559,8 @@ def main():
                             last_track_played = found_track
                             
                             # Remove from suggestion pool if it came from there
-                            remove_from_suggestion_pool(os.path.basename(found_track))
+                            show_pool_path = str(BASE_DIR / show_overrides["suggestion_pool"]) if show_overrides.get("suggestion_pool") else str(SUGGESTION_POOL_FILE)
+                            remove_from_pool_file(show_pool_path, os.path.basename(found_track))
                             
                             # Mark news story as presented if this was a deep dive
                             if mark_id:
@@ -568,15 +619,31 @@ def main():
                                             instructions = f"{combined_instructions}\n{retry_instructions}" if combined_instructions else retry_instructions
                                             request_data["instructions"] = instructions
                                 else:
-                                    log("Could not parse artist from suggestion. Skipping turn.")
+                                    log("Could not parse artist from suggestion. Falling back to pool.")
+                                    fallback_track = fallback_queue_from_pool(show_overrides, playlist)
+                                    if fallback_track:
+                                        last_track_played = fallback_track
                                     success = True
                     else:
-                        log("DJ response incomplete (missing track/announcement). Skipping turn.")
+                        log("DJ response incomplete (missing track/announcement). Falling back to pool.")
+                        fallback_track = fallback_queue_from_pool(show_overrides, playlist)
+                        if fallback_track:
+                            last_track_played = fallback_track
                         success = True
                 else:
-                    log("DJ cycle triggered, but no valid response.")
+                    log("DJ cycle triggered, but no valid response. Falling back to pool.")
+                    fallback_track = fallback_queue_from_pool(show_overrides, playlist)
+                    if fallback_track:
+                        last_track_played = fallback_track
                     success = True
             
+            # If all DJ attempts exhausted without success, fall back to pool
+            if not success:
+                log(f"All {MAX_DJ_ATTEMPTS} DJ attempts exhausted. Falling back to pool.")
+                fallback_track = fallback_queue_from_pool(show_overrides, playlist)
+                if fallback_track:
+                    last_track_played = fallback_track
+
         time.sleep(POLL_INTERVAL)
 
 if __name__ == "__main__":
