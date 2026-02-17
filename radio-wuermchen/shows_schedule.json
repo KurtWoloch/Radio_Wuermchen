@@ -110,14 +110,28 @@
       "name": "Music for young people (PM)",
       "schedule": {
         "start": "19:00",
-        "end": "22:00"
+        "end": "20:00"
       },
       "overrides": {
         "music_style": "Play music mainly from the 2010's and 2020's.",
         "dj_personality": "Energetic but current.",
         "suggestion_pool": "suggestion_pool_modern.txt"
       }
+    },
+    {
+      "id": "pappas_rock_show",
+      "name": "Mr. Pappa's Rock Show",
+      "schedule": {
+        "start": "20:00",
+        "end": "23:00"
+      },
+      "overrides": {
+        "music_style": "This is the show for Andrew Pappas in Indianapolis. Play music by artists like Beck, USA for Africa, Beastie Boys, Johnny Cash, OneRepublic, Supertramp, Justice and Jimmy Buffett. Go figure...",
+        "dj_personality": "Energetic but current.",
+        "suggestion_pool": "suggestion_pool_night_rock.txt"
+      }
     }
+
   ],
   "defaults": {
     "music_style": null,

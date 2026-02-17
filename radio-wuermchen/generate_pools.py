@@ -74,7 +74,7 @@ def main():
         "Frankie Goes to Hollywood", "Dead or Alive",
         "Nena", "Falco", "La Bouche", "Snap", "Technotronic",
         "C+C Music Factory", "Crystal Waters", "Haddaway",
-        "Corona", "2 Unlimited", "Ace of Base",
+        "Corona", "2 Unlimited", "Ace of Base", "Sabrina Carpenter",
         "Daft Punk", "Gorillaz", "MGMT", "Peter Kent",
     ]
     espresso_keywords = ["disco", "dance mix", "remix", "club mix", "synth"]
@@ -165,7 +165,7 @@ def main():
         "Ed Sheeran", "Adele", "Taylor Swift", "Billie Eilish",
         "Dua Lipa", "Harry Styles", "Olivia Rodrigo", "The Weeknd",
         "Post Malone", "Drake", "Ariana Grande", "Bruno Mars",
-        "Sia", "Lorde", "Sam Smith", "Hozier",
+        "Sia", "Lorde", "Sam Smith", "Hozier", "Sabrina Carpenter",
         "Imagine Dragons", "Twenty One Pilots", "Bastille",
         "Lana Del Rey", "Halsey", "Khalid", "Lizzo",
         "Doja Cat", "Bad Bunny", "BTS", "Blackpink",
@@ -185,10 +185,10 @@ def main():
     # --- Dreaming (soft/slow/easy listening) ---
     dreaming_artists = [
         "Enya", "Norah Jones", "Sade", "Chris Rea", "John Denver",
-        "Lionel Richie", "Barry White", "Luther Vandross",
-        "Air", "Zero 7", "Massive Attack", "Portishead",
-        "Enigma", "Mike Oldfield", "Vangelis", "Jean-Michel Jarre",
-        "Chet Baker", "Miles Davis", "John Coltrane", "Kenny Rogers",
+        "Lionel Richie", "Barry White", "Luther Vandross", "Elton John",
+        "Air", "Zero 7", "Massive Attack", "Portishead", "Dire Straits",
+        "Enigma", "Mike Oldfield", "Vangelis", "Jean-Michel Jarre", "Ben&Ben",
+        "Chet Baker", "Miles Davis", "John Coltrane", "Kenny Rogers", "Jean Michel Jarre",
         "Diana Krall", "Katie Melua", "Eva Cassidy", "Barbra Streisand",
     ]
     dreaming_keywords = [
