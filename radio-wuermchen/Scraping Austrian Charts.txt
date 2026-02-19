@@ -1,0 +1,18 @@
+OK, let's scrape the charts now! This should be an improvement for the show "Music for young people"...
+
+I'd propose to put this logic into an own "charts scraper" python script.
+The page in question is "https://austriancharts.at/charts/singles", which only changes once a week, so it should be enough to check it once a day.
+The scraping should work as follows:
+The chart entries are all preceeded by a "<tr class="charts">" tag.
+After this comes a "<td" tag, whose closing is followed by the chart position (1 through 75), which is followed by "</td>".
+Then there comes another "<td" chart, whose closing is followed by the previous chart position, which can be 1 to 75, or "RE" for a re-entry.
+A special case here would be new entries, which have a "<img src="/images/neu.gif"" tag in this place.
+After that, look for the next <b> tag, after which the artist starts, ended by the sequence "</b><br>" after which the title follows,
+which is ended by an "</a>" tag. You can ignore the rest until the next "<tr class="charts">" tag.
+If you scrape it like this, we get a listing of the current Austrian charts, with position, previous position, artist and title.
+Now you should check if the charts have changed since the previous scraping. If that's the case, do the following:
+- Run the generate_pools.py script again to regenerate all suggestion pools (so it will effectively run once a week)
+- After that, check each chart entry in descending order (from 75 to 1) if it's in the song library. If so, add it to a preliminary suggestion pool.
+- After having done that, the preliminary suggestion pool is complete, so then the normal "modern" pool gets appended to it.
+This should have the effect that, every time new charts are released, the suggestion pool for the "music for young people" show will start out containing all the available songs from the charts,
+and only as they are drained, it will turn more and more into a general 2010's and 2020's suggestion pool.

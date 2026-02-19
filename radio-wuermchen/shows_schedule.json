@@ -45,7 +45,7 @@
       "name": "Classic Crooners",
       "schedule": {
         "start": "10:00",
-        "end": "10:30"
+        "end": "11:00"
       },
       "overrides": {
         "music_style": "Focus exclusively on artists like Frank Sinatra, Dean Martin, Sammy Davis Jr., and similar classic crooners/big band vocalists.",
@@ -57,7 +57,7 @@
       "id": "music_young_am",
       "name": "Music for young people (AM)",
       "schedule": {
-        "start": "10:30",
+        "start": "11:00",
         "end": "12:00"
       },
       "overrides": {
@@ -72,11 +72,11 @@
       "name": "Espresso",
       "schedule": {
         "start": "13:00",
-        "end": "14:00"
+        "end": "15:00"
       },
       "overrides": {
-        "music_style": "Mainly play disco, electropop, or synth pop tracks, or at least faster-paced music 2 out of 3 tracks should be past-2000.",
-        "dj_personality": "Quick, punchy, and high-energy transitions.",
+        "music_style": "This is music for your lunch break. Play Bossa Nova, Nu-Jazz, acoustic pop, Chillout or Soft Lounge, artists like St. Germain, Thievery Corporation or Norah Jones, acoustic or unplugged versions of current hits",
+        "dj_personality": "Relaxing transitions for lunch break.",
         "suggestion_pool": "suggestion_pool_espresso.txt",
         "signation": "Jean-Claude Petit - Stars"
       }
@@ -122,29 +122,17 @@
       }
     },
     {
-      "id": "pbf2",
-      "name": "Please be friendly (PM)",
-      "schedule": {
-        "start": "20:00",
-        "end": "21:00"
-      },
-      "overrides": {
-        "music_style": "Play friendly, positive, happy tracks. Avoid sad, negative, or aggressive themes.",
-        "dj_personality": "Friendly, upbeat, and optimistic.",
-        "suggestion_pool": "suggestion_pool_friendly.txt"
-      }
-    },
-    {
       "id": "music_young_pm",
       "name": "Music for young people (PM)",
       "schedule": {
-        "start": "21:00",
+        "start": "19:00",
         "end": "22:00"
       },
       "overrides": {
         "music_style": "Play music mainly from the 2010's and 2020's.",
         "dj_personality": "Energetic but current.",
-        "suggestion_pool": "suggestion_pool_modern.txt"
+        "suggestion_pool": "suggestion_pool_modern.txt",
+        "signation": "Herbie Hancock - Just around the corner"
       }
     }
   ],

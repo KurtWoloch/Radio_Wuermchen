@@ -1,6 +1,4 @@
 # Suggestion Pool: Music for Dreaming
-OneRepublic - Counting stars
-David Bowie - Starman
 Lionel Richie - Dancing on the ceiling
 Soft Cell - Loving You Hating Me
 Chelsea Cutler - Sad tonight
@@ -8,17 +6,14 @@ Starship - We built this city
 Ben Daglish - Theme from Loco
 Stargate feat. P!nk & Sia - Waterfall
 Die Letzenbergstare - Lang, lang ist's her
-Robin Gibb - Another lonely night in New York
 Little River Band - The night owls
 Blutengel - Waiting for the night
-Dream Collection - Barcelona
 No Angels - No angel (It's all in your mind) (unplugged)
 Anastacia - Pieces of a dream
 Kurt Woloch - Stairway to heaven (Teamgrillen 2021)
 Frank Zander - Captain Starlight
 Kurt Woloch - Angel of Harlem (live Teamgrillen 2021)
 Fire Inc. - Tonight is what it means to be young
-Kurt Woloch - The Music of the night (Heimkaraoke)
 Asleep at the wheel - Am a right (or Amarillo)
 Jon Bon Jovi - Midnight in Chelsea
 Axel Rudi Pell - Silent angel
@@ -45,11 +40,8 @@ Bee Gees - Night fever
 Genesis - Tonight, tonight, tonight
 Kurt, Andrea & Patricia Woloch - I have a dream (Schutzhaus 2021)
 Soft Cell - What! (Single version)
-Cat Stevens - Love _ Heaven (Foreigner live 1973)
 The Firm - Star Trekkin'
 Real Life - Send me an angel
-Katie Melua - In my secret life
-Bing Crosby - Where The Blue Of The Night Meets The Gold Of
 Kurt Woloch - All through the night (Heimkaraoke)
 Two of us - Blue night shadow
 Kurt Woloch - Hark! The herald's angels sing (Heimkaraoke)
@@ -286,7 +278,6 @@ Godley & Creme - A little piece of heaven
 Die Letzenbergstare - Muss i denn, muss i denn zum Städtele 'naus
 Jean-Claude Petit - Stars
 Kenny Loggins - I'm free (Heaven helps the man)
-Norah Jones - Don't Know Why
 Al Hibbler - Unchained melody
 Alison Moyet & David Freeman - Sleep Like Breathing
 Deathstars - Death dies hard
@@ -600,7 +591,6 @@ Ringo Starr - Oh my my
 Vanessa Williams - Dreamin'
 Depeche Mode - Strangelove (live)
 No Angels - Something about us (Latin radio edit)
-Enya - Only time
 Kurt Woloch - Stars on 45 X-Mix
 E. Samuel & Camille - Diamond of night
 Liliana Mammana - Peacegiving Strength
@@ -1285,3 +1275,5 @@ the pretenders - angel of the morning
 LUV' - Dream dream
 Chris Rea - On the beach
 Alvin Stardust - Pretend
+OneRepublic - Counting stars
+David Bowie - Starman

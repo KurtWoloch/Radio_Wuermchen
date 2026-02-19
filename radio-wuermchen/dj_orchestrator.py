@@ -478,8 +478,18 @@ def main():
                         removed = [s for s in pool_before if s not in pool_after]
                         for entry in removed:
                             try:
-                                with open(actual_pool_file, 'a', encoding='utf-8') as f:
-                                    f.write(f"\n{entry}")
+                                # Read file to check if it ends with newline
+                                with open(actual_pool_file, 'rb') as f:
+                                    f.seek(0, 2)  # end of file
+                                    if f.tell() > 0:
+                                        f.seek(-1, 2)
+                                        needs_newline = f.read(1) != b'\n'
+                                    else:
+                                        needs_newline = False
+                                with open(actual_pool_file, 'a', encoding='latin-1') as f:
+                                    if needs_newline:
+                                        f.write('\n')
+                                    f.write(entry + '\n')
                                 log(f"POWER SAVE: Re-appended '{entry}' to pool (rotation mode).")
                             except Exception as e:
                                 log(f"POWER SAVE: Failed to re-append to pool: {e}")

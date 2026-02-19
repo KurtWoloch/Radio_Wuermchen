@@ -19,6 +19,6 @@ echo.
 echo Log output goes to: radio-wuermchen\streamer.log
 echo.
 
-cmd /k "python %PYTHON_SCRIPT% | %FFMPEG_BIN% -i - -f mp3 -acodec libmp3lame -content_type audio/mpeg icecast://source:hackme@localhost:8000/stream"
+cmd /k "python %PYTHON_SCRIPT% | %FFMPEG_BIN% -i - -f mp3 -acodec libmp3lame -content_type audio/mpeg icecast://source:BenandBen2026@localhost:8000/stream"
 
 pause

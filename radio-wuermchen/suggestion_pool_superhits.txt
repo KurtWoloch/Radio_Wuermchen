@@ -1,19 +1,7 @@
 # Suggestion Pool: Super Hits (70s & 80s)
-Wolfgang Ambros - Ruaf mi net an (live)
-STS - Fahr auf's Land mit mir
-Bon Jovi - Born to be my baby
-Genesis - Invisible touch (live V2)
-AC_DC - Hells bells
-Rainhard Fendrich - A jeder is' zum Hab'n
-Bon Jovi - We weren't born to follow
-Bruce Springsteen - The rising
-ABBA - Honey Honey
-Falco - Forever
-Elton John - Strangers
 Bee gees - Words
 Eagles - Ol' 55
 Prince Kay One feat. Emory - Keep calm
-Pat Benatar - Invincible (Theme from The legend of Billie Jean)
 Huey Lewis and the News - I want a new drug
 Madonna - You'll see (Inst.)
 Bruce Springsteen - We take care of our own
@@ -41,7 +29,6 @@ U2 - Electrical storm
 Bee Gees - Massachusetts
 ABBA - Should I Laugh Or Cry
 Bon Jovi - Everyday
-Donna Summer - She works hard for the money
 Michael Jackson - Heal the world (LP-Version)
 Billy Joel - Say goodbye to Hollywood
 Journey - Separate ways (Worlds apart)
@@ -1586,3 +1573,14 @@ George Michael - Too funky
 Elton John - Your Song (live)
 Electric Light Orchestra - Epilogue
 Kool & the Gang - Cherish (Smooth Jazz Version)
+Wolfgang Ambros - Ruaf mi net an (live)
+STS - Fahr auf's Land mit mir
+Bon Jovi - Born to be my baby
+Genesis - Invisible touch (live V2)
+AC_DC - Hells bells
+Rainhard Fendrich - A jeder is' zum Hab'n
+Bon Jovi - We weren't born to follow
+Bruce Springsteen - The rising
+ABBA - Honey Honey
+Falco - Forever
+Elton John - Strangers

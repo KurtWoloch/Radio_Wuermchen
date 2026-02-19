@@ -34,6 +34,10 @@ LOGO_FILE = BASE_DIR / "logo.png"
 request_timestamps = {}
 RATE_LIMIT_SECONDS = 120
 
+# Track active stream proxy connections so we can subtract them from Icecast's count
+active_proxy_connections = 0
+proxy_lock = threading.Lock()
+
 
 def get_current_show():
     """Get the currently active show name from the schedule."""
@@ -271,6 +275,7 @@ class RadioHandler(http.server.BaseHTTPRequestHandler):
         pass
 
     def do_GET(self):
+        global active_proxy_connections
         if self.path == "/" or self.path == "/index.html":
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
@@ -289,6 +294,10 @@ class RadioHandler(http.server.BaseHTTPRequestHandler):
                     listeners = source.get("listeners", 0)
             except:
                 pass
+            # Subtract our own proxy connections from the Icecast count
+            if listeners > 0:
+                with proxy_lock:
+                    listeners = max(0, listeners - active_proxy_connections)
             data = {
                 "show": get_current_show(),
                 "tracks": get_recent_tracks(5),
@@ -309,14 +318,20 @@ class RadioHandler(http.server.BaseHTTPRequestHandler):
                 self.send_header("Cache-Control", "no-cache")
                 self.send_header("Connection", "close")
                 self.end_headers()
-                while True:
-                    chunk = resp.read(4096)
-                    if not chunk:
-                        break
-                    try:
-                        self.wfile.write(chunk)
-                    except (BrokenPipeError, ConnectionResetError, OSError):
-                        break
+                with proxy_lock:
+                    active_proxy_connections += 1
+                try:
+                    while True:
+                        chunk = resp.read(4096)
+                        if not chunk:
+                            break
+                        try:
+                            self.wfile.write(chunk)
+                        except (BrokenPipeError, ConnectionResetError, OSError):
+                            break
+                finally:
+                    with proxy_lock:
+                        active_proxy_connections -= 1
             except Exception:
                 self.send_response(502)
                 self.end_headers()

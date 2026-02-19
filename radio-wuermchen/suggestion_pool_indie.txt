@@ -1,9 +1,5 @@
 # Suggestion Pool: The Music Box (Alternative / Indie)
-R.E.M. - I am Superman
 R.E.M. - At my most beautiful
-R.E.M. - Everybody hurts
-Massive Attack - Unfinished sympathy
-White Stripes - Icky thump
 R.E.M. - The one I love
 R.E.M. - Losing my religion (live in Athens)
 Placebo - Twenty years (Edit)
@@ -11,11 +7,9 @@ Coldplay - What if
 Bloc Party - The prayer
 Air Supply - Making love out of nothing at all
 The Killers - Read my mind
-Arcade Fire - Neon bible
 R.E.M. - Get up
 Coldplay - Viva la vida
 R.E.M. - So. central rain (I'm sorry)
-Muse - Compliance
 R.E.M. - The lion sleeps tonight
 Arctic Monkeys - When the sun goes down
 Muse - Supermassive black hole
@@ -24,7 +18,6 @@ Coldplay - A message
 Bloc Party - Uniform
 R.E.M. - Leaving New York
 Coldplay - Hymn for the weekend
-Talking Heads - Burning down the house
 R.E.M. - Finest worksong
 Air Supply - All out of love
 Franz Ferdinand - Ulysses
@@ -50,7 +43,6 @@ Coldplay - Sparks
 Coldplay - Lost
 Coldplay - Talk
 Coldplay - A sky full of stars
-Florence + The Machine - You've got the love
 R.E.M. - Losing My Religion
 Coldplay - Fix you
 Arctic Monkeys - Brianstorm
@@ -169,3 +161,5 @@ Coldplay - A rush of blood to the head
 Placebo - Twenty years (Instrumental)
 Arcade Fire - Ocean of noise
 Air Supply - The one that you love
+
+R.E.M. - I am Superman

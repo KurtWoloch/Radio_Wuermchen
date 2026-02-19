@@ -63,24 +63,23 @@ def main():
     write_pool("suggestion_pool_ratpack.txt", "Suggestion Pool: Classic Crooners / Rat Pack",
                filter_by_artists(playlist, ratpack_artists))
 
-    # --- Espresso (Disco / Electropop / Synth Pop / Fast) ---
+    # --- Espresso (Bossa Nova / Nu Jazz) ---
     espresso_artists = [
-        "Abba", "Boney M", "Bee Gees", "Donna Summer", "Gloria Gaynor",
-        "KC and the Sunshine Band", "KC & the Sunshine Band",
-        "Pet Shop Boys", "Depeche Mode", "New Order",
-        "Erasure", "Kraftwerk", "OMD", "Yazoo", "Soft Cell",
-        "Eurythmics", "A-ha", "Alphaville", "Modern Talking",
-        "Bronski Beat", "Communards", "Human League",
-        "Frankie Goes to Hollywood", "Dead or Alive",
-        "Nena", "Falco", "La Bouche", "Snap", "Technotronic",
-        "C+C Music Factory", "Crystal Waters", "Haddaway",
-        "Corona", "2 Unlimited", "Ace of Base", "Sabrina Carpenter",
-        "Daft Punk", "Gorillaz", "MGMT", "Peter Kent",
+        "Astrud Gilberto", "Sergio Mendes & Brasil '66", "Lelu-Starlite", "Bobby McFerrin",
+        "La sonora mantancera", "Joao Gilberto", "Everything but the girl",
+        "Antônio Carlos Jobim", "Stan Getz", "Dave Brubeck", "Leonard Cohen",
+        "Blues Trottoir", "Django Reinhardt", "Willie Nelson", "Soundtrack",
+        "Blue Monk", "Miss Patty Miller Band", "Dalida & Alain Delon", "Billie Holiday",
+        "Louis Armstrong", "The Sandpipers", "Simon & Garfunkel", "Elvis Presley",
+        "Orch. Roberto Delgado", "Caterina Valente", "Natalie Cole", "Chet Baker",
+        "Lou Donaldson", "Eric Clapton", "Kenny Dorham", "Amancio Prada",
+        "Jason Mraz", "Domingo Rey", "Art Blakey", "El Cigala",
+        "Blackmore's NIght", "William Elliott", "Grover Washington Jr.", "Anke Wagner"         
     ]
-    espresso_keywords = ["disco", "dance mix", "remix", "club mix", "synth"]
+    espresso_keywords = ["jazz", "bossa", "acoustic", "lounge"]
     tracks_espresso = filter_by_artists(playlist, espresso_artists)
     tracks_espresso += filter_by_keywords(playlist, espresso_keywords)
-    write_pool("suggestion_pool_espresso.txt", "Suggestion Pool: Espresso (Disco / Electropop / Synth Pop)",
+    write_pool("suggestion_pool_espresso.txt", "Suggestion Pool: Espresso (Bossa Nova / Nu Jazz)",
                sorted(set(tracks_espresso)))
 
     # --- Indie / Alternative / The Music Box ---
@@ -150,6 +149,12 @@ def main():
                filter_by_artists(playlist, superhits_artists))
 
     # --- Friendly / Positive ---
+    friendly_artists = [
+        "Olivia Newton-John", "Exile", "Johnny Cash", "Glenn Gampbell",
+        "Nick Straker Band", "Flash & the Pan", "Francis Lai", "John Paul Young",
+        "Billie Jo Spears", "Rino Gaetano", "Luv'", "Rita Coolidge",
+        "Adamo",
+    ]
     friendly_keywords = [
         "happy", "sunshine", "wonderful", "celebration", "joy",
         "smile", "beautiful", "good", "love", "dancing",
@@ -157,8 +162,10 @@ def main():
         "walking on", "feeling good", "best day", "bright",
     ]
     friendly_exclude = ["kill", "die", "dead", "war", "blood", "hate", "cry", "sad", "pain", "nightmare"]
+    tracks_friendly = filter_by_artists(playlist, friendly_artists)
+    tracks_friendly += filter_by_keywords(playlist, friendly_keywords, friendly_exclude)
     write_pool("suggestion_pool_friendly.txt", "Suggestion Pool: Please Be Friendly (positive vibes)",
-               filter_by_keywords(playlist, friendly_keywords, friendly_exclude))
+               sorted(set(tracks_friendly)))
 
     # --- Modern (2010s / 2020s) ---
     modern_artists = [
