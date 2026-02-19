@@ -1,4 +1,6 @@
 {
   "tts_model": "gemini-2.5-flash-preview-tts",
+  "tts_model_spare1": "gemini-2.5-flash-preview-tts",
+  "tts_model_spare2": "gemini-2.5-pro-preview-tts",
   "voice_name": "Kore"
 }

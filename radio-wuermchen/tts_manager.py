@@ -64,12 +64,16 @@ def generate_announcement_audio(text_content):
             check=True,
             capture_output=True,
             text=True,
-            cwd=str(BASE_DIR)
+            cwd=str(BASE_DIR),
+            timeout=120  # Safety net: kill TTS if it hangs >2 minutes
         )
         
         log(f"TTS Generation successful (slot {slot}).")
         return mp3_file
         
+    except subprocess.TimeoutExpired:
+        log("TTS Generation TIMED OUT (>120s). Likely API hang.")
+        return None
     except subprocess.CalledProcessError as e:
         log(f"TTS Generation FAILED (Code {e.returncode}). Stderr: {e.stderr.strip()}")
         return None

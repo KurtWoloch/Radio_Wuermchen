@@ -15,6 +15,19 @@
       }
     },
     {
+      "id": "Rock_show_n",
+      "name": "Night Rock Show",
+      "schedule": {
+        "start": "00:00",
+        "end": "06:00"
+      },
+      "overrides": {
+        "music_style": "This is the rock show for US listeners. Play music by artists like Beck, USA for Africa, Beastie Boys, Johnny Cash, OneRepublic, Supertramp, Justice, Jimmy Buffett and The Rolling Stones. Go figure...",
+        "dj_personality": "Energetic but current.",
+        "suggestion_pool": "suggestion_pool_night_rock.txt"
+      }
+    },
+    {
       "id": "pbf",
       "name": "Please be friendly",
       "schedule": {
@@ -32,7 +45,7 @@
       "name": "Classic Crooners",
       "schedule": {
         "start": "10:00",
-        "end": "11:00"
+        "end": "10:30"
       },
       "overrides": {
         "music_style": "Focus exclusively on artists like Frank Sinatra, Dean Martin, Sammy Davis Jr., and similar classic crooners/big band vocalists.",
@@ -44,13 +57,14 @@
       "id": "music_young_am",
       "name": "Music for young people (AM)",
       "schedule": {
-        "start": "11:00",
+        "start": "10:30",
         "end": "12:00"
       },
       "overrides": {
         "music_style": "Play music mainly from the 2010's and 2020's.",
         "dj_personality": "Energetic but current.",
-        "suggestion_pool": "suggestion_pool_modern.txt"
+        "suggestion_pool": "suggestion_pool_modern.txt",
+        "signation": "Earth Wind & Fire - September"
       }
     },
     {
@@ -61,9 +75,10 @@
         "end": "14:00"
       },
       "overrides": {
-        "music_style": "Mainly play disco, electropop, or synth pop tracks, or at least faster-paced music.",
+        "music_style": "Mainly play disco, electropop, or synth pop tracks, or at least faster-paced music 2 out of 3 tracks should be past-2000.",
         "dj_personality": "Quick, punchy, and high-energy transitions.",
-        "suggestion_pool": "suggestion_pool_espresso.txt"
+        "suggestion_pool": "suggestion_pool_espresso.txt",
+        "signation": "Jean-Claude Petit - Stars"
       }
     },
     {
@@ -74,7 +89,7 @@
         "end": "16:00"
       },
       "overrides": {
-        "music_style": "Lean into alternative, indie, and atmospheric electronic tunes (like downtempo/IDM).",
+        "music_style": "Play music that is not optimized for listenability but for discovery, friction, context – including long pieces, extreme sounds and strong contemporary Austrian scenes.",
         "dj_personality": "Thoughtful, cool, and slightly mysterious.",
         "suggestion_pool": "suggestion_pool_indie.txt"
       }
@@ -87,9 +102,10 @@
         "end": "17:00"
       },
       "overrides": {
-        "music_style": "Plays music strictly up to the 1960's. MUST NOT include anything from 1970 or later.",
+        "music_style": "Plays music strictly up to the 1960's. MUST NOT include anything from 1970 or later. Play The Beatles, Elvis and everything in between.",
         "dj_personality": "Nostalgic and timeless.",
-        "suggestion_pool": "suggestion_pool_evergreens.txt"
+        "suggestion_pool": "suggestion_pool_evergreens.txt",
+        "signation": "Ray Conniff & Billy Butterfield - Alexander's ragtime band"
       }
     },
     {
@@ -106,32 +122,31 @@
       }
     },
     {
+      "id": "pbf2",
+      "name": "Please be friendly (PM)",
+      "schedule": {
+        "start": "20:00",
+        "end": "21:00"
+      },
+      "overrides": {
+        "music_style": "Play friendly, positive, happy tracks. Avoid sad, negative, or aggressive themes.",
+        "dj_personality": "Friendly, upbeat, and optimistic.",
+        "suggestion_pool": "suggestion_pool_friendly.txt"
+      }
+    },
+    {
       "id": "music_young_pm",
       "name": "Music for young people (PM)",
       "schedule": {
-        "start": "19:00",
-        "end": "20:00"
+        "start": "21:00",
+        "end": "22:00"
       },
       "overrides": {
         "music_style": "Play music mainly from the 2010's and 2020's.",
         "dj_personality": "Energetic but current.",
         "suggestion_pool": "suggestion_pool_modern.txt"
       }
-    },
-    {
-      "id": "pappas_rock_show",
-      "name": "Mr. Pappa's Rock Show",
-      "schedule": {
-        "start": "20:00",
-        "end": "23:00"
-      },
-      "overrides": {
-        "music_style": "This is the show for Andrew Pappas in Indianapolis. Play music by artists like Beck, USA for Africa, Beastie Boys, Johnny Cash, OneRepublic, Supertramp, Justice and Jimmy Buffett. Go figure...",
-        "dj_personality": "Energetic but current.",
-        "suggestion_pool": "suggestion_pool_night_rock.txt"
-      }
     }
-
   ],
   "defaults": {
     "music_style": null,

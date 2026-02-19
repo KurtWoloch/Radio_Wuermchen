@@ -169,7 +169,7 @@ def generate(text_file):
                 print("ERROR: GEMINI_API_KEY environment variable not set.", file=sys.stderr)
                 return False
 
-            client = genai.Client(api_key=api_key)
+            client = genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=60000))
             
             response = client.models.generate_content(
                 model=config["tts_model"],

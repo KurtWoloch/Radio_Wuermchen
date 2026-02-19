@@ -87,15 +87,15 @@ def main():
     indie_artists = [
         "Radiohead", "Portishead", "Massive Attack", "Morcheeba",
         "Coldplay", "Arctic Monkeys", "The Killers", "Franz Ferdinand",
-        "Bloc Party", "Interpol", "The Strokes", "White Stripes",
+        "Bloc Party", "Interpol", "The Strokes", "White Stripes", "Blur",
         "Arcade Fire", "Florence", "Vampire Weekend", "Tame Impala",
-        "Pixies", "Sonic Youth", "The Cure", "Siouxsie",
-        "Joy Division", "Bauhaus", "Echo & the Bunnymen",
-        "Cocteau Twins", "The Smiths", "Morrissey",
-        "R.E.M.", "Talking Heads", "The National",
-        "Mogwai", "Sigur Ros", "Bjork", "Air", "Zero 7",
-        "Hooverphonic", "Lamb", "Sneaker Pimps", "Tricky",
-        "Garbage", "Placebo", "Muse", "Weezer",
+        "Pixies", "Sonic Youth", "The Cure", "Siouxsie", "Marilyn Manson",
+        "Joy Division", "Bauhaus", "Echo & the Bunnymen", "Green Day",
+        "Cocteau Twins", "The Smiths", "Morrissey", "Rage against the machine",
+        "R.E.M.", "Talking Heads", "The National", "The Smashing Pumpkins",
+        "Mogwai", "Sigur Ros", "Bjork", "Air", "Zero 7", "Foo fighters",
+        "Hooverphonic", "Lamb", "Sneaker Pimps", "Tricky", "Pearl Jam",
+        "Garbage", "Placebo", "Muse", "Weezer", "Red Hot Chili Peppers",
     ]
     indie_keywords = ["indie", "alternative", "downtempo"]
     tracks_indie = filter_by_artists(playlist, indie_artists)

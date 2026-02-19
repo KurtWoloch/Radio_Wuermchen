@@ -37,11 +37,38 @@ CHARTS_LIBRARY_FILE = BASE_DIR / "charts_in_library.json"
 
 PYTHON_BIN = "C:\\Program Files\\Python311\\python.exe"
 POLL_INTERVAL = 3  # seconds between checks
+ICECAST_STATUS_URL = "http://localhost:8000/status-json.xsl"
 MAX_ARTIST_SUGGESTIONS = 50 # Maximum tracks to offer the DJ if suggestion fails
 MAX_POOL_SUGGESTIONS = 50   # Maximum tracks to offer from the suggestion pool
 MAX_DJ_ATTEMPTS = 5 # Maximum times to re-prompt the DJ per signal event
 
 # --- HELPERS ---
+def get_listener_count():
+    """Query Icecast for the current number of listeners.
+    Returns the raw count (includes proxy connections from listener_server)."""
+    try:
+        import urllib.request
+        with urllib.request.urlopen(ICECAST_STATUS_URL, timeout=3) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+        source = data.get("icestats", {}).get("source", {})
+        # source can be a list (multiple mountpoints) or a dict (single)
+        if isinstance(source, list):
+            return sum(s.get("listeners", 0) for s in source)
+        return source.get("listeners", 0)
+    except Exception:
+        return -1  # unknown / error
+
+def has_listeners():
+    """Check if there are real listeners (beyond the listener_server proxy).
+    The web listener server keeps one persistent connection per web listener,
+    but even with 0 web listeners there may be 0 proxy connections.
+    We consider >0 as having listeners."""
+    count = get_listener_count()
+    if count < 0:
+        return True  # assume yes if we can't check
+    log(f"Icecast listener count: {count}")
+    return count > 0
+
 def log(msg):
     """Write log messages to a file."""
     try:
@@ -251,9 +278,12 @@ def parse_artist_from_suggestion(suggestion):
     return None
 
 def clean_suggestion_for_matching(suggestion):
-    """Strips versioning/subtitles from the suggested track name for better matching."""
-    cleaned = re.sub(r'\s*\(.*\)\s*', ' ', suggestion).strip()
-    cleaned = re.sub(r'\s*ft\.\s*.*|\s*feat\.\s*.*', '', cleaned, flags=re.IGNORECASE).strip()
+    """Strips versioning/subtitles and featured-artist tags from the suggested track name for better matching."""
+    cleaned = re.sub(r'\s*\(.*?\)\s*', ' ', suggestion).strip()
+    # Strip "ft./feat. <name>" only up to the " - " separator (preserve the title)
+    cleaned = re.sub(r'\s*(?:ft\.|feat\.)\s*[^-]+', '', cleaned, count=1, flags=re.IGNORECASE).strip()
+    # Clean up any leftover leading/trailing hyphens or whitespace
+    cleaned = re.sub(r'^[\s-]+|[\s-]+$', '', cleaned).strip()
     return cleaned
 
 def find_artist_alternatives(artist_name, playlist, max_results=MAX_ARTIST_SUGGESTIONS):
@@ -309,14 +339,19 @@ def trigger_dj(last_track, listener_input=None, instructions=None):
 
 # --- SHOW SCHEDULE ---
 
+SHOW_LOOKAHEAD_MINUTES = 4  # Start preparing a show this many minutes early
+
 def get_active_show():
-    """Check if a scheduled show is currently active. Returns show dict or None."""
+    """Check if a scheduled show is currently active or about to start
+    (within SHOW_LOOKAHEAD_MINUTES). Returns show dict or None."""
     schedule = load_json(str(SHOWS_SCHEDULE_FILE))
     if not schedule or "shows" not in schedule:
         return None
     
     now = datetime.now()
     current_minutes = now.hour * 60 + now.minute
+    # Look ahead: if a show starts in <=4 min, treat it as active already
+    lookahead_minutes = (current_minutes + SHOW_LOOKAHEAD_MINUTES) % (24 * 60)
     
     for show in schedule["shows"]:
         sched = show.get("schedule", {})
@@ -338,8 +373,14 @@ def get_active_show():
             # Crosses midnight (e.g. 23:00 - 00:00)
             if current_minutes >= start_min or current_minutes < end_min:
                 return show
+            # Lookahead: about to start
+            if lookahead_minutes >= start_min and current_minutes < start_min:
+                return show
         else:
             if start_min <= current_minutes < end_min:
+                return show
+            # Lookahead: about to start
+            if current_minutes < start_min and lookahead_minutes >= start_min:
                 return show
     
     return None
@@ -355,6 +396,7 @@ def get_show_overrides(show):
         "dj_personality": overrides.get("dj_personality", defaults.get("dj_personality")),
         "suggestion_pool": overrides.get("suggestion_pool", defaults.get("suggestion_pool", "suggestion_pool.txt")),
         "news_enabled": overrides.get("news_enabled", defaults.get("news_enabled", True)),
+        "signation": overrides.get("signation"),
     }
 
 # --- MAIN LOOP ---
@@ -363,6 +405,7 @@ def main():
     log("DJ Orchestrator starting up.")
     
     last_track_played = None
+    last_show_id = None  # Track show transitions
     last_charts_check = 0
     CHARTS_CHECK_INTERVAL = 86400  # 24 hours in seconds
     
@@ -405,50 +448,135 @@ def main():
             delete_signal()
 
             listener_input = read_and_clear_listener_request()
-            
-            # --- PHASE 0: SHOW DETECTION ---
+
+            # --- POWER SAVING MODE ---
+            # If no listeners are connected, skip LLM/TTS and just queue
+            # the next track from the suggestion pool. Listener requests
+            # still get full treatment (someone is clearly listening).
+            if not listener_input and not has_listeners():
+                log("POWER SAVE: No listeners detected — skipping LLM/TTS, queueing from pool.")
+                active_show = get_active_show()
+                show_overrides = get_show_overrides(active_show)
+                # Track show transitions even in power-save mode
+                last_show_id = active_show.get("id") if active_show else None
+                try:
+                    with open(str(PLAYLIST_FILE), 'r', encoding='utf-8') as f:
+                        playlist = [line.strip() for line in f if line.strip()]
+                except FileNotFoundError:
+                    playlist = []
+                if playlist:
+                    # Remember pool state before fallback picks a track
+                    show_pool_file = str(BASE_DIR / show_overrides["suggestion_pool"]) if show_overrides.get("suggestion_pool") else None
+                    actual_pool_file = show_pool_file or str(SUGGESTION_POOL_FILE)
+                    pool_before = read_suggestion_pool(pool_file=show_pool_file)
+                    
+                    fallback_track = fallback_queue_from_pool(show_overrides, playlist)
+                    if fallback_track:
+                        last_track_played = fallback_track
+                        # Re-append the used suggestion to rotate the pool
+                        pool_after = read_suggestion_pool(pool_file=show_pool_file)
+                        removed = [s for s in pool_before if s not in pool_after]
+                        for entry in removed:
+                            try:
+                                with open(actual_pool_file, 'a', encoding='utf-8') as f:
+                                    f.write(f"\n{entry}")
+                                log(f"POWER SAVE: Re-appended '{entry}' to pool (rotation mode).")
+                            except Exception as e:
+                                log(f"POWER SAVE: Failed to re-append to pool: {e}")
+                time.sleep(POLL_INTERVAL)
+                continue
+
+            # --- PHASE 0: SHOW DETECTION & TRANSITION ---
             active_show = get_active_show()
             show_overrides = get_show_overrides(active_show)
+            current_show_id = active_show.get("id") if active_show else None
+            is_show_transition = (current_show_id != last_show_id)
+            show_signation_track = None
+            
             if active_show:
                 log(f"Active show: {active_show['name']}")
+            if is_show_transition:
+                if active_show:
+                    log(f"SHOW TRANSITION: '{last_show_id}' -> '{current_show_id}' ({active_show['name']})")
+                else:
+                    log(f"SHOW TRANSITION: '{last_show_id}' -> no show (freeform)")
+                last_show_id = current_show_id
             
             # --- PHASE 1: CONTEXT GATHERING ---
             
-            # A. Weather Context
-            weather_forecast = get_weather_forecast()
+            # Skip weather and news when:
+            # - A listener request came in (focus on fulfilling it)
+            # - A new show is starting (focus on the show intro)
             weather_instruction = None
-            weather_is_fresh = False
-            if weather_forecast:
-                try:
-                    age = time.time() - os.path.getmtime(WEATHER_RESULT)
-                    weather_is_fresh = (age < 10)
-                except Exception:
-                    pass
+            news_instruction = None
+            news_context_payload = None
+            skip_weather_news = False
 
-                if weather_is_fresh:
-                    weather_instruction = (
-                        f"Current weather forecast for Vienna:\n{weather_forecast}\n\n"
-                        "It's time for a weather update! Please present the full weather forecast to the listeners in your own words, "
-                        "then suggest and introduce a song that fits the current weather mood."
-                    )
-                    log("Weather segment: FULL forecast mode (fresh scrape)")
+            if listener_input:
+                log(f"Listener request active — skipping weather/news to prioritize request: {listener_input}")
+                skip_weather_news = True
+            if is_show_transition and active_show:
+                log(f"Show transition — skipping weather/news for show intro.")
+                skip_weather_news = True
+            if not skip_weather_news:
+                # A. Weather Context
+                weather_forecast = get_weather_forecast()
+                weather_is_fresh = False
+                if weather_forecast:
+                    try:
+                        age = time.time() - os.path.getmtime(WEATHER_RESULT)
+                        weather_is_fresh = (age < 10)
+                    except Exception:
+                        pass
+
+                    if weather_is_fresh:
+                        weather_instruction = (
+                            f"Current weather forecast for Vienna:\n{weather_forecast}\n\n"
+                            "It's time for a weather update! Please present the full weather forecast to the listeners in your own words, "
+                            "then suggest and introduce a song that fits the current weather mood."
+                        )
+                        log("Weather segment: FULL forecast mode (fresh scrape)")
+                    else:
+                        weather_instruction = (
+                            f"Current weather for Vienna: {weather_forecast}\n"
+                            "You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast."
+                        )
+                        log("Weather segment: subtle mode (cached)")
+
+                # B. News Segment Check
+                if show_overrides["news_enabled"]:
+                    news_instruction, news_context_payload = get_news_instruction()
                 else:
-                    weather_instruction = (
-                        f"Current weather for Vienna: {weather_forecast}\n"
-                        "You may weave weather info naturally into your announcement if it fits, but don't repeat the full forecast."
-                    )
-                    log("Weather segment: subtle mode (cached)")
-
-            # B. News Segment Check
-            if show_overrides["news_enabled"]:
-                news_instruction, news_context_payload = get_news_instruction()
-            else:
-                news_instruction, news_context_payload = None, None
-                log("News disabled for current show.")
+                    news_instruction, news_context_payload = None, None
+                    log("News disabled for current show.")
 
             # C. Combine instructions
             combined_instructions = None
             instruction_parts = []
+
+            # Show transition: announce the new show
+            if is_show_transition and active_show:
+                show_name = active_show.get("name", "")
+                show_style = show_overrides.get("music_style", "")
+                signation = show_overrides.get("signation")
+                
+                if signation:
+                    # Signation track: DJ should announce the show and introduce
+                    # this specific track (orchestrator will force-queue it)
+                    transition_msg = (
+                        f"SHOW TRANSITION: A new show is starting now! The show is called \"{show_name}\". "
+                        f"Please announce the show name and its theme to the listeners. "
+                        f"The opening track is \"{signation}\" — introduce it as the show's signature opening."
+                    )
+                    show_signation_track = signation
+                    log(f"Show signation: {signation}")
+                else:
+                    transition_msg = (
+                        f"SHOW TRANSITION: A new show is starting now! The show is called \"{show_name}\". "
+                        f"Please announce the show name and its theme to the listeners, "
+                        f"then suggest a fitting opening track."
+                    )
+                instruction_parts.append(transition_msg)
 
             # Show-specific music style instruction
             if show_overrides["music_style"]:
@@ -533,6 +661,33 @@ def main():
                 if dj_output:
                     suggested_track = dj_output.get("track")
                     announcement_text = dj_output.get("announcement")
+                    
+                    # --- SIGNATION OVERRIDE ---
+                    # If this is a show transition with a signation, use the DJ's
+                    # announcement but force the signation track instead.
+                    if show_signation_track and announcement_text:
+                        log(f"SIGNATION: Overriding DJ track with show signation: {show_signation_track}")
+                        cleaned_sig = clean_suggestion_for_matching(show_signation_track)
+                        sig_found = None
+                        for p_track in playlist:
+                            if cleaned_sig.lower() in os.path.basename(p_track).lower():
+                                sig_found = p_track
+                                break
+                        if sig_found:
+                            announcement_audio_path = generate_announcement_audio(announcement_text)
+                            if announcement_audio_path:
+                                append_to_queue(str(announcement_audio_path))
+                            else:
+                                log("TTS failed — queueing signation without announcement.")
+                            append_to_queue(sig_found)
+                            last_track_played = sig_found
+                            log(f"SIGNATION queued: {os.path.basename(sig_found)}")
+                            show_signation_track = None  # consumed
+                            success = True
+                            continue
+                        else:
+                            log(f"SIGNATION track not found in library: {show_signation_track}. Falling through to normal flow.")
+                            show_signation_track = None
                     
                     if suggested_track and announcement_text:
                         # --- HISTORY CHECK & VALIDATION START ---
