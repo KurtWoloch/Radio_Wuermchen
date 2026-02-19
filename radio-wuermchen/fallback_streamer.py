@@ -14,7 +14,7 @@ def stream_fallback():
     print("Starting FALLBACK Streamer (Persistent Silence Loop)...")
     
     # FALLBACK_URL MUST BE A DIFFERENT MOUNTPOINT
-    FALLBACK_URL = "icecast://source:hackme@localhost:8000/silent_stream.mp3"
+    FALLBACK_URL = "icecast://source:BenandBen2026@localhost:8000/silent_stream.mp3"
     
     # -re loops the input stream infinitely for continuous connection
     ffmpeg_command = [

@@ -1,7 +1,7 @@
 <icecast>
-    <location>Earth</location>
-    <admin>icemaster@localhost</admin>
-    <hostname>localhost</hostname>
+    <location>Vienna, Austria</location>
+    <admin>kurt.woloch@gmail.com</admin>
+    <hostname>vanessa-unreceptive-dia.ngrok-free.dev</hostname>
 
     <limits>
         <clients>100</clients>
@@ -14,11 +14,17 @@
     </limits>
 
     <authentication>
-        <source-password>hackme</source-password>
-        <relay-password>hackme</relay-password>
+        <source-password>BenandBen2026</source-password>
+        <relay-password>BenandBen2026</relay-password>
         <admin-user>admin</admin-user>
-        <admin-password>hackme</admin-password>
+        <admin-password>BenandBen2026</admin-password>
     </authentication>
+
+    <!-- YP Directory listing -->
+    <directory>
+        <yp-url-timeout>15</yp-url-timeout>
+        <yp-url>http://dir.xiph.org/cgi-bin/yp-cgi</yp-url>
+    </directory>
 
     <listen-socket>
         <port>8000</port>
@@ -57,11 +63,18 @@
         <hidden>true</hidden>
     </mount>
     
-    <!-- Source Mount 3: Temporary mount for direct streaming (as used in previous session). -->
+    <!-- Main stream mount: direct streaming from Python/FFmpeg -->
     <mount type="normal">
         <mount-name>/stream</mount-name>
-        <max-listeners>1</max-listeners>
-        <hidden>true</hidden>
+        <max-listeners>100</max-listeners>
+        <hidden>false</hidden>
+        <public>1</public>
+        <stream-name>Radio Würmchen</stream-name>
+        <stream-description>AI-powered radio from Vienna, Austria. Music, news, weather - all selected and announced by AI.</stream-description>
+        <stream-url>https://vanessa-unreceptive-dia.ngrok-free.dev</stream-url>
+        <genre>Various</genre>
+        <bitrate>128</bitrate>
+        <type>audio/mpeg</type>
     </mount>
     
     <paths>

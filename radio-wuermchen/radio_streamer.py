@@ -25,7 +25,7 @@ DJ_LOG_PATH = os.path.join(SCRIPT_DIR, "dj_log.jsonl")
 TIMEOUT_SECONDS = 180 # Time to wait for agent response file
 
 # --- ICECAST CONFIGURATION ---
-ICECAST_URL = "icecast://source:hackme@localhost:8000/stream"
+ICECAST_URL = "icecast://source:BenandBen2026@localhost:8000/stream"
 
 # --- UTILITIES (Full functions must be here) ---
 
