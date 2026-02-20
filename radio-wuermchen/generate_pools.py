@@ -108,10 +108,10 @@ def main():
         "Chuck Berry", "Buddy Holly", "Little Richard", "Fats Domino",
         "Ray Charles", "Aretha Franklin", "Otis Redding", "Sam Cooke",
         "The Supremes", "The Temptations", "Four Tops", "Marvin Gaye",
-        "Stevie Wonder",  # early career
+        "Stevie Wonder", # early career
         "Simon & Garfunkel", "Bob Dylan", "Joan Baez",
         "The Mamas & the Papas", "The Byrds", "The Doors",
-        "Jimi Hendrix", "Janis Joplin", "The Who",
+        "Jimi Hendrix", "Janis Joplin", "The Who", "The Beatles",
         "Cream", "The Kinks", "The Animals", "The Yardbirds",
         "Dusty Springfield", "Petula Clark", "Tom Jones",
         "Frank Sinatra", "Dean Martin", "Nat King Cole",
@@ -153,7 +153,7 @@ def main():
         "Olivia Newton-John", "Exile", "Johnny Cash", "Glenn Gampbell",
         "Nick Straker Band", "Flash & the Pan", "Francis Lai", "John Paul Young",
         "Billie Jo Spears", "Rino Gaetano", "Luv'", "Rita Coolidge",
-        "Adamo",
+        "Adamo", "ABBA",
     ]
     friendly_keywords = [
         "happy", "sunshine", "wonderful", "celebration", "joy",
@@ -189,26 +189,50 @@ def main():
     write_pool("suggestion_pool_modern.txt", "Suggestion Pool: Music for Young People (2010s-2020s)",
                sorted(set(tracks_modern)))
 
-    # --- Dreaming (soft/slow/easy listening) ---
+    # --- Dreaming (romantic ballads, Austropop, soft pop classics) ---
+    # Modeled after ORF Radio Salzburg's "Musik zum Träumen"
     dreaming_artists = [
-        "Enya", "Norah Jones", "Sade", "Chris Rea", "John Denver",
-        "Lionel Richie", "Barry White", "Luther Vandross", "Elton John",
-        "Air", "Zero 7", "Massive Attack", "Portishead", "Dire Straits",
-        "Enigma", "Mike Oldfield", "Vangelis", "Jean-Michel Jarre", "Ben&Ben",
-        "Chet Baker", "Miles Davis", "John Coltrane", "Kenny Rogers", "Jean Michel Jarre",
-        "Diana Krall", "Katie Melua", "Eva Cassidy", "Barbra Streisand",
+        # Austropop
+        "Rainhard Fendrich", "STS", "Georg Danzer", "Wolfgang Ambros",
+        "Konstantin Wecker", "Andre Heller", "Stefanie Werger",
+        "Die Mayerin", "Poxrucker Sisters", "Seiler und Speer",
+        "EAV", "Peter Cornelius", "Arik Brauer", "Ludwig Hirsch",
+        "Marianne Mendt", "Waterloo & Robinson",
+        # German-language pop/Schlager ballads
+        "Udo Juergens", "Udo Jürgens", "Helene Fischer", "Westernhagen",
+        "Nena", "Herbert Groenemeyer", "Herbert Grönemeyer",
+        "Reinhard Mey", "Dalida",
+        # Classic soft rock/pop ballads
+        "Genesis", "Fleetwood Mac", "Whitney Houston", "Rod Stewart",
+        "Dire Straits", "Scorpions", "Foreigner", "Chicago",
+        "Phil Collins", "Elton John", "Billy Joel", "Paul Young",
+        "Chris Norman", "Sheena Easton", "Bonnie Tyler",
+        "Dionne Warwick", "Robson & Jerome", "Robin Gibb",
+        "James Taylor", "Cat Stevens", "Donovan", "Bill Withers",
+        # Easy listening / crooners
+        "Michael Buble", "Michael Bublé", "Barry Manilow", "Kenny G",
+        "Lionel Richie", "Kenny Rogers", "Barbra Streisand",
+        # Soft pop / singer-songwriter
+        "Enya", "Norah Jones", "Katie Melua", "Eva Cassidy",
+        "Sade", "Chris Rea", "Diana Krall", "Rita Coolidge",
+        "Clara Louise", "Jeanette",
     ]
     dreaming_keywords = [
-        "dream", "lullaby", "sleep", "night", "moon", "star",
-        "gentle", "soft", "quiet", "peace", "ballad",
-        "love story", "unchained melody", "close to you",
+        "dream", "lullaby", "night", "moon", "star",
+        "ballad", "love song", "love story",
+        "unchained melody", "close to you",
         "blue eyes", "bright eyes", "angel", "heaven",
-        "music of the night", "theme from",
+        "music of the night", "stand by me",
+        "for your eyes only", "songbird",
     ]
-    dreaming_exclude = ["nightmare", "shook me all night", "murder", "fight", "party all night", "late night"]
+    dreaming_exclude = [
+        "nightmare", "shook me all night", "murder", "fight",
+        "party all night", "late night", "dancing on the ceiling",
+        "starman", "rock me", "we will rock", "another one bites",
+    ]
     tracks_dreaming = filter_by_artists(playlist, dreaming_artists)
     tracks_dreaming += filter_by_keywords(playlist, dreaming_keywords, dreaming_exclude)
-    write_pool("suggestion_pool_dreaming.txt", "Suggestion Pool: Music for Dreaming",
+    write_pool("suggestion_pool_dreaming.txt", "Suggestion Pool: Music for Dreaming (Musik zum Träumen)",
                sorted(set(tracks_dreaming)))
 
     print("\nDone! All pools generated.")
