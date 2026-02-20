@@ -10,7 +10,7 @@
       "overrides": {
         "music_style": "Play romantic ballads, Austropop, and soft pop classics. Include a healthy mix of German-language artists (especially Austrian: Fendrich, STS, Danzer, Ambros, Wecker, Heller, Werger) and English-language ballads (Fleetwood Mac, Genesis, Whitney Houston, Dire Straits, Rod Stewart). Think warm and emotional, not ambient or electronic. Avoid anything loud, fast, or energetic.",
         "dj_personality": "Speak in a calm, warm, and soothing tone. Keep announcements gentle and brief — like a late-night companion winding down the day with the listener.",
-        "suggestion_pool": "suggestion_pool_dreaming.txt",
+        "suggestion_pool": "suggestion_pool_dreaming_curated.txt",
         "news_enabled": false
       }
     },
@@ -24,7 +24,7 @@
       "overrides": {
         "music_style": "This is the rock show for US listeners. Play music by artists like Beck, USA for Africa, Beastie Boys, Johnny Cash, OneRepublic, Supertramp, Justice, Jimmy Buffett and The Rolling Stones. Go figure...",
         "dj_personality": "Energetic but current.",
-        "suggestion_pool": "suggestion_pool_night_rock.txt"
+        "suggestion_pool": "suggestion_pool_night_rock_curated.txt"
       }
     },
     {
@@ -37,7 +37,7 @@
       "overrides": {
         "music_style": "Play friendly, positive, happy tracks. Avoid sad, negative, or aggressive themes.",
         "dj_personality": "Friendly, upbeat, and optimistic.",
-        "suggestion_pool": "suggestion_pool_friendly.txt"
+        "suggestion_pool": "suggestion_pool_friendly_curated.txt"
       }
     },
     {
@@ -77,7 +77,7 @@
       "overrides": {
         "music_style": "This is music for your lunch break. Play Bossa Nova, Nu-Jazz, acoustic pop, Chillout or Soft Lounge, artists like St. Germain, Thievery Corporation or Norah Jones, acoustic or unplugged versions of current hits",
         "dj_personality": "Relaxing transitions for lunch break.",
-        "suggestion_pool": "suggestion_pool_espresso.txt",
+        "suggestion_pool": "suggestion_pool_espresso_curated.txt",
         "signation": "Jean-Claude Petit - Stars"
       }
     },
@@ -104,7 +104,7 @@
       "overrides": {
         "music_style": "Plays music strictly up to the 1960's. MUST NOT include anything from 1970 or later. Play The Beatles, Elvis and everything in between.",
         "dj_personality": "Nostalgic and timeless.",
-        "suggestion_pool": "suggestion_pool_evergreens.txt",
+        "suggestion_pool": "suggestion_pool_evergreens_curated.txt",
         "signation": "Ray Conniff & Billy Butterfield - Alexander's ragtime band"
       }
     },
@@ -139,7 +139,7 @@
   "defaults": {
     "music_style": null,
     "dj_personality": null,
-    "suggestion_pool": "suggestion_pool_general.txt",
+    "suggestion_pool": "suggestion_pool_curated.txt",
     "suggestion_pool_bak": "suggestion_pool.txt",
     "news_enabled": true
   }

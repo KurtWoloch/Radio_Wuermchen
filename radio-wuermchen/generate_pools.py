@@ -40,6 +40,11 @@ def filter_by_keywords(playlist, keywords, exclude_keywords=None):
 
 def write_pool(filename, header, tracks):
     path = os.path.join(SCRIPT_DIR, filename)
+    # Never overwrite curated pools
+    curated_path = path.replace('.txt', '_curated.txt')
+    if os.path.exists(curated_path):
+        print(f"  {filename}: SKIPPED (curated version exists: {os.path.basename(curated_path)})")
+        return
     tracks = list(tracks)
     random.shuffle(tracks)
     with open(path, 'w', encoding='utf-8') as f:
