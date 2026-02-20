@@ -1,0 +1,9 @@
+{
+  "_comment": "Alias table for DJ track matching. Keys are aliases (substrings the DJ might say), values are the proper spelling (as it appears in filenames). Matching is case-insensitive.",
+  "aliases": {
+    "Falco - Amadeus": "Falco - Rock Me Amadeus",
+    "Daft Punk - Get Lucky (feat. Pharrell Williams)": "Daft Punk feat. Pharrell Williams - Get lucky",
+    "Earth, Wind & Fire": "Earth Wind & Fire",
+    "The Eagles": "Eagles"
+  }
+}

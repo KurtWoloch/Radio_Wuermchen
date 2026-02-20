@@ -34,6 +34,7 @@ SUGGESTION_POOL_FILE = BASE_DIR / "suggestion_pool.txt"
 HISTORY_FILE = BASE_DIR / "dj_history.json" # NEW: Added History file constant
 SHOWS_SCHEDULE_FILE = BASE_DIR / "shows_schedule.json"
 CHARTS_LIBRARY_FILE = BASE_DIR / "charts_in_library.json"
+TRACK_ALIASES_FILE = BASE_DIR / "track_aliases.json"
 
 PYTHON_BIN = "C:\\Program Files\\Python311\\python.exe"
 POLL_INTERVAL = 3  # seconds between checks
@@ -285,6 +286,74 @@ def clean_suggestion_for_matching(suggestion):
     # Clean up any leftover leading/trailing hyphens or whitespace
     cleaned = re.sub(r'^[\s-]+|[\s-]+$', '', cleaned).strip()
     return cleaned
+
+def find_news_relevant_tracks(news_text, playlist, max_results=10):
+    """Extract quoted strings from news text and find matching tracks in the playlist.
+    Handles English quotes ("..."), German lower-upper quotes (\u201e...\u201c), and
+    guillemets (\u00bb...\u00ab / \u00ab...\u00bb). Returns list of (track_path, quote_matched) tuples."""
+    if not news_text:
+        return []
+    
+    # Extract quoted strings (min 2 chars) — English, German, and guillemet styles
+    quotes = re.findall(r'[""\u201e\u201c\u00ab\u00bb](.{2,}?)[""\u201c\u201e\u00ab\u00bb]', news_text)
+    if not quotes:
+        return []
+    
+    log(f"News quotes extracted: {quotes[:15]}")
+    
+    # Find playlist matches for each quoted string
+    matches = []
+    seen_tracks = set()
+    for quote in quotes:
+        quote_lower = quote.lower().strip()
+        if len(quote_lower) < 3:  # skip very short quotes
+            continue
+        for p_track in playlist:
+            if p_track in seen_tracks:
+                continue
+            p_filename = os.path.basename(p_track).lower()
+            if quote_lower in p_filename:
+                matches.append((p_track, quote))
+                seen_tracks.add(p_track)
+    
+    if not matches:
+        return []
+    
+    log(f"News quote matches: {len(matches)} tracks found")
+    
+    # If too many matches, filter by artist appearing in the news text
+    if len(matches) > max_results:
+        news_lower = news_text.lower()
+        filtered = []
+        for p_track, quote in matches:
+            artist = parse_artist_from_suggestion(os.path.splitext(os.path.basename(p_track))[0])
+            if artist and artist.lower() in news_lower:
+                filtered.append((p_track, quote))
+        if filtered:
+            log(f"News matches filtered by artist presence: {len(filtered)} tracks")
+            matches = filtered[:max_results]
+        else:
+            # No artist matches — just take the first batch
+            matches = matches[:max_results]
+    
+    return matches
+
+def apply_track_aliases(suggestion):
+    """Check if the suggestion contains any known aliases and return
+    a list of alternative spellings to try. Returns empty list if no alias matches."""
+    aliases = load_json(str(TRACK_ALIASES_FILE))
+    if not aliases or "aliases" not in aliases:
+        return []
+    
+    suggestion_lower = suggestion.lower()
+    alternatives = []
+    for alias, proper in aliases["aliases"].items():
+        if alias.lower() in suggestion_lower:
+            # Replace the alias portion with the proper spelling
+            replaced = re.sub(re.escape(alias), proper, suggestion, count=1, flags=re.IGNORECASE)
+            alternatives.append(replaced)
+            log(f"Alias match: '{alias}' -> '{proper}' (rewritten: '{replaced}')")
+    return alternatives
 
 def find_artist_alternatives(artist_name, playlist, max_results=MAX_ARTIST_SUGGESTIONS):
     """Finds up to max_results tracks from the playlist matching the artist name."""
@@ -713,23 +782,47 @@ def main():
                             rejected_by_history = True
                         else:
                             # --- MUSIC MATCHING LOGIC START ---
-                            potential_matches = []
-                            
-                            cleaned_suggestion = clean_suggestion_for_matching(suggested_track)
-                            
+                            # Priority 1: Try exact match with the raw DJ suggestion
+                            # (preserves feat. tags, parentheses, etc.)
+                            found_track = None
+                            raw_lower = suggested_track.lower()
                             for p_track in playlist:
                                 p_filename = os.path.basename(p_track)
-                                p_filename_lower = p_filename.lower()
-                                
-                                if cleaned_suggestion.lower() in p_filename_lower:
-                                    is_exact_version_match = suggested_track.lower() in p_filename_lower
-                                    length_diff = len(p_filename_lower) - len(cleaned_suggestion.lower())
-                                    potential_matches.append((p_track, p_filename, length_diff, is_exact_version_match))
+                                if raw_lower in p_filename.lower():
+                                    found_track = p_track
+                                    log(f"Exact (raw) match found: {p_filename}")
+                                    break
                             
-                            found_track = None
-                            if potential_matches:
-                                potential_matches.sort(key=lambda x: (not x[3], x[2])) 
-                                found_track = potential_matches[0][0]
+                            # Priority 2: Try alias-based match
+                            if not found_track:
+                                alias_variants = apply_track_aliases(suggested_track)
+                                for variant in alias_variants:
+                                    variant_lower = variant.lower()
+                                    for p_track in playlist:
+                                        if variant_lower in os.path.basename(p_track).lower():
+                                            found_track = p_track
+                                            log(f"Alias match found: {os.path.basename(p_track)}")
+                                            break
+                                    if found_track:
+                                        break
+                            
+                            # Priority 3: Try cleaned/fuzzy match if exact and alias didn't work
+                            if not found_track:
+                                potential_matches = []
+                                cleaned_suggestion = clean_suggestion_for_matching(suggested_track)
+                                
+                                for p_track in playlist:
+                                    p_filename = os.path.basename(p_track)
+                                    p_filename_lower = p_filename.lower()
+                                    
+                                    if cleaned_suggestion.lower() in p_filename_lower:
+                                        is_exact_version_match = suggested_track.lower() in p_filename_lower
+                                        length_diff = len(p_filename_lower) - len(cleaned_suggestion.lower())
+                                        potential_matches.append((p_track, p_filename, length_diff, is_exact_version_match))
+                                
+                                if potential_matches:
+                                    potential_matches.sort(key=lambda x: (not x[3], x[2])) 
+                                    found_track = potential_matches[0][0]
                             
                             # --- MUSIC MATCHING LOGIC END ---
 
@@ -762,15 +855,32 @@ def main():
                             if not rejected_by_history:
                                 append_to_wishlist(suggested_track)
                             
+                            # --- NEWS-RELEVANT TRACKS ---
+                            news_relevant = find_news_relevant_tracks(combined_instructions, playlist)
+                            news_suggestion_lines = []
+                            if news_relevant:
+                                news_suggestion_lines = [
+                                    os.path.splitext(os.path.basename(t))[0] + f"  (matches news quote: \"{q}\")"
+                                    for t, q in news_relevant
+                                ]
+                                log(f"Adding {len(news_suggestion_lines)} news-relevant track suggestions.")
+                            
                             # --- SUGGESTION POOL FALLBACK (Priority 1) ---
                             show_pool_file = str(BASE_DIR / show_overrides["suggestion_pool"]) if show_overrides.get("suggestion_pool") else None
                             pool_suggestions = get_pool_suggestions(pool_file=show_pool_file)
-                            if pool_suggestions:
-                                pool_list = "\n".join(pool_suggestions)
+                            if news_suggestion_lines or pool_suggestions:
+                                all_suggestions = []
+                                if news_suggestion_lines:
+                                    all_suggestions.append("NEWS-RELEVANT TRACKS (these match today's news — strongly prefer these if they fit the story):")
+                                    all_suggestions.extend(news_suggestion_lines)
+                                    all_suggestions.append("")
+                                if pool_suggestions:
+                                    all_suggestions.append("OTHER RECOMMENDED TRACKS (from most to least recommended):")
+                                    all_suggestions.extend(pool_suggestions)
+                                suggestion_list = "\n".join(all_suggestions)
                                 retry_instructions = (
                                     f"The track '{suggested_track}' was unavailable. "
-                                    f"Please select one of the following recommended tracks instead. "
-                                    f"These are listed from most recommended to least recommended:\n{pool_list}"
+                                    f"Please select one of the following tracks instead:\n{suggestion_list}"
                                 )
                                 instructions = f"{combined_instructions}\n{retry_instructions}" if combined_instructions else retry_instructions
                                 log(f"Offering {len(pool_suggestions)} tracks from suggestion pool.")
