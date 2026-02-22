@@ -16,6 +16,9 @@ from urllib.parse import parse_qs
 BASE_DIR = Path(__file__).parent
 SCHEDULE_FILE = BASE_DIR / "shows_schedule.json"
 ALIASES_FILE = BASE_DIR / "track_aliases.json"
+WISHLIST_FILE = BASE_DIR / "wishlist.txt"
+WISHLIST_DB_FILE = BASE_DIR / "wishlist_db.json"
+ORCHESTRATOR_LOG = BASE_DIR / "orchestrator.log"
 PORT = 8080
 
 def get_pool_files():
@@ -45,9 +48,102 @@ def write_aliases(data):
         f.write('\n')
     os.replace(tmp, str(ALIASES_FILE))
 
+def read_wishlist_db():
+    if not WISHLIST_DB_FILE.exists():
+        return {"entries": []}
+    with open(WISHLIST_DB_FILE, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+def write_wishlist_db(data):
+    tmp = str(WISHLIST_DB_FILE) + ".tmp"
+    with open(tmp, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+        f.write('\n')
+    os.replace(tmp, str(WISHLIST_DB_FILE))
+
+def sync_wishlist():
+    """Read wishlist.txt and orchestrator.log, add new unique entries to the DB.
+    Returns the updated DB and count of new entries."""
+    import re
+    from datetime import datetime
+
+    db = read_wishlist_db()
+    existing = {e["track"].lower() for e in db["entries"]}
+
+    # Read wishlist.txt for track names
+    wishlist_tracks = []
+    if WISHLIST_FILE.exists():
+        with open(WISHLIST_FILE, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    wishlist_tracks.append(line)
+
+    # Parse orchestrator.log for timestamps of wishlist additions
+    # Pattern: [2026-02-15 16:05:26] Appended to wishlist: Track Name
+    ts_map = {}  # track_lower -> first timestamp
+    if ORCHESTRATOR_LOG.exists():
+        re_wishlist = re.compile(r'^\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\] Appended to wishlist: (.+)$')
+        with open(ORCHESTRATOR_LOG, 'r', encoding='utf-8', errors='replace') as f:
+            for line in f:
+                m = re_wishlist.match(line.strip())
+                if m:
+                    ts, track = m.group(1), m.group(2).strip()
+                    key = track.lower()
+                    if key not in ts_map:
+                        ts_map[key] = ts
+
+    # Find unique new entries
+    new_count = 0
+    seen_in_file = set()
+    for track in wishlist_tracks:
+        key = track.lower()
+        # Skip paths/filenames (contain slashes, backslashes, or end in .mp3 with path-like content)
+        if '/' in track or '\\' in track:
+            continue
+        # Skip if it looks like a bare filename (no " - " artist separator)
+        if ' - ' not in track and track.endswith('.mp3'):
+            continue
+        # Strip .mp3 suffix if present
+        if track.lower().endswith('.mp3'):
+            track = track[:-4]
+        if key in seen_in_file:
+            continue
+        seen_in_file.add(key)
+        if key not in existing:
+            entry = {
+                "track": track,
+                "first_seen": ts_map.get(key, "unknown"),
+                "times_requested": 0,
+                "status": "new",
+                "comment": ""
+            }
+            db["entries"].append(entry)
+            existing.add(key)
+            new_count += 1
+
+    # Count how many times each track appears in the wishlist
+    from collections import Counter
+    counts = Counter()
+    for track in wishlist_tracks:
+        key = track.strip().lower()
+        if key.endswith('.mp3'):
+            key = key[:-4]
+        counts[key] += 1
+    for entry in db["entries"]:
+        key = entry["track"].lower()
+        if key in counts:
+            entry["times_requested"] = counts[key]
+
+    if new_count > 0:
+        write_wishlist_db(db)
+
+    return db, new_count
+
 NAV_BAR = '''<div class="nav">
   <a href="/" id="nav-shows">&#127925; Shows</a>
   <a href="/aliases" id="nav-aliases">&#128257; Track Aliases</a>
+  <a href="/wishlist" id="nav-wishlist">&#127775; Wishlist</a>
 </div>'''
 
 NAV_CSS = '''
@@ -660,6 +756,322 @@ load();
 </html>
 """
 
+WISHLIST_PAGE = r"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Radio Wuermchen - Wishlist</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0a14; color: #eee; padding: 20px; }
+  h1 { margin-bottom: 5px; font-size: 1.6em; color: #ccc; }
+  h1 span { color: #00ff00; }
+  .subtitle { color: #888; margin-bottom: 20px; font-size: 0.85em; }
+  .toolbar { margin-bottom: 15px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .toolbar button { padding: 8px 16px; border: 1px solid #1a3a1a; border-radius: 8px; cursor: pointer;
+                    font-size: 0.9em; font-weight: 600; transition: background 0.2s; }
+  .btn-save { background: #00aa00; color: white; border-color: #00aa00; }
+  .btn-save:hover { background: #00cc00; }
+  .btn-save.saved { background: #1b4332; color: #95d5b2; border-color: #1b4332; }
+  .btn-sync { background: #0a1f0a; color: #00ff00; }
+  .btn-sync:hover { background: #0f2f0f; }
+  .btn-reload { background: #0a1f0a; color: #ccc; }
+  .btn-reload:hover { background: #0f2f0f; }
+  .status { margin-left: 15px; font-size: 0.85em; color: #888; }
+  .status.ok { color: #00ff00; }
+  .status.err { color: #f5a6a6; }
+
+  .filters { margin-bottom: 12px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .filters label { font-size: 0.8em; color: #aaa; }
+  .filters select, .filters input[type=text] {
+    padding: 5px 8px; background: #0a1f0a; color: #eee; border: 1px solid #1a3a1a;
+    border-radius: 4px; font-size: 0.85em;
+  }
+  .filters input[type=text] { width: 200px; }
+  .filters select:focus, .filters input:focus { border-color: #00ff00; outline: none; }
+  .counter { font-size: 0.85em; color: #888; margin-left: auto; }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 20px; table-layout: fixed; }
+  col.col-track { width: 30%; }
+  col.col-first { width: 10%; }
+  col.col-count { width: 4%; }
+  col.col-status { width: 9%; }
+  col.col-comment { width: 42%; }
+  col.col-del { width: 32px; }
+  th { background: #0f1a0f; color: #00ff00; padding: 8px 6px; text-align: left; font-size: 0.8em;
+       text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 0; z-index: 1;
+       border-bottom: 1px solid #1a3a1a; white-space: nowrap; }
+  td { padding: 4px 4px; border-bottom: 1px solid #1a3a1a; vertical-align: top; overflow: hidden; }
+  tr:hover { background: #0f1a0f40; }
+  td.count-cell { text-align: center; font-size: 0.85em; color: #aaa; }
+  td.date-cell { font-size: 0.8em; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  input[type=text], select, textarea {
+    width: 100%; padding: 5px 7px; background: #0a1f0a; color: #eee;
+    border: 1px solid #1a3a1a; border-radius: 4px; font-size: 0.85em; font-family: inherit;
+  }
+  input[type=text]:focus, select:focus, textarea:focus {
+    border-color: #00ff00; outline: none; box-shadow: 0 0 8px rgba(0,255,0,0.2);
+  }
+
+  .btn-del { background: #461220; color: #f5a6a6; border: 1px solid #692030; border-radius: 4px;
+             padding: 4px 8px; cursor: pointer; font-size: 0.8em; }
+  .btn-del:hover { background: #692030; }
+
+  /* Status colors */
+  .status-new select { color: #00ff00; }
+  .status-rejected select { color: #f5a6a6; }
+  .status-aliased select { color: #88ccff; }
+  .status-superseded select { color: #aaa; }
+  .status-approved select { color: #ffcc00; }
+  .status-added select { color: #95d5b2; }
+
+  th.sortable { cursor: pointer; user-select: none; }
+  th.sortable:hover { color: #95d5b2; }
+  th.sortable span { font-size: 0.7em; }
+
+  %%NAV_CSS%%
+</style>
+</head>
+<body>
+
+%%NAV_BAR%%
+<h1>&#127775; Radio <span>W&uuml;rmchen</span> - Wishlist</h1>
+<p class="subtitle">Tracks the DJ wanted but weren't in the library. Sync imports new entries from wishlist.txt.</p>
+
+<div class="toolbar">
+  <button class="btn-save" onclick="save()" id="btnSave">&#128190; Save</button>
+  <button class="btn-sync" onclick="sync()">&#128259; Sync from wishlist.txt</button>
+  <button class="btn-reload" onclick="load()">&#128260; Reload</button>
+  <span class="status" id="status"></span>
+</div>
+
+<div class="filters">
+  <label>Filter status:</label>
+  <select id="filterStatus" onchange="renderFiltered()">
+    <option value="">All</option>
+    <option value="new" selected>New</option>
+    <option value="rejected">Rejected</option>
+    <option value="aliased">Aliased</option>
+    <option value="superseded">Superseded</option>
+    <option value="approved">Approved</option>
+    <option value="added">Added</option>
+  </select>
+  <label>Search:</label>
+  <input type="text" id="filterSearch" oninput="renderFiltered()" placeholder="Filter by track name...">
+  <span class="counter" id="counter"></span>
+</div>
+
+<table>
+  <colgroup>
+    <col class="col-track">
+    <col class="col-first">
+    <col class="col-count">
+    <col class="col-status">
+    <col class="col-comment">
+    <col class="col-del">
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="sortable" onclick="toggleSort('track')">Track <span id="sort-track"></span></th>
+      <th class="sortable" onclick="toggleSort('first_seen')">First Seen <span id="sort-first_seen"></span></th>
+      <th class="sortable" onclick="toggleSort('times_requested')" title="Times requested"># <span id="sort-times_requested"></span></th>
+      <th class="sortable" onclick="toggleSort('status')">Status <span id="sort-status"></span></th>
+      <th>Comment</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="wishBody"></tbody>
+</table>
+
+<script>
+let entries = [];
+const STATUSES = ['new', 'rejected', 'aliased', 'superseded', 'approved', 'added'];
+let sortCol = null;   // current sort column
+let sortAsc = true;   // sort direction
+
+async function load() {
+  try {
+    const resp = await fetch('/api/wishlist');
+    const result = await resp.json();
+    entries = result.entries || [];
+    renderFiltered();
+    setStatus('Loaded ' + entries.length + ' entries.', 'ok');
+  } catch(e) {
+    setStatus('Load failed: ' + e, 'err');
+  }
+}
+
+async function sync() {
+  try {
+    setStatus('Syncing...', '');
+    const resp = await fetch('/api/wishlist/sync', { method: 'POST' });
+    const result = await resp.json();
+    entries = result.entries || [];
+    renderFiltered();
+    if (result.new_count > 0) {
+      setStatus('Synced! ' + result.new_count + ' new entries added. Total: ' + entries.length, 'ok');
+    } else {
+      setStatus('Already up to date. Total: ' + entries.length, 'ok');
+    }
+  } catch(e) {
+    setStatus('Sync failed: ' + e, 'err');
+  }
+}
+
+function setStatus(msg, cls) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = 'status ' + (cls || '');
+  if (cls === 'ok') setTimeout(() => { el.textContent = ''; }, 4000);
+}
+
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+}
+
+function statusOptions(current) {
+  return STATUSES.map(s =>
+    `<option value="${s}"${s === current ? ' selected' : ''}>${s}</option>`
+  ).join('');
+}
+
+function toggleSort(col) {
+  if (sortCol === col) {
+    sortAsc = !sortAsc;
+  } else {
+    sortCol = col;
+    sortAsc = col === 'times_requested' ? false : true; // default descending for count
+  }
+  updateSortIndicators();
+  renderFiltered();
+}
+
+function updateSortIndicators() {
+  for (const c of ['track', 'first_seen', 'times_requested', 'status']) {
+    const el = document.getElementById('sort-' + c);
+    if (el) el.textContent = sortCol === c ? (sortAsc ? '\u25B2' : '\u25BC') : '';
+  }
+}
+
+function getFilteredIndices() {
+  const statusFilter = document.getElementById('filterStatus').value;
+  const search = document.getElementById('filterSearch').value.toLowerCase();
+  const indices = [];
+  entries.forEach((e, i) => {
+    if (statusFilter && e.status !== statusFilter) return;
+    if (search && !e.track.toLowerCase().includes(search)) return;
+    indices.push(i);
+  });
+  // Sort
+  if (sortCol) {
+    const statusOrder = {};
+    STATUSES.forEach((s, i) => statusOrder[s] = i);
+    indices.sort((a, b) => {
+      const ea = entries[a], eb = entries[b];
+      let va, vb;
+      if (sortCol === 'times_requested') {
+        va = ea.times_requested || 0;
+        vb = eb.times_requested || 0;
+        return sortAsc ? va - vb : vb - va;
+      } else if (sortCol === 'status') {
+        va = statusOrder[ea.status] ?? 99;
+        vb = statusOrder[eb.status] ?? 99;
+        if (va !== vb) return sortAsc ? va - vb : vb - va;
+        // Secondary sort by times_requested descending
+        return (eb.times_requested || 0) - (ea.times_requested || 0);
+      } else {
+        va = (ea[sortCol] || '').toLowerCase();
+        vb = (eb[sortCol] || '').toLowerCase();
+        const cmp = va.localeCompare(vb);
+        return sortAsc ? cmp : -cmp;
+      }
+    });
+  }
+  return indices;
+}
+
+function renderFiltered() {
+  const indices = getFilteredIndices();
+  const tbody = document.getElementById('wishBody');
+  let html = '';
+  indices.forEach(i => {
+    const e = entries[i];
+    html += `<tr class="status-${esc(e.status)}">
+      <td><input type="text" value="${esc(e.track)}" data-field="track" data-idx="${i}" onchange="markDirty()"></td>
+      <td class="date-cell">${esc(e.first_seen)}</td>
+      <td class="count-cell">${e.times_requested || 0}</td>
+      <td><select data-field="status" data-idx="${i}" onchange="onStatusChange(this, ${i})">${statusOptions(e.status)}</select></td>
+      <td><input type="text" value="${esc(e.comment)}" data-field="comment" data-idx="${i}" onchange="markDirty()"></td>
+      <td><button class="btn-del" onclick="delEntry(${i})" title="Delete entry">&#128465;</button></td>
+    </tr>`;
+  });
+  tbody.innerHTML = html;
+  document.getElementById('counter').textContent =
+    `Showing ${indices.length} of ${entries.length} entries`;
+}
+
+function onStatusChange(sel, idx) {
+  entries[idx].status = sel.value;
+  // Update row class
+  sel.closest('tr').className = 'status-' + sel.value;
+  markDirty();
+}
+
+function collectData() {
+  document.querySelectorAll('[data-field][data-idx]').forEach(el => {
+    const idx = parseInt(el.dataset.idx);
+    const field = el.dataset.field;
+    if (field === 'status') entries[idx].status = el.value;
+    else if (field === 'track') entries[idx].track = el.value;
+    else if (field === 'comment') entries[idx].comment = el.value;
+  });
+}
+
+function markDirty() {
+  document.getElementById('btnSave').classList.remove('saved');
+  collectData();
+}
+
+async function save() {
+  collectData();
+  try {
+    const resp = await fetch('/api/wishlist', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ entries: entries })
+    });
+    if (resp.ok) {
+      setStatus('Saved ' + entries.length + ' entries!', 'ok');
+      document.getElementById('btnSave').classList.add('saved');
+    } else {
+      const err = await resp.text();
+      setStatus('Save failed: ' + err, 'err');
+    }
+  } catch(e) {
+    setStatus('Save failed: ' + e, 'err');
+  }
+}
+
+function delEntry(idx) {
+  collectData();
+  const name = entries[idx].track || '(empty)';
+  if (!confirm('Delete "' + name + '"?')) return;
+  entries.splice(idx, 1);
+  renderFiltered();
+  markDirty();
+}
+
+// Activate nav
+document.getElementById('nav-wishlist').classList.add('active');
+
+load();
+</script>
+</body>
+</html>
+"""
+
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         pass  # Suppress request logs
@@ -686,6 +1098,10 @@ class Handler(BaseHTTPRequestHandler):
             self._serve_json({"schedule": read_schedule(), "pool_files": get_pool_files()})
         elif self.path == '/api/aliases':
             self._serve_json(read_aliases())
+        elif self.path == '/wishlist':
+            self._serve_html(WISHLIST_PAGE)
+        elif self.path == '/api/wishlist':
+            self._serve_json(read_wishlist_db())
         else:
             self.send_error(404)
 
@@ -733,6 +1149,26 @@ class Handler(BaseHTTPRequestHandler):
                 self._send_ok()
                 print(f"  Aliases saved ({len(new_data['aliases'])} entries)")
             except (json.JSONDecodeError, ValueError) as e:
+                self._send_err(e)
+
+        elif self.path == '/api/wishlist':
+            try:
+                new_data = json.loads(self._read_body())
+                if 'entries' not in new_data:
+                    raise ValueError("Missing 'entries' key")
+                db = {"entries": new_data["entries"]}
+                write_wishlist_db(db)
+                self._send_ok()
+                print(f"  Wishlist saved ({len(db['entries'])} entries)")
+            except (json.JSONDecodeError, ValueError) as e:
+                self._send_err(e)
+
+        elif self.path == '/api/wishlist/sync':
+            try:
+                db, new_count = sync_wishlist()
+                self._serve_json({"entries": db["entries"], "new_count": new_count})
+                print(f"  Wishlist synced: {new_count} new, {len(db['entries'])} total")
+            except Exception as e:
                 self._send_err(e)
         else:
             self.send_error(404)

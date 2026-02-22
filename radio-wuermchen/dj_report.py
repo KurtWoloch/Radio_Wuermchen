@@ -13,6 +13,7 @@ Partial dates like "2026-02-22" are treated as "2026-02-22 00:00:00".
 """
 
 import argparse
+import math
 import re
 from collections import defaultdict
 from datetime import datetime
@@ -217,8 +218,88 @@ def parse_log(log_path, time_from=None, time_to=None, show_filter=None):
     return dict(dj_own), dict(pool_picked), dict(offered_tracks)
 
 
+def compute_ratings(dj_own, pool_picked, offered_tracks):
+    """
+    Compute rating suggestions (0-40 scale, 20 = average).
+
+    Cat 1: Top DJ pick(s) = 40. Others: 40 - ln(max_times/times) / 0.139
+    Cat 2: Linear spread from (cat1_floor - 1) down to 21, by list position.
+    Cat 3: Start at 19, spread downward so global average ~= 20.
+
+    Returns: dict {track: rating} for all tracks.
+    """
+    ratings = {}
+
+    # --- Category 1: DJ's own suggestions ---
+    cat1_ratings = {}
+    if dj_own:
+        totals = {t: info["accepted"] + info["rejected"] for t, info in dj_own.items()}
+        max_times = max(totals.values())
+        for track, times in totals.items():
+            if max_times <= 1 or times == max_times:
+                r = 40
+            else:
+                r = 40 - (math.log(max_times / times) / 0.139)
+                r = max(r, 22)  # floor: cat1 never drops below 22
+            cat1_ratings[track] = round(r)
+        ratings.update(cat1_ratings)
+
+    cat1_floor = min(cat1_ratings.values()) if cat1_ratings else 40
+
+    # --- Category 2: Pool picks ---
+    cat2_ratings = {}
+    if pool_picked:
+        # Sorted by offered count ascending (same order as report)
+        sorted_pool = sorted(pool_picked.items(), key=lambda x: offered_tracks.get(x[0], 0))
+        n = len(sorted_pool)
+        cat2_top = cat1_floor - 1
+        cat2_bottom = 21
+        for i, (track, _) in enumerate(sorted_pool):
+            if n == 1:
+                r = cat2_top
+            else:
+                # First in list (fewest offerings) gets highest, last gets lowest
+                r = cat2_top - i * (cat2_top - cat2_bottom) / (n - 1)
+            cat2_ratings[track] = max(0, round(r))
+        # Only use cat2 rating if the track doesn't already have a higher cat1 rating
+        for track, r in cat2_ratings.items():
+            if track not in ratings or r > ratings[track]:
+                ratings[track] = r
+
+    # --- Category 3: Not picked ---
+    picked_set = set(pool_picked.keys()) | set(dj_own.keys())
+    not_picked = {t: c for t, c in offered_tracks.items() if t not in picked_set}
+    cat3_ratings = {}
+    if not_picked:
+        sorted_not = sorted(not_picked.items(), key=lambda x: x[1])
+        n3 = len(sorted_not)
+        total_all = len(ratings) + n3
+        sum_cat12 = sum(ratings.values())
+        # We need: (sum_cat12 + sum_cat3) / total_all = 20
+        # So sum_cat3 = 20 * total_all - sum_cat12
+        target_sum = 20 * total_all - sum_cat12
+
+        # Distribute linearly from 19 downward: r_i = 19 - i * step
+        # Sum = n3 * 19 - step * n3*(n3-1)/2 = target_sum
+        if n3 == 1:
+            r = max(0, round(target_sum))
+            cat3_ratings[sorted_not[0][0]] = min(19, r)
+        else:
+            step = 2 * (n3 * 19 - target_sum) / (n3 * (n3 - 1)) if n3 > 1 else 0
+            for i, (track, _) in enumerate(sorted_not):
+                r = 19 - i * step
+                cat3_ratings[track] = max(0, round(r))
+        for track, r in cat3_ratings.items():
+            if track not in ratings or r > ratings[track]:
+                ratings[track] = r
+
+    return ratings
+
+
 def format_report(dj_own, pool_picked, offered_tracks, show_filter, time_from, time_to):
     """Format the report for display."""
+
+    ratings = compute_ratings(dj_own, pool_picked, offered_tracks)
 
     lines = []
     lines.append("=" * 70)
@@ -232,6 +313,11 @@ def format_report(dj_own, pool_picked, offered_tracks, show_filter, time_from, t
 
     if show_filter:
         lines.append(f"Show filter: {show_filter}")
+
+    # Show average rating
+    if ratings:
+        avg = sum(ratings.values()) / len(ratings)
+        lines.append(f"Average rating: {avg:.1f} (target: 20.0) across {len(ratings)} tracks")
 
     lines.append("")
 
@@ -256,7 +342,8 @@ def format_report(dj_own, pool_picked, offered_tracks, show_filter, time_from, t
             if info["rejected"]:
                 status_parts.append(f'{info["rejected"]}x rejected/not found')
             status = ", ".join(status_parts)
-            lines.append(f"   {i:3}. {track}  ({total}x suggested: {status})")
+            r = ratings.get(track, '?')
+            lines.append(f"   {i:3}. [{r:>2}] {track}  ({total}x suggested: {status})")
 
         total_suggestions = sum(v["accepted"] + v["rejected"] for v in dj_own.values())
         lines.append(f"\n   Total: {len(sorted_own)} unique tracks, "
@@ -277,14 +364,14 @@ def format_report(dj_own, pool_picked, offered_tracks, show_filter, time_from, t
         lines.append("   appearances = fewer chances for the DJ to pick them).")
         lines.append("-" * 70)
 
-        # Rank by how often they appeared in offerings (least first)
         sorted_pool = sorted(
             pool_picked.items(),
             key=lambda x: offered_tracks.get(x[0], 0)
         )
         for i, (track, count) in enumerate(sorted_pool, 1):
             times_offered = offered_tracks.get(track, 0)
-            lines.append(f"   {i:3}. {track}  ({count}x picked, offered {times_offered}x)")
+            r = ratings.get(track, '?')
+            lines.append(f"   {i:3}. [{r:>2}] {track}  ({count}x picked, offered {times_offered}x)")
 
         lines.append(f"\n   Total: {len(sorted_pool)} unique tracks picked from pool")
     else:
@@ -295,7 +382,6 @@ def format_report(dj_own, pool_picked, offered_tracks, show_filter, time_from, t
     lines.append("")
 
     # === CATEGORY 3: Offered but not picked ===
-    # All tracks that appeared in offering blocks but were never in pool_picked or dj_own
     picked_set = set(pool_picked.keys()) | set(dj_own.keys())
     not_picked = {t: c for t, c in offered_tracks.items() if t not in picked_set}
 
@@ -310,7 +396,8 @@ def format_report(dj_own, pool_picked, offered_tracks, show_filter, time_from, t
 
         sorted_not = sorted(not_picked.items(), key=lambda x: x[1])
         for i, (track, count) in enumerate(sorted_not, 1):
-            lines.append(f"   {i:3}. {track}  (offered {count}x)")
+            r = ratings.get(track, '?')
+            lines.append(f"   {i:3}. [{r:>2}] {track}  (offered {count}x)")
 
         lines.append(f"\n   Total: {len(sorted_not)} tracks offered but not picked")
     else:
@@ -343,6 +430,13 @@ Examples:
 
     args = parser.parse_args()
 
+    if not args.time_from and not args.time_to and not args.show:
+        print("Hint: Running on full log with no filters. For targeted reports, use:")
+        print("  python dj_report.py --from \"2026-02-22 06:00\" --to \"2026-02-22 09:00\"")
+        print("  python dj_report.py --show \"Good morning Vienna!\"")
+        print("  python dj_report.py --from \"2026-02-21 20:00\" --to \"2026-02-22\" --show \"blessings\"")
+        print()
+
     time_from = parse_timestamp(args.time_from) if args.time_from else None
     time_to = parse_timestamp(args.time_to) if args.time_to else None
 
@@ -351,6 +445,8 @@ Examples:
     )
 
     report = format_report(dj_own, pool_picked, offered_tracks, args.show, time_from, time_to)
+    import sys
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
     print(report)
 
 
