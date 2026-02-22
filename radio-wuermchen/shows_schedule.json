@@ -1,20 +1,6 @@
 {
   "shows": [
     {
-      "id": "music_for_dreaming",
-      "name": "Music for Dreaming",
-      "schedule": {
-        "start": "23:00",
-        "end": "00:00"
-      },
-      "overrides": {
-        "music_style": "Play romantic ballads, Austropop, and soft pop classics. Include a healthy mix of German-language artists (especially Austrian: Fendrich, STS, Danzer, Ambros, Wecker, Heller, Werger) and English-language ballads (Fleetwood Mac, Genesis, Whitney Houston, Dire Straits, Rod Stewart). Think warm and emotional, not ambient or electronic. Avoid anything loud, fast, or energetic.",
-        "dj_personality": "Speak in a calm, warm, and soothing tone. Keep announcements gentle and brief — like a late-night companion winding down the day with the listener.",
-        "suggestion_pool": "suggestion_pool_dreaming_curated.txt",
-        "news_enabled": false
-      }
-    },
-    {
       "id": "Rock_show_n",
       "name": "Night Rock Show",
       "schedule": {
@@ -25,6 +11,19 @@
         "music_style": "This is the rock show for US listeners. Play music by artists like Beck, USA for Africa, Beastie Boys, Johnny Cash, OneRepublic, Supertramp, Justice, Jimmy Buffett and The Rolling Stones. Go figure...",
         "dj_personality": "Energetic but current.",
         "suggestion_pool": "suggestion_pool_night_rock_curated.txt"
+      }
+    },
+    {
+      "id": "good_morning",
+      "name": "Good morning Vienna!",
+      "schedule": {
+        "start": "06:00",
+        "end": "09:00"
+      },
+      "overrides": {
+        "music_style": "Play high-energy, rebellious and fun songs like in the Good morning Vietnam movie.",
+        "dj_personality": "energetic, upbeat, crazy and optimistic like Adrian Conauer in the Good morning Vietnam movie.",
+        "suggestion_pool": "suggestion_pool_evergreens_curated.txt"
       }
     },
     {
@@ -126,13 +125,41 @@
       "name": "Music for young people (PM)",
       "schedule": {
         "start": "19:00",
-        "end": "22:00"
+        "end": "20:00"
       },
       "overrides": {
         "music_style": "Play music mainly from the 2010's and 2020's.",
         "dj_personality": "Energetic but current.",
         "suggestion_pool": "suggestion_pool_modern.txt",
         "signation": "Herbie Hancock - Just around the corner"
+      }
+    },
+    {
+      "id": "blessings",
+      "name": "The blessings",
+      "schedule": {
+        "start": "20:00",
+        "end": "22:00"
+      },
+      "overrides": {
+        "music_style": "Plays music fitting to the motto: May you be filled with loving kindness, may you be well, may you be peaceful and at ease and may you be joyous",
+        "dj_personality": "soft and faithful.",
+        "suggestion_pool": "suggestion_pool_blessings.txt",
+        "signation": "Wolfgang Ambros & Andre Heller - Für immer jung"
+      }
+    },
+    {
+      "id": "music_for_dreaming",
+      "name": "Music for Dreaming",
+      "schedule": {
+        "start": "22:00",
+        "end": "00:00"
+      },
+      "overrides": {
+        "music_style": "Play romantic ballads, Austropop, and soft pop classics. Include a healthy mix of German-language artists (especially Austrian: Fendrich, STS, Danzer, Ambros, Wecker, Heller, Werger) and English-language ballads (Fleetwood Mac, Genesis, Whitney Houston, Dire Straits, Rod Stewart). Think warm and emotional, not ambient or electronic. Avoid anything loud, fast, or energetic.",
+        "dj_personality": "Speak in a calm, warm, and soothing tone. Keep announcements gentle and brief — like a late-night companion winding down the day with the listener.",
+        "suggestion_pool": "suggestion_pool_dreaming_curated.txt",
+        "news_enabled": false
       }
     }
   ],

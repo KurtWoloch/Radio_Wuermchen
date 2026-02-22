@@ -787,23 +787,14 @@ def main():
                             # Collect all substring matches, prefer the closest (shortest filename)
                             found_track = None
                             raw_lower = suggested_track.lower()
-                            raw_candidates = []
                             for p_track in playlist:
                                 p_filename = os.path.basename(p_track)
                                 p_name_no_ext = os.path.splitext(p_filename)[0]
                                 if raw_lower == p_name_no_ext.lower():
                                     # Perfect match (exact filename minus extension)
                                     found_track = p_track
-                                    log(f"Exact match found: {p_filename}")
+                                    log(f"Exact (raw) match found: {p_filename}")
                                     break
-                                elif raw_lower in p_filename.lower():
-                                    raw_candidates.append((p_track, p_filename))
-                            
-                            if not found_track and raw_candidates:
-                                # Pick the candidate with the shortest filename (closest to suggestion)
-                                raw_candidates.sort(key=lambda x: len(x[1]))
-                                found_track = raw_candidates[0][0]
-                                log(f"Raw match found (best of {len(raw_candidates)}): {raw_candidates[0][1]}")
                             
                             # Priority 2: Try alias-based match
                             if not found_track:
@@ -953,6 +944,15 @@ def main():
                 fallback_track = fallback_queue_from_pool(show_overrides, playlist)
                 if fallback_track:
                     last_track_played = fallback_track
+
+            # --- STALE SIGNAL CLEANUP ---
+            # During the DJ turn, the streamer may have created a new signal file
+            # because it started playing the next queued item. That signal is stale
+            # since we just enqueued fresh content. Delete it to prevent a spurious
+            # double-queue on the next poll cycle.
+            if os.path.exists(SIGNAL_FILE):
+                delete_signal()
+                log("Cleaned up stale signal file created during DJ turn.")
 
         time.sleep(POLL_INTERVAL)
 
