@@ -22,6 +22,7 @@ REQUEST_FILE = os.path.join(SCRIPT_DIR, "dj_request.json")
 RESPONSE_FILE = os.path.join(SCRIPT_DIR, "dj_response.json")
 HISTORY_FILE = os.path.join(SCRIPT_DIR, "dj_history.json")
 WISHLIST_FILE = os.path.join(SCRIPT_DIR, "Wishlist.txt")
+THOUGHTS_FILE = os.path.join(SCRIPT_DIR, "dj_thoughts.log")
 TTS_GENERATOR_SCRIPT = os.path.join(SCRIPT_DIR, "tts_generate.py")
 PYTHON_BIN = "C:\\Program Files\\Python311\\python.exe"
 
@@ -93,19 +94,34 @@ def call_gemini(config, system_prompt, user_message):
             contents=[system_prompt, user_message],
             config=types.GenerateContentConfig(
                 response_modalities=["TEXT"],
-                temperature=config.get("temperature", 0.7)
+                temperature=config.get("temperature", 0.7),
+                thinking_config=types.ThinkingConfig(
+                    include_thoughts=True,
+                    thinking_budget=1024
+                )
             )
         )
 
         if not response.candidates or not response.candidates[0].content.parts:
             print(f"API Response Empty/Failed: {response.prompt_feedback}", file=sys.stderr)
-            return None
-            
-        return response.candidates[0].content.parts[0].text
+            return None, None
+
+        # Separate thinking parts from text parts
+        thoughts = []
+        text_parts = []
+        for part in response.candidates[0].content.parts:
+            if getattr(part, 'thought', False):
+                thoughts.append(part.text)
+            else:
+                text_parts.append(part.text)
+
+        thinking_text = "\n".join(thoughts) if thoughts else None
+        output_text = "\n".join(text_parts) if text_parts else None
+        return output_text, thinking_text
 
     except Exception as e:
         print(f"Gemini API Call Failed: {e}", file=sys.stderr)
-        return None
+        return None, None
 
 def build_system_prompt(config):
     """Build the system prompt that defines the DJ's personality."""
@@ -210,10 +226,22 @@ def main():
 
     # Call LLM
     print(f"Calling {config.get('model')}...")
-    raw_response = call_gemini(config, system_prompt, user_message)
+    raw_response, thinking = call_gemini(config, system_prompt, user_message)
 
     if not raw_response:
         sys.exit(1)
+
+    # Log DJ's internal thoughts if present
+    if thinking:
+        try:
+            with open(THOUGHTS_FILE, 'a', encoding='utf-8') as f:
+                f.write(f"\n{'='*60}\n")
+                f.write(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                f.write(f"{'='*60}\n")
+                f.write(thinking)
+                f.write("\n")
+        except Exception as e:
+            print(f"Warning: Could not write thoughts log: {e}", file=sys.stderr)
 
     # Parse and save result
     response = parse_dj_response(raw_response)
