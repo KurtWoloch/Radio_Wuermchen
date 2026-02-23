@@ -422,34 +422,29 @@ def get_active_show():
     # Look ahead: if a show starts in <=4 min, treat it as active already
     lookahead_minutes = (current_minutes + SHOW_LOOKAHEAD_MINUTES) % (24 * 60)
     
+    # Use lookahead time for all matching — effectively shifts show starts earlier
+    effective_minutes = lookahead_minutes
+    
     for show in schedule["shows"]:
         sched = show.get("schedule", {})
         start_str = sched.get("start", "")
         end_str = sched.get("end", "")
         if not start_str or not end_str:
             continue
-        
         try:
             sh, sm = map(int, start_str.split(":"))
             eh, em = map(int, end_str.split(":"))
         except ValueError:
             continue
-        
         start_min = sh * 60 + sm
         end_min = eh * 60 + em
-        
+
         if end_min <= start_min:
-            # Crosses midnight (e.g. 23:00 - 00:00)
-            if current_minutes >= start_min or current_minutes < end_min:
-                return show
-            # Lookahead: about to start
-            if lookahead_minutes >= start_min and current_minutes < start_min:
+            # Crosses midnight
+            if effective_minutes >= start_min or effective_minutes < end_min:
                 return show
         else:
-            if start_min <= current_minutes < end_min:
-                return show
-            # Lookahead: about to start
-            if current_minutes < start_min and lookahead_minutes >= start_min:
+            if start_min <= effective_minutes < end_min:
                 return show
     
     return None
