@@ -278,6 +278,80 @@ def parse_artist_from_suggestion(suggestion):
         return suggestion.split(" - ", 1)[0].strip()
     return None
 
+
+def sort_by_similarity(original_track: str, candidates: list[str]) -> list[str]:
+    """Sorts candidate tracks by similarity to the original track.
+    Criteria:
+    1. Same artist
+    2. Similar era/decade (from "(YYYY)")
+    3. String similarity of title
+    4. Featured artists overlap
+    """
+    if not candidates or not original_track:
+        return candidates
+
+    import re
+    import difflib
+
+    def get_artist(track):
+        return parse_artist_from_suggestion(track) or ""
+
+    def get_title(track):
+        parts = track.split(" - ", 1)
+        if len(parts) > 1:
+            return parts[1]
+        return track
+
+    def get_year(track):
+        match = re.search(r'\((\d{4})\)', track)
+        return int(match.group(1)) if match else None
+
+    def get_decade(year):
+        return (year // 10) * 10 if year else None
+
+    def get_features(track):
+        match = re.search(r'(?i)(?:feat\.|ft\.)\s+([^-]+)', track)
+        if match:
+            return set(re.findall(r'\w+', match.group(1).lower()))
+        return set()
+
+    orig_artist = get_artist(original_track).lower()
+    orig_title = get_title(original_track).lower()
+    orig_year = get_year(original_track)
+    orig_decade = get_decade(orig_year)
+    orig_features = get_features(original_track)
+
+    def score_candidate(candidate):
+        c_artist = get_artist(candidate).lower()
+        c_title = get_title(candidate).lower()
+        c_year = get_year(candidate)
+        c_decade = get_decade(c_year)
+        c_features = get_features(candidate)
+
+        score = 0.0
+        if orig_artist and orig_artist == c_artist:
+            score += 1000.0
+        elif orig_artist and c_artist and (orig_artist in c_artist or c_artist in orig_artist):
+            score += 500.0
+
+        if orig_decade and c_decade and orig_decade == c_decade:
+            score += 100.0
+            if orig_year and c_year and abs(orig_year - c_year) <= 2:
+                score += 50.0
+
+        title_sim = difflib.SequenceMatcher(None, orig_title, c_title).ratio()
+        score += title_sim * 50.0
+
+        if orig_features and c_features:
+            overlap = len(orig_features.intersection(c_features))
+            if overlap > 0:
+                score += overlap * 20.0
+
+        return score
+
+    return sorted(candidates, key=score_candidate, reverse=True)
+
+
 def clean_suggestion_for_matching(suggestion):
     """Strips versioning/subtitles and featured-artist tags from the suggested track name for better matching."""
     cleaned = re.sub(r'\s*\(.*?\)\s*', ' ', suggestion).strip()
@@ -382,11 +456,18 @@ def trigger_dj(last_track, listener_input=None, instructions=None):
     command = [PYTHON_BIN, str(DJ_BRAIN_SCRIPT)]
     log(f"Executing DJ Brain: {' '.join(command)}")
     
+    DJ_BRAIN_TIMEOUT = 120  # seconds - kill if it takes longer
     try:
         result = subprocess.run(
-            command, check=True, capture_output=True, text=True, cwd=str(BASE_DIR)
+            command, check=True, capture_output=True, text=True, cwd=str(BASE_DIR),
+            timeout=DJ_BRAIN_TIMEOUT
         )
         log(f"DJ Brain finished. STDOUT: {result.stdout.strip()}")
+        if result.stderr.strip():
+            log(f"DJ Brain STDERR: {result.stderr.strip()}")
+    except subprocess.TimeoutExpired:
+        log(f"DJ Brain TIMED OUT after {DJ_BRAIN_TIMEOUT}s - killing process")
+        return None
     except subprocess.CalledProcessError as e:
         log(f"DJ Brain FAILED (Code {e.returncode}). Stderr: {e.stderr.strip()}")
         return None
@@ -866,6 +947,8 @@ def main():
                             # --- SUGGESTION POOL FALLBACK (Priority 1) ---
                             show_pool_file = str(BASE_DIR / show_overrides["suggestion_pool"]) if show_overrides.get("suggestion_pool") else None
                             pool_suggestions = get_pool_suggestions(pool_file=show_pool_file)
+                            if pool_suggestions:
+                                pool_suggestions = sort_by_similarity(suggested_track, pool_suggestions)
                             if news_suggestion_lines or pool_suggestions:
                                 all_suggestions = []
                                 if news_suggestion_lines:

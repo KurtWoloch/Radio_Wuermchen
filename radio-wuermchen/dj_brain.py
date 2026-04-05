@@ -80,44 +80,73 @@ def append_to_wishlist(track):
         print(f"Error writing to wishlist: {e}", file=sys.stderr)
 
 def call_gemini(config, system_prompt, user_message):
-    """Call the Gemini API using the structure found in Google's current examples."""
+    """Call the configured model with optional fallback on failure."""
     try:
         api_key = os.environ.get("GEMINI_API_KEY")
         if not api_key:
             print("ERROR: GEMINI_API_KEY environment variable not set.", file=sys.stderr)
-            return None
-
-        client = genai_client.Client(api_key=api_key)
-        
-        response = client.models.generate_content(
-            model=config["model"],
-            contents=[system_prompt, user_message],
-            config=types.GenerateContentConfig(
-                response_modalities=["TEXT"],
-                temperature=config.get("temperature", 0.7),
-                thinking_config=types.ThinkingConfig(
-                    include_thoughts=True,
-                    thinking_budget=1024
-                )
-            )
-        )
-
-        if not response.candidates or not response.candidates[0].content.parts:
-            print(f"API Response Empty/Failed: {response.prompt_feedback}", file=sys.stderr)
             return None, None
 
-        # Separate thinking parts from text parts
-        thoughts = []
-        text_parts = []
-        for part in response.candidates[0].content.parts:
-            if getattr(part, 'thought', False):
-                thoughts.append(part.text)
-            else:
-                text_parts.append(part.text)
+        client = genai_client.Client(api_key=api_key)
+        primary_model = config["model"]
+        fallback_model = config.get("model-fallback")
+        temperature = config.get("temperature", 0.7)
+        
+        models_to_try = [primary_model]
+        if fallback_model:
+            models_to_try.append(fallback_model)
+        
+        for attempt, model_name in enumerate(models_to_try):
+            label = "primary" if attempt == 0 else "fallback"
+            print(f"Calling {label} model: {model_name}...", file=sys.stderr)
+            
+            try:
+                # Gemma models support thinking natively but don't accept thinking_config
+                use_thinking_config = not model_name.lower().startswith("gemma")
+                
+                gen_config_args = {
+                    "response_modalities": ["TEXT"],
+                    "temperature": temperature,
+                }
+                if use_thinking_config:
+                    gen_config_args["thinking_config"] = types.ThinkingConfig(
+                        include_thoughts=True,
+                        thinking_budget=1024
+                    )
+                
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=[system_prompt, user_message],
+                    config=types.GenerateContentConfig(**gen_config_args)
+                )
 
-        thinking_text = "\n".join(thoughts) if thoughts else None
-        output_text = "\n".join(text_parts) if text_parts else None
-        return output_text, thinking_text
+                if not response.candidates or not response.candidates[0].content.parts:
+                    print(f"{label.title()} model {model_name}: empty response ({response.prompt_feedback})", file=sys.stderr)
+                    continue
+
+                # Separate thinking parts from text parts
+                thoughts = []
+                text_parts = []
+                for part in response.candidates[0].content.parts:
+                    if getattr(part, 'thought', False):
+                        thoughts.append(part.text)
+                    else:
+                        text_parts.append(part.text)
+
+                thinking_text = "\n".join(thoughts) if thoughts else None
+                output_text = "\n".join(text_parts) if text_parts else None
+                
+                if output_text:
+                    print(f"Success with {label} model: {model_name}", file=sys.stderr)
+                    return output_text, thinking_text
+                else:
+                    print(f"{label.title()} model {model_name}: no text in response", file=sys.stderr)
+                    
+            except Exception as e:
+                print(f"{label.title()} model {model_name} failed: {e}", file=sys.stderr)
+        
+        print("ERROR: All models failed.", file=sys.stderr)
+        return None, None
 
     except Exception as e:
         print(f"Gemini API Call Failed: {e}", file=sys.stderr)
@@ -224,11 +253,11 @@ def main():
     system_prompt = build_system_prompt(config)
     user_message = build_user_message(request_data, history)
 
-    # Call LLM
-    print(f"Calling {config.get('model')}...")
+    # Call LLM (with timeout + fallback)
     raw_response, thinking = call_gemini(config, system_prompt, user_message)
 
     if not raw_response:
+        print("ERROR: No response from any model.", file=sys.stderr)
         sys.exit(1)
 
     # Log DJ's internal thoughts if present
