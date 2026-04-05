@@ -276,7 +276,11 @@ def main():
     response = parse_dj_response(raw_response)
 
     if response:
-        print(f"DJ Suggestion: {response['track']}")
+        # Use repr() fallback to avoid cp1252 encoding errors on Windows console
+        try:
+            print(f"DJ Suggestion: {response['track']}")
+        except UnicodeEncodeError:
+            print(f"DJ Suggestion: {response['track'].encode('ascii', 'replace').decode('ascii')}")
         append_to_history(response["track"], response["announcement"])
         
         with open(RESPONSE_FILE, 'w', encoding='utf-8') as f:
