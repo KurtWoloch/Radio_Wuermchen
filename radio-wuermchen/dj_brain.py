@@ -55,6 +55,9 @@ MAX_HISTORY_ENTRIES = 50  # Keep last 50 tracks in history
 
 def append_to_history(track, announcement):
     """Adds new entry to history and trims to MAX_HISTORY_ENTRIES."""
+    # Ensure track is a string, not a dict
+    if isinstance(track, dict):
+        track = f"{track.get('artist', '?')} - {track.get('title', '?')}"
     history = load_history()
     if not isinstance(history, list):
         history = []
@@ -187,8 +190,25 @@ def build_user_message(request_data, history):
 
     # Include recent history for variety
     if history:
-        recent = [entry.get("track", "?") for entry in history[-10:]]
+        recent = []
+        for entry in history[-10:]:
+            t = entry.get("track", "?")
+            if isinstance(t, dict):
+                t = f"{t.get('artist', '?')} - {t.get('title', '?')}"
+            recent.append(str(t))
         parts.append(f"HISTORY BLOCKLIST: You MUST NOT suggest any track found in this list unless fulfilling a specific listener request that names it: {', '.join(recent)}")
+
+    # Pre-selected track from Song Selector
+    pre_selected = request_data.get("pre_selected_track")
+    if pre_selected:
+        parts.append(
+            f"TRACK ALREADY SELECTED: The track '{pre_selected}' has been pre-selected by the music system. "
+            f"You MUST use this track — do NOT suggest a different one. "
+            f"Write an engaging announcement (1-3 sentences) introducing this track. "
+            f"Return the track as '{pre_selected}' in the JSON response."
+        )
+        parts.append("Write the announcement for the pre-selected track.")
+        return "\n".join(parts)
 
     # Listener input if any
     listener_input = request_data.get("listener_input")

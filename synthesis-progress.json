@@ -1,0 +1,155 @@
+{
+  "processed": {
+    "source.bridge.workspace-d9997e04.memory-2026-02-08-6189132e": {
+      "status": "used",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "syntheses": ["Radio Würmchen — Frühe technische Entwicklung"]
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-02-09-dadf95d7": {
+      "status": "used",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "syntheses": ["Radio Würmchen — Frühe technische Entwicklung"]
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-02-11-10f6f002": {
+      "status": "used",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "syntheses": ["Radio Würmchen — Frühe technische Entwicklung"]
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-02-14-305c12ad": {
+      "status": "used",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "syntheses": ["Radio Würmchen — Frühe technische Entwicklung"]
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-02-15-87eee542": {
+      "status": "used",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "syntheses": ["Radio Würmchen — Frühe technische Entwicklung"]
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-02-16-6218ea91": {
+      "status": "used",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "syntheses": ["Radio Würmchen — Frühe technische Entwicklung"]
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-02-17-242d7247": {
+      "status": "used",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "syntheses": ["Radio Würmchen — Frühe technische Entwicklung"]
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-02-19-139b4f3e": {
+      "status": "used",
+      "lastRead": "2026-05-08T11:53:00Z",
+      "syntheses": ["Radio Würmchen — AI Radio Station"],
+      "note": "Show tuning, listener server architecture, show transition system, signation tracks, Music Box show origin."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-02-21-b2b0daf0": {
+      "status": "empty",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "note": "Substantive (planning origins, user story analysis, dreaming ratings, email cleanup) but mostly covered by existing syntheses (hinweis-als-pflicht, plananalyse, nahrungssystem). Dreaming show ratings used in Radio Würmchen synthesis as supplementary source."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-02-22-ade39143": {
+      "status": "used",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "syntheses": ["Aufgaben-Codes als Buchungskategorien — Architektur-Einsicht"],
+      "note": "Kontensystem deep dive + radio tooling. Kontensystem content overlaps with existing synthesis; task code and windowlog content used in new synthesis."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-02-27-bbeb359e": {
+      "status": "empty",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "note": "Chess algorithm changes (covered by existing molt-chess synthesis) + email unsubscribe workflow (insufficient for standalone synthesis)."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-01-998d43a4": {
+      "status": "empty",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "note": "Rich source: workflow architecture (RooCode vs OpenClaw), cost optimization, planning system documentation origins, Andrew Pappas incident. Partially covered by existing syntheses. Could support future workflow-architecture synthesis with additional sources."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-02-088f05f2": {
+      "status": "used",
+      "lastRead": "2026-05-08T11:53:00Z",
+      "syntheses": ["Kontensystem — Unified Planning System", "Plananalyse-Methodik und Unterbrechungsklassifikation", "Planner-Entwicklung — Vom reaktiven Prototyp zum AutoDetect-System"],
+      "note": "Planning system deep dive, reactive vs predictive models, heartbeat cost fix, UC4 incident, Checklisten VB5 analysis, unified planning vision."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-03-9d26d530": {
+      "status": "used",
+      "lastRead": "2026-05-08T11:53:00Z",
+      "syntheses": ["Kontensystem — Unified Planning System", "Planner-Entwicklung — Vom reaktiven Prototyp zum AutoDetect-System"],
+      "note": "Phase A task inventory (14,379 entries → 7,916 tasks), first reactive planner build, v1.1-v1.2 iteration with state persistence and timeline logging."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-04-d847a2bf": {
+      "status": "used",
+      "lastRead": "2026-05-08T11:53:00Z",
+      "syntheses": ["Kontensystem — Unified Planning System", "Planner-Entwicklung — Vom reaktiven Prototyp zum AutoDetect-System"],
+      "note": "Planner UI sprint: day type override, Fs. interruption system, full-day projection (radio playout inspiration), preemptive scheduling, Ungeplant button."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-05-aae78d6d": {
+      "status": "used",
+      "lastRead": "2026-05-08T11:53:00Z",
+      "syntheses": ["Kontensystem — Unified Planning System", "Planner-Entwicklung — Vom reaktiven Prototyp zum AutoDetect-System"],
+      "note": "Documentation index (107 files, 31 accounts), code_suggest.py, bulk .doc→.txt conversion (103 files), doc_ref cross-reference (29% documented)."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-06-dea5a101": {
+      "status": "used",
+      "lastRead": "2026-05-08T11:53:00Z",
+      "syntheses": ["Kontensystem — Unified Planning System", "Planner-Entwicklung — Vom reaktiven Prototyp zum AutoDetect-System"],
+      "note": "Task automations, automation editor CRUD, Erledigt panel with gap detection, radio-playout layout, molt.chess ELO standings."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-07-54f9454b": {
+      "status": "used",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "syntheses": ["Aufgaben-Codes als Buchungskategorien — Architektur-Einsicht"]
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-08-fe7ec318": {
+      "status": "used",
+      "lastRead": "2026-05-08T11:53:00Z",
+      "syntheses": ["Kontensystem — Unified Planning System", "Planner-Entwicklung — Vom reaktiven Prototyp zum AutoDetect-System"],
+      "note": "Planner v1.5 commit, log file transition discussion (old Planung/Ablauf → JSON logs), planner documentation (handbuch + technik), Feiertag gap."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-11-bb7399ff": {
+      "status": "used",
+      "lastRead": "2026-05-08T11:53:00Z",
+      "syntheses": ["Kontensystem — Unified Planning System", "Plananalyse-Methodik und Unterbrechungsklassifikation", "Planner-Entwicklung — Vom reaktiven Prototyp zum AutoDetect-System"],
+      "note": "87 min/day Nacherfassung overhead, first full-day windowmon capture, three-source comparison methodology, idle detection design discussion, Morgenroutine off-PC blocks."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-12-f53e0f24": {
+      "status": "used",
+      "lastRead": "2026-05-08T11:53:00Z",
+      "syntheses": ["Kontensystem — Unified Planning System", "Planner-Entwicklung — Vom reaktiven Prototyp zum AutoDetect-System"],
+      "note": "Idle/Off-PC detection implemented (30s trigger, 20s backdate), windowmon_summary.py with ~20 AutoDetect rules, Kurt's VB5 Logger integration."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-13-7c3ea518": {
+      "status": "used",
+      "lastRead": "2026-05-08T11:53:00Z",
+      "syntheses": ["Kontensystem — Unified Planning System", "Planner-Entwicklung — Vom reaktiven Prototyp zum AutoDetect-System"],
+      "note": "AutoDetect philosophy (continue previous activity fallback), Radio Würmchen title parsing, Notepad content rules, Explorer folder mapping."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-14-f4dcefab": {
+      "status": "used",
+      "lastRead": "2026-05-08T11:53:00Z",
+      "syntheses": ["Plananalyse-Methodik und Unterbrechungsklassifikation", "Planner-Entwicklung — Vom reaktiven Prototyp zum AutoDetect-System"],
+      "note": "Nacherfassung pain points (6 problems), improvement roadmap (V1-V6), AutoDetect rule analysis (EXCEL missing, AI DJ Break, Grok'n Roll), report blind spot (windowmon_import)."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-15-05bd91a4": {
+      "status": "used",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "syntheses": ["Aufgaben-Codes als Buchungskategorien — Architektur-Einsicht"]
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-17-bb7cf45c": {
+      "status": "used",
+      "lastRead": "2026-05-08T11:53:00Z",
+      "syntheses": ["Planner-Entwicklung — Vom reaktiven Prototyp zum AutoDetect-System"],
+      "note": "March 16 day analysis, 'Hausaufgaben'-Muster insight, planner context fix, noise-absorption fix, Sati-Ramadan exception, boundary lesson (Frühstart-Regel)."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-18-290cfeb7": {
+      "status": "used",
+      "lastRead": "2026-05-08T11:53:00Z",
+      "syntheses": ["Planner-Entwicklung — Vom reaktiven Prototyp zum AutoDetect-System"],
+      "note": "Tizanidin medication discovery (PC sleep cause), boundary lesson elaboration (autonomy-removal parallel to father), March 17 day analysis."
+    },
+    "source.bridge.workspace-d9997e04.memory-2026-03-23-91bf756e": {
+      "status": "empty",
+      "lastRead": "2026-05-08T10:14:00Z",
+      "note": "Planner bugfixes (thin), stock tooling (covered by aktien-trading synthesis), CMOL-FPGA project (unique but single-source, insufficient for synthesis)."
+    }
+  },
+  "unreadable": {},
+  "pendingTopics": []
+}

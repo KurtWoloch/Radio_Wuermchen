@@ -1,0 +1,9 @@
+{
+  "total_songs": 20625,
+  "needs_energy": 20625,
+  "needs_mood": 20625,
+  "needs_tempo": 20625,
+  "batch_size": 20,
+  "total_batches": 1032,
+  "sample_batch": "1. \"#9 dream\" by Lennon\n   Genre: Rock, Pop, Beat\n   Voice: hoch\n   Language: en\n\n2. \"#Selfie\" by Chainsmokers\n   Genre: Hip-Hop\n   Decade: 2010s\n   Language: en\n\n3. \"#Thatpower\" by Will.i.am ft. Justin Bieber\n   Genre: Dance\n   Tempo: 16\n   Decade: 2010s\n   Language: en\n\n4. \"#wheresthelove\" by Black eyed peas feat. The World\n   Genre: Pop, Rap, R&B\n   Tempo: 16, langsam\n   Decade: 2010s\n   Language: en\n\n5. \"$100 groom\" by Westerberg\n   Genre: Pop, Beat, Rock\n   Mood: schmutzig\n   Language: en\n\n6. \"Reaper\" by Blue Öyster Cult\n   Genre: Pop, Beat, Rock\n   Decade: 1970s\n   Language: en\n\n7. \"(Du musst ein) Schwein sein\" by Prinzen\n   Genre: Pop, Dance\n   Tempo: 16\n   Language: de\n\n8. \"I do it for you\" by Vienna Blues\n   Genre: Pop, Beat, Rock\n   Tempo: Ballade, 16\n   Language: en\n\n9. \"I do it for you\" by Adams\n   Genre: Rock, Beat\n   Tempo: Ballade\n   Mood: rauh\n   Voice: hoch\n   Instruments: Klavier\n   Language: en\n\n10. \"I do it for you\" by Adams\n   Genre: Pop, Beat, Rock\n   Tempo: Balla"
+}

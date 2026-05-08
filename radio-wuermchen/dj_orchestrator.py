@@ -18,6 +18,7 @@ from weather_manager import get_weather_forecast, WEATHER_RESULT
 from tts_manager import generate_announcement_audio
 from news_scheduler import get_news_instruction, news_mark_presented
 import charts_scraper
+from song_selector import SongSelector
 
 # --- CONFIGURATION ---
 BASE_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
@@ -42,6 +43,41 @@ ICECAST_STATUS_URL = "http://localhost:8000/status-json.xsl"
 MAX_ARTIST_SUGGESTIONS = 50 # Maximum tracks to offer the DJ if suggestion fails
 MAX_POOL_SUGGESTIONS = 50   # Maximum tracks to offer from the suggestion pool
 MAX_DJ_ATTEMPTS = 5 # Maximum times to re-prompt the DJ per signal event
+
+# --- SONG SELECTOR (initialized after log function) ---
+song_selector = None
+
+def get_show_energy_target(show_overrides):
+    """Determine energy target from show config.
+    Maps music_style keywords to energy levels."""
+    style = show_overrides.get('music_style', '').lower()
+    if not style:
+        return 5  # default
+    if any(w in style for w in ['rock', 'energisch', 'schnell', 'punk', 'metal']):
+        return 7
+    if any(w in style for w in ['ballade', 'ruhig', 'chill', 'ambient', 'jazz']):
+        return 3
+    if any(w in style for w in ['pop', 'dance', 'disco', 'electro']):
+        return 6
+    return 5
+
+def get_show_genre_prefer(show_overrides):
+    """Extract genre preferences from show config."""
+    style = show_overrides.get('music_style', '').lower()
+    if not style:
+        return None
+    genre_map = {
+        'rock': ['Rock'], 'pop': ['Pop'], 'jazz': ['Jazz'],
+        'dance': ['Dance', 'Disco'], 'electro': ['Electro', 'Synthie'],
+        'country': ['Country'], 'blues': ['Blues'], 'soul': ['Soul', 'R&B'],
+        'metal': ['Metal'], 'punk': ['Punk'], 'folk': ['Folk'],
+        'schlager': ['Schlager'], 'oldie': ['Oldie'],
+    }
+    genres = []
+    for keyword, genre_list in genre_map.items():
+        if keyword in style:
+            genres.extend(genre_list)
+    return genres if genres else None
 
 # --- HELPERS ---
 def get_listener_count():
@@ -77,6 +113,17 @@ def log(msg):
             f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {msg}\n")
     except Exception:
         pass
+
+def load_json(path):
+    """Load JSON data, handling missing files gracefully."""
+
+# --- Initialize Song Selector (needs log function) ---
+try:
+    song_selector = SongSelector()
+    log(f"Song Selector loaded with {len(song_selector.songs)} songs.")
+except Exception as e:
+    song_selector = None
+    log(f"WARNING: Song Selector failed to load: {e}")
 
 def load_json(path):
     """Load JSON data, handling missing files gracefully."""
@@ -441,14 +488,16 @@ def find_artist_alternatives(artist_name, playlist, max_results=MAX_ARTIST_SUGGE
     return alternatives
 
 # --- DJ COMMUNICATION ---
-def trigger_dj(last_track, listener_input=None, instructions=None):
+def trigger_dj(last_track, listener_input=None, instructions=None, pre_selected_track=None):
     """Writes request file, runs DJ brain, reads response."""
     
     request_data = {
         "last_track": last_track,
         "listener_input": listener_input,
-        "instructions": instructions
+        "instructions": instructions,
     }
+    if pre_selected_track:
+        request_data["pre_selected_track"] = pre_selected_track
     with open(str(REQUEST_FILE), 'w', encoding='utf-8') as f:
         json.dump(request_data, f, indent=2)
     log(f"Wrote DJ request. Last Track: {last_track}. Listener Input: {listener_input}. Instructions: {instructions}")
@@ -807,11 +856,49 @@ def main():
             success = False
             retry_count = 0
             
+            # --- SONG SELECTOR: Pre-select a song ---
+            pre_selected_track = None
+            if song_selector and not listener_input:
+                try:
+                    energy_target = get_show_energy_target(show_overrides)
+                    genre_prefer = get_show_genre_prefer(show_overrides)
+                    
+                    # Build exclusion set from recent history
+                    history = load_json(str(HISTORY_FILE))
+                    recent_nrs = set()
+                    for entry in history[-20:]:
+                        if 'titel_nr' in entry:
+                            recent_nrs.add(entry['titel_nr'])
+                    
+                    # Select a song
+                    selected = song_selector.select(
+                        energy_target=energy_target,
+                        genre_prefer=genre_prefer,
+                        exclude_nrs=recent_nrs,
+                        count=1
+                    )
+                    
+                    if selected:
+                        sel = selected[0]
+                        track_str = f"{sel['artist']} - {sel['title']}"
+                        pre_selected_track = track_str
+                        log(f"SONG SELECTOR: Picked '{track_str}' "
+                            f"(energy={sel['energy']}, score={sel['score']}, reasons={sel['reasons']})")
+                        
+                        # Add to request_data so DJ Brain knows the pre-selected track
+                        request_data['pre_selected_track'] = track_str
+                    else:
+                        log("SONG SELECTOR: No suitable track found. Falling back to DJ Brain.")
+                except Exception as e:
+                    log(f"SONG SELECTOR ERROR: {e}. Falling back to DJ Brain.")
+            elif listener_input:
+                log("SONG SELECTOR: Skipped (listener request active).")
+            
             while retry_count < MAX_DJ_ATTEMPTS and not success:
                 retry_count += 1
                 log(f"--- DJ Attempt {retry_count}/{MAX_DJ_ATTEMPTS} ---")
                 
-                dj_output = trigger_dj(request_data["last_track"], request_data["listener_input"], request_data["instructions"])
+                dj_output = trigger_dj(request_data["last_track"], request_data["listener_input"], request_data["instructions"], pre_selected_track=pre_selected_track)
 
                 if dj_output:
                     suggested_track = dj_output.get("track")
