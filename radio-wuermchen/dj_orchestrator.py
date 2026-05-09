@@ -408,6 +408,23 @@ def clean_suggestion_for_matching(suggestion):
     cleaned = re.sub(r'^[\s-]+|[\s-]+$', '', cleaned).strip()
     return cleaned
 
+def normalize_track_name(track):
+    """Normalize a track name to 'Artist - Title' format.
+    Handles dict objects, Python dict-repr strings, and normal strings."""
+    if isinstance(track, dict):
+        return f"{track.get('artist', '?')} - {track.get('title', '?')}"
+    if isinstance(track, str):
+        # Handle Python dict repr strings like "{'artist': 'X', 'title': 'Y', ...}"
+        if track.startswith("{") and "'artist'" in track:
+            try:
+                import ast
+                d = ast.literal_eval(track)
+                if isinstance(d, dict) and 'artist' in d:
+                    return f"{d.get('artist', '?')} - {d.get('title', '?')}"
+            except Exception:
+                pass
+    return str(track)
+
 def find_news_relevant_tracks(news_text, playlist, max_results=10):
     """Extract quoted strings from news text and find matching tracks in the playlist.
     Handles English quotes ("..."), German lower-upper quotes (\u201e...\u201c), and
@@ -858,6 +875,8 @@ def main():
             
             # --- SONG SELECTOR: Pre-select a song ---
             pre_selected_track = None
+            pre_selected_track_path = None  # Actual playlist path from database filename
+            selected_song_info = None  # Full song dict for history update
             if song_selector and not listener_input:
                 try:
                     energy_target = get_show_energy_target(show_overrides)
@@ -882,8 +901,28 @@ def main():
                         sel = selected[0]
                         track_str = f"{sel['artist']} - {sel['title']}"
                         pre_selected_track = track_str
+                        selected_song_info = sel  # Save titel_nr etc. for history update
                         log(f"SONG SELECTOR: Picked '{track_str}' "
                             f"(energy={sel['energy']}, score={sel['score']}, reasons={sel['reasons']})")
+                        
+                        # Find the actual playlist path using the database filename
+                        db_filename = sel.get('filename', '')
+                        if db_filename:
+                            db_filename_lower = db_filename.lower()
+                            for p_track in playlist:
+                                if os.path.basename(p_track).lower() == db_filename_lower:
+                                    pre_selected_track_path = p_track
+                                    log(f"SONG SELECTOR: Resolved to playlist path: {p_track}")
+                                    break
+                            if not pre_selected_track_path:
+                                # Try partial match (filename might have extra path components)
+                                for p_track in playlist:
+                                    if db_filename_lower in os.path.basename(p_track).lower():
+                                        pre_selected_track_path = p_track
+                                        log(f"SONG SELECTOR: Partial match to playlist path: {p_track}")
+                                        break
+                        if not pre_selected_track_path:
+                            log(f"SONG SELECTOR WARNING: Could not find '{db_filename}' in playlist.")
                         
                         # Add to request_data so DJ Brain knows the pre-selected track
                         request_data['pre_selected_track'] = track_str
@@ -936,7 +975,8 @@ def main():
                         
                         history = load_json(str(HISTORY_FILE))
                         # Skip the most recent entry — it's the one the DJ just suggested
-                        recent_tracks = [entry["track"].lower() for entry in history[:-1] if "track" in entry]
+                        # Normalize track names to handle dict-repr strings from LLM
+                        recent_tracks = [normalize_track_name(entry.get("track", "")).lower() for entry in history[:-1] if "track" in entry]
                         
                         rejected_by_history = False
                         if suggested_track.lower() in recent_tracks:
@@ -945,10 +985,18 @@ def main():
                             rejected_by_history = True
                         else:
                             # --- MUSIC MATCHING LOGIC START ---
+                            found_track = None
+                            
+                            # Priority 0: If Song Selector pre-selected a track and we
+                            # resolved the playlist path, use it directly
+                            if (pre_selected_track_path and 
+                                normalize_track_name(suggested_track).lower() == normalize_track_name(pre_selected_track).lower()):
+                                found_track = pre_selected_track_path
+                                log(f"Pre-selected path match: {os.path.basename(pre_selected_track_path)}")
+                            
                             # Priority 1: Try matching with the raw DJ suggestion
                             # (preserves feat. tags, parentheses, etc.)
                             # Collect all substring matches, prefer the closest (shortest filename)
-                            found_track = None
                             raw_lower = suggested_track.lower()
                             for p_track in playlist:
                                 p_filename = os.path.basename(p_track)
@@ -1009,6 +1057,17 @@ def main():
                             show_pool_path = str(BASE_DIR / show_overrides["suggestion_pool"]) if show_overrides.get("suggestion_pool") else str(SUGGESTION_POOL_FILE)
                             remove_from_pool_file(show_pool_path, os.path.basename(found_track))
                             
+                            # Update history entry with titel_nr for future exclusion
+                            if selected_song_info and 'titel_nr' in selected_song_info:
+                                try:
+                                    hist = load_json(str(HISTORY_FILE))
+                                    if hist:
+                                        hist[-1]['titel_nr'] = selected_song_info['titel_nr']
+                                        save_json(HISTORY_FILE, hist)
+                                        log(f"History updated with titel_nr={selected_song_info['titel_nr']}")
+                                except Exception as e:
+                                    log(f"Failed to update history with titel_nr: {e}")
+                            
                             # Mark news story as presented if this was a deep dive
                             if mark_id:
                                 news_mark_presented(mark_id)
@@ -1031,16 +1090,28 @@ def main():
                                 ]
                                 log(f"Adding {len(news_suggestion_lines)} news-relevant track suggestions.")
                             
+                            # --- SONG SELECTOR FALLBACK (Priority 0) ---
+                            # If DJ Brain chose a different track that wasn't found,
+                            # offer the Song Selector's recommendation first
+                            selector_suggestion = None
+                            if pre_selected_track and normalize_track_name(suggested_track).lower() != normalize_track_name(pre_selected_track).lower():
+                                selector_suggestion = pre_selected_track
+                                log(f"Offering Song Selector recommendation as primary fallback: {pre_selected_track}")
+                            
                             # --- SUGGESTION POOL FALLBACK (Priority 1) ---
                             show_pool_file = str(BASE_DIR / show_overrides["suggestion_pool"]) if show_overrides.get("suggestion_pool") else None
                             pool_suggestions = get_pool_suggestions(pool_file=show_pool_file)
                             if pool_suggestions:
                                 pool_suggestions = sort_by_similarity(suggested_track, pool_suggestions)
-                            if news_suggestion_lines or pool_suggestions:
+                            if news_suggestion_lines or selector_suggestion or pool_suggestions:
                                 all_suggestions = []
                                 if news_suggestion_lines:
                                     all_suggestions.append("NEWS-RELEVANT TRACKS (these match today's news — strongly prefer these if they fit the story):")
                                     all_suggestions.extend(news_suggestion_lines)
+                                    all_suggestions.append("")
+                                if selector_suggestion:
+                                    all_suggestions.append("TOP RECOMMENDATION (pre-selected by the music system for this show):")
+                                    all_suggestions.append(selector_suggestion)
                                     all_suggestions.append("")
                                 if pool_suggestions:
                                     all_suggestions.append("OTHER RECOMMENDED TRACKS (from most to least recommended):")

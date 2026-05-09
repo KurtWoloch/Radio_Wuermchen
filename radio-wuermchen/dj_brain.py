@@ -198,27 +198,23 @@ def build_user_message(request_data, history):
             recent.append(str(t))
         parts.append(f"HISTORY BLOCKLIST: You MUST NOT suggest any track found in this list unless fulfilling a specific listener request that names it: {', '.join(recent)}")
 
-    # Pre-selected track from Song Selector
-    pre_selected = request_data.get("pre_selected_track")
-    if pre_selected:
-        parts.append(
-            f"TRACK ALREADY SELECTED: The track '{pre_selected}' has been pre-selected by the music system. "
-            f"You MUST use this track — do NOT suggest a different one. "
-            f"Write an engaging announcement (1-3 sentences) introducing this track. "
-            f"Return the track as '{pre_selected}' in the JSON response."
-        )
-        parts.append("Write the announcement for the pre-selected track.")
-        return "\n".join(parts)
-
     # Listener input if any
     listener_input = request_data.get("listener_input")
     if listener_input:
         parts.append(f"A listener has requested or commented: {listener_input}")
     else:
-        # --- NEW INSTRUCTION FOR LONGER ANNOUNCEMENTS ---
         parts.append("Since there is no specific listener request, your announcement should be more detailed and engaging (2-3 sentences) about the song or artist before introducing the track.")
-        
-    # Any special instructions
+
+    # Pre-selected track from Song Selector — suggestion, not mandate
+    pre_selected = request_data.get("pre_selected_track")
+    if pre_selected:
+        parts.append(
+            f"MUSIC SYSTEM RECOMMENDATION: The music system recommends '{pre_selected}' as a strong candidate for the current show and time. "
+            f"You may play this track, or choose a different one if you have a better idea that fits the show's style. "
+            f"If you choose a different track, make sure it is a real, well-known song."
+        )
+
+    # Any special instructions (show context, weather, news, etc.)
     instructions = request_data.get("instructions")
     if instructions:
         parts.append(f"System instruction for this turn: {instructions}")
@@ -296,6 +292,20 @@ def main():
     response = parse_dj_response(raw_response)
 
     if response:
+        # Normalize track field — LLM sometimes returns dict-repr strings
+        # like "{'titel_nr': 6050, 'artist': 'X', ...}" instead of "Artist - Title"
+        track = response.get("track", "")
+        if isinstance(track, str) and track.startswith("{") and "'artist'" in track:
+            try:
+                import ast
+                d = ast.literal_eval(track)
+                if isinstance(d, dict) and 'artist' in d:
+                    normalized = f"{d.get('artist', '?')} - {d.get('title', '?')}"
+                    print(f"Normalized track from dict-repr: '{track[:60]}...' -> '{normalized}'", file=sys.stderr)
+                    response["track"] = normalized
+            except Exception:
+                pass
+
         # Use repr() fallback to avoid cp1252 encoding errors on Windows console
         try:
             print(f"DJ Suggestion: {response['track']}")
