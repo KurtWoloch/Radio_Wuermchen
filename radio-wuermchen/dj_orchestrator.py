@@ -1026,8 +1026,12 @@ def main():
                             
                             # Priority 0: If Song Selector pre-selected a track and we
                             # resolved the playlist path, use it directly
+                            # Normalize and strip hyphens/spaces for fuzzy comparison
+                            def _normalize_for_match(s):
+                                import re
+                                return re.sub(r'[^a-z0-9]', '', normalize_track_name(s).lower())
                             if (pre_selected_track_path and 
-                                normalize_track_name(suggested_track).lower() == normalize_track_name(pre_selected_track).lower()):
+                                _normalize_for_match(suggested_track) == _normalize_for_match(pre_selected_track)):
                                 found_track = pre_selected_track_path
                                 log(f"Pre-selected path match: {os.path.basename(pre_selected_track_path)}")
                             
