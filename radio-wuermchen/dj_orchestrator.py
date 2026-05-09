@@ -1104,6 +1104,24 @@ def main():
                                         log(f"History updated with titel_nr={selected_song_info['titel_nr']}")
                                 except Exception as e:
                                     log(f"Failed to update history with titel_nr: {e}")
+                                
+                                # Update rw_last_played in song database
+                                if song_selector:
+                                    try:
+                                        # Prefer titel_nr from pre-selected track
+                                        if selected_song_info and 'titel_nr' in selected_song_info:
+                                            song_selector.mark_as_played(selected_song_info['titel_nr'])
+                                            log(f"Database updated: rw_last_played for titel_nr={selected_song_info['titel_nr']}")
+                                        else:
+                                            # DJ Brain chose its own track — look up by filename
+                                            played_song = song_selector.find_by_filename(os.path.basename(found_track))
+                                            if played_song:
+                                                song_selector.mark_as_played(played_song['titel_nr'])
+                                                log(f"Database updated: rw_last_played for '{played_song['artist']} - {played_song['title']}'")
+                                            else:
+                                                log(f"Track '{os.path.basename(found_track)}' not found in database — rw_last_played not updated")
+                                    except Exception as e:
+                                        log(f"Failed to update rw_last_played: {e}")
                             
                             # Mark news story as presented if this was a deep dive
                             if mark_id:

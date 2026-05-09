@@ -16,6 +16,30 @@ class SongSelector:
         self.by_nr = {}
         for s in self.songs:
             self.by_nr[s['titel_nr']] = s
+        self._db_path = db_path
+    
+    def mark_as_played(self, titel_nr):
+        """Mark a song as played by updating rw_last_played in the database."""
+        song = self.by_nr.get(titel_nr)
+        if song:
+            song['rw_last_played'] = datetime.now().isoformat()
+            song['rw_play_count'] = song.get('rw_play_count', 0) + 1
+            try:
+                with open(self._db_path, 'w', encoding='utf-8') as f:
+                    json.dump(self.songs, f, indent=2, ensure_ascii=False)
+                return True
+            except Exception:
+                return False
+        return False
+    
+    def find_by_filename(self, filename):
+        """Find a song in the database by its filename. Returns the song dict or None."""
+        filename_lower = os.path.basename(filename).lower()
+        for song in self.songs:
+            db_filename = song.get('filename', '')
+            if db_filename and db_filename.lower() == filename_lower:
+                return song
+        return None
     
     def select(self, 
                energy_target=5, 
