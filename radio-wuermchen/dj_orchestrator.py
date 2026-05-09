@@ -1172,12 +1172,39 @@ def main():
                                 if artist_alternatives:
                                     log(f"Found {len(artist_alternatives)} artist alternatives for '{artist}' (after history filter).")
                             
+                            # --- SAME-TITLE BY OTHER ARTISTS (Priority 1.5) ---
+                            # Search for tracks with the same title but different artist
+                            title_alternatives = []
+                            title_part = None
+                            if ' - ' in suggested_track:
+                                title_part = suggested_track.split(' - ', 1)[1].strip()
+                            if title_part:
+                                # Strip version suffixes for matching: (Live), (Karaoke), feat. etc.
+                                title_clean = re.sub(r'\s*\(.*?\)\s*', ' ', title_part).strip().lower()
+                                title_clean = re.sub(r'\s*(?:ft\.|feat\.)\s*.*$', '', title_clean, flags=re.IGNORECASE).strip()
+                                for p_track in playlist:
+                                    p_filename = os.path.splitext(os.path.basename(p_track))[0]
+                                    if ' - ' in p_filename:
+                                        p_artist, p_title = p_filename.split(' - ', 1)
+                                        p_title_clean = re.sub(r'\s*\(.*?\)\s*', ' ', p_title).strip().lower()
+                                        p_title_clean = re.sub(r'\s*(?:ft\.|feat\.)\s*.*$', '', p_title_clean, flags=re.IGNORECASE).strip()
+                                        if p_title_clean == title_clean and p_artist.lower() != (artist or '').lower():
+                                            title_alternatives.append(p_track)
+                                # Filter out recently played
+                                if recent_tracks:
+                                    title_alternatives = [
+                                        t for t in title_alternatives
+                                        if os.path.splitext(os.path.basename(t))[0].lower() not in recent_tracks
+                                    ]
+                                if title_alternatives:
+                                    log(f"Found {len(title_alternatives)} same-title alternatives for '{title_part}'.")
+                            
                             # --- SUGGESTION POOL FALLBACK (Priority 2) ---
                             show_pool_file = str(BASE_DIR / show_overrides["suggestion_pool"]) if show_overrides.get("suggestion_pool") else None
                             pool_suggestions = get_pool_suggestions(pool_file=show_pool_file)
                             if pool_suggestions:
                                 pool_suggestions = sort_by_similarity(suggested_track, pool_suggestions)
-                            if news_suggestion_lines or selector_suggestion or artist_alternatives or pool_suggestions:
+                            if news_suggestion_lines or selector_suggestion or artist_alternatives or title_alternatives or pool_suggestions:
                                 all_suggestions = []
                                 if news_suggestion_lines:
                                     all_suggestions.append("NEWS-RELEVANT TRACKS (these match today's news — strongly prefer these if they fit the story):")
@@ -1190,6 +1217,10 @@ def main():
                                 if artist_alternatives:
                                     all_suggestions.append(f"OTHER TRACKS BY {artist.upper()} (available in library):")
                                     all_suggestions.extend(os.path.splitext(os.path.basename(t))[0] for t in artist_alternatives[:MAX_ARTIST_SUGGESTIONS])
+                                    all_suggestions.append("")
+                                if title_alternatives:
+                                    all_suggestions.append(f"OTHER VERSIONS OF '{title_part}' (by different artists):")
+                                    all_suggestions.extend(os.path.splitext(os.path.basename(t))[0] for t in title_alternatives[:MAX_ARTIST_SUGGESTIONS])
                                     all_suggestions.append("")
                                 if pool_suggestions:
                                     all_suggestions.append("OTHER RECOMMENDED TRACKS (from most to least recommended):")
