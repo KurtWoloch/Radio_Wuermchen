@@ -84,9 +84,9 @@ def blend_energy(show_energy, day_context):
     if day_energy is None:
         return show_energy
     # Blend: show gets 70% weight, day context gets 30%
-    blended = round(show_energy * 0.7 + day_energy * 0.3)
+    blended = show_energy * 0.7 + day_energy * 0.3
     # Clamp to 1-10 range
-    return max(1, min(10, blended))
+    return max(1.0, min(10.0, blended))
 
 
 def get_show_genre_prefer(show_overrides):
