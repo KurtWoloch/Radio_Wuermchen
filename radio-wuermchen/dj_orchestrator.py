@@ -1157,12 +1157,27 @@ def main():
                                 selector_suggestion = pre_selected_track
                                 log(f"Offering Song Selector recommendation as primary fallback: {pre_selected_track}")
                             
-                            # --- SUGGESTION POOL FALLBACK (Priority 1) ---
+                            # --- ARTIST ALTERNATIVES (Priority 1) ---
+                            # Search full library for other tracks by the same artist
+                            artist_alternatives = []
+                            artist = parse_artist_from_suggestion(suggested_track)
+                            if artist:
+                                artist_alternatives = find_artist_alternatives(artist, playlist)
+                                # Filter out recently played tracks
+                                if recent_tracks:
+                                    artist_alternatives = [
+                                        t for t in artist_alternatives
+                                        if os.path.splitext(os.path.basename(t))[0].lower() not in recent_tracks
+                                    ]
+                                if artist_alternatives:
+                                    log(f"Found {len(artist_alternatives)} artist alternatives for '{artist}' (after history filter).")
+                            
+                            # --- SUGGESTION POOL FALLBACK (Priority 2) ---
                             show_pool_file = str(BASE_DIR / show_overrides["suggestion_pool"]) if show_overrides.get("suggestion_pool") else None
                             pool_suggestions = get_pool_suggestions(pool_file=show_pool_file)
                             if pool_suggestions:
                                 pool_suggestions = sort_by_similarity(suggested_track, pool_suggestions)
-                            if news_suggestion_lines or selector_suggestion or pool_suggestions:
+                            if news_suggestion_lines or selector_suggestion or artist_alternatives or pool_suggestions:
                                 all_suggestions = []
                                 if news_suggestion_lines:
                                     all_suggestions.append("NEWS-RELEVANT TRACKS (these match today's news — strongly prefer these if they fit the story):")
@@ -1171,6 +1186,10 @@ def main():
                                 if selector_suggestion:
                                     all_suggestions.append("TOP RECOMMENDATION (pre-selected by the music system for this show):")
                                     all_suggestions.append(selector_suggestion)
+                                    all_suggestions.append("")
+                                if artist_alternatives:
+                                    all_suggestions.append(f"OTHER TRACKS BY {artist.upper()} (available in library):")
+                                    all_suggestions.extend(os.path.splitext(os.path.basename(t))[0] for t in artist_alternatives[:MAX_ARTIST_SUGGESTIONS])
                                     all_suggestions.append("")
                                 if pool_suggestions:
                                     all_suggestions.append("OTHER RECOMMENDED TRACKS (from most to least recommended):")
@@ -1181,7 +1200,7 @@ def main():
                                     f"Please select one of the following tracks instead:\n{suggestion_list}"
                                 )
                                 instructions = f"{combined_instructions}\n{retry_instructions}" if combined_instructions else retry_instructions
-                                log(f"Offering {len(pool_suggestions)} tracks from suggestion pool.")
+                                log(f"Offering {len(artist_alternatives)} artist alternatives + {len(pool_suggestions)} pool tracks.")
                                 request_data["instructions"] = instructions
                             else:
                                 # --- ARTIST ALTERNATIVES FALLBACK (Priority 2) ---
