@@ -63,6 +63,34 @@ def get_show_energy_target(show_overrides):
 
 def get_show_genre_prefer(show_overrides):
     """Extract genre preferences from show config."""
+
+
+def read_day_context():
+    """Read the day context file for mood/energy adjustments."""
+    day_context_path = BASE_DIR / "day-context.json"
+    try:
+        with open(str(day_context_path), 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+
+
+def blend_energy(show_energy, day_context):
+    """Blend show energy with day context energy.
+    Show energy is dominant (70%), day context adjusts slightly (30%)."""
+    if not day_context:
+        return show_energy
+    day_energy = day_context.get('energy')
+    if day_energy is None:
+        return show_energy
+    # Blend: show gets 70% weight, day context gets 30%
+    blended = round(show_energy * 0.7 + day_energy * 0.3)
+    # Clamp to 1-10 range
+    return max(1, min(10, blended))
+
+
+def get_show_genre_prefer(show_overrides):
+    """Extract genre preferences from show config."""
     style = show_overrides.get('music_style', '').lower()
     if not style:
         return None
@@ -881,6 +909,15 @@ def main():
                 try:
                     energy_target = get_show_energy_target(show_overrides)
                     genre_prefer = get_show_genre_prefer(show_overrides)
+                    
+                    # Adjust energy based on day context (mood)
+                    day_context = read_day_context()
+                    if day_context:
+                        original_energy = energy_target
+                        energy_target = blend_energy(energy_target, day_context)
+                        if energy_target != original_energy:
+                            log(f"Day context: energy adjusted {original_energy} -> {energy_target} "
+                                f"(mood={day_context.get('mood', '?')}, day_energy={day_context.get('energy', '?')})")
                     
                     # Build exclusion set from recent history
                     history = load_json(str(HISTORY_FILE))
