@@ -2,10 +2,15 @@ import json
 import random
 import os
 import re
+import numpy as np
+from google import genai
 from datetime import datetime, timedelta
 
 DB_PATH = os.path.join(os.path.dirname(__file__), 'song-database-v1-classified.json')
 KEYWORDS_PATH = os.path.join(os.path.dirname(__file__), 'keywords.txt')
+EMBEDDINGS_PATH = os.path.join(os.path.dirname(__file__), 'song_embeddings.npz')
+EMBEDDING_MODEL = 'models/gemini-embedding-001'
+EMBEDDING_BONUS_MULTIPLIER = 2.0  # scale raw similarity scores to match +2/keyword system
 
 class SongSelector:
     """Song selection algorithm for Radio Würmchen."""
@@ -22,6 +27,24 @@ class SongSelector:
         
         # Load keywords
         self.keywords = self._load_keywords(keywords_path)
+        
+        # Load song embeddings (semantic keyword matching)
+        self._emb_matrix = None
+        self._emb_titles = None
+        self._emb_title_to_idx = {}
+        if os.path.exists(EMBEDDINGS_PATH):
+            try:
+                data = np.load(EMBEDDINGS_PATH, allow_pickle=True)
+                self._emb_matrix = data['embeddings']
+                self._emb_titles = data['titles']
+                self._emb_title_to_idx = {t: i for i, t in enumerate(self._emb_titles)}
+                # Pre-normalize for faster cosine similarity
+                norms = np.linalg.norm(self._emb_matrix, axis=1, keepdims=True)
+                norms[norms == 0] = 1.0
+                self._emb_normalized = self._emb_matrix / norms
+                print(f"Loaded {len(self._emb_title_to_idx)} song embeddings ({self._emb_matrix.shape[1]}d)")
+            except Exception as e:
+                print(f"Could not load embeddings: {e}")
     
     def _load_keywords(self, path):
         """Load keywords from file. One keyword per line, case-insensitive."""
@@ -35,7 +58,60 @@ class SongSelector:
     def reload_keywords(self, path=KEYWORDS_PATH):
         """Reload keywords from file (for external updates without restart)."""
         self.keywords = self._load_keywords(path)
+        # Clear cached keyword embeddings since keywords changed
+        self._kw_emb_cache = getattr(self, '_kw_emb_cache', {})
         return len(self.keywords)
+    
+    def _compute_embedding_bonuses(self):
+        """Compute embedding-based bonus for all songs against current keywords.
+        
+        Returns tuple (bonuses, per_keyword):
+          bonuses: search_key ("Artist - Title") → bonus points (sum × multiplier)
+          per_keyword: search_key → list of (keyword, similarity) pairs
+        """
+        if not self.keywords or self._emb_matrix is None:
+            return {}, {}
+        
+        api_key = os.environ.get('GEMINI_API_KEY')
+        if not api_key:
+            return {}, {}
+        
+        try:
+            client = genai.Client(api_key=api_key)
+            result = client.models.embed_content(
+                model=EMBEDDING_MODEL,
+                contents=[kw.lower() for kw in self.keywords],
+            )
+            kw_embeddings = np.array([emb.values for emb in result.embeddings], dtype=np.float32)
+        except Exception as e:
+            print(f"Warning: keyword embedding failed: {e}")
+            return {}, {}
+        
+        # Normalize keyword embeddings for cosine similarity
+        kw_norms = np.linalg.norm(kw_embeddings, axis=1, keepdims=True)
+        kw_norms[kw_norms == 0] = 1.0
+        kw_normalized = kw_embeddings / kw_norms
+        
+        # All-pairs cosine similarity: (n_songs, n_keywords)
+        sim_matrix = self._emb_normalized @ kw_normalized.T
+        
+        # Sum similarities across all keywords for each song (Kurt's approach)
+        sim_sums = np.sum(sim_matrix, axis=1)
+        
+        # Build result dicts: title_key → scaled bonus, title_key → per-kw breakdown
+        bonuses = {}
+        per_keyword = {}
+        multiplier = EMBEDDING_BONUS_MULTIPLIER
+        for i, title in enumerate(self._emb_titles):
+            s = float(sim_sums[i])
+            if s > 0.1:  # skip negligible matches
+                bonuses[str(title)] = s * multiplier
+                per_keyword[str(title)] = [
+                    (self.keywords[j], float(sim_matrix[i, j]))
+                    for j in range(len(self.keywords))
+                ]
+        
+        return bonuses, per_keyword
     
     def mark_as_played(self, titel_nr):
         """Mark a song as played by updating rw_last_played in the database."""
@@ -96,6 +172,9 @@ class SongSelector:
             cutoff = (datetime.now() - timedelta(hours=exclude_hours)).isoformat()
         
         candidates = []
+        
+        # Pre-compute embedding-based bonuses for all songs (one API call + one matrix multiply)
+        emb_bonuses, emb_per_kw = self._compute_embedding_bonuses() if self.keywords and self._emb_matrix is not None else ({}, {})
         
         for song in self.songs:
             tn = song['titel_nr']
@@ -187,6 +266,20 @@ class SongSelector:
                 if keyword_hits > 0:
                     score += keyword_hits * 2  # 2 points per keyword match
                     reasons.append(f'keywords:{keyword_hits}')
+            
+            # Embedding bonus: semantic similarity to all keywords (sum of cosine sims)
+            if emb_bonuses:
+                emb_key = f"{song.get('artist', '')} - {song.get('title', '')}"
+                emb_bonus = emb_bonuses.get(emb_key, 0)
+                if emb_bonus > 0:
+                    score += emb_bonus
+                    # Format per-keyword breakdown for the selected song
+                    kw_details = emb_per_kw.get(emb_key, [])
+                    if kw_details:
+                        kw_str = ', '.join(f'{kw}:{sim:.2f}' for kw, sim in kw_details)
+                        reasons.append(f'embed:{emb_bonus:.1f} ({kw_str})')
+                    else:
+                        reasons.append(f'embed:{emb_bonus:.1f}')
             
             candidates.append({
                 'song': song,
