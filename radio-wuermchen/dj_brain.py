@@ -92,17 +92,21 @@ def call_gemini(config, system_prompt, user_message):
             return None, None
 
         client = genai_client.Client(api_key=api_key)
-        primary_model = config["model"]
-        fallback_model = config.get("model-fallback")
         temperature = config.get("temperature", 0.7)
         
-        models_to_try = [primary_model]
-        if fallback_model:
-            models_to_try.append(fallback_model)
+        # Model cascade: support new "models" array, fall back to old "model"/"model-fallback"
+        if "models" in config:
+            models_to_try = config["models"]
+        else:
+            models_to_try = [config["model"]]
+            fallback = config.get("model-fallback")
+            if fallback:
+                models_to_try.append(fallback)
         
+        total = len(models_to_try)
         for attempt, model_name in enumerate(models_to_try):
-            label = "primary" if attempt == 0 else "fallback"
-            print(f"Calling {label} model: {model_name}...", file=sys.stderr)
+            label = f"model {attempt+1}/{total}"
+            print(f"Calling {label}: {model_name}...", file=sys.stderr)
             
             output_text = ""
             thoughts_parts = []
@@ -146,19 +150,20 @@ def call_gemini(config, system_prompt, user_message):
                                 thoughts_parts.append(part.text)
                     # Progress heartbeat: every 10 chunks
                     if chunk_count % 10 == 0:
-                        print(f"[{label}] {chunk_count} chunks, {len(output_text)} chars so far", file=sys.stderr)
+                        thought_len = sum(len(t) for t in thoughts_parts)
+                        print(f"[{label}] {chunk_count} chunks, {len(output_text)} text, {thought_len} thought chars so far", file=sys.stderr)
 
-                thinking_text = "\n".join(thoughts_parts) if thoughts_parts else None
+                thinking_text = "".join(thoughts_parts) if thoughts_parts else None
                 
                 if output_text:
                     text_len = len(output_text)
-                    print(f"Success with {label} model: {model_name} ({chunk_count} chunks, {text_len} chars)", file=sys.stderr)
+                    print(f"Success with {label}: {model_name} ({chunk_count} chunks, {text_len} chars)", file=sys.stderr)
                     return output_text, thinking_text
                 else:
-                    print(f"{label.title()} model {model_name}: no text in response after {chunk_count} chunks", file=sys.stderr)
+                    print(f"{label} {model_name}: no text in response after {chunk_count} chunks", file=sys.stderr)
                     
             except Exception as e:
-                print(f"{label.title()} model {model_name} failed after {chunk_count} chunks, {len(output_text)} chars: {e}", file=sys.stderr)
+                print(f"{label} {model_name} failed after {chunk_count} chunks, {len(output_text)} chars: {e}", file=sys.stderr)
         
         print("ERROR: All models failed.", file=sys.stderr)
         return None, None
