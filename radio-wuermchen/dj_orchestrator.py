@@ -19,6 +19,7 @@ from tts_manager import generate_announcement_audio
 from news_scheduler import get_news_instruction, news_mark_presented
 import charts_scraper
 from song_selector import SongSelector
+from session_keyword_generator import generate_keywords
 
 # --- CONFIGURATION ---
 BASE_DIR = Path(os.path.dirname(os.path.abspath(__file__)))
@@ -559,8 +560,27 @@ def trigger_dj(last_track, listener_input=None, instructions=None, pre_selected_
         log(f"DJ Brain finished. STDOUT: {result.stdout.strip()}")
         if result.stderr.strip():
             log(f"DJ Brain STDERR: {result.stderr.strip()}")
-    except subprocess.TimeoutExpired:
+    except subprocess.TimeoutExpired as e:
+        # Capture partial output — DJ Brain writes diagnostics to stderr
+        stderr_output = ''
+        try:
+            raw = e.stderr
+            if raw:
+                stderr_output = raw.decode('utf-8', errors='replace') if isinstance(raw, bytes) else str(raw)
+        except Exception:
+            pass
+        stdout_output = ''
+        try:
+            raw = e.stdout
+            if raw:
+                stdout_output = raw.decode('utf-8', errors='replace') if isinstance(raw, bytes) else str(raw)
+        except Exception:
+            pass
         log(f"DJ Brain TIMED OUT after {DJ_BRAIN_TIMEOUT}s - killing process")
+        if stderr_output.strip():
+            log(f"DJ Brain partial STDERR (timeout): {stderr_output.strip()[-2000:]}")
+        if stdout_output.strip():
+            log(f"DJ Brain partial STDOUT (timeout): {stdout_output.strip()[-500:]}")
         return None
     except subprocess.CalledProcessError as e:
         log(f"DJ Brain FAILED (Code {e.returncode}). Stderr: {e.stderr.strip()}")
@@ -759,6 +779,7 @@ def main():
             weather_instruction = None
             news_instruction = None
             news_context_payload = None
+            weather_forecast = None
             skip_weather_news = False
 
             if listener_input:
@@ -925,6 +946,15 @@ def main():
                     for entry in history[-20:]:
                         if 'titel_nr' in entry:
                             recent_nrs.add(entry['titel_nr'])
+                    
+                    # Refresh keywords: quota system (News+Weather+Session)
+                    try:
+                        new_kw = generate_keywords(news_text=news_instruction, weather_text=weather_forecast)
+                        if new_kw:
+                            song_selector.reload_keywords()
+                            log(f"KEYWORDS: Reloaded {len(song_selector.keywords)} keywords: {', '.join(song_selector.keywords)}")
+                    except Exception as e:
+                        log(f"KEYWORDS: Generator failed: {e}")
                     
                     # Select a song
                     selected = song_selector.select(

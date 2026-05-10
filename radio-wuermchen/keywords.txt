@@ -1,0 +1,14 @@
+# Quota-based keywords: News + Weather + Session
+# Generated: 2026-05-10T17:23:10.455835
+# News: 0/8 (min_count=1)
+# Weather: 3/3 (min_count=2)
+# Session: 4/4 (min_count=2)
+# Combined: 7/15
+# Session file: 79e845a2-c2fb-4dd2-9066-9b5763e14f90.jsonl
+sonnig
+südostwind
+weht
+chunks
+chars
+primary
+chunk

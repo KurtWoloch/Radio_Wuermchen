@@ -83,7 +83,8 @@ def append_to_wishlist(track):
         print(f"Error writing to wishlist: {e}", file=sys.stderr)
 
 def call_gemini(config, system_prompt, user_message):
-    """Call the configured model with optional fallback on failure."""
+    """Call the configured model with optional fallback on failure.
+    Uses streaming to capture partial progress for timeout diagnostics."""
     try:
         api_key = os.environ.get("GEMINI_API_KEY")
         if not api_key:
@@ -103,6 +104,9 @@ def call_gemini(config, system_prompt, user_message):
             label = "primary" if attempt == 0 else "fallback"
             print(f"Calling {label} model: {model_name}...", file=sys.stderr)
             
+            output_text = ""
+            thoughts_parts = []
+            chunk_count = 0
             try:
                 # Gemma models support thinking natively but don't accept thinking_config
                 use_thinking_config = not model_name.lower().startswith("gemma")
@@ -117,36 +121,44 @@ def call_gemini(config, system_prompt, user_message):
                         thinking_budget=1024
                     )
                 
-                response = client.models.generate_content(
+                # STREAMING: capture tokens as they arrive (enables timeout diagnostics)
+                stream = client.models.generate_content_stream(
                     model=model_name,
                     contents=[system_prompt, user_message],
                     config=types.GenerateContentConfig(**gen_config_args)
                 )
+                
+                for chunk in stream:
+                    chunk_count += 1
+                    # Collect delta text from this chunk
+                    if chunk.text:
+                        # Handle both cumulative and delta chunk modes:
+                        # cumulative: chunk.text starts with previous output_text → replace
+                        # delta: chunk.text is new tokens → append
+                        if output_text and chunk.text.startswith(output_text):
+                            output_text = chunk.text  # cumulative mode
+                        else:
+                            output_text += chunk.text  # delta mode
+                    # Collect thought parts (always delta, never cumulative)
+                    if chunk.candidates and chunk.candidates[0].content and chunk.candidates[0].content.parts:
+                        for part in chunk.candidates[0].content.parts:
+                            if getattr(part, 'thought', False) and part.text:
+                                thoughts_parts.append(part.text)
+                    # Progress heartbeat: every 10 chunks
+                    if chunk_count % 10 == 0:
+                        print(f"[{label}] {chunk_count} chunks, {len(output_text)} chars so far", file=sys.stderr)
 
-                if not response.candidates or not response.candidates[0].content.parts:
-                    print(f"{label.title()} model {model_name}: empty response ({response.prompt_feedback})", file=sys.stderr)
-                    continue
-
-                # Separate thinking parts from text parts
-                thoughts = []
-                text_parts = []
-                for part in response.candidates[0].content.parts:
-                    if getattr(part, 'thought', False):
-                        thoughts.append(part.text)
-                    else:
-                        text_parts.append(part.text)
-
-                thinking_text = "\n".join(thoughts) if thoughts else None
-                output_text = "\n".join(text_parts) if text_parts else None
+                thinking_text = "\n".join(thoughts_parts) if thoughts_parts else None
                 
                 if output_text:
-                    print(f"Success with {label} model: {model_name}", file=sys.stderr)
+                    text_len = len(output_text)
+                    print(f"Success with {label} model: {model_name} ({chunk_count} chunks, {text_len} chars)", file=sys.stderr)
                     return output_text, thinking_text
                 else:
-                    print(f"{label.title()} model {model_name}: no text in response", file=sys.stderr)
+                    print(f"{label.title()} model {model_name}: no text in response after {chunk_count} chunks", file=sys.stderr)
                     
             except Exception as e:
-                print(f"{label.title()} model {model_name} failed: {e}", file=sys.stderr)
+                print(f"{label.title()} model {model_name} failed after {chunk_count} chunks, {len(output_text)} chars: {e}", file=sys.stderr)
         
         print("ERROR: All models failed.", file=sys.stderr)
         return None, None
@@ -233,7 +245,7 @@ def parse_dj_response(raw_text):
         text = text[:-3].strip()
 
     try:
-        data = json.loads(text)
+        data = json.loads(text, strict=False)
         if "track" in data and "announcement" in data:
             return data
         else:

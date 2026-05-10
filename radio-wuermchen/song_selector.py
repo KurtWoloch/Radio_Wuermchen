@@ -1,14 +1,16 @@
 import json
 import random
 import os
+import re
 from datetime import datetime, timedelta
 
 DB_PATH = os.path.join(os.path.dirname(__file__), 'song-database-v1-classified.json')
+KEYWORDS_PATH = os.path.join(os.path.dirname(__file__), 'keywords.txt')
 
 class SongSelector:
     """Song selection algorithm for Radio Würmchen."""
     
-    def __init__(self, db_path=DB_PATH):
+    def __init__(self, db_path=DB_PATH, keywords_path=KEYWORDS_PATH):
         with open(db_path, 'r', encoding='utf-8') as f:
             self.songs = json.load(f)
         
@@ -17,6 +19,23 @@ class SongSelector:
         for s in self.songs:
             self.by_nr[s['titel_nr']] = s
         self._db_path = db_path
+        
+        # Load keywords
+        self.keywords = self._load_keywords(keywords_path)
+    
+    def _load_keywords(self, path):
+        """Load keywords from file. One keyword per line, case-insensitive."""
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                keywords = [line.strip().lower() for line in f if line.strip() and not line.strip().startswith('#')]
+            return keywords
+        except FileNotFoundError:
+            return []
+    
+    def reload_keywords(self, path=KEYWORDS_PATH):
+        """Reload keywords from file (for external updates without restart)."""
+        self.keywords = self._load_keywords(path)
+        return len(self.keywords)
     
     def mark_as_played(self, titel_nr):
         """Mark a song as played by updating rw_last_played in the database."""
@@ -157,6 +176,17 @@ class SongSelector:
             if random.random() < 0.1:
                 score += 1
                 reasons.append('variety_bonus')
+            
+            # Keyword bonus: check artist and title against keyword list
+            if self.keywords:
+                search_text = f"{song.get('artist', '')} {song.get('title', '')}".lower()
+                keyword_hits = 0
+                for kw in self.keywords:
+                    if re.search(r'\b' + re.escape(kw) + r'\b', search_text):
+                        keyword_hits += 1
+                if keyword_hits > 0:
+                    score += keyword_hits * 2  # 2 points per keyword match
+                    reasons.append(f'keywords:{keyword_hits}')
             
             candidates.append({
                 'song': song,
