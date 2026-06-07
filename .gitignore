@@ -11,6 +11,11 @@ USER.md
 MEMORY.md
 HEARTBEAT.md
 IDENTITY.md
+OBSERVATIONS.md
+memory/
+synthesis-progress.json
+tool_errors_analysis/
+tool_errors.jsonl
 
 # Workspace files
 *.mp3
