@@ -1176,6 +1176,7 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     if not SCHEDULE_FILE.exists():
         print(f"Error: {SCHEDULE_FILE} not found!")
+        input("Press Enter to close...")
         sys.exit(1)
 
     server = HTTPServer(('127.0.0.1', PORT), Handler)
@@ -1194,4 +1195,9 @@ def main():
         print("\nStopped.")
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(f"\nError: {e}")
+        input("\nPress Enter to close...")
+        sys.exit(1)

@@ -35,3 +35,6 @@ radio-wuermchen/*.wav
 radio-wuermchen/*.m3u
 radio-wuermchen/temp_concat.txt
 radio-wuermchen/temp_announcement.txt
+radio-wuermchen/*.log
+radio-wuermchen/**/*.log
+radio-wuermchen/song_embeddings.npz

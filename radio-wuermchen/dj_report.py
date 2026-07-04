@@ -35,6 +35,7 @@ RE_OFFERING = re.compile(r'Offering (\d+) tracks from suggestion pool')
 RE_SHOW_TRANSITION = re.compile(r'SHOW TRANSITION:.*?-> \'(\w+)\' \((.+?)\)')
 RE_OTHER_RECOMMENDED = re.compile(r'^OTHER RECOMMENDED TRACKS ')
 RE_NEWS_RELEVANT = re.compile(r'^NEWS-RELEVANT TRACKS ')
+RE_SELECT_RECOMMENDED = re.compile(r'Please select one of the following.*recommended tracks')
 RE_NEWS_QUOTE_SUFFIX = re.compile(r'\s+\(matches news quote:.*\)\s*$')
 
 
@@ -139,7 +140,7 @@ def parse_log(log_path, time_from=None, time_to=None, show_filter=None):
 
         # Check for offered track list headers
         stripped = line.lstrip()
-        if RE_OTHER_RECOMMENDED.match(stripped) or RE_NEWS_RELEVANT.match(stripped):
+        if RE_OTHER_RECOMMENDED.match(stripped) or RE_NEWS_RELEVANT.match(stripped) or RE_SELECT_RECOMMENDED.search(stripped):
             # Start reading offered tracks
             flush_offered_block()  # flush any previous block
             reading_offered = True
