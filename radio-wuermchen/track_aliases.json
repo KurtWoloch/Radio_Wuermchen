@@ -1,10 +1,15 @@
 {
   "_comment": "Alias table for DJ track matching. Keys are aliases (substrings the DJ might say), values are the proper spelling (as it appears in filenames). Matching is case-insensitive.",
   "aliases": {
-    "Falco - Amadeus": "Falco - Rock Me Amadeus",
     "Daft Punk - Get Lucky (feat. Pharrell Williams)": "Daft Punk feat. Pharrell Williams - Get lucky",
+    "Doris Day - Que Sera, Sera": "Doris Day - Que sera sera",
     "Earth, Wind & Fire": "Earth Wind & Fire",
+    "Falco - Amadeus": "Falco - Rock Me Amadeus",
+    "Jean Michel Jarre - Magnetic Fields Part I / 2": "Jean Michel Jarre - Magnetic Fields Part I _ 2",
+    "Jean-Michel Jarre": "Jean Michel Jarre",
+    "Jean-Michel Jarre - Oxygène, Pt. IV": "Jean Michel Jarre - Oxygene IV",
+    "Katrina & The Waves - Walking on Sunshine": "Katrina and the Waves - Walking on sunshine",
     "The Eagles": "Eagles",
-    "Katrina & The Waves - Walking on Sunshine": "Katrina and the Waves - Walking on sunshine"
+    "The Beach Boys - Surfin' U.S.A.": "The Beach Boys - Surfin' USA"
   }
 }

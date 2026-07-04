@@ -1789,6 +1789,1080 @@
           "action": "added"
         }
       ]
+    },
+    {
+      "timestamp": "2026-02-22 14:39:07",
+      "round": 1,
+      "batch_size": 50,
+      "applied": true,
+      "results": [
+        {
+          "track": "Poolside - Strange Overtones",
+          "show_id": "espresso",
+          "show_name": "Espresso",
+          "reason": "Chillwave/nu-disco fits the chillout/soft lounge vibe for lunch break.",
+          "action": "added"
+        },
+        {
+          "track": "Peter Clarke - Theme from Bubble Bobble",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Video game theme music does not fit any described show.",
+          "action": "added_default"
+        },
+        {
+          "track": "eleVate - Not out of mind",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Contemporary sound, likely from 2010s/2020s, suitable for young people's music.",
+          "action": "added"
+        },
+        {
+          "track": "Mauracher - Rosary girls",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Contemporary Austrian artist, fits the focus on strong contemporary Austrian scenes.",
+          "action": "added"
+        },
+        {
+          "track": "The Tremeloes - Silence is golden (Original artist re-recording)",
+          "show_id": "evergreens",
+          "show_name": "Evergreens",
+          "reason": "Classic 1960s track, fits the \"strictly up to 1960s\" criteria for evergreens.",
+          "action": "added"
+        },
+        {
+          "track": "Kurt Woloch - Atari und sonst nichts (E-Piano)",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Niche Austrian piece, fits the \"discovery, friction, context\" and Austrian scene focus.",
+          "action": "added"
+        },
+        {
+          "track": "Erwin, Kurt & Elfriede Woloch - Am Weihnachtsbaume (1990)",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Traditional Christmas carol from 1990 doesn't fit any specific show's genre or era.",
+          "action": "added_default"
+        },
+        {
+          "track": "The Gentlemen - Let me in",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Contemporary sound, likely from 2010s/2020s, suitable for young people's music.",
+          "action": "added"
+        },
+        {
+          "track": "Musikverlag Aline Davis - Schneeflöckchen, Weissröckchen",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Traditional children's song does not fit any specific show's genre or era.",
+          "action": "added_default"
+        },
+        {
+          "track": "Kurt Woloch - Making your mind up (1981)",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Track from 1981 fits perfectly within the 1970s and 1980s focus of Super Hits.",
+          "action": "added"
+        },
+        {
+          "track": "Waterloo - Freunde",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Austrian artist, likely Austropop, fits the \"Austropop\" criteria for Music for Dreaming.",
+          "action": "added"
+        },
+        {
+          "track": "White Lies - Bigger than us",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Indie rock band active in the 2010s, fits the \"Music for young people\" criteria.",
+          "action": "added"
+        },
+        {
+          "track": "Damensalonorchester Fledermaus - Sängerlust-Polka",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Traditional polka music does not fit any specific show's genre or era.",
+          "action": "added_default"
+        },
+        {
+          "track": "Inka - Tränen",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "German-language soft pop/ballad, fits the \"soft pop classics\" and German artists criteria.",
+          "action": "added"
+        },
+        {
+          "track": "Kurt Woloch - Krokofeenland (Entwurf)",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Niche Austrian piece, fits the \"discovery, friction, context\" and Austrian scene focus.",
+          "action": "added"
+        },
+        {
+          "track": "Ulli Martin - Ich träume mit offenen Augen von Dir (Neuaufna)",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "German Schlager romantic ballad, fits \"romantic ballads\" and German-language artists.",
+          "action": "added"
+        },
+        {
+          "track": "The Musicals Collection - The Dance at the Gym",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Musical theatre track does not fit any specific show's genre or era.",
+          "action": "added_default"
+        },
+        {
+          "track": "Celine Dion - Taking chances",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Pop ballad by a classic artist, fits \"romantic ballads\" and \"soft pop classics\".",
+          "action": "added"
+        },
+        {
+          "track": "Elfriede Woloch - Mary's boy child _ Oh my Lord (Weihnachten)",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Traditional Christmas song does not fit any specific show's genre or era.",
+          "action": "added_default"
+        },
+        {
+          "track": "Die Ärzte  - Junge (Economy)",
+          "show_id": "good_morning",
+          "show_name": "Good morning Vienna!",
+          "reason": "High-energy, rebellious German punk rock, fits the \"high-energy, rebellious and fun\" theme.",
+          "action": "added"
+        },
+        {
+          "track": "Mexican Institute of Sound - Alocatel (Ad-Rock Remix)",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Contemporary electronic/funk, likely from 2010s, fits \"Music for young people\".",
+          "action": "added"
+        },
+        {
+          "track": "Romanes - Casablanca",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Title suggests a romantic ballad, fitting the \"romantic ballads\" criteria.",
+          "action": "added"
+        },
+        {
+          "track": "Groove Connection - Sipping on Bacardi Rum",
+          "show_id": "espresso",
+          "show_name": "Espresso",
+          "reason": "Title and artist suggest a chillout/lounge track, fitting \"Chillout or Soft Lounge\".",
+          "action": "added"
+        },
+        {
+          "track": "Panpipes at Christmas - Step into Christmas",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Panpipes Christmas song does not fit any specific show's genre or era.",
+          "action": "added_default"
+        },
+        {
+          "track": "Kurt Woloch - Elternblatt beim Niedermeyer",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Niche Austrian piece, fits the \"discovery, friction, context\" and Austrian scene focus.",
+          "action": "added"
+        },
+        {
+          "track": "Mariah Carey - Close my eyes",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Pop ballad by a classic artist, fits \"romantic ballads\" and \"soft pop classics\".",
+          "action": "added"
+        },
+        {
+          "track": "Comedian Harmonists - Stille Nacht",
+          "show_id": "evergreens",
+          "show_name": "Evergreens",
+          "reason": "Classic group from pre-1960s performing a traditional carol, fits \"strictly up to 1960s\".",
+          "action": "added"
+        },
+        {
+          "track": "Percy Sledge - Poor little Jesus",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Christmas song by a classic artist does not fit any specific show's genre or era.",
+          "action": "added_default"
+        },
+        {
+          "track": "Caro Emerald - Whatchugot",
+          "show_id": "espresso",
+          "show_name": "Espresso",
+          "reason": "Nu-jazz/acoustic pop artist from 2010s, fits \"Nu-Jazz, acoustic pop\" for Espresso.",
+          "action": "added"
+        },
+        {
+          "track": "Vader Abraham - Schlumpfies Boogie Woogie Show (Teil I+II)",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Children's song does not fit any specific show's genre or era.",
+          "action": "added_default"
+        },
+        {
+          "track": "Allessa - Räuber",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Austrian Schlager, likely positive and friendly, fitting the \"friendly, positive, happy\" theme.",
+          "action": "added"
+        },
+        {
+          "track": "Blutengel - In the shadows",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Darkwave/gothic music, fits \"extreme sounds\" and \"friction\" for discovery.",
+          "action": "added"
+        },
+        {
+          "track": "Panpipes at Christmas - If every day was like Christmas",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Panpipes Christmas song does not fit any specific show's genre or era.",
+          "action": "added_default"
+        },
+        {
+          "track": "Caro Emerald - Tangled up",
+          "show_id": "espresso",
+          "show_name": "Espresso",
+          "reason": "Nu-jazz/acoustic pop artist from 2010s, fits \"Nu-Jazz, acoustic pop\" for Espresso.",
+          "action": "added"
+        },
+        {
+          "track": "Take That - Underground machine",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Contemporary pop track, likely from 2010s, fits \"Music for young people\".",
+          "action": "added"
+        },
+        {
+          "track": "Andy Borg - Ein schneeweisses Schiff",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Austrian Schlager, likely romantic/sentimental, fits \"Austropop\" and \"soft pop classics\".",
+          "action": "added"
+        },
+        {
+          "track": "Döblinger Gesangsverein - Denk dir, die Welt wär' ein Blumen",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Austrian choir performing a positive, friendly song, fitting \"friendly, positive, happy\" theme.",
+          "action": "added"
+        },
+        {
+          "track": "Of Monsters And Men - Mountain sound",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Indie folk band from the 2010s, fits the \"Music for young people\" criteria.",
+          "action": "added"
+        },
+        {
+          "track": "Mel Brooks - To be or not to be (The Hitler Rap)",
+          "show_id": "good_morning",
+          "show_name": "Good morning Vienna!",
+          "reason": "Fun, rebellious comedy song from the 80s, fits \"high-energy, rebellious and fun songs\".",
+          "action": "added"
+        },
+        {
+          "track": "Bata Illic - Laß mich wieder heim zu dir",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "German Schlager ballad, fits \"romantic ballads\" and German-language artists.",
+          "action": "added"
+        },
+        {
+          "track": "Unheilig - Zeit zu gehen",
+          "show_id": "good_morning",
+          "show_name": "Good morning Vienna!",
+          "reason": "German rock/industrial band, high-energy and rebellious, fits \"high-energy, rebellious and fun\".",
+          "action": "added"
+        },
+        {
+          "track": "Lale Andersen - Blaue Nacht am Hafen",
+          "show_id": "evergreens",
+          "show_name": "Evergreens",
+          "reason": "Classic German singer from pre-1960s, fits the \"strictly up to 1960s\" criteria.",
+          "action": "added"
+        },
+        {
+          "track": "Simple Plan - Summer paradise",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Pop-punk band, \"Summer Paradise\" is from 2011, fits \"Music for young people\".",
+          "action": "added"
+        },
+        {
+          "track": "Claudia Jung - Diese Nacht soll nie enden",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "German Schlager romantic ballad, fits \"romantic ballads\" and German-language artists.",
+          "action": "added"
+        },
+        {
+          "track": "Amy MacDonald - I got no roots",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Contemporary folk-pop artist from the 2010s, fits \"Music for young people\".",
+          "action": "added"
+        },
+        {
+          "track": "Oliver Baier & Claus Hörr - Der Boxenstopp",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Comedy sketch/spoken word track does not fit any specific show's genre.",
+          "action": "added_default"
+        },
+        {
+          "track": "Cindy Ellis - Denkst du noch an mich",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "German Schlager sentimental ballad, fits \"romantic ballads\" and German-language artists.",
+          "action": "added"
+        },
+        {
+          "track": "Howard Carpendale - Wie frei willst Du sein",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "German-language soft pop classic, fits \"soft pop classics\" and German artists.",
+          "action": "added"
+        },
+        {
+          "track": "Magic Lauster - Das Gefühl tief in mir",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "German Schlager sentimental song, fits \"romantic ballads\" and German-language artists.",
+          "action": "added"
+        },
+        {
+          "track": "Luis Miguel - Noche de Ronda",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Classic romantic bolero, fits the \"romantic ballads\" criteria for Music for Dreaming.",
+          "action": "added"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-22 22:25:43",
+      "round": 1,
+      "batch_size": 50,
+      "applied": true,
+      "results": [
+        {
+          "track": "Gänsehaut - Es stirbt eine Möwe",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Melancholic, introspective German track, fitting the nocturnal and gentle vibe.",
+          "action": "added"
+        },
+        {
+          "track": "Daft Punk - Harder, better, faster, stronger",
+          "show_id": "good_morning",
+          "show_name": "Good morning Vienna!",
+          "reason": "High-energy, fun electronic track, perfect for a rebellious and energetic start.",
+          "action": "added"
+        },
+        {
+          "track": "GoGo - Hey, Pippi Langstrumpf",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Friendly, positive, and happy children's song, fitting the friendly show theme.",
+          "action": "added"
+        },
+        {
+          "track": "Johnny Guitar King - Kling Glöckchen kling",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Traditional, friendly, and positive Christmas song, fitting the happy theme.",
+          "action": "added"
+        },
+        {
+          "track": "Unheilig - Neuland",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Contemporary German rock/pop from the 2010s, fitting music for young people.",
+          "action": "added"
+        },
+        {
+          "track": "Gänsehaut - Schmetterlinge gibt's nicht mehr",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Melancholic German track, fitting the introspective and gentle nocturnal vibe.",
+          "action": "added"
+        },
+        {
+          "track": "Joesi Prokopetz - Der Trick mit dem Hüftknick",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Contemporary Austrian artist, fitting the show's focus on local scenes and discovery.",
+          "action": "added"
+        },
+        {
+          "track": "Lenny Kravitz - Where are we runnin'_ (edit)",
+          "show_id": "Rock_show_n",
+          "show_name": "Night Rock Show",
+          "reason": "High-energy rock track by a prominent artist, fitting the US rock show.",
+          "action": "added"
+        },
+        {
+          "track": "Sarah Connor - Where did U sleep last nite_",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Melancholic ballad, fitting the introspective and gentle nocturnal vibe.",
+          "action": "added"
+        },
+        {
+          "track": "Peter Roberts - Einmal noch",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Likely a friendly and positive German Schlager track.",
+          "action": "added"
+        },
+        {
+          "track": "Drafi Deutscher - Cinderella baby",
+          "show_id": "evergreens",
+          "show_name": "Evergreens",
+          "reason": "German pop from the 1960s, strictly fitting the Evergreens show.",
+          "action": "added"
+        },
+        {
+          "track": "Status Quo - Rockin' all over the world (live)",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Classic rock anthem from the 1970s, perfectly fitting the Super Hits era.",
+          "action": "added"
+        },
+        {
+          "track": "Peter Alexander - Wir sind eine große Familie",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Friendly, positive, and unifying German Schlager, fitting the friendly theme.",
+          "action": "added"
+        },
+        {
+          "track": "Marit Larsen - Only a fool",
+          "show_id": "espresso",
+          "show_name": "Espresso",
+          "reason": "Acoustic pop track, fitting the chillout and acoustic vibe of Espresso.",
+          "action": "added"
+        },
+        {
+          "track": "Paola - Wenn du heimkommst",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Warm, sentimental German track, fitting the gentle and emotional mood.",
+          "action": "added"
+        },
+        {
+          "track": "Kurt Woloch - Keep on loving you (Heimkaraoke)",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Iconic 1980s power ballad, fitting the Super Hits era.",
+          "action": "added"
+        },
+        {
+          "track": "Böhse Onkelz - Koma - Eine Nacht, die niemals endet",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Controversial German rock, fitting the 'extreme sounds' and 'friction' aspect of the show.",
+          "action": "added"
+        },
+        {
+          "track": "Alejandro Fernández - México lindo y querido",
+          "show_id": "blessings",
+          "show_name": "The blessings",
+          "reason": "Evokes a sense of love and well-being for one's homeland, fitting the motto.",
+          "action": "added"
+        },
+        {
+          "track": "Kurt Woloch - Bridge over troubled water (T.C.Karaoke)",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Gentle, emotional ballad, fitting the melancholic and introspective mood.",
+          "action": "added"
+        },
+        {
+          "track": "Alessia Cara - Growing pains",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Contemporary pop track from the 2010s, fitting music for young people.",
+          "action": "added"
+        },
+        {
+          "track": "Helmi's Nightmare - Freiheit",
+          "show_id": "good_morning",
+          "show_name": "Good morning Vienna!",
+          "reason": "Rebellious theme of freedom, fitting the high-energy and rebellious show.",
+          "action": "added"
+        },
+        {
+          "track": "Wiener Straußcapelle - Wiener Blut",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Classical waltz, does not fit any of the specified show genres.",
+          "action": "added_default"
+        },
+        {
+          "track": "Schandmaul - Sonnenstrahl",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Positive German folk rock, fitting the friendly and happy theme.",
+          "action": "added"
+        },
+        {
+          "track": "Hot Hot Heat - Let me in",
+          "show_id": "good_morning",
+          "show_name": "Good morning Vienna!",
+          "reason": "High-energy indie rock, fitting the rebellious and fun morning show.",
+          "action": "added"
+        },
+        {
+          "track": "The Muppets & Don Knotts - Tier der Woche",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Friendly and positive children's entertainment, fitting the friendly show theme.",
+          "action": "added"
+        },
+        {
+          "track": "Süddeutsche Philharmonie - Sinfonie No. 3 in F Op. 90",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Classical symphony, does not fit any of the specified show genres.",
+          "action": "added_default"
+        },
+        {
+          "track": "Kurt Woloch - Q_bert Teil 2",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Quirky, context-driven track, fitting the discovery and friction theme.",
+          "action": "added"
+        },
+        {
+          "track": "Big Country - In a big country",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Iconic 1980s rock track, perfectly fitting the Super Hits era.",
+          "action": "added"
+        },
+        {
+          "track": "Kurt Woloch - Under the boardwalk",
+          "show_id": "evergreens",
+          "show_name": "Evergreens",
+          "reason": "Classic song from the 1960s, strictly fitting the Evergreens show.",
+          "action": "added"
+        },
+        {
+          "track": "Münchener Freiheit - In dieser Stadt",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Popular German pop from the 1980s, fitting the Super Hits era.",
+          "action": "added"
+        },
+        {
+          "track": "Freddie Mercury & Montserrat Caballé - Ensueno",
+          "show_id": "none",
+          "show_name": "none",
+          "reason": "Operatic pop crossover, too dramatic for 'Music for Dreaming', doesn't fit other shows.",
+          "action": "added_default"
+        },
+        {
+          "track": "Muckenstruntz & Bamschabl - Luise",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Humorous contemporary Austrian act, fitting the local scene and discovery theme.",
+          "action": "added"
+        },
+        {
+          "track": "Womack & Womack - Life's just a ballgame",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Soul/R&B track from the 1980s, fitting the Super Hits era.",
+          "action": "added"
+        },
+        {
+          "track": "Peter Alexander - Irgendwann verblüh'n die Rosen",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Sentimental German track, fitting the melancholic and introspective mood.",
+          "action": "added"
+        },
+        {
+          "track": "Celine Dion - Treat her like a lady",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Positive and friendly pop track, fitting the friendly show theme.",
+          "action": "added"
+        },
+        {
+          "track": "Morak - Billiger Rock 'n' Roll",
+          "show_id": "good_morning",
+          "show_name": "Good morning Vienna!",
+          "reason": "Rebellious rock theme, fitting the high-energy and fun morning show.",
+          "action": "added"
+        },
+        {
+          "track": "Vicki Vomit - China",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Satirical German punk, fitting the 'extreme sounds' and 'friction' aspect of the show.",
+          "action": "added"
+        },
+        {
+          "track": "Alesso feat. Nico & Vinz - I wanna know",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Contemporary electronic pop from the 2010s, fitting music for young people.",
+          "action": "added"
+        },
+        {
+          "track": "Die Ärzte - Der Ritt auf dem Schmetterling (instrumental)",
+          "show_id": "good_morning",
+          "show_name": "Good morning Vienna!",
+          "reason": "Energetic German punk rock, fitting the rebellious and fun morning show.",
+          "action": "added"
+        },
+        {
+          "track": "Boney M. - The carnival is over",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Classic disco/euro-pop from the 1980s, fitting the Super Hits era.",
+          "action": "added"
+        },
+        {
+          "track": "Edenbridge - Alight a new tomorrow",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Contemporary Austrian symphonic metal, fitting the local scene and 'extreme sounds' aspect.",
+          "action": "added"
+        },
+        {
+          "track": "Kristina Bach - Der ultimative Hitmix",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Upbeat and positive German Schlager, fitting the friendly and happy theme.",
+          "action": "added"
+        },
+        {
+          "track": "Kurt Woloch - Boat on the river (nach Styx)",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Gentle, acoustic-folk-rock song, fitting the melancholic and introspective mood.",
+          "action": "added"
+        },
+        {
+          "track": "Panpipes at Christmas - Driving home for Christmas",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Warm, gentle, and emotional Christmas instrumental, fitting the restrained dreaming mood.",
+          "action": "added"
+        },
+        {
+          "track": "France Gall - Kilimandscharo",
+          "show_id": "evergreens",
+          "show_name": "Evergreens",
+          "reason": "French pop from the 1960s, strictly fitting the Evergreens show.",
+          "action": "added"
+        },
+        {
+          "track": "De La Soul - Ring, Ring, Ring (Ha ha hey)",
+          "show_id": "Rock_show_n",
+          "show_name": "Night Rock Show",
+          "reason": "Hip-hop track by a significant artist, fitting the broad 'Night Rock Show' criteria.",
+          "action": "added"
+        },
+        {
+          "track": "Carlos Sancha - Feuer",
+          "show_id": "good_morning",
+          "show_name": "Good morning Vienna!",
+          "reason": "Energetic track with a passionate theme, fitting the high-energy and fun show.",
+          "action": "added"
+        },
+        {
+          "track": "Sunfly Demosängerin - Chains",
+          "show_id": "evergreens",
+          "show_name": "Evergreens",
+          "reason": "Classic song from the 1960s, strictly fitting the Evergreens show.",
+          "action": "added"
+        },
+        {
+          "track": "Otto - Karl Soost",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Humorous and friendly German comedy song, fitting the positive theme.",
+          "action": "added"
+        },
+        {
+          "track": "Daliah Lavi - Willst du mit mir geh'n",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "German pop from the 1970s, fitting the Super Hits era.",
+          "action": "added"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-02-23 16:34:39",
+      "round": 1,
+      "batch_size": 50,
+      "applied": true,
+      "results": [
+        {
+          "track": "Cephalgy - Engel sterben nie",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Industrial music fits 'extreme sounds' and 'not optimized for listenability' for discovery.",
+          "action": "added"
+        },
+        {
+          "track": "kitaro - mirage",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Atmospheric, melancholic, and soothing new-age instrumental music fits the dreamy vibe.",
+          "action": "added"
+        },
+        {
+          "track": "Wall Of Voodoo - Mexican Radio",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Classic 1980s new wave/post-punk track, fitting the 70s and 80s focus.",
+          "action": "added"
+        },
+        {
+          "track": "Heinz Erhardt - Skat-Polka",
+          "show_id": "evergreens",
+          "show_name": "Evergreens",
+          "reason": "Comedic German artist from the mid-20th century, strictly up to 1960s.",
+          "action": "added"
+        },
+        {
+          "track": "Die Flippers - Rhodos",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "German Schlager is typically friendly, positive, and happy music.",
+          "action": "added"
+        },
+        {
+          "track": "Denk - Es tuat ma laad",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Austrian pop/rock with a melancholic title, fitting soft, introspective themes.",
+          "action": "added"
+        },
+        {
+          "track": "Münchener Freiheit - Einfach wahr",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Popular German pop band from the 1980s, fitting the era.",
+          "action": "added"
+        },
+        {
+          "track": "Toni Polster - Ich kann verlieren",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Lighthearted song by an Austrian personality, fitting friendly and positive themes.",
+          "action": "added"
+        },
+        {
+          "track": "Mirage - Get down",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Generic pop/dance track, likely from the 1970s or 1980s.",
+          "action": "added"
+        },
+        {
+          "track": "The Staple Singers - Will the circle be unbroken",
+          "show_id": "blessings",
+          "show_name": "The blessings",
+          "reason": "Traditional gospel song, embodying peace, joy, and loving kindness.",
+          "action": "added"
+        },
+        {
+          "track": "Kurt Woloch - Ansage 2 für Puchsbaum und Chor",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "An announcement or spoken word piece, fitting 'discovery, friction, context'.",
+          "action": "added"
+        },
+        {
+          "track": "Käpt'n Bill - Kuddel Hein",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Humorous folk song, fitting friendly and positive themes.",
+          "action": "added"
+        },
+        {
+          "track": "Sum 41 - The hell song",
+          "show_id": "good_morning",
+          "show_name": "Good morning Vienna!",
+          "reason": "High-energy pop-punk track, fitting rebellious and fun songs.",
+          "action": "added"
+        },
+        {
+          "track": "Die Ärzte - Overtüre zum besten Konzert der Welt",
+          "show_id": "good_morning",
+          "show_name": "Good morning Vienna!",
+          "reason": "Energetic German punk rock, fitting high-energy, rebellious, and fun songs.",
+          "action": "added"
+        },
+        {
+          "track": "2Pac - Loyal To The Game",
+          "show_id": "Rock_show_n",
+          "show_name": "Night Rock Show",
+          "reason": "US hip-hop artist; show includes Beastie Boys and is for 'US listeners'.",
+          "action": "added"
+        },
+        {
+          "track": "Bilgeri - No respect",
+          "show_id": "good_morning",
+          "show_name": "Good morning Vienna!",
+          "reason": "Austrian pop/rock with a rebellious title, fitting high-energy and rebellious themes.",
+          "action": "added"
+        },
+        {
+          "track": "Patrice - Soulstorm",
+          "show_id": "espresso",
+          "show_name": "Espresso",
+          "reason": "Soul/reggae artist, likely chill, acoustic, or soft lounge style.",
+          "action": "added"
+        },
+        {
+          "track": "Kim Wilde - Our town",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Popular British pop singer from the 1980s, fitting the era.",
+          "action": "added"
+        },
+        {
+          "track": "TV - Raumschiff Enterprise - Tribbles (Teil 1)",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "TV show audio clip, fitting 'discovery, friction, context' and not music.",
+          "action": "added"
+        },
+        {
+          "track": "Tommy Ton - Für Gabi tu ich alles",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "German Schlager/pop, likely romantic and friendly, fitting positive themes.",
+          "action": "added"
+        },
+        {
+          "track": "Social Distortion - Ring of fire",
+          "show_id": "Rock_show_n",
+          "show_name": "Night Rock Show",
+          "reason": "US punk rock band covering Johnny Cash, fitting US rock.",
+          "action": "added"
+        },
+        {
+          "track": "Kurt Woloch - Don't let the sun go down on me (Karaoke-Club)",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Karaoke version, fitting 'not optimized for listenability but for discovery'.",
+          "action": "added"
+        },
+        {
+          "track": "Kiddy Contest Kids 2006 - We are the kids",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Children's music, fitting friendly, positive, and happy tracks.",
+          "action": "added"
+        },
+        {
+          "track": "Countdown - Crazy Harry",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Generic pop/rock track, likely from the 1970s or 1980s.",
+          "action": "added"
+        },
+        {
+          "track": "Rose Laurens - The conversation",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "French pop singer popular in the 1980s, fitting the era.",
+          "action": "added"
+        },
+        {
+          "track": "Anik Kadinski - Be somebody, be someone (live @ song02)",
+          "show_id": "espresso",
+          "show_name": "Espresso",
+          "reason": "Austrian singer-songwriter, live acoustic performance fits 'acoustic pop'.",
+          "action": "added"
+        },
+        {
+          "track": "Ö3 - Radionachrichten 13.11.1981",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Archival radio news, fitting 'discovery, friction, context' and not music.",
+          "action": "added"
+        },
+        {
+          "track": "Christina Aguilera - Keeps gettin' better",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Pop song from 2008, close enough to 2010s for 'young people'.",
+          "action": "added"
+        },
+        {
+          "track": "Boyzone - Father And Son",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Gentle, introspective ballad, fitting soft, mellow, and soothing themes.",
+          "action": "added"
+        },
+        {
+          "track": "Warren G - What's Love Got to Do With It (remix)",
+          "show_id": "Rock_show_n",
+          "show_name": "Night Rock Show",
+          "reason": "US hip-hop artist; show includes Beastie Boys and is for 'US listeners'.",
+          "action": "added"
+        },
+        {
+          "track": "Jessica - How will I know (who you are)",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Generic contemporary pop song, fitting music for young people (2010s/2020s).",
+          "action": "added"
+        },
+        {
+          "track": "Die Toten Hosen - Do anything you wanna do (live in Edinbourgh 1992)",
+          "show_id": "good_morning",
+          "show_name": "Good morning Vienna!",
+          "reason": "Energetic German punk rock, fitting high-energy, rebellious, and fun songs.",
+          "action": "added"
+        },
+        {
+          "track": "Alan Walker feat. Gavin James - Tired",
+          "show_id": "music_young_am",
+          "show_name": "Music for young people (AM)",
+          "reason": "Contemporary electronic pop track from 2017, fitting 2010s/2020s music.",
+          "action": "added"
+        },
+        {
+          "track": "Fats Domino - I Want To Walk You Home",
+          "show_id": "evergreens",
+          "show_name": "Evergreens",
+          "reason": "Rock and roll pioneer, active from the 1940s, strictly up to 1960s.",
+          "action": "added"
+        },
+        {
+          "track": "DJ Ötzi & Kate Hall - Tränen",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Austrian pop with a melancholic title ('Tears'), fitting soft, melancholic themes.",
+          "action": "added"
+        },
+        {
+          "track": "Die Kranken Schwestern - Hendel",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Niche German/Austrian act, fitting 'discovery, friction, context' and extreme sounds.",
+          "action": "added"
+        },
+        {
+          "track": "Thomas Quasthoff - Schubert_ Winterreise_ Im Dorfe D 911,17",
+          "show_id": "music_for_dreaming",
+          "show_name": "Music for Dreaming",
+          "reason": "Classical Lieder, melancholic and introspective, fitting atmospheric and gentle themes.",
+          "action": "added"
+        },
+        {
+          "track": "Münchener Freiheit - Liebe auf den ersten Blick",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Popular German pop band from the 1980s, fitting the era.",
+          "action": "added"
+        },
+        {
+          "track": "Dodl & Freund - Helmi 3",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Children's safety show audio, fitting friendly, positive, and happy tracks.",
+          "action": "added"
+        },
+        {
+          "track": "Kurt Woloch - Modern Talking _ Bad Boys Blue-Medley",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Local artist's medley, fitting 'not optimized for listenability but for discovery'.",
+          "action": "added"
+        },
+        {
+          "track": "Laid Back - High society girl",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Danish electronic pop duo from the 1980s, fitting the era.",
+          "action": "added"
+        },
+        {
+          "track": "Ricchi e poveri - Sarà perché ti amo (Versione '99)",
+          "show_id": "superhits",
+          "show_name": "Super Hits",
+          "reason": "Iconic 1980s Italian pop hit, fitting the 70s and 80s focus.",
+          "action": "added"
+        },
+        {
+          "track": "Vera Böhnisch - Anders (Karaoke Edit)",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "Karaoke version, fitting 'not optimized for listenability but for discovery'.",
+          "action": "added"
+        },
+        {
+          "track": "Die Paldauer - Du bist alles",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "Austrian Schlager, typically friendly, positive, and happy music.",
+          "action": "added"
+        },
+        {
+          "track": "Andrea Jürgens - Gleich nebenan",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "German Schlager, typically friendly, positive, and happy music.",
+          "action": "added"
+        },
+        {
+          "track": "Tommy Fischer - Eine neue Liebe ist wie ein neues Leben",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "German Schlager, typically friendly, positive, and happy music.",
+          "action": "added"
+        },
+        {
+          "track": "Roy Black - Nimm meine Hand",
+          "show_id": "pbf",
+          "show_name": "Please be friendly",
+          "reason": "German Schlager, typically friendly, positive, and happy music.",
+          "action": "added"
+        },
+        {
+          "track": "Ivan Rebroff - O Jesulein süß",
+          "show_id": "blessings",
+          "show_name": "The blessings",
+          "reason": "German Christmas carol, embodying peace, joy, and loving kindness.",
+          "action": "added"
+        },
+        {
+          "track": "Tocotronic - Kapitulation",
+          "show_id": "music_box",
+          "show_name": "The music box",
+          "reason": "German indie rock, fitting 'discovery, friction, context' and contemporary scenes.",
+          "action": "added"
+        },
+        {
+          "track": "Johannes Heesters - Paris bleibt Paris",
+          "show_id": "rat_pack",
+          "show_name": "Classic Crooners",
+          "reason": "Classic crooner style from the mid-20th century, fitting classic crooners.",
+          "action": "added"
+        }
+      ]
     }
   ],
   "classified": {
@@ -3041,6 +4115,756 @@
       "show_id": "music_box",
       "reason": "Rock band's interpretation of a carol, offering friction and context for discovery in The Music Box.",
       "timestamp": "2026-02-22 14:00:21"
+    },
+    "poolside - strange overtones": {
+      "show_id": "espresso",
+      "reason": "Chillwave/nu-disco fits the chillout/soft lounge vibe for lunch break.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "peter clarke - theme from bubble bobble": {
+      "show_id": "none",
+      "reason": "Video game theme music does not fit any described show.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "elevate - not out of mind": {
+      "show_id": "music_young_am",
+      "reason": "Contemporary sound, likely from 2010s/2020s, suitable for young people's music.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "mauracher - rosary girls": {
+      "show_id": "music_box",
+      "reason": "Contemporary Austrian artist, fits the focus on strong contemporary Austrian scenes.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "the tremeloes - silence is golden (original artist re-recording)": {
+      "show_id": "evergreens",
+      "reason": "Classic 1960s track, fits the \"strictly up to 1960s\" criteria for evergreens.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "kurt woloch - atari und sonst nichts (e-piano)": {
+      "show_id": "music_box",
+      "reason": "Niche Austrian piece, fits the \"discovery, friction, context\" and Austrian scene focus.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "erwin, kurt & elfriede woloch - am weihnachtsbaume (1990)": {
+      "show_id": "none",
+      "reason": "Traditional Christmas carol from 1990 doesn't fit any specific show's genre or era.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "the gentlemen - let me in": {
+      "show_id": "music_young_am",
+      "reason": "Contemporary sound, likely from 2010s/2020s, suitable for young people's music.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "musikverlag aline davis - schneeflöckchen, weissröckchen": {
+      "show_id": "none",
+      "reason": "Traditional children's song does not fit any specific show's genre or era.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "kurt woloch - making your mind up (1981)": {
+      "show_id": "superhits",
+      "reason": "Track from 1981 fits perfectly within the 1970s and 1980s focus of Super Hits.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "waterloo - freunde": {
+      "show_id": "music_for_dreaming",
+      "reason": "Austrian artist, likely Austropop, fits the \"Austropop\" criteria for Music for Dreaming.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "white lies - bigger than us": {
+      "show_id": "music_young_am",
+      "reason": "Indie rock band active in the 2010s, fits the \"Music for young people\" criteria.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "damensalonorchester fledermaus - sängerlust-polka": {
+      "show_id": "none",
+      "reason": "Traditional polka music does not fit any specific show's genre or era.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "inka - tränen": {
+      "show_id": "music_for_dreaming",
+      "reason": "German-language soft pop/ballad, fits the \"soft pop classics\" and German artists criteria.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "kurt woloch - krokofeenland (entwurf)": {
+      "show_id": "music_box",
+      "reason": "Niche Austrian piece, fits the \"discovery, friction, context\" and Austrian scene focus.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "ulli martin - ich träume mit offenen augen von dir (neuaufna)": {
+      "show_id": "music_for_dreaming",
+      "reason": "German Schlager romantic ballad, fits \"romantic ballads\" and German-language artists.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "the musicals collection - the dance at the gym": {
+      "show_id": "none",
+      "reason": "Musical theatre track does not fit any specific show's genre or era.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "celine dion - taking chances": {
+      "show_id": "music_for_dreaming",
+      "reason": "Pop ballad by a classic artist, fits \"romantic ballads\" and \"soft pop classics\".",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "elfriede woloch - mary's boy child _ oh my lord (weihnachten)": {
+      "show_id": "none",
+      "reason": "Traditional Christmas song does not fit any specific show's genre or era.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "die ärzte  - junge (economy)": {
+      "show_id": "good_morning",
+      "reason": "High-energy, rebellious German punk rock, fits the \"high-energy, rebellious and fun\" theme.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "mexican institute of sound - alocatel (ad-rock remix)": {
+      "show_id": "music_young_am",
+      "reason": "Contemporary electronic/funk, likely from 2010s, fits \"Music for young people\".",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "romanes - casablanca": {
+      "show_id": "music_for_dreaming",
+      "reason": "Title suggests a romantic ballad, fitting the \"romantic ballads\" criteria.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "groove connection - sipping on bacardi rum": {
+      "show_id": "espresso",
+      "reason": "Title and artist suggest a chillout/lounge track, fitting \"Chillout or Soft Lounge\".",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "panpipes at christmas - step into christmas": {
+      "show_id": "none",
+      "reason": "Panpipes Christmas song does not fit any specific show's genre or era.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "kurt woloch - elternblatt beim niedermeyer": {
+      "show_id": "music_box",
+      "reason": "Niche Austrian piece, fits the \"discovery, friction, context\" and Austrian scene focus.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "mariah carey - close my eyes": {
+      "show_id": "music_for_dreaming",
+      "reason": "Pop ballad by a classic artist, fits \"romantic ballads\" and \"soft pop classics\".",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "comedian harmonists - stille nacht": {
+      "show_id": "evergreens",
+      "reason": "Classic group from pre-1960s performing a traditional carol, fits \"strictly up to 1960s\".",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "percy sledge - poor little jesus": {
+      "show_id": "none",
+      "reason": "Christmas song by a classic artist does not fit any specific show's genre or era.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "caro emerald - whatchugot": {
+      "show_id": "espresso",
+      "reason": "Nu-jazz/acoustic pop artist from 2010s, fits \"Nu-Jazz, acoustic pop\" for Espresso.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "vader abraham - schlumpfies boogie woogie show (teil i+ii)": {
+      "show_id": "none",
+      "reason": "Children's song does not fit any specific show's genre or era.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "allessa - räuber": {
+      "show_id": "pbf",
+      "reason": "Austrian Schlager, likely positive and friendly, fitting the \"friendly, positive, happy\" theme.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "blutengel - in the shadows": {
+      "show_id": "music_box",
+      "reason": "Darkwave/gothic music, fits \"extreme sounds\" and \"friction\" for discovery.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "panpipes at christmas - if every day was like christmas": {
+      "show_id": "none",
+      "reason": "Panpipes Christmas song does not fit any specific show's genre or era.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "caro emerald - tangled up": {
+      "show_id": "espresso",
+      "reason": "Nu-jazz/acoustic pop artist from 2010s, fits \"Nu-Jazz, acoustic pop\" for Espresso.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "take that - underground machine": {
+      "show_id": "music_young_am",
+      "reason": "Contemporary pop track, likely from 2010s, fits \"Music for young people\".",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "andy borg - ein schneeweisses schiff": {
+      "show_id": "music_for_dreaming",
+      "reason": "Austrian Schlager, likely romantic/sentimental, fits \"Austropop\" and \"soft pop classics\".",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "döblinger gesangsverein - denk dir, die welt wär' ein blumen": {
+      "show_id": "pbf",
+      "reason": "Austrian choir performing a positive, friendly song, fitting \"friendly, positive, happy\" theme.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "of monsters and men - mountain sound": {
+      "show_id": "music_young_am",
+      "reason": "Indie folk band from the 2010s, fits the \"Music for young people\" criteria.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "mel brooks - to be or not to be (the hitler rap)": {
+      "show_id": "good_morning",
+      "reason": "Fun, rebellious comedy song from the 80s, fits \"high-energy, rebellious and fun songs\".",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "bata illic - laß mich wieder heim zu dir": {
+      "show_id": "music_for_dreaming",
+      "reason": "German Schlager ballad, fits \"romantic ballads\" and German-language artists.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "unheilig - zeit zu gehen": {
+      "show_id": "good_morning",
+      "reason": "German rock/industrial band, high-energy and rebellious, fits \"high-energy, rebellious and fun\".",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "lale andersen - blaue nacht am hafen": {
+      "show_id": "evergreens",
+      "reason": "Classic German singer from pre-1960s, fits the \"strictly up to 1960s\" criteria.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "simple plan - summer paradise": {
+      "show_id": "music_young_am",
+      "reason": "Pop-punk band, \"Summer Paradise\" is from 2011, fits \"Music for young people\".",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "claudia jung - diese nacht soll nie enden": {
+      "show_id": "music_for_dreaming",
+      "reason": "German Schlager romantic ballad, fits \"romantic ballads\" and German-language artists.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "amy macdonald - i got no roots": {
+      "show_id": "music_young_am",
+      "reason": "Contemporary folk-pop artist from the 2010s, fits \"Music for young people\".",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "oliver baier & claus hörr - der boxenstopp": {
+      "show_id": "none",
+      "reason": "Comedy sketch/spoken word track does not fit any specific show's genre.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "cindy ellis - denkst du noch an mich": {
+      "show_id": "music_for_dreaming",
+      "reason": "German Schlager sentimental ballad, fits \"romantic ballads\" and German-language artists.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "howard carpendale - wie frei willst du sein": {
+      "show_id": "music_for_dreaming",
+      "reason": "German-language soft pop classic, fits \"soft pop classics\" and German artists.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "magic lauster - das gefühl tief in mir": {
+      "show_id": "music_for_dreaming",
+      "reason": "German Schlager sentimental song, fits \"romantic ballads\" and German-language artists.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "luis miguel - noche de ronda": {
+      "show_id": "music_for_dreaming",
+      "reason": "Classic romantic bolero, fits the \"romantic ballads\" criteria for Music for Dreaming.",
+      "timestamp": "2026-02-22 14:39:07"
+    },
+    "gänsehaut - es stirbt eine möwe": {
+      "show_id": "music_for_dreaming",
+      "reason": "Melancholic, introspective German track, fitting the nocturnal and gentle vibe.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "daft punk - harder, better, faster, stronger": {
+      "show_id": "good_morning",
+      "reason": "High-energy, fun electronic track, perfect for a rebellious and energetic start.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "gogo - hey, pippi langstrumpf": {
+      "show_id": "pbf",
+      "reason": "Friendly, positive, and happy children's song, fitting the friendly show theme.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "johnny guitar king - kling glöckchen kling": {
+      "show_id": "pbf",
+      "reason": "Traditional, friendly, and positive Christmas song, fitting the happy theme.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "unheilig - neuland": {
+      "show_id": "music_young_am",
+      "reason": "Contemporary German rock/pop from the 2010s, fitting music for young people.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "gänsehaut - schmetterlinge gibt's nicht mehr": {
+      "show_id": "music_for_dreaming",
+      "reason": "Melancholic German track, fitting the introspective and gentle nocturnal vibe.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "joesi prokopetz - der trick mit dem hüftknick": {
+      "show_id": "music_box",
+      "reason": "Contemporary Austrian artist, fitting the show's focus on local scenes and discovery.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "lenny kravitz - where are we runnin'_ (edit)": {
+      "show_id": "Rock_show_n",
+      "reason": "High-energy rock track by a prominent artist, fitting the US rock show.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "sarah connor - where did u sleep last nite_": {
+      "show_id": "music_for_dreaming",
+      "reason": "Melancholic ballad, fitting the introspective and gentle nocturnal vibe.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "peter roberts - einmal noch": {
+      "show_id": "pbf",
+      "reason": "Likely a friendly and positive German Schlager track.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "drafi deutscher - cinderella baby": {
+      "show_id": "evergreens",
+      "reason": "German pop from the 1960s, strictly fitting the Evergreens show.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "status quo - rockin' all over the world (live)": {
+      "show_id": "superhits",
+      "reason": "Classic rock anthem from the 1970s, perfectly fitting the Super Hits era.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "peter alexander - wir sind eine große familie": {
+      "show_id": "pbf",
+      "reason": "Friendly, positive, and unifying German Schlager, fitting the friendly theme.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "marit larsen - only a fool": {
+      "show_id": "espresso",
+      "reason": "Acoustic pop track, fitting the chillout and acoustic vibe of Espresso.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "paola - wenn du heimkommst": {
+      "show_id": "music_for_dreaming",
+      "reason": "Warm, sentimental German track, fitting the gentle and emotional mood.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "kurt woloch - keep on loving you (heimkaraoke)": {
+      "show_id": "superhits",
+      "reason": "Iconic 1980s power ballad, fitting the Super Hits era.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "böhse onkelz - koma - eine nacht, die niemals endet": {
+      "show_id": "music_box",
+      "reason": "Controversial German rock, fitting the 'extreme sounds' and 'friction' aspect of the show.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "alejandro fernández - méxico lindo y querido": {
+      "show_id": "blessings",
+      "reason": "Evokes a sense of love and well-being for one's homeland, fitting the motto.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "kurt woloch - bridge over troubled water (t.c.karaoke)": {
+      "show_id": "music_for_dreaming",
+      "reason": "Gentle, emotional ballad, fitting the melancholic and introspective mood.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "alessia cara - growing pains": {
+      "show_id": "music_young_am",
+      "reason": "Contemporary pop track from the 2010s, fitting music for young people.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "helmi's nightmare - freiheit": {
+      "show_id": "good_morning",
+      "reason": "Rebellious theme of freedom, fitting the high-energy and rebellious show.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "wiener straußcapelle - wiener blut": {
+      "show_id": "none",
+      "reason": "Classical waltz, does not fit any of the specified show genres.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "schandmaul - sonnenstrahl": {
+      "show_id": "pbf",
+      "reason": "Positive German folk rock, fitting the friendly and happy theme.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "hot hot heat - let me in": {
+      "show_id": "good_morning",
+      "reason": "High-energy indie rock, fitting the rebellious and fun morning show.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "the muppets & don knotts - tier der woche": {
+      "show_id": "pbf",
+      "reason": "Friendly and positive children's entertainment, fitting the friendly show theme.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "süddeutsche philharmonie - sinfonie no. 3 in f op. 90": {
+      "show_id": "none",
+      "reason": "Classical symphony, does not fit any of the specified show genres.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "kurt woloch - q_bert teil 2": {
+      "show_id": "music_box",
+      "reason": "Quirky, context-driven track, fitting the discovery and friction theme.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "big country - in a big country": {
+      "show_id": "superhits",
+      "reason": "Iconic 1980s rock track, perfectly fitting the Super Hits era.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "kurt woloch - under the boardwalk": {
+      "show_id": "evergreens",
+      "reason": "Classic song from the 1960s, strictly fitting the Evergreens show.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "münchener freiheit - in dieser stadt": {
+      "show_id": "superhits",
+      "reason": "Popular German pop from the 1980s, fitting the Super Hits era.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "freddie mercury & montserrat caballé - ensueno": {
+      "show_id": "none",
+      "reason": "Operatic pop crossover, too dramatic for 'Music for Dreaming', doesn't fit other shows.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "muckenstruntz & bamschabl - luise": {
+      "show_id": "music_box",
+      "reason": "Humorous contemporary Austrian act, fitting the local scene and discovery theme.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "womack & womack - life's just a ballgame": {
+      "show_id": "superhits",
+      "reason": "Soul/R&B track from the 1980s, fitting the Super Hits era.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "peter alexander - irgendwann verblüh'n die rosen": {
+      "show_id": "music_for_dreaming",
+      "reason": "Sentimental German track, fitting the melancholic and introspective mood.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "celine dion - treat her like a lady": {
+      "show_id": "pbf",
+      "reason": "Positive and friendly pop track, fitting the friendly show theme.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "morak - billiger rock 'n' roll": {
+      "show_id": "good_morning",
+      "reason": "Rebellious rock theme, fitting the high-energy and fun morning show.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "vicki vomit - china": {
+      "show_id": "music_box",
+      "reason": "Satirical German punk, fitting the 'extreme sounds' and 'friction' aspect of the show.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "alesso feat. nico & vinz - i wanna know": {
+      "show_id": "music_young_am",
+      "reason": "Contemporary electronic pop from the 2010s, fitting music for young people.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "die ärzte - der ritt auf dem schmetterling (instrumental)": {
+      "show_id": "good_morning",
+      "reason": "Energetic German punk rock, fitting the rebellious and fun morning show.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "boney m. - the carnival is over": {
+      "show_id": "superhits",
+      "reason": "Classic disco/euro-pop from the 1980s, fitting the Super Hits era.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "edenbridge - alight a new tomorrow": {
+      "show_id": "music_box",
+      "reason": "Contemporary Austrian symphonic metal, fitting the local scene and 'extreme sounds' aspect.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "kristina bach - der ultimative hitmix": {
+      "show_id": "pbf",
+      "reason": "Upbeat and positive German Schlager, fitting the friendly and happy theme.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "kurt woloch - boat on the river (nach styx)": {
+      "show_id": "music_for_dreaming",
+      "reason": "Gentle, acoustic-folk-rock song, fitting the melancholic and introspective mood.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "panpipes at christmas - driving home for christmas": {
+      "show_id": "music_for_dreaming",
+      "reason": "Warm, gentle, and emotional Christmas instrumental, fitting the restrained dreaming mood.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "france gall - kilimandscharo": {
+      "show_id": "evergreens",
+      "reason": "French pop from the 1960s, strictly fitting the Evergreens show.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "de la soul - ring, ring, ring (ha ha hey)": {
+      "show_id": "Rock_show_n",
+      "reason": "Hip-hop track by a significant artist, fitting the broad 'Night Rock Show' criteria.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "carlos sancha - feuer": {
+      "show_id": "good_morning",
+      "reason": "Energetic track with a passionate theme, fitting the high-energy and fun show.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "sunfly demosängerin - chains": {
+      "show_id": "evergreens",
+      "reason": "Classic song from the 1960s, strictly fitting the Evergreens show.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "otto - karl soost": {
+      "show_id": "pbf",
+      "reason": "Humorous and friendly German comedy song, fitting the positive theme.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "daliah lavi - willst du mit mir geh'n": {
+      "show_id": "superhits",
+      "reason": "German pop from the 1970s, fitting the Super Hits era.",
+      "timestamp": "2026-02-22 22:25:43"
+    },
+    "cephalgy - engel sterben nie": {
+      "show_id": "music_box",
+      "reason": "Industrial music fits 'extreme sounds' and 'not optimized for listenability' for discovery.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "kitaro - mirage": {
+      "show_id": "music_for_dreaming",
+      "reason": "Atmospheric, melancholic, and soothing new-age instrumental music fits the dreamy vibe.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "wall of voodoo - mexican radio": {
+      "show_id": "superhits",
+      "reason": "Classic 1980s new wave/post-punk track, fitting the 70s and 80s focus.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "heinz erhardt - skat-polka": {
+      "show_id": "evergreens",
+      "reason": "Comedic German artist from the mid-20th century, strictly up to 1960s.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "die flippers - rhodos": {
+      "show_id": "pbf",
+      "reason": "German Schlager is typically friendly, positive, and happy music.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "denk - es tuat ma laad": {
+      "show_id": "music_for_dreaming",
+      "reason": "Austrian pop/rock with a melancholic title, fitting soft, introspective themes.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "münchener freiheit - einfach wahr": {
+      "show_id": "superhits",
+      "reason": "Popular German pop band from the 1980s, fitting the era.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "toni polster - ich kann verlieren": {
+      "show_id": "pbf",
+      "reason": "Lighthearted song by an Austrian personality, fitting friendly and positive themes.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "mirage - get down": {
+      "show_id": "superhits",
+      "reason": "Generic pop/dance track, likely from the 1970s or 1980s.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "the staple singers - will the circle be unbroken": {
+      "show_id": "blessings",
+      "reason": "Traditional gospel song, embodying peace, joy, and loving kindness.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "kurt woloch - ansage 2 für puchsbaum und chor": {
+      "show_id": "music_box",
+      "reason": "An announcement or spoken word piece, fitting 'discovery, friction, context'.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "käpt'n bill - kuddel hein": {
+      "show_id": "pbf",
+      "reason": "Humorous folk song, fitting friendly and positive themes.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "sum 41 - the hell song": {
+      "show_id": "good_morning",
+      "reason": "High-energy pop-punk track, fitting rebellious and fun songs.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "die ärzte - overtüre zum besten konzert der welt": {
+      "show_id": "good_morning",
+      "reason": "Energetic German punk rock, fitting high-energy, rebellious, and fun songs.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "2pac - loyal to the game": {
+      "show_id": "Rock_show_n",
+      "reason": "US hip-hop artist; show includes Beastie Boys and is for 'US listeners'.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "bilgeri - no respect": {
+      "show_id": "good_morning",
+      "reason": "Austrian pop/rock with a rebellious title, fitting high-energy and rebellious themes.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "patrice - soulstorm": {
+      "show_id": "espresso",
+      "reason": "Soul/reggae artist, likely chill, acoustic, or soft lounge style.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "kim wilde - our town": {
+      "show_id": "superhits",
+      "reason": "Popular British pop singer from the 1980s, fitting the era.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "tv - raumschiff enterprise - tribbles (teil 1)": {
+      "show_id": "music_box",
+      "reason": "TV show audio clip, fitting 'discovery, friction, context' and not music.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "tommy ton - für gabi tu ich alles": {
+      "show_id": "pbf",
+      "reason": "German Schlager/pop, likely romantic and friendly, fitting positive themes.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "social distortion - ring of fire": {
+      "show_id": "Rock_show_n",
+      "reason": "US punk rock band covering Johnny Cash, fitting US rock.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "kurt woloch - don't let the sun go down on me (karaoke-club)": {
+      "show_id": "music_box",
+      "reason": "Karaoke version, fitting 'not optimized for listenability but for discovery'.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "kiddy contest kids 2006 - we are the kids": {
+      "show_id": "pbf",
+      "reason": "Children's music, fitting friendly, positive, and happy tracks.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "countdown - crazy harry": {
+      "show_id": "superhits",
+      "reason": "Generic pop/rock track, likely from the 1970s or 1980s.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "rose laurens - the conversation": {
+      "show_id": "superhits",
+      "reason": "French pop singer popular in the 1980s, fitting the era.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "anik kadinski - be somebody, be someone (live @ song02)": {
+      "show_id": "espresso",
+      "reason": "Austrian singer-songwriter, live acoustic performance fits 'acoustic pop'.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "ö3 - radionachrichten 13.11.1981": {
+      "show_id": "music_box",
+      "reason": "Archival radio news, fitting 'discovery, friction, context' and not music.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "christina aguilera - keeps gettin' better": {
+      "show_id": "music_young_am",
+      "reason": "Pop song from 2008, close enough to 2010s for 'young people'.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "boyzone - father and son": {
+      "show_id": "music_for_dreaming",
+      "reason": "Gentle, introspective ballad, fitting soft, mellow, and soothing themes.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "warren g - what's love got to do with it (remix)": {
+      "show_id": "Rock_show_n",
+      "reason": "US hip-hop artist; show includes Beastie Boys and is for 'US listeners'.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "jessica - how will i know (who you are)": {
+      "show_id": "music_young_am",
+      "reason": "Generic contemporary pop song, fitting music for young people (2010s/2020s).",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "die toten hosen - do anything you wanna do (live in edinbourgh 1992)": {
+      "show_id": "good_morning",
+      "reason": "Energetic German punk rock, fitting high-energy, rebellious, and fun songs.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "alan walker feat. gavin james - tired": {
+      "show_id": "music_young_am",
+      "reason": "Contemporary electronic pop track from 2017, fitting 2010s/2020s music.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "fats domino - i want to walk you home": {
+      "show_id": "evergreens",
+      "reason": "Rock and roll pioneer, active from the 1940s, strictly up to 1960s.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "dj ötzi & kate hall - tränen": {
+      "show_id": "music_for_dreaming",
+      "reason": "Austrian pop with a melancholic title ('Tears'), fitting soft, melancholic themes.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "die kranken schwestern - hendel": {
+      "show_id": "music_box",
+      "reason": "Niche German/Austrian act, fitting 'discovery, friction, context' and extreme sounds.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "thomas quasthoff - schubert_ winterreise_ im dorfe d 911,17": {
+      "show_id": "music_for_dreaming",
+      "reason": "Classical Lieder, melancholic and introspective, fitting atmospheric and gentle themes.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "münchener freiheit - liebe auf den ersten blick": {
+      "show_id": "superhits",
+      "reason": "Popular German pop band from the 1980s, fitting the era.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "dodl & freund - helmi 3": {
+      "show_id": "pbf",
+      "reason": "Children's safety show audio, fitting friendly, positive, and happy tracks.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "kurt woloch - modern talking _ bad boys blue-medley": {
+      "show_id": "music_box",
+      "reason": "Local artist's medley, fitting 'not optimized for listenability but for discovery'.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "laid back - high society girl": {
+      "show_id": "superhits",
+      "reason": "Danish electronic pop duo from the 1980s, fitting the era.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "ricchi e poveri - sarà perché ti amo (versione '99)": {
+      "show_id": "superhits",
+      "reason": "Iconic 1980s Italian pop hit, fitting the 70s and 80s focus.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "vera böhnisch - anders (karaoke edit)": {
+      "show_id": "music_box",
+      "reason": "Karaoke version, fitting 'not optimized for listenability but for discovery'.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "die paldauer - du bist alles": {
+      "show_id": "pbf",
+      "reason": "Austrian Schlager, typically friendly, positive, and happy music.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "andrea jürgens - gleich nebenan": {
+      "show_id": "pbf",
+      "reason": "German Schlager, typically friendly, positive, and happy music.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "tommy fischer - eine neue liebe ist wie ein neues leben": {
+      "show_id": "pbf",
+      "reason": "German Schlager, typically friendly, positive, and happy music.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "roy black - nimm meine hand": {
+      "show_id": "pbf",
+      "reason": "German Schlager, typically friendly, positive, and happy music.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "ivan rebroff - o jesulein süß": {
+      "show_id": "blessings",
+      "reason": "German Christmas carol, embodying peace, joy, and loving kindness.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "tocotronic - kapitulation": {
+      "show_id": "music_box",
+      "reason": "German indie rock, fitting 'discovery, friction, context' and contemporary scenes.",
+      "timestamp": "2026-02-23 16:34:39"
+    },
+    "johannes heesters - paris bleibt paris": {
+      "show_id": "rat_pack",
+      "reason": "Classic crooner style from the mid-20th century, fitting classic crooners.",
+      "timestamp": "2026-02-23 16:34:39"
     }
   }
 }

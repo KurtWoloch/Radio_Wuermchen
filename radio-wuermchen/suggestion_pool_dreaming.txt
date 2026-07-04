@@ -1,30 +1,24 @@
 # Suggestion Pool: Music for Dreaming (Musik zum Träumen)
-Bon Jovi - This ain't a love song
-Monrose - Even heaven cries
 Michael Bublé - Lost
 Udo Jürgens - Der gekaufte Drachen
 Wolfgang Ambros - Unmoralisch
 Coldplay - Midnight
-STS - Zeig mir dein' Himmel
 Just Jack - Starz in their eyes
 Rainhard Fendrich - Paranoia
 Kurt Woloch - Stars on 45 X-Mix
 Dream Music - Conquest of paradise
 Doris Day - Lullaby of Broadway
 No Angels - Couldn't care less
-Norah Jones - Don't Know Why
 Nena - Irgendwie, irgendwo, irgendwann
 Peter Cornelius - Gegen den Strom
 Papermoon - Any longer 4 U
 Billy Vaughn - Sail along silvry moon
-Whitney Houston - I believe in you and me
 Jean-Claude Petit - Stars
 Dalida - Il venait d'avoir dix-huit ans
 Wolfgang Ambros - I wü frei sein
 Cesár Sampson - O holy night (live beim Ö3-Weihnachtswunder 2018)
 One Republic - Stop and stare
 Vicki Vomit - Popstars kacken nicht (Tränen lügen nicht)
-Ludwig Hirsch - Wienerlied
 Wolfgang Ambros - I selber
 Marianne Mendt & Wolfgang Ambros - Da Wamperte, da Glatzerte und i
 VIZE feat. Laniia - Stars
@@ -41,7 +35,6 @@ Jose Carreras - The impossible dream
 A-ha - Dark is the night for all
 Genesis - Illegal alien
 Dalida - Gerde-moi la dernière danse
-Fleetwood Mac - When the sun goes down
 Rainhard Fendrich - Was war da in dem Tee drin
 Eros Ramazzotti - Un angelo non é
 Rainhard Fendrich - Schickeria
@@ -558,7 +551,6 @@ Angelika Milster - Ein Spaziergang durch New York
 Kurt Woloch - The Music of the night (Klavier)
 Genesis - The carpet crawlers 1999
 Elton John - Strangers
-Rainhard Fendrich - Weus'd a Herz hast wia a Bergwerk
 Udo Jürgens - Illusionen
 Cat Stevens - Wild world
 Thompson Twins - Don't mess with Doctor Dream
@@ -838,7 +830,6 @@ Jeanette - True Blue heroes
 Rainhard Fendrich - Die Erde
 Kurt Woloch - NIght fever (Keyboard)
 Genesis - Tell me why
-Genesis - Follow you follow me
 Andrea Berg - Bin nicht so stark
 Genesis - Happy the man
 Anke Wagner - Cool days cool nights (playback version)
@@ -1000,7 +991,6 @@ Udo Jürgens - Engel am Morgen
 Peter Cornelius - Cornelius Boogie
 Die Letzenbergstare - Horch' was kommt von draussen rein_
 Sara Bareilles - Love song
-Whitney Houston - I will always love you
 Kurt Woloch - Strangers in the night (Karaoke-Club)
 Rainhard Fendrich - Auf und davon
 Nena - Willst Du mit mir gehn
@@ -1341,7 +1331,6 @@ No Angels - No angel (It's all in your mind) (unplugged)
 Jan Wayne & Charlene - Here I am (Send me an angel)
 Waterloo & Robinson - Hollywood (engl.)
 Panpipes at Christmas - Silent night
-Dire Straits - Brothers in arms
 Markus Hoffmann, Monika Mört, Reinhold Jawhari, Kurt Woloch u.a. - Stand by me _ Only you
 Corey Hart - Sunglasses at night
 STS - So frei, wie ma sein kann
@@ -2372,3 +2361,4 @@ Papermoon - Dancing again
 Samantha Fox - I surrender (to the spirit of the night)
 Dalida - L'amour qui grandit
 Barbra Streisand & Barry Gibb - Guilty
+Bon Jovi - This ain't a love song

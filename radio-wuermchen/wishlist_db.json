@@ -46,29 +46,29 @@
       "track": "The OpenClaw Sound - Heartbeat Groove",
       "first_seen": "unknown",
       "times_requested": 1,
-      "status": "new",
-      "comment": ""
+      "status": "approved",
+      "comment": "wurde produziert, aber noch nicht in Playlist integriert"
     },
     {
       "track": "Digital Echoes - The Syntactic Wormhole",
       "first_seen": "unknown",
       "times_requested": 1,
-      "status": "new",
-      "comment": ""
+      "status": "approved",
+      "comment": "in Playlist nicht vorhanden"
     },
     {
       "track": "Hubert Kah - Sternenhimmel",
       "first_seen": "unknown",
       "times_requested": 1,
-      "status": "new",
-      "comment": ""
+      "status": "approved",
+      "comment": "in Playlist nicht vorhanden"
     },
     {
       "track": "The Internet - Girl",
       "first_seen": "unknown",
       "times_requested": 1,
-      "status": "new",
-      "comment": ""
+      "status": "approved",
+      "comment": "in Playlist nicht vorhanden"
     },
     {
       "track": "The Midnight - Sunset",
@@ -109,8 +109,8 @@
       "track": "Falco - Amadeus",
       "first_seen": "unknown",
       "times_requested": 1,
-      "status": "new",
-      "comment": ""
+      "status": "aliased",
+      "comment": "heißt \"Rock me Amadeus\", nicht \"Amadeus\""
     },
     {
       "track": "ASP - Der Takt der Zeit",
@@ -220,7 +220,7 @@
     {
       "track": "Stevie Wonder - Superstition",
       "first_seen": "2026-02-14 18:20:57",
-      "times_requested": 17,
+      "times_requested": 18,
       "status": "approved",
       "comment": ""
     },
@@ -486,7 +486,7 @@
     {
       "track": "Tracy Chapman - Talkin' 'Bout a Revolution",
       "first_seen": "2026-02-15 13:34:54",
-      "times_requested": 5,
+      "times_requested": 6,
       "status": "new",
       "comment": ""
     },
@@ -703,7 +703,7 @@
     {
       "track": "Florence + The Machine - Shake It Out",
       "first_seen": "2026-02-16 21:43:35",
-      "times_requested": 2,
+      "times_requested": 3,
       "status": "new",
       "comment": ""
     },
@@ -829,7 +829,7 @@
     {
       "track": "Sammy Davis Jr. - Mr. Bojangles",
       "first_seen": "2026-02-17 10:34:14",
-      "times_requested": 2,
+      "times_requested": 3,
       "status": "new",
       "comment": ""
     },
@@ -843,7 +843,7 @@
     {
       "track": "Lizzo - Good As Hell",
       "first_seen": "2026-02-17 11:30:56",
-      "times_requested": 3,
+      "times_requested": 4,
       "status": "new",
       "comment": ""
     },
@@ -1046,14 +1046,14 @@
     {
       "track": "Norah Jones - Come Away With Me",
       "first_seen": "2026-02-17 23:22:46",
-      "times_requested": 4,
+      "times_requested": 5,
       "status": "new",
       "comment": ""
     },
     {
       "track": "Ludovico Einaudi - Nuvole Bianche",
       "first_seen": "2026-02-17 23:47:47",
-      "times_requested": 2,
+      "times_requested": 3,
       "status": "new",
       "comment": ""
     },
@@ -1438,7 +1438,7 @@
     {
       "track": "Frank Sinatra - Come Fly With Me",
       "first_seen": "2026-02-19 10:27:30",
-      "times_requested": 2,
+      "times_requested": 3,
       "status": "new",
       "comment": ""
     },
@@ -1564,7 +1564,7 @@
     {
       "track": "Thievery Corporation - Lebanese Blonde",
       "first_seen": "2026-02-19 15:53:03",
-      "times_requested": 2,
+      "times_requested": 3,
       "status": "new",
       "comment": ""
     },
@@ -1578,14 +1578,14 @@
     {
       "track": "St. Germain - Rose Rouge",
       "first_seen": "2026-02-19 16:00:40",
-      "times_requested": 2,
+      "times_requested": 3,
       "status": "new",
       "comment": ""
     },
     {
       "track": "João Gilberto - Chega de Saudade",
       "first_seen": "2026-02-19 16:08:49",
-      "times_requested": 1,
+      "times_requested": 2,
       "status": "new",
       "comment": ""
     },
@@ -1599,7 +1599,7 @@
     {
       "track": "José González - Heartbeats",
       "first_seen": "2026-02-19 16:19:07",
-      "times_requested": 1,
+      "times_requested": 2,
       "status": "new",
       "comment": ""
     },
@@ -1641,7 +1641,7 @@
     {
       "track": "Enya - May It Be",
       "first_seen": "2026-02-19 18:23:42",
-      "times_requested": 2,
+      "times_requested": 3,
       "status": "new",
       "comment": ""
     },
@@ -1788,14 +1788,14 @@
     {
       "track": "Air - La Femme d'Argent",
       "first_seen": "2026-02-20 13:01:03",
-      "times_requested": 1,
+      "times_requested": 2,
       "status": "new",
       "comment": ""
     },
     {
       "track": "Zero 7 - In The Waiting Line",
       "first_seen": "2026-02-20 13:07:54",
-      "times_requested": 1,
+      "times_requested": 2,
       "status": "new",
       "comment": ""
     },
@@ -1809,7 +1809,7 @@
     {
       "track": "St. Germain - Sure Thing",
       "first_seen": "2026-02-20 13:33:37",
-      "times_requested": 1,
+      "times_requested": 2,
       "status": "new",
       "comment": ""
     },
@@ -1830,14 +1830,14 @@
     {
       "track": "Bebel Gilberto - Tanto Tempo",
       "first_seen": "2026-02-20 14:38:03",
-      "times_requested": 1,
+      "times_requested": 2,
       "status": "new",
       "comment": ""
     },
     {
       "track": "Astrud Gilberto & Stan Getz - The Girl from Ipanema",
       "first_seen": "2026-02-20 14:46:34",
-      "times_requested": 1,
+      "times_requested": 2,
       "status": "new",
       "comment": ""
     },
@@ -1998,6 +1998,174 @@
     {
       "track": "Wilson Pickett - Land of 1000 Dances",
       "first_seen": "2026-02-22 08:59:00",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Caravan Palace - Lone Digger",
+      "first_seen": "unknown",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Frank Sinatra - Strangers in the Night",
+      "first_seen": "2026-02-22 10:21:13",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Frank Sinatra - Come Rain or Come Shine",
+      "first_seen": "2026-02-22 10:38:09",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Tony Bennett - I Left My Heart in San Francisco",
+      "first_seen": "2026-02-22 10:46:00",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Mark Ronson ft. Bruno Mars - Uptown Funk",
+      "first_seen": "2026-02-22 11:21:10",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Måneskin - Beggin'",
+      "first_seen": "2026-02-22 11:36:40",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "The Killers - The Man",
+      "first_seen": "2026-02-22 11:47:40",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Travis - Why Does It Always Rain On Me?",
+      "first_seen": "2026-02-22 12:14:14",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Buena Vista Social Club - Chan Chan",
+      "first_seen": "2026-02-22 12:39:32",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Stan Getz & João Gilberto - Desafinado",
+      "first_seen": "2026-02-22 13:46:25",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Thievery Corporation - All That We Perceive",
+      "first_seen": "2026-02-22 13:57:14",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "José González - Crosses",
+      "first_seen": "2026-02-22 14:09:44",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Caravan Palace - Lone Digger",
+      "first_seen": "unknown",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Nouvelle Vague - This Is Not A Love Song",
+      "first_seen": "2026-02-22 14:35:13",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Jack Johnson - Better Together",
+      "first_seen": "2026-02-22 14:40:43",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Soap&Skin - Spiracle",
+      "first_seen": "2026-02-22 15:01:00",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Max Richter - On the Nature of Daylight",
+      "first_seen": "2026-02-22 22:01:33",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Leonard Cohen - Famous Blue Raincoat",
+      "first_seen": "2026-02-22 22:08:10",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Sigur Rós - Starálfur",
+      "first_seen": "2026-02-22 22:16:39",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Element of Crime - Am Ende denk ich an dich",
+      "first_seen": "2026-02-22 22:19:25",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Agnes Obel - Riverside",
+      "first_seen": "2026-02-22 22:22:04",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Gisbert zu Knyphausen - Das Licht dieser Welt",
+      "first_seen": "2026-02-22 22:24:41",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Philipp Poisel - Wo fängt dein Himmel an",
+      "first_seen": "2026-02-22 22:31:03",
+      "times_requested": 1,
+      "status": "new",
+      "comment": ""
+    },
+    {
+      "track": "Element of Crime - Am Ende denk ich immer nur an dich",
+      "first_seen": "2026-02-22 22:34:34",
       "times_requested": 1,
       "status": "new",
       "comment": ""
